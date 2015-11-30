@@ -3,6 +3,9 @@
 		width: 760px;
 		margin: 0 auto;
 	}
+	.color_h1{
+		color: #32CD32;
+	}
 	.tutheader{
 		border-top: 2px solid #99F9FF;
 		padding-top: 15px;
@@ -36,6 +39,13 @@
 	.previous-design-link{
 		float: left;
 	}
-	.next-design-link a{
+	.next-design-link {
 		float: right;
+	}
+	.main ul li{
+		margin-left: 40px;
+	}
+	.demo{
+		border: 2px solid  #99F9FF;
+		padding: 10px;
 	}
