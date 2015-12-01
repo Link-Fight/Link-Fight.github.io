@@ -42,10 +42,14 @@
 	.next-design-link {
 		float: right;
 	}
+	.main{
+	 		margin-top: 100px;
+	 	}
 	.main ul li{
 		margin-left: 40px;
 	}
 	.demo{
+		margin: 10px 0px;
 		border: 2px solid  #99F9FF;
 		padding: 10px;
 	}
