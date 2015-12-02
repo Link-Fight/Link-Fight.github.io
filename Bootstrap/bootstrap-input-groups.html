@@ -17,23 +17,210 @@
 
 <body>
 	<div class="main">
-		<h1>Bootstrap <span class="color_h1"> 导航元素</span></h1>
-		<pre>Bootstrap 提供的用于定义导航元素的一些选项。它们使用相同的标记和基类 .nav。</pre>
-		<h2 class="tutheader">表格导航或标签</h2> 创建一个标签式的导航菜单：
-		<ul>
-			<li>以一个带有class.nav的无序列表开始</li>
-			<li>添加class.nav-tabs</li>
-		</ul>
+		<h1>Bootstrap <span class="color_h1"> 输入框组</span></h1>
+		<pre>使用输入框组，您可以很容易地向基于文本的输入框添加作为前缀和后缀的文本或按钮。
+通过向输入域添加前缀和后缀的内容，您可以向用户输入添加公共的元素。例如，您可以添加美元符号，或者在 Twitter 用户名前添加 @，或者应用程序接口所需要的其他公共的元素。
+向 .form-control 添加前缀或后缀元素的步骤如下：
+1.把前缀或后缀元素放在一个带有 class .input-group 的 &lt;div&gt; 中。
+2.接着，在相同的 &lt;div&gt; 内，在 class 为 .input-group-addon 的 &lt;span&gt; 内放置额外的内容。
+3.把该 &lt;span&gt; 放置在 &lt;input&gt; 元素的前面或者后面。</pre>
+		<h2 class="tutheader">基本的输入框组</h2>
 		<div class="demo">
-			<p>标签式的导航菜单</p>
-			<ul class="nav nav-tabs">
-				<li class="active"><a href="#">Home</a></li>
-				<li><a href="#">SVN</a></li>
-				<li><a href="#">iOS</a></li>
-				<li><a href="#">VB.Net</a></li>
-				<li><a href="#">Java</a></li>
-				<li><a href="#">PHP</a></li>
-			</ul>
+			<div style="padding:10px 100px 10px">
+				<form action="" class="bs-example bs-example-form" role='form'>
+					<div class="input-group">
+						<span class="input-group-addon">@</span>
+						<input type="text" class="form-control" placeholder="sine">
+					</div>
+					<br>
+					<div class="input-group">
+						<input type="text" class="form-control">
+						<span class="input-group-addon">.00</span>
+					</div>
+					<br>
+					<div class="input-group">
+						<span class="input-group-addon">$</span>
+						<input type="text" class="form-control">
+						<span class="input-group-addon">.00</span>
+					</div>
+				</form>
+
+			</div>
+		</div>
+		<h2>复选框和单选框插件</h2>
+		<div class="demo">
+			<form class="bs-example bs-example-form" role="form">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="input-group">
+							<span class="input-group-addon">
+                  <input type="checkbox">
+               </span>
+							<input type="text" class="form-control">
+						</div>
+						<!-- /input-group -->
+					</div>
+					<!-- /.col-lg-6 -->
+					<br>
+					<div class="col-lg-6">
+						<div class="input-group">
+							<span class="input-group-addon">
+                  <input type="radio">
+               </span>
+							<input type="text" class="form-control">
+						</div>
+						<!-- /input-group -->
+					</div>
+					<!-- /.col-lg-6 -->
+				</div>
+				<!-- /.row -->
+			</form>
+		</div>
+		<h2>按钮插件</h2>
+		<pre>把按钮作为输入框组的前缀或者后缀元素，不是添加 .input-group-addon class，而需要使用 class .input-group-btn 来包裹按钮。这是必需的，因为默认的浏览器样式不会被重写。下面的实例演示了这点：</pre>
+		<div class="demo">
+			<form class="bs-example bs-example-form" role="form">
+				<div class="row">
+					<div class="col-sm-6">
+						<div class="input-group">
+							<span class="input-group-btn">
+                  <button class="btn btn-default" type="button">
+                     Go!
+                  </button>
+               </span>
+							<input type="text" class="form-control">
+						</div>
+						<!-- /input-group -->
+					</div>
+					<!-- /.col-lg-6 -->
+
+					<div class="col-sm-6">
+						<div class="input-group">
+							<input type="text" class="form-control">
+							<span class="input-group-btn">
+                  <button class="btn btn-default" type="button">
+                     Go!
+                  </button>
+               </span>
+						</div>
+						<!-- /input-group -->
+					</div>
+					<!-- /.col-lg-6 -->
+				</div>
+				<!-- /.row -->
+			</form>
+		</div>
+		<h2>带有下拉菜单的按钮</h2>
+		<pre>只需要简单地在一个 .input-group-btn class 中包裹按钮和下拉菜单即可，如下面的实例所示：</pre>
+		<div class="demo">
+			<form class="bs-example bs-example-form" role="form">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="input-group">
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-default 
+                     dropdown-toggle" data-toggle="dropdown">
+									下拉菜单
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu">
+									<li><a href="#">功能</a></li>
+									<li><a href="#">另一个功能</a></li>
+									<li><a href="#">其他</a></li>
+									<li class="divider"></li>
+									<li><a href="#">分离的链接</a></li>
+								</ul>
+							</div>
+							<!-- /btn-group -->
+							<input type="text" class="form-control">
+						</div>
+						<!-- /input-group -->
+					</div>
+					<!-- /.col-lg-6 -->
+					<br>
+					<div class="col-lg-6">
+						<div class="input-group">
+							<input type="text" class="form-control">
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-default 
+                     dropdown-toggle" data-toggle="dropdown">
+									下拉菜单
+									<span class="caret"></span>
+								</button>
+								<ul class="dropdown-menu pull-right">
+									<li><a href="#">功能</a></li>
+									<li><a href="#">另一个功能</a></li>
+									<li><a href="#">其他</a></li>
+									<li class="divider"></li>
+									<li><a href="#">分离的链接</a></li>
+								</ul>
+							</div>
+							<!-- /btn-group -->
+						</div>
+						<!-- /input-group -->
+					</div>
+					<!-- /.col-lg-6 -->
+				</div>
+				<!-- /.row -->
+			</form>
+
+		</div>
+		<h2>分割的下拉菜单按钮</h2>
+		<div class="demo">
+			<form class="bs-example bs-example-form" role="form">
+				<div class="row">
+					<div class="col-lg-6">
+						<div class="input-group">
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-default" tabindex="-1">下拉菜单
+								</button>
+								<button type="button" class="btn btn-default 
+                     dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+									<span class="caret"></span>
+									<span class="sr-only">切换下拉菜单</span>
+								</button>
+								<ul class="dropdown-menu">
+									<li><a href="#">功能</a></li>
+									<li><a href="#">另一个功能</a></li>
+									<li><a href="#">其他</a></li>
+									<li class="divider"></li>
+									<li><a href="#">分离的链接</a></li>
+								</ul>
+							</div>
+							<!-- /btn-group -->
+							<input type="text" class="form-control">
+						</div>
+						<!-- /input-group -->
+					</div>
+					<!-- /.col-lg-6 -->
+					<br>
+					<div class="col-lg-6">
+						<div class="input-group">
+							<input type="text" class="form-control">
+							<div class="input-group-btn">
+								<button type="button" class="btn btn-default" tabindex="-1">下拉菜单
+								</button>
+								<button type="button" class="btn btn-default 
+                     dropdown-toggle" data-toggle="dropdown" tabindex="-1">
+									<span class="caret"></span>
+									<span class="sr-only">切换下拉菜单</span>
+								</button>
+								<ul class="dropdown-menu pull-right">
+									<li><a href="#">功能</a></li>
+									<li><a href="#">另一个功能</a></li>
+									<li><a href="#">其他</a></li>
+									<li class="divider"></li>
+									<li><a href="#">分离的链接</a></li>
+								</ul>
+							</div>
+							<!-- /btn-group -->
+						</div>
+						<!-- /input-group -->
+					</div>
+					<!-- /.col-lg-6 -->
+				</div>
+				<!-- /.row -->
+			</form>
 		</div>
 	</div>
 	<div>
