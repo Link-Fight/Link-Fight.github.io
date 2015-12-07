@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Bootstrap 按钮下拉菜单</title>
+	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../../Bootstrap/myBootstrap.css" type="text/css">
+	<style>
+		ul li {
+			margin: 0px !important;
+		}
+		p{
+			text-indent: 40px;
+			
+		}
+	</style>
+</head>
+
+<body>
+	<div class="main">
+		<h1> <span class="color_h1"> HTML </span>Question</h1>
+		<ol>
+			<li><a href="#q1">What does a doctype do?</a></li>
+		</ol>
+		
+	   <h2>My<span class="color_h1"> answer</span></h2>
+	   <pre>1. <a name="q1">What does a doctype do?</a> 中文：就是问doctype标签的作用</pre>
+	   <p>这个doctype从英文上的理解就是文档类型，而我们在些html文档上看到的&lt;!DOCTYPE html&gt;标签就是声明这是html文档。在w3c给的定义来看，这可以来声明(!Doctype)不是HTMl标签，指示web浏览器关于编写该页面是是使用了哪个版本的HTML。
+	   </p>
+		
+	</div>
+	<div>
+		<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+			<div class="container">
+				<div class="navbar-header">
+					<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+						<span class="sr-only">Toggle navigation</span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+						<span class="icon-bar"></span>
+					</button>
+					<a class="navbar-brand" href="#">Link博客</a>
+				</div>
+				<div class="collapse navbar-collapse">
+					<ul class="nav navbar-nav">
+						<li><a href="#"><span class="glyphicon ">css</span></a></li>
+						<li><a href="#shop"><span class="glyphicon">javaScript</span></a></li>
+						<li><a href="#support"><span class="glyphicon ">jQuery</span></a></li>
+						<li><a href="#bootstrap"><span class="glyphicon ">bootstrap</span></a></li>
+						<li class="dropdown">
+							<a href="" class="dropdown-toggle" data-toggle='dropdown'>question<b class="caret"></b>
+							</a>
+							<ul class="dropdown-menu">
+								<li><a href="../HTML/index.html">HTML</a></li>
+								<li><a href="../CSS/index.html">CSS</a></li>
+								<li><a href="../JS/index.html">JS</a></li>
+								<li><a href="#">Testing</a></li>
+								<li><a href="#">Performance</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
+				<!-- /.nav-collapse -->
+			</div>
+			<!-- /.container -->
+		</div>
+	</div>
+	<div class="previous-next-links">
+		<div class="previous-design-link">← <a href="#" rel="prev" title="
+	Index	">
+	html	</a>
+		</div>
+		<div class="next-design-link"><a href="index.html" rel="next" title="
+		index">
+		html</a> →
+		</div>
+	</div>
+</body>
+
+</html>
