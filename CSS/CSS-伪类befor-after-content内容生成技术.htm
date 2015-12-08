@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<style>
+		a:after{
+			content: "after";
+			color: red;
+		}
+		.btn{
+			position: relative;
+			display: block;
+			margin: 100px auto;
+			width: 200px;
+			padding: 10px 20px;
+			font-size: 20px;
+			background-color: #fff;
+			color: #6bdf4e;
+			border:1px solid  #6bdf4e;
+			border-radius: 5px;
+			cursor: pointer;
+		}
+		.btn::after{
+			content: attr(data-tip);
+			display: none;
+			position: absolute;
+			padding: 5px 10px;
+			left: 50%;
+			bottom: 100%;
+			margin-bottom: 12px;
+			transform: translateX(-50%);
+			font-size: 16px;
+			background: #000;
+			color: #fff;
+			cursor: default;
+			border-radius: 8px;
+		}
+		.btn::before{
+			content: "";
+			position: absolute;
+			display: none;
+			left: 50%;
+			bottom: 100%;
+			transform: translateX(-50%);
+			margin-bottom: 3px;
+			width: 0;
+			height: 0;
+			border-left: 10px solid transparent;
+			border-right:10px solid transparent;
+			border-top: 9px solid #000;
+		}
+		.btn:hover::after,
+		.btn:hover:before{
+			display: block;
+		}
+		.span-class .bttn-1{
+			height: 30px;
+			background: #6bdf4e;
+			color: #fff;
+			border:1px solid  #6bdf4e;
+		}
+		.span-class .ss-1{
+			 height: 0px;
+			 width: 0px;
+		    vertical-align: middle;
+			border-top: 15px solid #108593;
+			border-right: 1px solid #108593;
+			border-bottom: 15px solid #108593;
+			border-left: 15px solid #6bdf4e;
+			padding: 0;
+		}
+		.span-class .bttn-2{
+			margin-left: 0px;
+			height: 30px;
+			background: #108593;
+			color: #fff;
+			border:1px solid  #108593;
+		}
+		.span-class .ss-2{
+		   vertical-align: middle;
+			border-top: 15px solid #812154;
+			border-right: 1px solid #812154;
+			border-bottom: 15px solid #812154;
+			border-left: 15px solid #108593;
+			padding: 0;
+		}
+		
+			.span-class .bttn-3{
+			margin-left: 0px;
+			height: 30px;
+			background: #812154;
+			color: #fff;
+			border:1px solid  #812154;
+		}
+		.span-class .ss-3{
+		   vertical-align: middle;
+			border-top: 15px solid #fff;
+			border-right: 1px solid #fff;
+			border-bottom: 15px solid #fff;
+			border-left: 15px solid #812154;
+			padding: 0;
+		}
+		.span-class{
+		 padding: 0;
+		 margin: 0px;
+		  
+		}
+ 		.trigon-div,.trigon-div ul{
+			 margin-left: 0px;
+			 -webkit-padding-start: 0px;
+		 }
+		 .trigon-div li{
+			padding-left: 10px;
+			 float: left;
+			 list-style-type: none;
+			 /*background: red;*/
+			 color: #fff;
+			 height: 30px;
+			 line-height: 30px;
+			 vertical-align: middle;
+		 }
+		 .trigon-div li span{
+			margin-left: 10px;
+			 display: block;
+			 float: right;
+			 padding: 0px !important;
+			 height: 0px !important;
+			 background: blue;
+			 /*border-top: 15px solid green;
+			 border-bottom: 15px solid green;
+			 border-left: 15px solid yellowgreen;*/
+		 }
+		 .trigon-li-1{
+			 	 background: #990000;
+		 }
+		 .trigon-li-1 span{
+			  border-top: 15px solid #9966FF;
+			 border-bottom: 15px solid #9966FF;
+			 border-left: 15px solid #990000;
+		 }
+		 .trigon-li-2{
+			 background: #9966FF;
+		 }
+		  .trigon-li-2 span{
+			  border-top: 15px solid #99FF33;
+			 border-bottom: 15px solid #99FF33;
+			 border-left: 15px solid #9966FF;
+		 }
+		 .trigon-li-3{
+			 background: #99FF33;
+		 }
+		  .trigon-li-3 span{
+			  border-top: 15px solid #CC6600;
+			 border-bottom: 15px solid #CC6600;
+			 border-left: 15px solid #99FF33;
+		 }
+		 .trigon-li-4{
+			 background: #CC6600;
+		 }
+		 .trigon-li-4 span{
+			  border-top: 15px solid #3333FF;
+			 border-bottom: 15px solid #3333FF;
+			 border-left: 15px solid #CC6600;
+		 }
+		 .trigon-li-5{
+			 background: #3333FF
+		 }
+		  .trigon-li-5 span{
+			  border-top: 15px solid #fff;
+			 border-bottom: 15px solid #fff;
+			 border-left: 15px solid #3333FF;
+		 }
+	</style>
+</head>
+<body>
+	<div>
+		<p>:after 和 :before 是CSS2时候引入的伪元素。顾名思义就是指伪元素在元素前/后添加内容，默认display是inline。</p>
+		<pre>
+			a:after{
+			content: "after";
+			color: red;
+			}
+		</pre>
+		<a href="#">2015</a>
+		<div class="demo">
+			<button class="btn" data-tip='ToolTip1111'>Button</button>
+		</div>
+		<div class="span-class">
+			<button class="bttn-1">Java</button><button class="ss-1" disabled></button><button class="bttn-2">C#</button><button class="ss-2" disabled></button></button><button class="bttn-3">php</button><button class="ss-3" disabled></button>
+		</div>
+		
+		<div class="trigon-div">
+			<ul>
+				<li class='trigon-li-1'>java <span></span> </li>
+				<li class='trigon-li-2'>javaScript<span></span></li>
+				<li class='trigon-li-3'>jQuery<span></span></li>
+				<li class='trigon-li-4'>Node.js<span></span></li>
+				<li class='trigon-li-5'>CSS<span></span></li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>
