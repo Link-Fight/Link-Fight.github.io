@@ -8,6 +8,11 @@
 	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
 	<link rel="stylesheet" href="../Bootstrap/myBootstrap.css" type="text/css">
+	<style>
+		ol {
+			margin-left: 40px;
+		}
+	</style>
 </head>
 
 <body>
@@ -17,14 +22,58 @@
 		<h4 class="tutheader">jQuery AJAX 实例</h4>
 		<h5 id="test-1">点击下面按钮，通过jQuery AJAX 改变这段文本。</h5>
 		<button class="btn btn-primary" id="btn1">获得外部内容</button>
-	</div>
-<script>
-$(document).ready(function(){
-  $("#btn1").click(function(){
-    $('#test-1').load('demo_test.txt');
-  })
+		<h4 class="tutheader">什么是AJAX?</h4>
+		<p>AJAX=异步javaScript和XML。
+			<br>简短来说，在不重载全部页面的情况下，AJAX通过后台加载数据，并在网页上显示。</p>
+		<h4 class="tutheader">关于jQuery和AJAX</h4>
+		<p>通过jQUery AJAX方法，可以使用HTTP Get 和 HTTP Post 从远程服务器上请求文本，HTML,XML或JSON-同时能够把这些外部数据直接载入网页中被选中的元素中。</p>
+		<h4 class="tutheader">jQuery load()方法</h4>
+		<p>load()方法从服务器加载数据，并把返回的数据放入被选中元素中。</p>
+		<h4>语法：</h4>
+		<pre>$(selector).load(URL,data,callback);</pre>
+		<ol>
+			<li>URL:必需，规定需要加载的URL。</li>
+			<li>data:可选，键值对参数</li>
+			<li>callback:可选，该方法执行完后执行的函数名称</li>
+		</ol>
+		<em>这是示例文件（"demo_test.txt"）的内容：</em>
+		<pre>&lt;h2&gt;jQuery and AJAX is FUN!!!&lt;/h2&gt;<br>&lt;p id="p1"&gt;This is some text in a paragraph.&lt;/p&gt;</pre>
+		<em> 下面的例子会把文件 "demo_test.txt" 的内容加载到指定的</em>
+		<div class="demo"> 元素中： 示例 $("#div1").load("demo_test.txt")
+			<h3 id="test-2">请点击下面的按钮，通过 jQuery AJAX 改变这段文本。</h3>
+			<button id="btn2" type="button" class="btn btn-primary">获得外部的内容</button>
+		</div>
+		<p>也可以把jQuery选择器添加到URL参数。
+			<br>下面的例子吧“demo_text3.txt"文件中id="p1"的元素的内容，加载到指定的&lt;div&gt;元素中：</p>
+		<h4>实例</h4>
+		<pre> $('#div1').load("demo_test.txt #p1");</pre>
+		<div class="demo">
+			<div id="div3">
+				<h2>使用 jQuery AJAX 来改变文本</h2></div>
+			<button id="btn3" type="button" class="btn btn-primary">获得外部内容</button>
+		</div>
+		<script>
+			$(document).ready(function(){
+		   text ="";	
+			$("#btn1").click(function(){
+				if(text=="")
+					text  = $('#test-1').text();
+				if(text== $('#test-1').text())
+					$('#test-1').load('demo_test.txt');
+					else
+					$('#test-1').text(text);
+			})
+			
+			$('#btn2').click(function(){
+				$('#test-2').load('demo_test2.txt');
+			});
+			
+			$('#btn3').click(function(){
+				// $('#div3').load('demo_test2.txt #p1');
+				$('#div3').load('http://www.hao123.com/');
+			});
 })
-</script>
+		</script>
 </body>
 
 </html>
