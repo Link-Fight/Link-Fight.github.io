@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+	<link rel="stylesheet" href="../Bootstrap/myBootstrap.css" type="text/css">
+</head>
+
+<body>
+	<div class="main">
+		<h1 class="color_h1">jQuery-AJAX简介</h1>
+		<p class="tutheader"> AJAX是与服务器交换数据的艺术，它在不重载全部页面的情况下，实现了对部分网页的更新。</p>
+		<h4 class="tutheader">jQuery AJAX 实例</h4>
+		<h5 id="test-1">点击下面按钮，通过jQuery AJAX 改变这段文本。</h5>
+		<button class="btn btn-primary" id="btn1">获得外部内容</button>
+	</div>
+<script>
+$(document).ready(function(){
+  $("#btn1").click(function(){
+    $('#test-1').load('/example/jquery/demo_test.txt');
+  })
+})
+</script>
+</body>
+
+</html>
