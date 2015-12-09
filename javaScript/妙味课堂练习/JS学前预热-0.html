@@ -13,13 +13,16 @@
 		}
 		
 		.left {
-			position: relative;
+			
 			float: left;
 			width: 160px;
 			height: 800px;
 			background: #E5EDF2;
 		}
-		
+		.user{
+			margin-top: 10px;
+			position: relative;
+		}
 		.content {
 			width: 100%;
 			height: 800px;
@@ -49,7 +52,7 @@
 			border: 1px solid #999;
 			z-index: 50;
 			position: absolute;
-			top: 35px;
+			top: 31px;
 			height: 218px;
 			width: 500px;
 			background: whitesmoke;
@@ -89,130 +92,248 @@
 		.foolt td {
 			padding-right: 10px;
 		}
-		#hideDisplay img,#hideDisplay label{
+		
+		#hideDisplay img,
+		#hideDisplay label {
 			cursor: pointer;
 			margin-right: 3px;
 			padding-right: 3px;
 		}
 	</style>
 	<script>
-		window.onload=function(){
-		var div = document.getElementById("displayDiv");
-		div.onmouseenter = function(){
-			var div = document.getElementById('hideDisplay');
-			div.style.display = 'block';
-				div.onmouseleave = function(){
-				div.style.display = 'none';
-			};
-		};
-		div = document.getElementById('hideDisplay');
+		// window.onload=function(){
+		// var div = document.getElementById("displayDiv");
+		// div.onmouseenter = function(){
+		// 	var div = document.getElementById('hideDisplay');
+		// 	div.style.display = 'block';
+		// 		div.onmouseleave = function(){
+		// 		div.style.display = 'none';
+		// 	};
+		// };
+		// div = document.getElementById('hideDisplay');
 	
-		};
+		// };
+		
+		window.onload=function(){
+			var divs = document.getElementsByClassName("displayDiv");
+			var hideDivs = document.getElementsByClassName("hideDisplay");
+			for(var i=0;i<divs.length;i++){
+				divs[i].onmouseenter =(function(i){
+					return function(){
+						hideDivs[i].style.display='block';
+						// hideDivs[i].offsetTop=divs[i].offsetTop;
+						hideDivs[i].onmouseleave = function(){
+							hideDivs[i].style.display = 'none';
+						};
+					};
+				})(i);
+			}
+		}
 	</script>
 </head>
 
 <body>
-<div class="head">0-妙味课堂原创JavaScript视频教程——Discuz!练习</div>
+	<div class="head">0-妙味课堂原创JavaScript视频教程——Discuz!练习</div>
 	<div class="main">
 		<div class="left">
-			<h5>miaov.com</h5>
-			<div class="imgDiv" id="displayDiv">
-				<img src="images-0/1.jpg" alt="">
-				<p>miaov.com</p>
-				<span></span>
-				<span></span>
-				<span></span>
-			</div>
-			<div class="imgDiv imgDiv-hide" id="hideDisplay">
-				<img src="images-0/1.jpg" alt="">
-				<div>
-					<label>leo 当前在线</label>
+			<div class="user">
+				<h5>miaov.com</h5>
+				<div class="imgDiv displayDiv" id="displayDiv">
+					<img src="images-0/1.jpg" alt="">
+					<p>miaov.com</p>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				<div class="imgDiv imgDiv-hide hideDisplay" id="hideDisplay">
+					<img src="images-0/1.jpg" alt="">
+					<div>
+						<label>leo 当前在线</label>
+						<table>
+							<tr>
+								<td>积分</td>
+								<td>1623</td>
+								<td>阅读权限</td>
+								<td>100</td>
+							</tr>
+							<tr>
+								<td>最后登录</td>
+								<td>2015-01-01</td>
+								<td>精华</td>
+								<td>10</td>
+							</tr>
+							<tr>
+								<td>帖子</td>
+								<td>243</td>
+								<td>威望</td>
+								<td>10</td>
+							</tr>
+							<tr>
+								<td>金币</td>
+								<td>9999</td>
+								<td>体力</td>
+								<td>2333</td>
+							</tr>
+							<tr>
+								<td>激情</td>
+								<td>1645</td>
+								<td>注册时间</td>
+								<td>2010-09-01</td>
+							</tr>
+							<tr>
+								<td>
+									<img src="images-0/qq.gif" alt="">
+									<img src="images-0/forumlink.gif" alt="">
+									<img src="images-0/userinfo.gif" alt="">
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+					<label for=""> <img src="images-0/pmto.gif" alt="">发送短信</label>
+					<br>
+					<label for=""> <img src="images-0/addbuddy.gif" alt="">加为好友</label>
+				</div>
+				<div class="foolt" id="foolt">
 					<table>
 						<tr>
 							<td>积分</td>
-							<td>1623</td>
-							<td>阅读权限</td>
-							<td>100</td>
+							<td>3850</td>
 						</tr>
 						<tr>
-							<td>最后登录</td>
-							<td>2015-01-01</td>
-							<td>精华</td>
-							<td>10</td>
+							<td>UID</td>
+							<td>1001952</td>
 						</tr>
 						<tr>
 							<td>帖子</td>
-							<td>243</td>
+							<td>3502</td>
+						</tr>
+						<tr>
 							<td>威望</td>
-							<td>10</td>
+							<td>4</td>
 						</tr>
 						<tr>
 							<td>金币</td>
-							<td>9999</td>
+							<td>672个</td>
+						</tr>
+						<tr>
 							<td>体力</td>
-							<td>2333</td>
+							<td>756</td>
 						</tr>
 						<tr>
 							<td>激情</td>
-							<td>1645</td>
-							<td>注册时间</td>
-							<td>2010-09-01</td>
+							<td>3068</td>
 						</tr>
 						<tr>
-							<td>
-								<img src="images-0/qq.gif" alt="">
-								<img src="images-0/forumlink.gif" alt="">
-								<img src="images-0/userinfo.gif" alt="">
-							</td>
-							<td></td>
-							<td></td>
-							<td></td>
+							<td>注册时间</td>
+							<td>2008-10-4</td>
 						</tr>
 					</table>
 				</div>
-				<label for=""> <img src="images-0/pmto.gif" alt="">发送短信</label>
-				<br>
-				<label for=""> <img src="images-0/addbuddy.gif" alt="">加为好友</label>
 			</div>
-			<div class="foolt" id="foolt">
-				<table>
-					<tr>
-						<td>积分</td>
-						<td>3850</td>
-					</tr>
-					<tr>
-						<td>UID</td>
-						<td>1001952</td>
-					</tr>
-					<tr>
-						<td>帖子</td>
-						<td>3502</td>
-					</tr>
-					<tr>
-						<td>威望</td>
-						<td>4</td>
-					</tr>
-					<tr>
-						<td>金币</td>
-						<td>672个</td>
-					</tr>
-					<tr>
-						<td>体力</td>
-						<td>756</td>
-					</tr>
-					<tr>
-						<td>激情</td>
-						<td>3068</td>
-					</tr>
-					<tr>
-						<td>注册时间</td>
-						<td>2008-10-4</td>
-					</tr>
-				</table>
+
+
+			<div class="user">
+				<h5>miaov.com</h5>
+				<div class="imgDiv displayDiv" id="displayDiv">
+					<img src="images-0/2.jpg" alt="">
+					<p>miaov.com</p>
+					<span></span>
+					<span></span>
+					<span></span>
+				</div>
+				<div class="imgDiv imgDiv-hide hideDisplay" id="hideDisplay">
+					<img src="images-0/2.jpg" alt="">
+					<div>
+						<label>leo 当前在线</label>
+						<table>
+							<tr>
+								<td>积分</td>
+								<td>1623</td>
+								<td>阅读权限</td>
+								<td>100</td>
+							</tr>
+							<tr>
+								<td>最后登录</td>
+								<td>2015-01-01</td>
+								<td>精华</td>
+								<td>10</td>
+							</tr>
+							<tr>
+								<td>帖子</td>
+								<td>243</td>
+								<td>威望</td>
+								<td>10</td>
+							</tr>
+							<tr>
+								<td>金币</td>
+								<td>9999</td>
+								<td>体力</td>
+								<td>2333</td>
+							</tr>
+							<tr>
+								<td>激情</td>
+								<td>1645</td>
+								<td>注册时间</td>
+								<td>2010-09-01</td>
+							</tr>
+							<tr>
+								<td>
+									<img src="images-0/qq.gif" alt="">
+									<img src="images-0/forumlink.gif" alt="">
+									<img src="images-0/userinfo.gif" alt="">
+								</td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+						</table>
+					</div>
+					<label for=""> <img src="images-0/pmto.gif" alt="">发送短信</label>
+					<br>
+					<label for=""> <img src="images-0/addbuddy.gif" alt="">加为好友</label>
+				</div>
+				<div class="foolt" id="foolt">
+					<table>
+						<tr>
+							<td>积分</td>
+							<td>3850</td>
+						</tr>
+						<tr>
+							<td>UID</td>
+							<td>1001952</td>
+						</tr>
+						<tr>
+							<td>帖子</td>
+							<td>3502</td>
+						</tr>
+						<tr>
+							<td>威望</td>
+							<td>4</td>
+						</tr>
+						<tr>
+							<td>金币</td>
+							<td>672个</td>
+						</tr>
+						<tr>
+							<td>体力</td>
+							<td>756</td>
+						</tr>
+						<tr>
+							<td>激情</td>
+							<td>3068</td>
+						</tr>
+						<tr>
+							<td>注册时间</td>
+							<td>2008-10-4</td>
+						</tr>
+					</table>
+				</div>
 			</div>
 		</div>
 		<div class="content">
-
 			<img src="images-0/Discuz!_pic.gif" alt="">
 		</div>
 	</div>

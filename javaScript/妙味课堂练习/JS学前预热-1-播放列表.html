@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>播放列表收缩展开</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		
+		.main {
+			width: 240px;
+			margin: 10px auto;
+		}
+		.dropdown{
+			position: relative;
+		}
+		
+		.dropdown button {
+			font-size: 14px;
+			width: 230px;
+			height: 26px;
+			text-align: left;
+			color: #6b7980;
+			padding-left: 10px;
+			background: url(images-0/down_list_h2_bg.gif) repeat-x;
+			cursor: pointer;
+		}
+		
+		.dropdown span {
+			float: right;
+			height: 10px;
+			width: 10px;
+			padding-right: 10px;
+			vertical-align: bottom;
+			background: url(images-0/up.gif) no-repeat center;
+		}
+		.dropdown ul{
+			position: absolute;
+			width: 228px;
+			border:1px solid  #6b7980;
+			border-top: none;
+			background: #eee;
+		}
+		.dropdown li{
+			list-style: none;
+			line-height: 20px;
+		}
+		.dropdown li a{
+			display: block;
+			 height: 22px;
+			font-size: 13px;
+			text-decoration: none;
+			color: #6b7980;
+			padding-left: 8px;
+			
+		}
+		.dropdown li a:hover{
+			background: #fff;
+			text-decoration: underline;
+		}
+	</style>
+	<script>
+		window.onload= function(){
+			var btn = document.getElementById('btn');
+			btn.onclick = function(){
+				var span = btn.children[0];
+				var ul = btn.nextElementSibling;
+				if(span.style.background=="")
+				{
+					ul.style.display='none';
+					span.style.background="URL('images-0/down.gif')  no-repeat center";
+				}
+				else
+				{
+					ul.style.display='block';
+					span.style.background="";
+				}
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<div class="main">
+		<div class="dropdown">
+			<button id="btn">播放列表 <span></span></button>
+			<ul>
+				<li><a href="#">玩爱之徒 - 蔡依林</a></li>
+				<li><a href="#">原谅我就是这样的女生 - 戴佩妮</a></li>
+				<li><a href="#">猜不透 - 丁当</a></li>
+				<li><a href="#">自导自演 - 周杰伦</a></li>
+				<li><a href="#">浪漫窝 - 玄子</a></li>
+				<li><a href="#">流年 - 王菲</a></li>
+			</ul>
+		</div>
+	</div>
+</body>
+
+</html>
