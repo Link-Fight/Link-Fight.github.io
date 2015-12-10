@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>JS学前预热-3-星星评分</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		
+		.container {
+			width: 300px;
+			margin: 10px auto;
+		}
+		
+		.container ul {
+			list-style: none;
+		}
+		
+		.container li {
+			float: left;
+			width: 28px;
+			height: 28px;
+			background: url(images-0/star.gif) 0 0;
+		}
+		
+		#tip-gp{
+			display: none;
+		}
+		
+		#tip {
+			float: left;
+			line-height: 28px;
+			text-align: center;
+			height: 28px;
+			width: 100px;
+			background: cadetblue;
+			font-size: 14px;
+			color: #fff;
+		}
+		
+		#tip-bf {
+			float: left;
+			margin-left: 5px;
+			/*height: 18px;*/
+			padding: 0;
+			border-top: 14px solid transparent;
+			border-bottom: 14px solid transparent;
+			border-right: 18px solid cadetblue
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			var div = document.getElementsByClassName("container")[0];
+ 
+		   var mdate = ["糟糕","差评","合格","好评","推荐"];
+			var lis = div.getElementsByTagName('li');
+			for(var i=0,len = lis.length;i<len;i++){
+				(function(){
+					var a =i;
+					lis[a].onclick = function(){
+					    alert((a+1)+"分");	
+					};
+												
+					var label = document.getElementById("tip-gp");
+					lis[a].onmouseenter=function(){
+						for(var y=0;y<len;y++){
+							if(y<=a){
+								lis[y].style.background="url(images-0/star.gif) 0 -29px";
+							}else
+							{
+								lis[y].style.background="";
+							}
+						}
+						label.style.display="block";
+						var lab = document.getElementById("tip");
+						lab.textContent = "鸭腿说："+mdate[a];
+						
+					};
+					lis[a].onmouseleave =function(){
+						label.style.display="none";
+					}
+					
+				})(i);
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<div class="container">
+		<ul>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+			<li></li>
+		</ul>
+		<div id="tip-gp">
+			<label for="" id="tip-bf"></label>
+			<label for="" id="tip">评价</label>
+		</div>
+	</div>
+</body>
+
+</html>

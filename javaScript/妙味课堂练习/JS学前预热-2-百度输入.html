@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>JS学前预热-2-百度输入</title>
+	<style>
+		* {
+			margin: 0;
+			padding: 0;
+		}
+		
+		.contain {
+			position: relative;
+			width: 60px;
+			margin: 20px auto;
+		}
+		
+		.contain label {
+			display: block;
+			color: deepskyblue;
+			font-size: 14px;
+			width: 60px;
+			background: url(images-0/ico.gif) 46px no-repeat;
+		}
+		
+		.dropdown {
+			position: absolute;
+			z-index: 999;
+			background: #fff;
+			margin-top: 4px;
+			border: 1px solid deepskyblue;
+			display: none;
+		}
+		
+		.dropdown ul li {
+			list-style: none;
+			/*padding: 5px 0 5px 0;*/
+			text-align: center;
+			font-size: 13px;
+		}
+		
+		.dropdown ul a {
+			text-decoration: none;
+			display: block;
+			cursor: pointer;
+			height: 25px;
+			line-height: 25px;
+			width: 58px;
+			color: deepskyblue;
+		}
+		
+		.dropdown ul li a:hover {
+			background: lightsteelblue;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			var btn = document.getElementById('btn');
+			btn.onclick = function(){
+				var div  = btn.nextElementSibling;
+				if(div.style.display=="")
+					div.style.display = 'block';
+				else
+					div.style.display = '';
+			}
+		}
+	</script>
+</head>
+
+<body>
+	<div class="contain">
+		<label for="" id='btn'>输入法</label>
+		<div class="dropdown">
+			<ul>
+				<li><a href="">手写</a></li>
+				<li><a href="">拼音</a></li>
+				<li><a href="">关闭</a></li>
+			</ul>
+		</div>
+
+		<div class="demo">
+			<p>Hi</p>
+		</div>
+	</div>
+
+</body>
+
+</html>
