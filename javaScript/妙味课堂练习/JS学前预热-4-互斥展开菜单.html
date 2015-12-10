@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>JS学前预热-4-互斥展开菜单.html</title>
+	<style>
+		*{
+			padding: 0;
+			margin: 0;
+		}
+		.demo{
+			width: 400px;
+			margin: 10px auto;
+			background: skyblue;
+			
+		}
+		.container{
+			width: 150px;
+			background: whitesmoke;
+		}
+		.container ul{
+			list-style: none;
+			text-indent: 40px;
+		}
+		.ul-1>li{
+			
+			background: url(images-0/menu.gif) repeat-x ;
+		}
+	</style>
+</head>
+<body>
+	<div class="demo">
+		<div class="container">
+			<ul class="ul-1">
+				<li>1
+					<ul class="ul-2">
+						<li>11</li>
+						<li>23</li>
+						<li>34</li>
+						<li>56</li>
+					</ul>
+				</li>
+				<li>2</li>
+				<li>3</li>
+				<li>4</li>
+				<li>5</li>
+				<li>6</li>
+			</ul>
+		</div>
+	</div>
+</body>
+</html>

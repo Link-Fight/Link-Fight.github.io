@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>JS学前预热-5-无缝滚动图片</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		
+		.top {
+			background: deepskyblue;
+			text-align: center;
+			padding: 20px;
+			border: 2px solid cadetblue;
+		}
+		
+		.content {
+			height: 400px;
+			width: 80%;
+			margin: 10px auto;
+			background: royalblue;
+			position: relative;
+		}
+		
+		.wrap {
+			position: relative;
+			background: red;
+			
+		}
+		
+		.wrap li {
+			
+			float: left;
+			width: 182px;
+			height: 108px;
+			text-align: center;
+			list-style: none;
+		}
+		.btn_left{
+			display: block;
+			width: 68px;
+			height: 68px;
+			background: url(images-0/btn.jpg) no-repeat -70px -69px;
+			float: left;
+			margin-top: 20px;
+		}
+		.btn_right{
+			display: block;
+			width: 68px;
+			height: 68px;
+			background: url(images-0/btn.jpg) no-repeat 1px -69px;
+			float: right;
+			margin-top: 20px;;
+		}
+	</style>
+</head>
+
+<body>
+	<div class="main">
+		<div class="top">
+			<input type="checkbox">间隔停顿
+			<select name="stop" id="stop">
+				<option value="0">短</option>
+				<option value="1">中</option>
+				<option value="2">长</option>
+			</select>
+			滚动速度
+			<select name="speed" id="speed">
+				<option value="0">慢</option>
+				<option value="1">中</option>
+				<option value="2">快</option>
+			</select>
+		</div>
+		<div class="content" id="roll">
+			<a class="btn_left" href="javascript:void(0);"></a>
+
+			<div class="wrap">
+				<ul>
+					<li>
+						<a href="#"><img src="images-0/11.jpg" alt=""></a>
+					</li>
+					<li>
+						<a href="#"><img src="images-0/12.jpg" alt=""></a>
+					</li>
+					<li>
+						<a href="#"><img src="images-0/13.jpg" alt=""></a>
+					</li>
+					<li>
+						<a href="#"><img src="images-0/14.jpg" alt=""></a>
+					</li>
+				</ul>
+			</div>
+			<a class="btn_right" href="javascript:void(0);"></a>
+		</div>
+
+	</div>
+</body>
+
+</html>
