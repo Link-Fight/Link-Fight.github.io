@@ -9,7 +9,9 @@
 			padding: 0;
 			margin: 0;
 		}
-		
+		.img{
+			border:0;
+		}
 		.top {
 			background: deepskyblue;
 			text-align: center;
@@ -18,42 +20,74 @@
 		}
 		
 		.content {
-			height: 400px;
-			width: 80%;
-			margin: 10px auto;
+			height: 112px;
+			width: 880px;
+			margin: 10px auto 20px;
 			background: royalblue;
 			position: relative;
+			overflow: hidden;
 		}
 		
 		.wrap {
+			height: 108px;
+			width: 728px;
+			margin: 0 auto;
 			position: relative;
 			background: red;
-			
+			overflow: hidden;
+			padding-top: 5px;
+			padding-bottom: 5px;
+		}
+		
+		.wrap ul {
+			position: relative;
+			top: 0;
+			left: 0;
 		}
 		
 		.wrap li {
-			
 			float: left;
 			width: 182px;
 			height: 108px;
 			text-align: center;
 			list-style: none;
 		}
-		.btn_left{
+		
+		.wrap li:hover {
+			margin-top: 5px;
+		}
+		
+		.btn_left {
+			position: absolute;
+			top: 0;
+			left: 0;
 			display: block;
 			width: 68px;
 			height: 68px;
 			background: url(images-0/btn.jpg) no-repeat -70px -69px;
 			float: left;
-			margin-top: 20px;
+			margin-top: 25px;
 		}
-		.btn_right{
+		
+		.btn_left:hover {
+			background: url(images-0/btn.jpg) no-repeat -70px -0px;
+		}
+		
+		.btn_right {
+			top: 0;
+			right: 0;
+			position: absolute;
 			display: block;
 			width: 68px;
 			height: 68px;
 			background: url(images-0/btn.jpg) no-repeat 1px -69px;
 			float: right;
-			margin-top: 20px;;
+			margin-top: 25px;
+			;
+		}
+		
+		.btn_right:hover {
+			background: url(images-0/btn.jpg) no-repeat 1px -0px;
 		}
 	</style>
 </head>
@@ -76,9 +110,20 @@
 		</div>
 		<div class="content" id="roll">
 			<a class="btn_left" href="javascript:void(0);"></a>
-
 			<div class="wrap">
 				<ul>
+					<li>
+						<a href="#"><img src="images-0/11.jpg" alt=""></a>
+					</li>
+					<li>
+						<a href="#"><img src="images-0/12.jpg" alt=""></a>
+					</li>
+					<li>
+						<a href="#"><img src="images-0/13.jpg" alt=""></a>
+					</li>
+					<li>
+						<a href="#"><img src="images-0/14.jpg" alt=""></a>
+					</li>
 					<li>
 						<a href="#"><img src="images-0/11.jpg" alt=""></a>
 					</li>
@@ -95,8 +140,24 @@
 			</div>
 			<a class="btn_right" href="javascript:void(0);"></a>
 		</div>
-
 	</div>
+	<script>
+		window.onload= function(){
+			var mDiv = document.getElementById('roll');
+			var mUl = mDiv.getElementsByTagName('ul')[0];
+			// mUl.innerHTML += mUl.innerHTML;
+			setInterval(Move,100);
+		}
+		
+		var speed =10;
+		function Move(){
+			var mDiv = document.getElementById('roll');
+			var mUl = mDiv.getElementsByTagName('ul')[0];
+			speed+=10;
+			
+		    mUl.style.left= "-"+speed+'px';
+		}
+	</script>
 </body>
 
 </html>

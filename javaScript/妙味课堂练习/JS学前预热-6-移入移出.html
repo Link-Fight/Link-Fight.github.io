@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>JS学前预热-6-移入移出</title>
+	<style>
+		.container {
+			width: 200px;
+			margin: 10px auto;
+			text-align: center;
+			padding: 10px;
+			background: url(C:/Users/kelin/Desktop/QQ图片20151211105858.png) repeat-y;
+		}
+		
+		#box1 {
+			height: 40px;
+			width: 100px;
+			/*background: deepskyblue;*/
+			margin: 10px auto;
+		}
+		
+		#box2 {
+			margin: 10px auto 20px;
+			height: 20px;
+			width: 150px;
+			/*background: orangered;*/
+		}
+	</style>
+
+</head>
+
+<body>
+	<div class="main">
+		<div class="container">
+			<div id="box1"></div>
+			<div id="box2"></div>
+			<input type="button" onclick="cclick();" value="click">
+			<button onclick="sclick()">stop</button>
+		</div>
+
+	</div>
+	<script>
+		function copyText()
+		{
+			 setInterval(move,100);
+			alert("??");
+		}
+		var speed =0;
+		function move(){
+			var div = document.getElementsByClassName("container")[0];
+			div.style.background="url(C:/Users/kelin/Desktop/QQ图片20151211105858.png) 0px  -"+speed +"px repeat-y";
+			speed+=10;
+		}
+		var time ;
+		function cclick(){
+			time= setInterval(move,100);
+		}
+		function sclick(){
+			clearInterval(time);
+		}
+	</script>
+</body>
+
+</html>
