@@ -18,42 +18,67 @@
 		}
 		
 		.content {
-			height: 400px;
+			height: 120px;
 			width: 80%;
 			margin: 10px auto;
 			background: royalblue;
 			position: relative;
+			overflow: hidden;
 		}
 		
 		.wrap {
+			margin-left: 68px;
+			margin-right: 68px;
+			height: 110px;
+			width: 728px;
 			position: relative;
 			background: red;
-			
+			overflow: hidden;
 		}
 		
+		.wrap ul{
+			position: absolute;
+			top: 0;
+			left: 0px;
+		}
 		.wrap li {
-			
+			/*display: block;*/
 			float: left;
 			width: 182px;
 			height: 108px;
 			text-align: center;
 			list-style: none;
 		}
+		
+		.wrap li:hover{
+			margin-top: 4px;
+		}
+		
 		.btn_left{
 			display: block;
 			width: 68px;
 			height: 68px;
 			background: url(images-0/btn.jpg) no-repeat -70px -69px;
-			float: left;
-			margin-top: 20px;
+			position: absolute;
+			top: 20px;
+			left: 0;
+			/*margin-top: 20px;*/
+		}
+		.btn_left:hover{
+			background: url(images-0/btn.jpg) no-repeat -70px 0px;
 		}
 		.btn_right{
 			display: block;
 			width: 68px;
 			height: 68px;
 			background: url(images-0/btn.jpg) no-repeat 1px -69px;
-			float: right;
-			margin-top: 20px;;
+			position: absolute;
+			top: 20px;
+			right: 0;
+			/*margin-top: 20px;;*/
+		}
+		.btn_right:hover{
+			background: url(images-0/btn.jpg) no-repeat 1px 0px;
 		}
 	</style>
 </head>
@@ -61,17 +86,17 @@
 <body>
 	<div class="main">
 		<div class="top">
-			<input type="checkbox">间隔停顿
-			<select name="stop" id="stop">
-				<option value="0">短</option>
-				<option value="1">中</option>
-				<option value="2">长</option>
+			<input type="checkbox" onchange="changePause(this)" checked>间隔停顿
+			<select name="stop" id="stop" onchange="changePauseTime(this)">
+				<option value="1000">短</option>
+				<option value="2000">中</option>
+				<option value="3000">长</option>
 			</select>
 			滚动速度
-			<select name="speed" id="speed">
-				<option value="0">慢</option>
-				<option value="1">中</option>
-				<option value="2">快</option>
+			<select name="speed" id="speed" onchange="changeSpeed(this)">
+				<option value="10">慢</option>
+				<option value="20">中</option>
+				<option value="40">快</option>
 			</select>
 		</div>
 		<div class="content" id="roll">
@@ -95,8 +120,150 @@
 			</div>
 			<a class="btn_right" href="javascript:void(0);"></a>
 		</div>
+		<div class="test">
+			<div class="div1">
+				<div class="div2">23332</div>
+				<div class="div2">23332</div>
+				<div class="div2">23332</div>
+			</div>
+		</div>
 
 	</div>
+	<style>
+		.test{
+			width: 400px;
+			height: 100px;
+			background: yellowgreen;
+			padding: 10px 10px;
+			margin: 10px auto;
+		}
+		.div1{
+			margin:  0 auto;
+			/*width: 180px;*/
+			height: 100px;
+			background: indianred;
+			vertical-align: middle;
+		}
+		.div2{
+			width: 50px;
+			height: 100px;
+			margin: 0 10px;
+			background: #eee;
+			text-align: center;
+			line-height: 100px;
+			float: left;
+		}
+		/*在div里面设置padding值，border值是可以撑大箱子的大小的 而margin不能*/
+	</style>
+	<script>
+		window.onresize=function(){
+			defaultWidth();
+		}
+		window.onload=function(){
+			defaultWidth();
+			defaultUl();
+			setInterval(Move,100);
+			defaultControlA();
+		}
+		var ul_wrap;
+		function defaultWidth(){
+			var div_roll = document.getElementById('roll');
+			var div_wrap = div_roll.getElementsByClassName('wrap')[0];
+			var a_roll = div_roll.getElementsByTagName('a')[0];
+			div_wrap.style.width = div_roll.offsetWidth - a_roll.offsetWidth*2+"px";
+			ul_wrap = div_roll.getElementsByTagName('ul')[0];
+		}
+		var defaultUl_width=0;
+		function defaultUl(){
+			var div_roll = document.getElementById('roll');
+			ul_wrap = div_roll.getElementsByTagName('ul')[0];
+			ul_wrap.innerHTML+=ul_wrap.innerHTML;
+			li_wrap = ul_wrap.getElementsByTagName('li');
+			defaultUl_width=li_wrap[0].offsetWidth*li_wrap.length;
+			ul_wrap.style.width=defaultUl_width+'px';
+			for(var i =0,len =li_wrap.length;i<len;i++){
+				(function(){
+					li_wrap[i].onmouseenter = movestop;
+					li_wrap[i].onmouseleave = movestart;
+				})(i);		
+			}
+		}
+		
+		function defaultControlA(){
+			var  btn_left  = document.getElementsByClassName('btn_left')[0];
+			btn_left.onmouseenter=function(){
+				p_left =true;
+			};
+			var  btn_right  = document.getElementsByClassName('btn_right')[0];
+			btn_right.onmouseenter=function(){
+				p_left =false;
+			};
+		}
+		
+		var position=0;
+		var p_left = false;
+		var p_right = false;
+		var move_stop = false;
+		
+		function movestop(){
+			move_stop = true;
+		}
+		
+		function movestart(){
+			move_stop = false;
+		}
+		var speed = 10;
+		function Move(){
+			if(move_stop)
+			 return;
+			// position+=speed;
+			if(p_left){
+				position-=speed
+				if(Math.abs(position)>=defaultUl_width/2)
+				{
+					position=0;
+				}
+			}else{
+				position+=speed
+				if(position>=0)
+				{
+					position=-defaultUl_width/2;
+				}
+			}
+			ul_wrap.style.left=position+ 'px';
+			pause();
+		}
+		
+		var needPause = true;
+		var pauseTime = 1000;
+		function pause(){
+			if(needPause==true){
+				if(Math.abs(position)%182<=speed){
+					move_stop=true;
+					setTimeout(function(){
+						move_stop =false;
+					},pauseTime);
+				}
+			}
+		}
+		
+		function changePause(e){
+			if(e.checked==true){
+				needPause = true;
+				return;
+			}
+			needPause = false;
+		}
+		
+		function changePauseTime(e){
+			pauseTime = parseInt(e.value);
+		}
+		
+		function changeSpeed(e){
+			speed = parseInt(e.value);
+		}
+		
+	</script>
 </body>
 
 </html>
