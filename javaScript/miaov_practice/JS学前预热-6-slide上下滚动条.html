@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>JS学前预热-6-slide上下滚动条</title>
+	<style>
+		body {
+			background: #eee;
+		}
+		
+		* {
+			margin: 0px;
+			padding: 0px;
+		}
+		
+		li {
+			list-style: none;
+			height: 104px;
+		}
+		
+		.main {
+			width: 400px;
+			margin: 50px auto;
+			text-align: center;
+		}
+		
+		.up {
+			display: block;
+			background: url(images-0/up1.gif);
+			width: 27px;
+			height: 27px;
+			margin: 2px auto;
+			margin-bottom: 4px;
+		}
+		
+		.down {
+			display: block;
+			background: url(images-0/down1.gif);
+			width: 27px;
+			height: 27px;
+			margin: 2px auto;
+			margin-top: 4px;
+		}
+		
+		.content {
+			margin: 0 auto;
+			width: 120px;
+			background: #fff;
+			border: 2px solid #aaa;
+			padding: 5px;
+			text-align: center;
+		}
+		.roll{
+			position: relative;
+			width: 100px;
+			height: 310px;
+			margin: 0 auto;
+			overflow: hidden;
+		}
+		img{
+			padding: 0px;
+		}
+		.roll ul {
+			position: absolute;
+			
+		}
+	</style>
+</head>
+
+<body>
+	<div class="main">
+		<div class="content">
+			<a href="#" class="up" onclick="up()"></a>
+			<div class="roll">
+				<ul>
+					<li><img src="images-0/21_1.png" alt=""></ima>
+					</li>
+					<li><img src="images-0/21_2.png" alt=""></ima>
+					</li>
+					<li><img src="images-0/21_3.png" alt=""></ima>
+					</li>
+					<li><img src="images-0/21_4.png" alt=""></ima>
+					</li>
+				</ul>
+			</div>
+			<a href="#" class="down" onclick="down()"></a>
+		</div>
+	</div>
+	<script>
+		var ul;
+		window.onload = function (){
+			var ii = document.getElementById('');
+			var content = document.getElementsByClassName('content')[0];
+			 ul = content.getElementsByTagName('ul')[0];
+			var li = ul.getElementsByTagName('li');			
+			 ul.innerHTML += ul.innerHTML;
+			 setInterval(move,100);
+			 
+		}
+		var position =0;
+		var is_up = false;
+		function move(){
+			
+			if(is_up){
+				position-=10;
+				if(Math.abs(position)>=ul.offsetHeight/2){
+					position=0;
+				}		
+			}else{
+				position+=10;
+				if(position>=0){
+					position=-ul.offsetHeight/2;
+				}
+			}
+			 ul.style.top=position+"px";
+		}
+		
+		function up(){
+			is_up =true;
+		}
+		function down(){
+			is_up = false;
+		}
+	</script>
+</body>
+
+</html>

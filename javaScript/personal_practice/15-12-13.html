@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>遮罩层</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		body{
+			background: #eee;
+		}
+		.container{
+			width: 400px;
+			height: 600px;
+			margin: 10px auto;
+			border:5px solid #999;
+			background: #aaa;
+		}
+		.main{
+			padding: 20px;
+			width: 90%;
+			margin: 0 auto;
+			background: mediumblue;
+			text-align: center;
+			position: relative;
+		}
+		.main>.main_shade{
+			position: absolute;
+			top: 0px;
+			left: 0px;
+			background: rgba(0, 0, 0, 0.2);
+			/*text-align: center;*/
+			border:10px solid rgba(0, 0, 0, 0.1);
+			display: none;
+		}
+		 .shade_content{ 
+			width: 300px;
+			height: 90%;
+			margin: 0 auto;
+			vertical-align: middle;
+			background: orangered;
+		}
+		.shade_content .header{
+			width: 100%;
+			height: 20px;
+			position: relative;
+			background: #999;
+			font-family:"楷体";
+			/*font-size: 14px;*/
+		}
+		.header>.close{
+			float: right;
+		}
+	</style>
+</head>
+<body>
+	<div class="container">
+		<div class="main">
+			<input type="text" placeholder="账号">
+			<br>
+			<input type="text" placeholder="密码">
+			<br>
+			<input type="button" value="确认" onclick="onShade_0(this)">
+			<ul>
+				<li name='kelin'>Java</li>
+				<li>DOM</li>
+				<li>HTML</li>
+				<li>javaScrip</li>
+				<li>CSS</li>
+			</ul>
+			<br><br><br><br><br>
+			<p>
+				密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码密码
+			</p>
+			<input type="button" value="hi">
+			<div class="main_shade">
+				<!--<input type="button" class="close" value="close(this)">-->
+				<div class="shade_content">
+					<div class="header">
+						这是遮罩啦
+						<input type="button" class="close" onclick="onCloseShade(this)" value="×">
+					</div>
+					<input type="text" placeholder="邮箱">
+				</div>
+				</div>
+		</div>
+		
+	</div>
+	<script>
+		function onShade_0(e){
+			var parent_Div = e.parentElement;
+			var shade_Div = parent_Div.lastElementChild;
+			shade_Div.style.display='block';
+			shade_Div.style.height = parent_Div.offsetHeight -10*2+'px';
+			shade_Div.style.width = parent_Div.offsetWidth-10*2+'px';
+		}
+		function onCloseShade(e){
+		   var shade = e.parentElement.parentElement.parentElement;
+		   shade.style.display='none';
+		}
+	</script>
+</body>
+</html>
