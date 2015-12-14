@@ -57,14 +57,14 @@
 		
 		.roll .wrap {
 			width: 728px;
-			height: 108px;
+			height: 128px;
 			margin: 0 auto;
 			position: relative;
 			overflow: hidden;
 		}
 		
 		.roll ul {
-			position: relative;
+			position: absolute;
 			top: 0;
 			left: 0;
 		}
@@ -88,46 +88,6 @@
 			padding: 20px 0;
 		}
 	</style>
-</head>
-
-<body>
-	<div class="control">
-		<label id="chk_pause">
-			<input type="checkbox" checked="checked">间隔停顿</label>
-		<select id="pause_time">
-			<option value="100">短</option>
-			<option value="1000" selected="selected">中</option>
-			<option value="3000">长</option>
-		</select>
-
-		滚动速度：
-		<select id="sel_speed">
-			<option value="2">慢</option>
-			<option value="5">中</option>
-			<option value="10">快</option>
-		</select>
-	</div>
-
-	<div class="roll" id="roll">
-		<a href="javascript:void(0);" class="btn_left"></a>
-		<a href="javascript:void(0);" class="btn_right"></a>
-		<div class="wrap">
-			<ul>
-				<li>
-					<a href="http://www.miaov.com/"><img src="images-0/11.jpg" /></a>
-				</li>
-				<li>
-					<a href="http://www.miaov.com/"><img src="images-0/12.jpg" /></a>
-				</li>
-				<li>
-					<a href="http://www.miaov.com/"><img src="images-0/13.jpg" /></a>
-				</li>
-				<li>
-					<a href="http://www.miaov.com/"><img src="images-0/14.jpg" /></a>
-				</li>
-			</ul>
-		</div>
-	</div>
 	<script>
 		var g_bMoveLeft=true;
 var g_oTimer=null;
@@ -256,9 +216,68 @@ function doMove()
 		}
 	}
 	
-	oUl.style.left=l+'px';
+	 oUl.style.left=l+'px';
 }
 	</script>
+	<!--<script>
+		window.onload=function(){
+			var div_roll = document.getElementById('roll');
+			ul_wrap= div_roll.getElementsByTagName('ul')[0];
+			li_wrap = div_roll.getElementsByTagName('li');
+			ul_wrap.style.width=li_wrap[0].offsetWidth*li_wrap.length+'px';
+			setInterval(Move,10);
+		}
+		var ul_wrap;
+		
+		var position=0;
+		function Move(){
+			position-=1;
+			ul_wrap.style.left=position+ 'px';
+		}
+	</script>-->
+</head>
+
+<body>
+	<div class="control">
+		<label id="chk_pause">
+			<input type="checkbox" checked="checked">间隔停顿</label>
+		<select id="pause_time">
+			<option value="100">短</option>
+			<option value="1000" selected="selected">中</option>
+			<option value="3000">长</option>
+		</select>
+
+		滚动速度：
+		<select id="sel_speed">
+			<option value="2">慢</option>
+			<option value="5">中</option>
+			<option value="10">快</option>
+		</select>
+	</div>
+
+	<div class="roll" id="roll">
+		<a href="javascript:void(0);" class="btn_left"></a>
+		<a href="javascript:void(0);" class="btn_right"></a>
+		<div class="wrap">
+			<ul>
+				<li>
+					<a href="http://www.miaov.com/"><img src="images-0/11.jpg" /></a>
+				</li>
+				<li>
+					<a href="http://www.miaov.com/"><img src="images-0/11.jpg" /></a>
+				</li>
+				<li>
+					<a href="http://www.miaov.com/"><img src="images-0/12.jpg" /></a>
+				</li>
+				<li>
+					<a href="http://www.miaov.com/"><img src="images-0/13.jpg" /></a>
+				</li>
+				<li>
+					<a href="http://www.miaov.com/"><img src="images-0/14.jpg" /></a>
+				</li>
+			</ul>
+		</div>
+	</div>
 </body>
 
 </html>
