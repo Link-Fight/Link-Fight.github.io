@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Div拖拽</title>
+	<style>
+		*{
+			padding:0;
+			margin:0;
+		}
+		
+		.target1{
+			width:100px;
+			height:100px;
+			background:red;
+			position: absolute;
+			left: 100px;
+			top: 100px;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			var oDiv = document.getElementsByClassName('target1');
+			for(var i=0,len=oDiv.length;i<len;i++){
+				oDiv[i].onmousedown=mousedown;
+				oDiv[i].ondblclick=dbClick;
+			}
+		}
+		
+		
+		function mousedown(e){
+			var oEvent = e||event;
+			var disX = oEvent.clientX - e.target.offsetLeft;
+			var disY = oEvent.clientY - e.target.offsetTop;
+			var target = e.target;
+			if(target.className=='target1')
+				target.style.border="4px solid green";
+			document.onmousemove = function(e){
+				var oEvent = e||event;
+				var pX = oEvent.clientX-disX;
+				var pY = oEvent.clientY-disY;
+				target.style.top=pY+'px';
+				target.style.left=pX+'px';
+			}
+			target.onmouseup=function(){
+				document.onmousemove=null;
+				target.onmouseup = null;
+				target.style.border="none";
+			}
+			oEvent.cancelBubble = true;
+			return false;
+		}
+		
+		function dbClick(e){
+			// alert(e);
+			
+		}
+		
+	</script>
+</head>
+<body>
+	<div class="target1"></div>
+	<div class="target1">
+		<div>
+			<p>abc</p>
+		</div>
+	</div>
+</body>
+</html>
