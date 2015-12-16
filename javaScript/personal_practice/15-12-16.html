@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<title>运动学习</title>
+	<style>
+		* {
+			padding: 0;
+			margin: 0;
+		}
+		
+		.test1 .container {
+			position: relative;
+			/*width: 200px;
+			height: 300px;
+			background: yellowgreen;*/
+		}
+		
+		.test1 .sport1 {
+			position: absolute;
+			left: 0px;
+			width: 100px;
+			height: 100px;
+			background: orchid;
+		}
+		.test2 .share1{
+			position: fixed;
+			z-index: -1;
+			top: 30%;
+			left: -100px;
+			width: 100px;
+			height: 200px;
+			background: forestgreen;
+		}
+		.share1:hover{
+			background: #999;
+		}
+		.share1 .tip{
+			width: 20px;
+			height: 60px;
+			position: absolute;
+			left: 100px;
+			top: 70px;
+			background: greenyellow;
+		}
+		.test3{
+			margin:  0 auto;
+			width: 400px;
+			background: #888;
+		}
+		.test3 img,.content{
+			height: 400px;
+			width: 400px;
+			margin: 0 auto;
+			
+		}
+		
+		.test3 img{ 
+			
+			opacity:0.3;
+		}
+	</style>
+	<script>
+		window.onload=function(){
+			var btn1 = document.getElementById('btn1');
+			var time =null;
+			btn1.onclick = function(){
+				var objDiv = this.parentElement.lastElementChild;
+				var speed =10;
+				clearInterval(time);
+				time=setInterval(function(){
+					if(objDiv.offsetLeft>=document.documentElement.clientWidth-objDiv.offsetWidth)
+						objDiv.style.left="";
+					if(objDiv.offsetLeft>=300)
+					   clearInterval(time);
+					else{
+						objDiv.style.left = objDiv.offsetLeft+speed+"px";	
+					}
+				},30);	
+			}
+			
+			var oDiv2 =document.getElementById('share1');
+
+			oDiv2.onmouseenter =function(){
+				move1(oDiv2,0);
+			};
+			
+			oDiv2.onmouseleave = function(){
+				move1(oDiv2,-100);
+			};
+			
+			var img = document.getElementById('img1');	
+			img.onmouseenter=function(){
+
+					move2(img,"opacity",1,0.05);
+					console.log("in");
+			};
+			img.onmouseleave=function(){
+				
+					move2(img,"opacity",0.3,0.05);
+					console.log("out");
+			};
+		}
+		var time1;
+		function move1(e,target){
+			clearInterval(time1);
+			var speed=10;
+			if(target>e.offsetLeft){
+			   speed =10;
+			   }
+			else{
+				speed=-10;	
+				}
+			time1 = setInterval(function(){
+			if(e.offsetLeft==target)
+			{
+				clearInterval(time1);
+			}
+			else
+			{
+				e.style.left = e.offsetLeft+speed+'px';
+			}
+			},50);	
+		}
+		
+		var time2 =null;
+		var alpha =30;
+		function move2(e,targetAttr,targetValue,s){
+				clearInterval(time2);
+				 if(e.style[targetAttr]=="")
+				 {
+					e.style[targetAttr]=0.3;
+				 }
+				if(e.style[targetAttr]==""||parseFloat(e.style[targetAttr])<targetValue)
+				{
+					s = s;					
+				}else
+				{
+					s=- s;
+				}
+				time2 = setInterval(function(){
+					if(parseFloat(e.style[targetAttr])==targetValue)
+					{
+						clearInterval(time2);
+					}else{
+						
+						e.style[targetAttr]= parseFloat(e.style[targetAttr])+s;//targetValue;//
+						
+					}
+				},100);
+		}
+		
+		
+		
+		
+		
+	</script>
+</head>
+
+<body>
+	<div class="test1">
+		<div class="container">
+			<input id="btn1" type="button" value="跑啊">
+			<div class="sport1"></div>
+		</div>
+	</div>
+	<div class="test2">
+		<div class="container">
+			<div id='share1' class="share1">
+				<span class="tip">分享到</span>
+			</div>
+		</div>
+	</div>
+	<div class="test3">
+		<div class="content">
+			<img src='piti.jpg' alt="" id="img1">
+		</div>
+	</div>
+</body>
+
+</html>
