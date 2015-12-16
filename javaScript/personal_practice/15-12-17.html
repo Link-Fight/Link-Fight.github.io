@@ -1,0 +1,190 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title>导航菜单</title>
+	<style type="text/css">
+		* {
+			margin: 0;
+			padding: 0;
+			font-size: 14px;
+		}
+		
+		a {
+			color: #333;
+			text-decoration: none
+		}
+		
+		.nav,
+		.nav2 {
+			list-style: none;
+			height: 30px;
+			border-bottom: 10px solid #F60;
+			margin-top: 20px;
+			padding-left: 50px;
+		}
+		
+		.nav li,
+		.nav2 li {
+			float: left
+		}
+		
+		.nav li a,
+		.nav2 li a {
+			display: block;
+			height: 30px;
+			text-align: center;
+			line-height: 30px;
+			width: 120px;
+			background: url(http://img.mukewang.com/53846438000168f901200060.jpg);
+			margin-left: 1px;
+		}
+		
+		.nav li a.on,
+		.nav li a:hover {
+			background-position: 0 -30px;
+			color: #fff;
+		}
+		
+		.nav2 li a {
+			background: none;
+			display: block;
+			height: 30px;
+			text-align: center;
+			line-height: 30px;
+			width: 120px;
+			background-color: #ccc;
+		}
+		
+		.nav2 li a:hover {
+			background-color: #F60;
+			height: 40px;
+			line-height: 40px;
+			margin-top: -10px;
+		}
+		
+		.subNav {
+			list-style: none;
+			position: absolute;
+			top: 30px;
+			left: 0;
+			width: 120px;
+			height: 0;
+			overflow: hidden;
+		}
+		
+		.subNav li a {
+			background: #ddd
+		}
+		
+		.subNav li a:hover {
+			background: #efefef
+		}
+	</style>
+
+</head>
+
+<body>
+
+	<ul class="nav">
+		<li><a class="on" href="#">首　　页</a></li>
+		<li><a href="#">新闻快讯</a></li>
+		<li><a href="#">产品展示</a></li>
+		<li><a href="#">售后服务</a></li>
+		<li><a href="#">联系我们</a></li>
+	</ul>
+	<br>
+	<ul class=" nav2">
+		<li><a class="on" href="#">首　　页</a></li>
+		<li><a href="#">新闻快讯</a></li>
+		<li><a href="#">产品展示</a></li>
+		<li><a href="#">售后服务</a></li>
+		<li><a href="#">联系我们</a></li>
+	</ul>
+	<br>
+	<br>
+	<br>
+	<ul class="nav" id="target">
+		<li><a href="#">一级菜单1</a>
+			<ul class="subNav">
+				<li><a href="#">二级菜单</a></li>
+				<li><a href="#">二级菜单</a></li>
+				<li><a href="#">二级菜单</a></li>
+				<li><a href="#">二级菜单</a></li>
+			</ul>
+		</li>
+		<li><a href="#">一级菜单2</a>
+			<ul class="subNav">
+				<li><a href="#">二级菜单</a></li>
+				<li><a href="#">二级菜单</a></li>
+				<li><a href="#">二级菜单</a></li>
+				<li><a href="#">二级菜单</a></li>
+				<li><a href="#">二级菜单</a></li>
+				<li><a href="#">二级菜单</a></li>
+			</ul>
+		</li>
+		<li><a href="#">一级菜单</a></li>
+		<li><a href="#">一级菜单</a></li>
+		<li><a href="#">一级菜单</a></li>
+	</ul>
+	<script>
+		var count =0;
+		window.onload=function(){
+			var oUl = document.getElementById('target');
+    		var aLi=oUl.getElementsByTagName('li');
+		for(var i=0; i<aLi.length; i++){
+			aLi[i].onmouseover=function(){
+				// var dd = document.getElementsByTagName
+				//鼠标经过一级菜单，二级菜单动画下拉显示出来
+				if(this.children.length==2){
+					var ul = this.children[1];
+					// ul.style.overflow='visible';
+					li = ul.getElementsByTagName('li');
+					ul.style.left = this.offsetLeft+"px";
+					ul.style.top = this.offsetTop+this.offsetHeight+"px";
+					clearInterval(ul.time);
+					ul.time=setInterval(function(){
+						if(ul.offsetHeight==li.length*30){
+							clearInterval(ul.time)
+						}else
+						{
+						ul.style.height = ul.offsetHeight+10+"px";	
+						console.log(count+++"下："+ul.style.height);
+						}
+					},30);
+					
+				}
+	
+		
+			}
+        //鼠标离开菜单，二级菜单动画收缩起来。		
+		aLi[i].onmouseout=function(){
+			
+            if(this.children.length==2){
+					var ul = this.children[1];
+					li = ul.getElementsByTagName('li');
+					ul.style.left = this.offsetLeft+"px";
+					ul.style.top = this.offsetTop+this.offsetHeight+"px";
+					clearInterval(ul.time);
+					ul.time=setInterval(function(){
+						if(ul.offsetHeight<=0){
+							clearInterval(ul.time)
+						}else
+						{
+						ul.style.height = ul.offsetHeight-10+"px";	
+						console.log(count+++"上："+ul.style.height);
+						}
+					},30);
+				}
+            
+            
+		}
+		
+	}
+}
+
+	</script>
+</body>
+
+</html>
