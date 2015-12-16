@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>遮罩层</title>
+	<title>遮罩层-原生ajax</title>
 	<style>
 		*{
 			margin: 0;
@@ -86,9 +86,87 @@
 				</div>
 				</div>
 		</div>
-		
+		<input type="button" value="读取文件" id='btn1'>
+		<a href="http://www.baidu.com" target="_blank">百度</a>
 	</div>
 	<script>
+		window.onload=function(){
+			var btn = document.getElementById('btn1');
+			btn.onclick= function(){
+				
+				myAjax("get","test.txt",successStateFun,failStatus,true);
+			 
+				
+				  return;
+				
+				var oAjax = new XMLHttpRequest();	
+				alert(oAjax);
+				oAjax.open("get","test.txt",true);
+				oAjax.send();
+				// alert(oAjax.readyState);
+				oAjax.onreadystatechange=function(){
+					alert(oAjax.readyState);
+					if(oAjax.readyState=="4"){
+						if(oAjax.status=="200"){
+							alert(oAjax.responseText);
+						}
+					}
+				}
+			};
+		}
+		
+		// var xmlHttp = null;
+		function myAjax(menth,url,successfun,failfun,async){			
+		 	var xmlHttp = new XMLHttpRequest();
+			if(window.XMLHttpRequest){
+				xmlHttp = new XMLHttpRequest();
+			}else if(window.ActiveXObject){
+				xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+			}
+			if(xmlHttp!=null){
+				xmlHttp.open("get","test.txt",true);
+				xmlHttp.send("user=123;pwd=233;");
+					xmlHttp.onreadystatechange=function(){
+					alert(xmlHttp.readyState+"@");
+					if(xmlHttp.readyState=="4"){
+						if(xmlHttp.status=="200"){
+							// alert(xmlHttp.responseText);
+							successfun(xmlHttp.responseText);
+						}else
+						{
+							if(failfun)
+								failfun();
+						}
+					}
+				}
+				
+				xmlHttp.onprogress = downLoadProgress;
+				xmlHttp.upload.onprogress = updateProgress;
+			}
+		}
+		var ss = true;
+		function downLoadProgress(event){
+			if(event.lengthComputable){
+				var percentComplete = event.loaded/event.total;
+				// alert(percentComplete);
+			}
+		}
+		
+		function updateProgress(event){
+			alert(event.lengthComputable+"@");
+			if(event.lengthComputable){
+				var percentComplete = event.loaded/event/total;
+				alert(percentComplete);
+			}
+		}
+		
+		function successStateFun(responseText){
+			alert(responseText);
+		}
+		 
+		 function failStatus(){
+			 alert("fail");
+		 }
 		function onShade_0(e){
 			var parent_Div = e.parentElement;
 			var shade_Div = parent_Div.lastElementChild;
