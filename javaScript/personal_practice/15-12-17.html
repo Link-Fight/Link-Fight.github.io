@@ -108,20 +108,20 @@
 	<ul class="nav" id="target">
 		<li><a href="#">一级菜单1</a>
 			<ul class="subNav">
-				<li><a href="#">二级菜单</a></li>
-				<li><a href="#">二级菜单</a></li>
-				<li><a href="#">二级菜单</a></li>
-				<li><a href="#">二级菜单</a></li>
+				<li><a href="#">二级菜单1</a></li>
+				<li><a href="#">二级菜单2</a></li>
+				<li><a href="#">二级菜单3</a></li>
+				<li><a href="#">二级菜单4</a></li>
 			</ul>
 		</li>
 		<li><a href="#">一级菜单2</a>
 			<ul class="subNav">
+				<li><a href="#">二级菜单1</a></li>
 				<li><a href="#">二级菜单</a></li>
 				<li><a href="#">二级菜单</a></li>
 				<li><a href="#">二级菜单</a></li>
 				<li><a href="#">二级菜单</a></li>
-				<li><a href="#">二级菜单</a></li>
-				<li><a href="#">二级菜单</a></li>
+				<li><a href="#">二级菜单6</a></li>
 			</ul>
 		</li>
 		<li><a href="#">一级菜单</a></li>
@@ -129,7 +129,7 @@
 		<li><a href="#">一级菜单</a></li>
 	</ul>
 	<script>
-		var count =0;
+var count =0;
 		window.onload=function(){
 			var oUl = document.getElementById('target');
     		var aLi=oUl.getElementsByTagName('li');
@@ -139,13 +139,12 @@
 				//鼠标经过一级菜单，二级菜单动画下拉显示出来
 				if(this.children.length==2){
 					var ul = this.children[1];
-					// ul.style.overflow='visible';
 					li = ul.getElementsByTagName('li');
 					ul.style.left = this.offsetLeft+"px";
 					ul.style.top = this.offsetTop+this.offsetHeight+"px";
 					clearInterval(ul.time);
 					ul.time=setInterval(function(){
-						if(ul.offsetHeight==li.length*30){
+						if(ul.offsetHeight==li.length*li[0].offsetHeight){
 							clearInterval(ul.time)
 						}else
 						{

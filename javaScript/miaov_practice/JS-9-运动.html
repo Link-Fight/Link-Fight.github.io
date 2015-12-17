@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>运动</title>
+	<style>
+		*{
+			margin: 0;
+			padding: 0;
+		}
+		.demo1{
+			height: 130px;
+		}
+		.demo1 .target{
+			position: absolute;
+			height: 100px;
+			width:100px;
+			background: mediumspringgreen;
+		}
+		.demo2 .target{
+			left:  0px;
+			position: absolute;
+			height: 100px;
+			width:100px;
+			background: mediumspringgreen;
+		}
+		.splie{
+			position: absolute;
+			top: 0px;
+			left: 400px;
+			width: 1px;
+			height: 600px;
+			background: red;
+		}
+		.demo2{
+			height: 130px;
+		}
+		.container{
+			/*position: relative;*/
+			height: 500px;
+			background: #999;
+		}
+		.demo3 .target{
+			position: absolute;
+			width: 100%;
+			height: 500px;
+			background: #999;
+		}
+		.poin{
+			position: absolute;
+			height: 20px;
+			width: 20px;
+			border-radius: 10px;
+		}
+		
+		.poin1{
+			top: 32px;
+			left: 32px;
+			background: indianred;
+		}
+		.poin2{
+			top: 64px;
+			left: 64px;
+			background: greenyellow;
+		}
+		.pContainer{
+			height: 100%;
+			widows: 99%;
+			 
+		}
+		.pp{
+			position: absolute;
+			width: 6px;
+			height: 6px;
+			border-radius: 3px;
+			background: cornflowerblue;
+		}
+	</style>
+	<script>
+		window.onload = function(){
+			var btn1 = document.getElementById('btn1');
+			btn1.getElementsByTagName
+			btn1.onclick = function(){
+				var oDiv=this.parentNode.getElementsByTagName("div")[0];
+				clearInterval(oDiv.time);
+			 oDiv.time = setInterval(function(){
+				 console.log(oDiv.offsetLeft);
+					if(oDiv.offsetLeft==300)
+					{
+						clearInterval(oDiv.time);	
+					}
+					else{
+						oDiv.style.left = oDiv.offsetLeft+10+"px";	
+					}
+				},30);
+					
+			};
+			initBtn2();
+			initPoin();
+		}
+		function initBtn2(){
+			var btn1 = document.getElementById('btn2');
+			btn1.getElementsByTagName
+			btn1.onclick = function(){
+				var oDiv=this.parentNode.getElementsByTagName("div")[0];
+				clearInterval(oDiv.time);
+			 var speed =0;
+			 var target = 400;
+			 oDiv.time = setInterval(function(){
+				 console.log(oDiv.offsetLeft+" "+speed);
+				 
+				 speed = (target- oDiv.offsetLeft)/8;
+				 if(speed>0)
+				 	speed = Math.ceil(speed);
+				else{
+					speed =Math.floor(speed);
+				}
+					if(oDiv.offsetLeft==target)
+					{
+						clearInterval(oDiv.time);	
+					}
+					else{
+						oDiv.style.left = oDiv.offsetLeft+speed+"px";	
+						oDiv.style.top = oDiv.offsetTop+2+"px";	
+					}
+				},30);
+					
+			};
+		
+		}
+		
+		
+		function getStyle(obj,attr){
+			if(obj.currentStyle){
+				return obj.currentStyle[attr];
+			}else{
+				return getComputedStyle(obj,false)[attr];
+			}
+		}
+		
+		function initPoin(){
+			// var oC = document.getElementById("c1");
+			var p1 = document.getElementById("p1");
+			var p2 = document.getElementById("p2");
+			p1.style.height
+			p1.onmousedown = mouseMove;
+			p2.onmousedown = mouseMove;
+		}
+		
+		function mouseMove(e){
+					var oEvent =  e||event;
+					var dis_Height = this.parentNode.offsetTop - window.scrollY;//计算远动的范围：父元素距离文档顶部的距离-滚动条滚动的距离=父元素距离浏览器顶部的距离
+					var dis_X = oEvent.clientX - parseFloat(getStyle(this,'left'));
+					var dis_Y = oEvent.clientY -dis_Height- parseFloat(getStyle(this,'top'));
+					var poin = this;
+					document.onmousemove=function(e){
+						var oEvent = e||event;
+						poin.style.left = oEvent.clientX- dis_X + "px";
+						poin.style.top = oEvent.clientY - dis_Height - dis_Y +"px";
+						if(poin.offsetLeft<0){
+							poin.style.left='0px';
+						}else if(poin.offsetTop<=0){
+							poin.style.top='0px';
+							document.onmousemove = null;
+							poin.onmouseup=null;
+						}else if(poin.offsetLeft+poin.offsetWidth>=window.innerWidth-10){
+							// console.log(poin.offsetLeft+poin.offsetWidth);
+							poin.style.left=window.innerWidth-poin.offsetWidth-10+'px';
+							// console.log(poin.style.top+"@");
+							document.onmousemove = null;
+							poin.onmouseup=null;
+						}else if(poin.offsetTop+poin.offsetHeight>=poin.parentNode.offsetHeight){
+							document.onmousemove = null;
+							poin.onmouseup=null;
+							poin.style.top=poin.parentNode.offsetHeight-poin.offsetHeight+'px';
+						}
+				};
+					
+					this.onmouseup = function(e){
+						document.onmousemove = null;
+						poin.onmouseup=null;	
+					};
+					oEvent.cancelBubble = true;
+					return false;
+		}
+	</script>
+</head>
+<body>
+	<div class="demo demo1">
+		 基本移动到300px 
+		<input type="button" value="start" id="btn1">
+		如果不进行reset 初始化操作 margin: 0; ，那么这个div1的初始值就有8px了
+		<div class="target">div1</div>	
+	</div>
+	<div class="splie"></div>
+	<div class="demo demo2">
+		 缓冲远动到300px 
+		<input type="button" value="start" id="btn2">
+	 
+		<div class="target">div2</div>	
+	</div>
+	
+	<div class="demo demo3">
+ 
+		<input type="button" value="start" id="btn3" onclick="onStar(this)">
+	    <div class="container" id='c1'>
+			<div class="target">
+				<div class="poin poin1" id="p1"></div>
+				<div class="poin poin2" id="p2"></div>
+				<div class="pContainer">
+					44444
+					<div class="pp"></div>
+					 
+					<div class="pp"></div>
+					
+					<div class="pp"></div>
+					<div class="pp"></div>
+				</div>
+			</div>	
+		</div>
+		
+	</div>
+	<script>
+		function onStar(e){
+			var p1 = document.getElementById("p1");
+			var p2 = document.getElementById("p2");
+			var x1  = parseFloat(getStyle(p1,"left"))+p1.offsetWidth/2 ;
+			var y1  = parseFloat(getStyle(p1,"top")) +p1.offsetHeight/2;
+			var x2  = parseFloat(getStyle(p2,"left"))+p2.offsetWidth/2 ;
+			var y2  = parseFloat(getStyle(p2,"top")) +p2.offsetHeight/2;
+			console.log(x1+" 1 "+y1);
+			console.log(x2+" 2 "+y2);
+		}
+		
+		function move(target){
+			this.timer =null;
+			
+		}
+	</script>
+</body>
+</html>
