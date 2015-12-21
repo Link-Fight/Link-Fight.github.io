@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+
+<head>
+    <meta charset="utf-8">
+    <title>ECharts</title>
+
+</head>
+
+<body>
+    <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+    <button onclick="click1()">show</button>
+    切换主题
+    <select name="theme" id="theme" >
+        <option selected="true" name="macarons">macarons</option>
+        <option name="infographic">infographic</option>
+        <option name="shine">shine</option>
+        <option name="dark">dark</option>
+        <option name="blue">blue</option>
+        <option name="green">green</option>
+        <option name="red">red</option>
+        <option name="gray">gray</option>
+        <option name="helianthus">helianthus</option>
+        <option name="roma">roma</option>
+        <option name="mint">mint</option>
+        <option name="macarons2">macarons2</option>
+        <option name="sakura">sakura</option>
+        <option name="default">default</option>
+    </select>
+    <div id="main" style="height:400px"></div>
+    <!-- ECharts单文件引入 -->
+    <script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+    <script>
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+        function changeTheme(){
+            var select = document.getElementById("theme");
+            alert(select.value);
+        }
+        function click1()
+		{
+            show();
+        }
+        function show(){
+            
+            require(
+					[
+						'echarts',
+						'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+					],
+                    function(ec){
+                     var select = document.getElementById("theme");
+                     console.log(select.value);
+                     var myChart = ec.init(document.getElementById('main'),select.value); 
+                              var option = {
+                                            title : {
+                                                text: '某地区蒸发量和降水量',
+                                                subtext: '纯属虚构'
+                                            },
+                                            tooltip : {
+                                                trigger: 'axis'
+                                            },
+                                            legend: {
+                                                data:['蒸发量','降水量']
+                                            },
+                                            toolbox: {
+                                                show : true,
+                                                feature : {
+                                                    mark : {show: false},
+                                                    dataView : {show: false, readOnly: false},
+                                                    magicType : {show: false, type: ['line', 'bar']},
+                                                    restore : {show: false},
+                                                    saveAsImage : {show: true}
+                                                }
+                                            },
+                                            calculable : true,
+                                            xAxis : [
+                                                {
+                                                    type : 'category',
+                                                    data : ['1月','2月','3月','4月','5月','6月','7月','8月','9月','10月','11月','12月']
+                                                }
+                                            ],
+                                            yAxis : [
+                                                {
+                                                    type : 'value'
+                                                }
+                                            ],
+                                            series : [
+                                                {
+                                                    name:'蒸发量',
+                                                    type:'bar',
+                                                    data:[2.0, 4.9, 7.0, 23.2, 25.6, 76.7, 135.6, 162.2, 32.6, 20.0, 6.4, 3.3],
+                                                    markPoint : {
+                                                        data : [
+                                                            {type : 'max', name: '最大值'},
+                                                            {type : 'min', name: '最小值'}
+                                                        ]
+                                                    },
+                                                    markLine : {
+                                                        data : [
+                                                            {type : 'average', name: '平均值'}
+                                                        ]
+                                                    }
+                                                },
+                                                {
+                                                    name:'降水量',
+                                                    type:'bar',
+                                                    data:[2.6, 5.9, 9.0, 26.4, 28.7, 70.7, 175.6, 182.2, 48.7, 18.8, 6.0, 2.3],
+                                                    markPoint : {
+                                                        data : [
+                                                            {name : '年最高', value : 182.2, xAxis: 7, yAxis: 183, symbolSize:18},
+                                                            {name : '年最低', value : 2.3, xAxis: 11, yAxis: 3}
+                                                        ]
+                                                    },
+                                                    markLine : {
+                                                        data : [
+                                                            {type : 'average', name : '平均值'}
+                                                        ]
+                                                    }
+                                                }
+                                            ]
+                                        };
+                                        myChart.setOption(option); 
+                    });
+                            
+            	
+        }
+    </script>
+</body>

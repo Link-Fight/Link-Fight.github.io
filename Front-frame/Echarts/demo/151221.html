@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+
+<head>
+	<meta charset="utf-8">
+	<title>ECharts</title>
+	<script>
+		 function myAjax(url,sFun,fFun)
+         {
+			//1.创建Ajax对象
+                var oAjax=null;
+                
+                if(window.XMLHttpRequest)
+                {
+                    oAjax=new XMLHttpRequest();
+                }
+                else
+                {
+                    oAjax=new ActiveXObject("Microsoft.XMLHTTP");
+                }
+                
+                //2.连接服务器
+                oAjax.open('GET', url, true);
+                
+                //3.发送请求
+                oAjax.send();
+                
+                //4.接收服务器的返回
+                oAjax.onreadystatechange=function ()
+                {
+                    if(oAjax.readyState==4)	//完成
+                    {
+                        if(oAjax.status==200)	//成功
+                        {
+                            sFun(oAjax.responseText);
+                        }
+                        else
+                        {
+                            if(fFun)
+                                fFun(oAjax.status);
+                        }
+                    }
+                };
+		 }
+         
+         
+         function successFun(text)
+         {
+             var str ="'"+ text+"'";
+            //  alert(str);
+             show(text);
+         }
+	</script>
+</head>
+
+<body>
+	<!-- 为ECharts准备一个具备大小（宽高）的Dom -->
+	<button  onclick="click1()">44</button>
+	<input type="button" value="click1" onclick="click()">
+	<div id="main" style="height:400px"></div>
+	<!-- ECharts单文件引入 -->
+	<script src="http://echarts.baidu.com/build/dist/echarts.js"></script>
+	<script type="text/javascript">
+		// 路径配置
+        require.config({
+            paths: {
+                echarts: 'http://echarts.baidu.com/build/dist'
+            }
+        });
+        
+		function click1()
+		{
+            // alert("click");
+			 myAjax("data/test1.txt",successFun);
+            
+        }
+        
+        function show(text){
+            // alert("@1@"+option);
+				// 使用
+				require(
+					[
+						'echarts',
+						'echarts/chart/bar' // 使用柱状图就加载bar模块，按需加载
+					],
+					function (ec) {
+						// 基于准备好的dom，初始化echarts图表
+						var myChart = ec.init(document.getElementById('main')); 
+						
+						var option = {
+							tooltip: {
+								show: true
+							},
+							legend: {
+								data:['鸭子花了多少钱']
+							},
+							xAxis : [
+								{
+									type : 'category',
+									data : ["底裤","牛仔裤","羊绒毛衣","围巾","包包","外套","马甲"]
+								}
+							],
+							yAxis : [
+								{
+									type : 'value'
+								}
+							],
+							series : [
+								{
+									"name":"鸭子花了多少钱",
+									"type":"bar",
+									"data":[99, 299, 199, 50, 99, 199,169]
+								}
+							]
+						};
+				     
+						// 为echarts对象加载数据 
+						myChart.setOption(option); 
+                        // alert(text);
+					}
+				);
+		}
+	</script>
+</body>
