@@ -1,1 +1,1 @@
-﻿{tooltip: {show: true},legend: {data:['销量']},xAxis : [{type : 'category',data : ["衬衫","羊毛衫","雪纺衫","裤子","高跟鞋","袜子"]}],yAxis : [{type :'value'}],series : [{"name":"销量","type":"bar","data":[5, 20, 40, 10, 10, 20]}]}
+"{"tooltip":{"show":true},"legend":{"data":["鸭子花了多少钱"]},"xAxis":[{"type":"category","data":["底裤","牛仔裤","羊绒毛衣","围巾","包包","外套","马甲"]}],"yAxis":[{"type":"value"}],"series":[{"name":"鸭子花了多少钱","type":"bar","data":[99,299,199,50,99,199,169]}]}"
