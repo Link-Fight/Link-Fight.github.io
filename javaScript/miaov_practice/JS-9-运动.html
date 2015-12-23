@@ -210,9 +210,7 @@
 				<div class="pContainer">
 					44444
 					<div class="pp"></div>
-					 
 					<div class="pp"></div>
-					
 					<div class="pp"></div>
 					<div class="pp"></div>
 				</div>
@@ -228,14 +226,92 @@
 			var y1  = parseFloat(getStyle(p1,"top")) +p1.offsetHeight/2;
 			var x2  = parseFloat(getStyle(p2,"left"))+p2.offsetWidth/2 ;
 			var y2  = parseFloat(getStyle(p2,"top")) +p2.offsetHeight/2;
-			console.log(x1+" 1 "+y1);
-			console.log(x2+" 2 "+y2);
+			console.log(x1+" p1 "+y1);
+			console.log(x2+" p2 "+y2);
+			console.log("XY  "+parseFloat(getStyle(p2,"left"))+" : "+parseFloat(getStyle(p2,"top")));
+		    // p1.timerx=null;
+			// move(p1,p1.timerx,"left",x2-p2.offsetHeight/2);
+			// p1.timery=null;
+			// move(p1,p1.timery,"top",y2-p2.offsetHeight/2);
+			moveXY(p1,p1.time1,p2);
 		}
 		
-		function move(target){
-			this.timer =null;
-			
+		function move(obj,timer,attr,target){
+			console.log("move: "+ obj+":"+attr+"@"+target);
+			 clearInterval(timer);
+			 
+			 var speed= (target-parseFloat(getStyle(obj,attr)))/10;
+			 console.log("s:"+speed);
+			 var x =0,y=0;
+			 var arr=[];
+			 timer=setInterval(function(){
+				 x = parseFloat(getStyle(obj,"left"))+parseFloat(getStyle(obj,"width"));
+				 y = parseFloat(getStyle(obj,"top")) +parseFloat(getStyle(obj,"height"));//p1.offsetHeight/2;
+				 arr.push([x,y]);
+				 drawPoint(x,y);
+				 console.log(x+" "+y);
+				 if(Math.abs(parseFloat(getStyle(obj,attr))-target)< Math.abs(speed)){
+					 console.log("=:"+(parseFloat(getStyle(obj,attr))-target));
+					 clearInterval(timer);
+					 obj.style[attr] = target+"px";
+				 }else{
+					 obj.style[attr] = parseFloat(getStyle(obj,attr))+speed+"px";
+				 }
+			 } 
+			 ,10);		
 		}
+		
+		function moveXY(obj,time,tObj){
+			clearInterval(time);
+			var dis_X = (parseFloat(getStyle(tObj,"left"))-parseFloat(getStyle(obj,"left")));
+			var dis_Y = (parseFloat(getStyle(tObj,"top"))-parseFloat(getStyle(obj,"top")));
+			var speed_X = dis_X/10;
+			// speed_X=speed_X>0?Math.ceil(speed_X):Math.floor(speed_X);
+			var speed_Y = dis_Y/10;
+			// speed_Y = speed_Y>0?Math.ceil(speed_Y):Math.floor(speed_Y);
+			var x =0,y=0,arr=[];
+			time=setInterval(function(){
+				 x = parseFloat(getStyle(obj,"left"))+parseFloat(getStyle(obj,"width"));
+				 y = parseFloat(getStyle(obj,"top")) +parseFloat(getStyle(obj,"height"));
+				 arr.push([x,y]);
+				 drawPoint(x,y);
+				if(Math.abs()){
+					if(Math.abs(dis_X)<=Math.abs(speed_X)){
+						clearInterval(time);
+						obj.style.left = parseFloat(getStyle(tObj,"left"))+"px";
+						obj.style.top = parseFloat(getStyle(tObj,"top"))+"px";
+						console.log("X  "+obj.style.left+" : "+obj.style.top );
+						console.log("XY  "+parseFloat(getStyle(tObj,"left"))+" : "+parseFloat(getStyle(tObj,"top")));
+						return;
+					}
+				}else if(Math.abs(dis_Y)<=Math.abs(speed_Y)){
+						clearInterval(time);
+						obj.style.left = parseFloat(getStyle(tObj,"left"))+"px";
+						obj.style.top = parseFloat(getStyle(tObj,"top"))+"px";
+						console.log("Y  "+obj.style.left+" : "+obj.style.top );
+						console.log("XY  "+parseFloat(getStyle(tObj,"left"))+" : "+parseFloat(getStyle(tObj,"top")));
+						return;
+				}else{
+					 obj.style["left"] = parseFloat(getStyle(obj,"left"))+speed_X+"px";
+					  obj.style["top"] = parseFloat(getStyle(obj,"top"))+speed_Y+"px";
+				}
+				dis_X = (parseFloat(getStyle(tObj,"left"))-parseFloat(getStyle(obj,"left")));
+				dis_Y = (parseFloat(getStyle(tObj,"top"))-parseFloat(getStyle(obj,"top")));
+			}
+			);
+		}
+		
+		var count=0;
+		function drawPoint(x,y){
+			console.log((count++)+" @ "+x+" "+y);
+			var newP = document.createElement("div");
+			newP.setAttribute("class","pp");
+			newP.style.left=x-3+"px";
+			newP.style.top = y-3+"px";
+			var div = document.getElementsByClassName("pContainer")[0];
+			div.appendChild(newP);
+		}
+		
 	</script>
 </body>
 </html>

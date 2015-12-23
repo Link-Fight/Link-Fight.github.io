@@ -75,6 +75,9 @@
         }
         
         function show(text){
+			console.log(text);
+			var obj = text;
+			alert("@"+obj);
             // alert("@1@"+option);
 				// 使用
 				require(
@@ -112,7 +115,7 @@
 								}
 							]
 						};
-				     
+						console.log(option);	     
 						// 为echarts对象加载数据 
 						myChart.setOption(option); 
                         // alert(text);
