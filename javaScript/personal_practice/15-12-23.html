@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>(O_O)</title>
+    <style type="text/css">
+        body,
+        ul,
+        li {
+            margin: 0;
+            padding: 0;
+            font-size: 13px;
+        }
+        
+        ul,
+        li {
+            list-style: none;
+        }
+        
+        #divselect {
+            width: 186px;
+            margin: 80px auto;
+            position: relative;
+            z-index: 10000;
+        }
+        
+        #divselect cite {
+            width: 150px;
+            height: 24px;
+            line-height: 24px;
+            display: block;
+            color: #807a62;
+            cursor: pointer;
+            font-style: normal;
+            padding-left: 4px;
+            padding-right: 30px;
+            border: 1px solid #333333;
+            background: url(xjt.png) no-repeat right center;
+        }
+        
+        #divselect ul {
+            height: 0px;
+            width: 184px;
+       
+            border: 1px solid #333333;
+            /*border-top : none;*/
+            background-color: #ffffff;
+            position: absolute;
+            z-index: 20000;
+            margin-top: -1px;
+            overflow: hidden;
+            display: none;
+        }
+        
+        #divselect ul li {
+            height: 24px;
+            line-height: 24px;
+        }
+        
+        #divselect ul li a {
+            display: block;
+            height: 24px;
+            color: #333333;
+            text-decoration: none;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+    </style>
+    <script>    
+     function MyMove(ele,attr,target,callBack){
+         clearInterval(ele.time);
+         var speed = null;
+         ele.time=setInterval(function(){
+             if(parseInt(getCurrStyle(ele,attr))==target){
+                 clearInterval(ele.time);
+                 if(callBack)
+                    callBack();
+             }
+             speed = (target -parseInt(getCurrStyle(ele,attr)))/5;
+             speed = speed>0?Math.ceil(speed):Math.floor(speed);
+             ele.style[attr]=parseInt(getCurrStyle(ele,attr))+speed+"px";
+         },50);
+     }
+     
+     function getCurrStyle(ele,attr){
+         if(ele.currentStyle){
+             return ele.currentStyle[attr];
+         }else{
+             return getComputedStyle(ele,false)[attr];
+         }
+     }
+    </script>
+    <script type="text/javascript">
+        window.onload=function(){
+	var box=document.getElementById('divselect'),
+	    title=box.getElementsByTagName('cite')[0],
+	    menu=box.getElementsByTagName('ul')[0],
+	    as=box.getElementsByTagName('a'),
+        index=-1;
+   
+    // 点击三角时
+    title.onclick=function(event){
+        if( menu.style.display==""||menu.style.display=="none"){
+            menu.style.display="block";
+            event.stopPropagation();
+            MyMove(menu,"height",24*as.length)
+            return false;
+        }else{
+             event.stopPropagation();
+             MyMove(menu,"height",0,function(){
+                  menu.style.display="none";
+             })
+              return false;
+        }
+      // 执行脚本
+    }  
+    
+    for(var i=0,len = as.length;i<len;i++){
+        as[i].onmouseover=function(){
+            this.style.background="#678";
+        };
+        as[i].onmouseleave =function(){
+            this.style.background="";
+        };
+        
+        as[i].onclick=function(){
+            var text = this.innerHTML;
+            title.innerHTML = text;
+            console.info(this.innerHTML);
+        };
+        
+    }
+  document.onkeyup = function(event){
+   
+  
+    if(menu.style.display!=""){
+          var index = -1;
+          for(var i=0,len = as.length;i<len;i++){
+              if(as[i].style.background!=""){
+                  index =i;
+              }
+          }
+          console.log(event.keyCode);
+          if(event.keyCode==40){
+                  if(index!=-1){
+                      as[index].onmouseleave();
+                      if(index>=as.length-1){
+                           as[0].onmouseover();
+                      }else
+                      {
+                           as[index+1].onmouseover();
+                      }
+                  }else{
+                      as[0].onmouseover();
+                  }
+           }
+           
+             if(event.keyCode==38){
+                  if(index!=-1){
+                      as[index].onmouseleave();
+                      if(index==0){
+                          as[as.length-1].onmouseover();
+                      }else
+                      {
+                           as[index-1].onmouseover();
+                      }
+                  }else{
+                      as[0].onmouseover();
+                  }
+           }
+           if(event.keyCode==13){
+                 as[index].onclick();
+                 menu.style.display="";
+           }  
+            
+    }
+  };
+   // 滑过滑过、离开、点击每个选项时
+      // 执行脚本
+
+   // 点击页面空白处时
+       // 执行脚本
+     document.onclick=function(){
+          menu.style.display="";
+    }
+ }
+    </script>
+</head>
+
+<body>
+    <div id="divselect">
+        <cite>请选择分类</cite>
+        <ul>
+            <li id="li"><a href="javascript:;" selectid="1">ASP开发</a></li>
+            <li><a href="javascript:;" selectid="2">.NET开发</a></li>
+            <li><a href="javascript:;" selectid="3">PHP开发</a></li>
+            <li><a href="javascript:;" selectid="4">Javascript开发</a></li>
+            <li><a href="javascript:;" selectid="5">Java特效</a></li>
+        </ul>
+    </div>
+</body>
+
+</html>

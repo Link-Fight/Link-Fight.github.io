@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>兼容DOM和IE的事件操作</title>
+</head>
+<body>
+    <script>
+        var id = document.getElementById("");
+        id.addEventListener;
+        id.removeEventListener
+         var eventUtil = {
+                addHandler:function(element,type,handler){
+                    if(element.addEventListener){
+                        element.addEventListener(type,handler,false);
+                    }else if(element.attachEvent){
+                        element.attachEvent("on"+type,handler);
+                    }else{
+                        element["on"+type] = handler;
+                    }
+                },
+                removeHandler:function(element,type,handler){
+                    if(element.removeEventListener){
+                        element.removeEventListener(type,handler,false);
+                    }else if(element.detachEvent){
+                        element.detachEvent("on"+type,handler);
+                    }else{
+                        element["on"+type]=handler;
+                    }
+                },
+                getEvent:function(event){
+                    return event?event:window.event;
+                },
+                preventDefault:function(event){
+                    if(event.preventDefault){
+                        event.preventDefatult();
+                    }else{
+                        event.returnvalue = false;
+                    }
+                },
+                stopPropagetion:function(event){
+                    if(event.stopPropagation){
+                        event.stopPropagation();
+                    }else{
+                        event.cancelBubble = true;
+                    }
+                },
+                getType:function(event){
+                    return event.type;
+                },
+                getElement:function(event){
+                    return event.target||event.srcElement;
+                }
+         };
+    </script>
+   
+</body>
+</html>
