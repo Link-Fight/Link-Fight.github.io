@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title></title>
     <link rel="stylesheet" href="styles/kendo.common.min.css" />
@@ -8,63 +9,67 @@
     <script src="jquery.min.js"></script>
     <script src="kendo.all.min.js"></script>
     <style>
-        div .demo-section{
+        div .demo-section {
             width: 680px;
             margin: 0 auto;
-            border:5px solid deepskyblue;
+            border: 5px solid deepskyblue;
         }
     </style>
 </head>
+
 <body>
-<div id="example">
-    <button onclick="createChart();">reflash</button> Basic Usage
-    <button onclick="Save()">Save</button>
-    <div class="demo-section k-content wide">
-        <div id="chart"  style="background: center no-repeat url('../content/shared/styles/world-map.png'); height:400px;"></div>
-    </div>
-     <button onclick="createChart1();">reflash</button> Column chart
-    <div class="demo-section k-content wide">
-        <div id="chart1"  style="background: center no-repeat url('../content/shared/styles/world-map.png'); height:400px;"></div>
-    </div>
-     <button onclick="createChart2();">reflash</button> Stacked bars
-    <div class="demo-section k-content wide">
-        <div id="chart2"  style="background: center no-repeat url('../content/shared/styles/world-map.png'); height:400px;"></div>
-    </div>
-      <button onclick="createChart3();">reflash</button> Bar Charts / Stacked and grouped bars
-    <div class="demo-section k-content wide">
-        <div id="chart3"  style="background: center no-repeat url('../content/shared/styles/world-map.png'); height:400px;"></div>
-    </div>
-      <button onclick="createChart4();">reflash</button> Bar Charts / 100% Stacked bars
-    <div class="demo-section k-content wide">
-        <div id="chart4"  style="background: center no-repeat url('../content/shared/styles/world-map.png'); height:400px;"></div>
-    </div>
-    
-     <button onclick="createChart5();">reflash</button> Bar Charts / 100% Stacked and grouped bars
-    <div class="demo-section k-content wide">
-        <div id="chart5"  style="background: center no-repeat url('../content/shared/styles/world-map.png'); height:400px;"></div>
-    </div>
-    <script>
-        function Save(){
+    <canvas id="canvas"></canvas>
+    <div id="example">
+        <button onclick="createChart();">reflash</button> Basic Usage
+        <button onclick="Save()">Save</button>
+        <div class="demo-section k-content wide">
+            <div id="chart" style="height:400px;"></div>
+        </div>
+        <button onclick="createChart1();">reflash</button> Column chart
+        <div class="demo-section k-content wide">
+            <div id="chart1" style="background: center no-repeat url('../content/shared/styles/world-map.png'); height:400px;"></div>
+        </div>
+        <button onclick="createChart2();">reflash</button> Stacked bars
+        <div class="demo-section k-content wide">
+            <div id="chart2" style="background: center no-repeat url('../content/shared/styles/world-map.png'); height:400px;"></div>
+        </div>
+        <button onclick="createChart3();">reflash</button> Bar Charts / Stacked and grouped bars
+        <div class="demo-section k-content wide">
+            <div id="chart3" style="background: center no-repeat url('../content/shared/styles/world-map.png'); height:400px;"></div>
+        </div>
+        <button onclick="createChart4();">reflash</button> Bar Charts / 100% Stacked bars
+        <div class="demo-section k-content wide">
+            <div id="chart4" style="background: center no-repeat url('../content/shared/styles/world-map.png'); height:400px;"></div>
+        </div>
+
+        <button onclick="createChart5();">reflash</button> Bar Charts / 100% Stacked and grouped bars
+        <div class="demo-section k-content wide">
+            <div id="chart5" style="background: center no-repeat url('../content/shared/styles/world-map.png'); height:400px;"></div>
+        </div>
+        <script type="text/javascript" src="rgbcolor.js"></script>
+        <script type="text/javascript" src="StackBlur.js"></script>
+        <script type="text/javascript" src="canvg.js"></script>
+        <script>
+            function Save(){
             var div = document.getElementById("chart");
-            var svg = div.innerHTML;
-            var image = new Image();
-            image.src='data:image/svg+xml;base64,' + window.btoa(unescape(encodeURIComponent(svg))); //给图片对象写入base64编码的svg流
-            
-            var canvas = document.createElement('canvas');  //准备空画布
-            canvas.width = 300;
-            canvas.height = 400;
-            
-            var context = canvas.getContext('2d');  //取得画布的2d绘图上下文
-            context.drawImage(image, 0, 0);
-            
+            var svg = div.innerHTML;    
+            var mCanvas = document.getElementById("canvas");            // mCanvas.style.height=div.offsetHeight+"px";
+            canvg(mCanvas, svg,{ ignoreMouse: true, ignoreAnimation: true,ignoreDimensions:false});
             var a = document.createElement('a');
-            a.href = canvas.toDataURL('image/png');  //将画布内的信息导出为png图片数据
+            var image = new Image();
+            image.src=mCanvas.toDataURL('image/png');
+            var myCanvas = document.createElement('canvas');  //准备空画布
+            myCanvas.width = div.offsetWidth;
+            myCanvas.height = div.offsetHeight;
+            var mContext = myCanvas.getContext('2d');
+            mContext.drawImage(image,0,0);//,div.offsetWidth,div.offsetHeight,0,0,div.offsetWidth,div.offsetHeight);
+            a.href = myCanvas.toDataURL('image/png');  //将画布内的信息导出为png图片数据
             a.download = "MapByMathArtSys";  //设定下载名称
             a.click(); //点击触发下载 
         }
-    </script>
-    <script>
-        var count = 56000;
+        </script>
+        <script>
+            var count = 56000;
         function createChart(op) {
             var option ={
                 title: {
@@ -117,9 +122,9 @@
 
         $(document).ready(createChart);
         $(document).bind("kendo:skinChange", createChart);
-    </script>
-    <script>
-        function createChart1() {
+        </script>
+        <script>
+            function createChart1() {
             $("#chart1").kendoChart({
                 title: {
                     text: "Gross domestic product growth /GDP annual %/"
@@ -170,9 +175,9 @@
         }
          $(document).ready(createChart1);
         $(document).bind("kendo:skinChange", createChart1);
-    </script>
-    <script>
-        function createChart2() {
+        </script>
+        <script>
+            function createChart2() {
             $("#chart2").kendoChart({
                 title: {
                     text: "Olympic Medals won by USA"
@@ -221,9 +226,9 @@
 
         $(document).ready(createChart2);
         $(document).bind("kendo:skinChange", createChart2);
-    </script>
-     <script>
-        function createChart3() {
+        </script>
+        <script>
+            function createChart3() {
             $("#chart3").kendoChart({
                 title: {
                     text: "World population by age group and sex"
@@ -300,9 +305,9 @@
 
         $(document).ready(createChart3);
         $(document).bind("kendo:skinChange", createChart3);
-    </script>
-     <script>
-        function createChart4() {
+        </script>
+        <script>
+            function createChart4() {
             $("#chart4").kendoChart({
                 title: {
                     text: "Olympic Medals won by USA"
@@ -352,9 +357,9 @@
 
         $(document).ready(createChart4);
         $(document).bind("kendo:skinChange", createChart4);
-    </script>
-     <script>
-        function createChart5() {
+        </script>
+        <script>
+            function createChart5() {
             $("#chart5").kendoChart({
                 title: {
                     text: "World population by age group and sex"
@@ -451,9 +456,10 @@
 
         $(document).ready(createChart5);
         $(document).bind("kendo:skinChange", createChart5);
-    </script>
-</div>
+        </script>
+    </div>
 
 
 </body>
+
 </html>
