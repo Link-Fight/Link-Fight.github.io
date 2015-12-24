@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        .targetDiv{
+            position: absolute;
+            left: 100px;
+            top: 100px;
+            height: 100px;
+            width:100px;
+            background: greenyellow;
+        }
+    </style>
+</head>
+<body>
+    <script>
+        window.onload=function(){
+            console.log("@@")
+            var t1 = new Drag("target");
+            new Drag("target1");
+            new Drag("target2");
+        }
+        
+        function Drag(id){   
+            var _this = this; 
+            this.target = document.getElementById(id);//"target"
+            this.dis_X=0;
+            this.dis_Y=0;
+            this.target.onmousedown= function(){
+                _this.mouseDown();    
+            } 
+            
+        }
+        
+       Drag.prototype.mouseDown= function(event){
+                var oEvent = event||window.event;
+                var _this = this;
+                this.dis_X = oEvent.clientX-this.target.offsetLeft;
+                this.dis_Y = oEvent.clientY-this.target.offsetTop;
+                document.onmousemove = function(){ _this.mouseMove() };
+                this.target.onmouseup =function(){ _this.mouseUp()   };
+            }
+        
+        
+        Drag.prototype.mouseMove = function(eve){
+                    var oEvetn =eve||window.event;
+                    this.target.style.left = oEvetn.clientX-this.dis_X +"px";
+                    this.target.style.top =  oEvetn.clientY-this.dis_Y+"px";
+                }
+        
+        Drag.prototype.mouseUp=function(){
+                    document.onmousemove = null;
+                    this.target.onmouseup = null;
+                }
+    </script>
+    <script>
+        var arr1 = new Array(1,2,3);
+        var arr2 = new Array(2,3,4);
+        Array.prototype.sum=function(){
+            var sum =0
+            for(var i=0;i<this.length;i++){
+                sum+=this[i];
+            }
+            return sum;
+        }
+        
+        console.log(arr1.sum());
+        console.log(arr2.sum());
+        
+        function Aaa(){
+            this.a = 12;
+            _this = this;
+            setInterval(function(){
+                // _this.show(); 
+            },
+               3000);
+        }
+        Aaa.prototype.show = function(){
+            alert(this.a);
+        }
+        
+        var obj = new Aaa();
+        // obj.show();
+    </script>
+    <div class="targetDiv" id="target"></div>
+    <div class="targetDiv" id="target1"></div>
+    <div class="targetDiv" id="target2"></div>
+</body>
+</html>
