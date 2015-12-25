@@ -431,11 +431,11 @@
 <body>
     <div class="container">
         <div class="st-container">
-            <input type="radio" name="radio-set"  id="st-control-1">
+            <input type="radio" name="radio-set"  checked id="st-control-1">
             <a href="#st-panel-1">L</a>
             <input type="radio" name="radio-set" id="st-control-2">
             <a href="#st-panel-2">O</a>
-            <input type="radio" name="radio-set" checked id="st-control-3">
+            <input type="radio" name="radio-set"  id="st-control-3">
             <a href="#st-panel-3">V</a>
             <input type="radio" name="radio-set" id="st-control-4">
             <a href="#st-panel-4">E</a>
@@ -491,9 +491,9 @@ var preScroll = 0;
 var dis_Scroll=0;
 var isDown =true;
         window.onscroll=function(){
-            console.log(h);            
+            // console.log(h);            
             var scrollTop = window.document.body.scrollTop||document.documentElement.scrollTop;
-            console.log(scrollTop); 
+            // console.log(scrollTop); 
             var mInput = document.getElementsByTagName("input");
             for(var i = 0,len = mInput.length;i<len;i++){
                 if(mInput[i].checked){
@@ -534,7 +534,7 @@ var isDown =true;
                 }else{
                     ul.style.left = ul.offsetLeft - speed +"px";
                 }
-                console.log(ul.offsetLeft);
+                // console.log(ul.offsetLeft);
             },20);
         }
     </script>
