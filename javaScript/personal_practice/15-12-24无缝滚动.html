@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>无缝滚动公告</title>
+    <style>
+        *{
+            margin: 0;
+            padding:0;
+        }
+        .contain{
+            padding: 50px 0;
+            width: 500px;
+            margin: 0px auto;
+            background: #ccc;
+        }
+        .roll{
+            width: 200px;
+            margin: 20px auto;
+            background: #eee;
+        }
+        .roll .roll_head{
+            height: 50px;
+            line-height: 50px;
+            text-align: center;
+            font-size: 30px;
+            background: lightblue;
+        }
+        .roll ul{
+            list-style: none;
+            height: 125px;
+            overflow: hidden;
+        }
+        .roll ul li {
+            height: 25px;
+            line-height: 25px;
+        }
+        .roll ul li a{
+            text-decoration: none;
+            color: black;
+        }
+        .roll ul li a{
+            float: left;
+            padding-left: 10px;
+        }
+        .roll ul li:hover{
+              background: #9aa;
+        }
+        .roll ul li span{
+            float: right;
+            padding-right: 10px;
+        }
+    </style>
+    <script>
+      window.onload=function(){
+          var ul = document.getElementById("roll_ul");
+          var li = ul.getElementsByTagName('li');
+          var height = li.length*li[0].offsetHeight;
+          ul.innerHTML+=ul.innerHTML;
+          console.log(height);
+          
+          
+          var speed = 1;
+          var isStop = 1;
+          setInterval(function(){
+               ul.scrollTop+=speed;
+               console.log(ul.scrollTop);
+               if(ul.scrollTop%25==0&&isStop==1){
+                   speed = 0;
+                   isStop=0;
+                   setTimeout(function(){ speed = 1; isStop=1;},1000);
+               }
+               if(ul.scrollTop>=height)
+                ul.scrollTop = 0;
+          },30);
+         
+         for(var i =0,len = li.length;i<len;i++){
+             li[i].onmouseenter = function(){
+                 speed = 0;
+             };
+             li[i].onmouseleave= function(){
+                 setTimeout(function(){ speed = 1;},1000);
+             }
+         }
+         
+      }
+    </script>
+</head>
+
+<body>
+    <div class="main">
+        <div class="contain">
+            <div class="roll">
+                <div class="roll_head">学习计划</div>
+                <div class="roll_content">
+                    <ul id="roll_ul">
+                        <li><a href="#">JS-1</a><span>2015-01</span></li>
+                        <li><a href="#">JS-2</a><span>2015-02</span></li>
+                        <li><a href="#">JS-3</a><span>2015-03</span></li>
+                        <li><a href="#">JS-4</a><span>2015-04</span></li>
+                        <li><a href="#">JS-5</a><span>2015-05</span></li>
+                        <li><a href="#">JS-6</a><span>2015-06</span></li>
+                        <li><a href="#">JS-7</a><span>2015-07</span></li>
+                        <li><a href="#">JS-8</a><span>2015-08</span></li>
+                        <li><a href="#">JS-9</a><span>2015-09</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
