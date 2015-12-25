@@ -7,18 +7,34 @@
     <meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
-        @font-face{
+        @font-face {
             font-family: "MerryChristmasStar";
             src: url('font/MerryChristmasStar.ttf');
             font-weight: normal;
             font-style: normal;
         }
-         @font-face{
+        
+        @font-face {
             font-family: "MerryChristmasFlake";
             src: url('font/MerryChristmasFlake.ttf');
             font-weight: normal;
             font-style: normal;
         }
+        
+        @font-face {
+            font-family: "YoungRanger";
+            src: url('font/YoungRanger.ttf');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: "Shorelines Script Bold";
+            src: url('font/Shorelines Script Bold.otf');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
         * {
             padding: 0;
             margin: 0;
@@ -38,6 +54,7 @@
             position: absolute;
             left: 0;
             top: 0;
+            /*background: blue;*/
         }
         
         .st-container a {
@@ -57,9 +74,9 @@
         .st-container >input,
         .st-container > a {
             position: fixed;
-            width: 20%;
-            height: 34px;
-            line-height: 34px;
+            width: 25%;
+            height: 44px;
+            line-height: 44px;
             text-align: center;
             bottom: 0px;
             cursor: pointer;
@@ -73,10 +90,11 @@
         .st-container >a {
             z-index: 99;
             font-weight: 700;
-            font-size: 16px;
+            font-size: 26px;
             color: #eee;
             text-shadow: 2px 2px 2px rgba(151, 24, 64, 0.2);
-            background: lightpink;
+            background: hotpink;
+            font-family: "MerryChristmasStar";
         }
         
         #st-control-1,
@@ -86,34 +104,33 @@
         
         #st-control-2,
         #st-control-2+a {
-            left: 20%;
+            left: 25%;
             /*background: lightpink;*/
         }
         
         #st-control-3,
         #st-control-3+a {
-            left: 40%;
+            left: 50%;
             /*background: lightpink;*/
         }
         
         #st-control-4,
         #st-control-4+a {
-            left: 60%;
+            left: 75%;
             /*background: lightpink;*/
         }
-        
-        #st-control-5,
+        /*#st-control-5,
         #st-control-5+a {
             left: 80%;
-            /*background: lightpink;*/
-        }
+           
+        }*/
         
         .st-container >input:hover + a {
-            background: hotpink;
+            background: deeppink;
         }
         
         .st-container > input:checked + a {
-            background: deeppink;
+            background: mediumvioletred;
         }
         
         .st-container input:checked + a::after {
@@ -121,7 +138,7 @@
             /*padding: 0px;
            margin: 0px;*/
             border: 20px solid transparent;
-            border-bottom-color: deeppink;
+            border-bottom-color: mediumvioletred;
             position: absolute;
             bottom: 100%;
             left: 50%;
@@ -135,56 +152,61 @@
             height: 100%;
             position: relative;
         }
-        .st-scroll{
+        
+        .st-scroll {
             left: 0;
             top: 0;
-            -webkit-transform: translate3d(0,0,0);
-            -moz-transform: translate3d(0,0,0);
-            -o-transform: translate3d(0,0,0);
-            -ms-transform: translate3d(0,0,0);
-            transform: translate3d(0,0,0);
+            -webkit-transform: translate3d(0, 0, 0);
+            -moz-transform: translate3d(0, 0, 0);
+            -o-transform: translate3d(0, 0, 0);
+            -ms-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
             -webkit-backface-visibility: hidden;
-            
             -webkit-transition: all 0.5s ease-in-out;
             -moz-transition: all 0.5s ease-in-out;
             -o-transition: all 0.5s ease-in-out;
             -ms-transition: all 0.5s ease-in-out;
             transition: all 0.5s ease-in-out;
         }
-        .st-panel{
+        
+        .st-panel {
             background: #fff;
             overflow: hidden;
-            
         }
-        #st-control-1:checked ~ .st-scroll{
+        
+        #st-control-1:checked ~ .st-scroll {
             -webkit-transform: translateY(0%);
             -moz-transform: translateY(0%);
             -o-transform: translateY(0%);
             -ms-transform: translateY(0%);
             transform: translateY(0%);
         }
-        #st-control-2:checked ~ .st-scroll{
+        
+        #st-control-2:checked ~ .st-scroll {
             -webkit-transform: translateY(-100%);
             -moz-transform: translateY(-100%);
             -o-transform: translateY(-100%);
             -ms-transform: translateY(-100%);
             transform: translateY(-100%);
         }
-        #st-control-3:checked ~ .st-scroll{
+        
+        #st-control-3:checked ~ .st-scroll {
             -webkit-transform: translateY(-200%);
             -moz-transform: translateY(-200%);
             -o-transform: translateY(-200%);
             -ms-transform: translateY(-200%);
             transform: translateY(-200%);
         }
-        #st-control-4:checked ~ .st-scroll{
+        
+        #st-control-4:checked ~ .st-scroll {
             -webkit-transform: translateY(-300%);
             -moz-transform: translateY(-300%);
             -o-transform: translateY(-300%);
             -ms-transform: translateY(-300%);
             transform: translateY(-300%);
         }
-        #st-control-5:checked ~ .st-scroll{
+        
+        #st-control-5:checked ~ .st-scroll {
             -webkit-transform: translateY(-400%);
             -moz-transform: translateY(-400%);
             -o-transform: translateY(-400%);
@@ -192,7 +214,7 @@
             transform: translateY(-400%);
         }
         
-        .st-desc{
+        .st-desc {
             width: 200px;
             height: 200px;
             background: lightpink;
@@ -200,19 +222,19 @@
             left: 50%;
             top: 0;
             margin-left: -100px;
-            transform:translateY(-50%) rotate(45deg);
-            -webkit-transform:translateY(-50%) rotate(45deg);
-            -moz-transform:translateY(-50%) rotate(45deg);
-            -o-transform:translateY(-50%) rotate(45deg);
-            -ms-transform:translateY(-50%) rotate(45deg);
+            transform: translateY(-50%) rotate(45deg);
+            -webkit-transform: translateY(-50%) rotate(45deg);
+            -moz-transform: translateY(-50%) rotate(45deg);
+            -o-transform: translateY(-50%) rotate(45deg);
+            -ms-transform: translateY(-50%) rotate(45deg);
         }
         
-        [data-icon]:after{
+        [data-icon]:after {
             content: attr(data-icon);
             width: 200px;
             height: 200px;
             /*background: #898;*/
-            color: black;
+            color: #eee;
             text-align: center;
             font-size: 90px;
             line-height: 200px;
@@ -227,58 +249,295 @@
             -ms-transform: rotate(-45deg) translateY(25%);
             font-family: "MerryChristmasStar";
         }
+        
+        .st-panel h2 {
+            color: #fa96b5;
+            font-size: 54px;
+            line-height: 50px;
+            text-align: center;
+            font-weight: 900;
+            width: 80%;
+            position: absolute;
+            left: 10%;
+            top: 150px;
+            margin-top: 0px;
+            font-family: "YoungRanger";
+            letter-spacing: 2px;
+        }
+        
+        #st-panel-2 p {
+            margin-top: -50px;
+            font-size: 34px;
+            letter-spacing: 5px;
+            line-height: 60px;
+            font-family: "MerryChristmasFlake";
+            width: 60%;
+            left: 20%;
+        }
+        
+        .st-panel p {
+            color: #fa96b5;
+            font-size: 84px;
+            letter-spacing: 5px;
+            line-height: 90px;
+            text-align: center;
+            /*font-weight: 900;*/
+            width: 80%;
+            position: absolute;
+            left: 10%;
+            top: 250px;
+            margin-top: 0px;
+        }
+        
+        #st-control-1:checked ~ .st-scroll #st-panel-1 h2,
+        #st-control-2:checked ~ .st-scroll #st-panel-2 h2,
+        #st-control-3:checked ~ .st-scroll #st-panel-3 h2,
+        #st-control-4:checked ~ .st-scroll #st-panel-4 h2 {
+            -webkit-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+            -moz-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+            -o-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+            -ms-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+            animation: moveDown 0.6s ease-in-out 0.2s backwards;
+        }
+        
+        @-webkit-keyframes moveDown {
+            0% {
+                -webkit-transform: translateY(-20px);
+                opacity: 0;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                -webkit-transform: translateY(0px);
+                opacity: 1;
+            }
+        }
+        
+        #st-control-1:checked ~ .st-scroll #st-panel-1 p,
+        #st-control-2:checked ~ .st-scroll #st-panel-2 p,
+        
+        #st-control-4:checked ~ .st-scroll #st-panel-4 p {
+            -webkit-animation: moveUp 0.6s ease-in-out 0.2s backwards;
+            -moz-animation: moveUp 0.6s ease-in-out 0.2s backwards;
+            -o-animation: moveUp 0.6s ease-in-out 0.2s backwards;
+            -ms-animation: moveUp 0.6s ease-in-out 0.2s backwards;
+            animation: moveUp 0.6s ease-in-out 0.2s backwards;
+        }
+        #st-control-3:checked ~ .st-scroll #st-panel-3 .roll{
+            -webkit-animation: moveUp 0.6s ease-in-out 0.4s backwards;
+            -moz-animation: moveUp 0.6s ease-in-out 0.4s backwards;
+            -o-animation: moveUp 0.6s ease-in-out 0.4s backwards;
+            -ms-animation: moveUp 0.6s ease-in-out 0.4s backwards;
+            animation: moveUp 0.6s ease-in-out 0.4s backwards;
+        }
+        @-webkit-keyframes moveUp {
+            0% {
+                -webkit-transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                -webkit-transform: translateY(0px);
+                opacity: 1;
+            }
+        }
+        
+        .roll {
+            position: absolute;
+            top: 50%;
+            left: 30%;
+            width: 40%;
+            height: 300px;
+            /*background: red;*/
+            margin: -100px auto;
+        }
+        .st-color{
+            background: #fa96b5;
+        }
+        .st-color .st-desc{
+           background: #fff;
+        }
+        .st-color  [data-icon]:after{
+            color: #fa96b5;
+        }
+        .st-color h2,.st-color p{
+            color: #fff;
+        }
+       @media screen and (max-width:520px) {
+         .st-panel  p{
+               font-size: 50px;
+               line-height:65px;
+               width: 90%;
+               left: 5%;
+           }
+           #st-panel-2 p{
+               width: 90%;
+               left: 5%;
+               font-size: 50px;
+               line-height: 60px;
+           }
+          #st-panel-3 .roll{
+              width: 80%;
+              left: 10%;
+              /*background: green;*/
+              /*width: 240px;*/
+          }
+       } 
+       .roll{
+           overflow: hidden;
+       }
+        ul{
+           position: absolute;
+           width: 100%;
+           /*left: 10%;*/
+           height: 100%;
+           /*width: 600px; */
+           /*background: seagreen;*/
+        }
+        
+        ul li {
+           position:  relative;
+           float: left;
+           margin-right: 5px;  
+           list-style:  none;
+           height: 100%;
+           width: 200px;
+           background: blue;
+           /*border:1px solid yellowgreen;*/
+       }
+       ul li a{
+           height: 100%;
+           width: 100%;
+       }
+       .img1{
+           background: url("image/p1.jpg") no-repeat;
+           background-size: 200px,300px;
+       }
+       .img2{
+           background: url("image/p2.jpg") no-repeat;
+           background-size: 200px,300px;
+       }
+       .img3{
+           background: url("image/p3.jpg") no-repeat;
+           background-size: 200px,300px;
+       }
+       .img4{
+           background: url("image/p4.jpg") no-repeat;
+           background-size: 200px,300px;
+       }
     </style>
 </head>
 
 <body>
     <div class="container">
         <div class="st-container">
-            <input type="radio" name="radio-set" checked="checked" id="st-control-1">
-            <a href="#st-panel-1">Serendipity</a>
+            <input type="radio" name="radio-set"  id="st-control-1">
+            <a href="#st-panel-1">L</a>
             <input type="radio" name="radio-set" id="st-control-2">
-            <a href="#st-panel-2">Happiness</a>
-            <input type="radio" name="radio-set" id="st-control-3">
-            <a href="#st-panel-3">Tranquillity</a>
+            <a href="#st-panel-2">O</a>
+            <input type="radio" name="radio-set" checked id="st-control-3">
+            <a href="#st-panel-3">V</a>
             <input type="radio" name="radio-set" id="st-control-4">
-            <a href="#st-panel-4">Positivity</a>
-            <input type="radio" name="radio-set" id="st-control-5">
-            <a href="#st-panel-5">Passion</a>
+            <a href="#st-panel-4">E</a>
+            <!--<input type="radio" name="radio-set" id="st-control-5">
+            <a href="#st-panel-5">Passion</a>-->
             <div class="st-scroll">
                 <section class="st-panel" id="st-panel-1">
                     <div class="st-desc" data-icon="0"></div>
-                    <h2>大人</h2>
-                    <p style=" font-family: 'MerryChristmasStar';font-size:53px">么么哒
-                        0123456789
-                        <br>
-                       Merry 0  Christmas 
-                       <br>
-                       Chen Yu Juan
+                    <h2>2015 12 25</h2>
+                    <p style=" font-family: 'MerryChristmasFlake';">
+                        #Merry0Christmas+
+                        <br> Chen Yu Juan
                     </p>
                 </section>
                 <section class="st-panel st-color" id="st-panel-2">
                     <div class="st-desc" data-icon="1"></div>
-                    <h2>鸭腿</h2>
-                    <p >么么哒</p>
+                    <h2>2013 07 25</h2>
+                    <p>Whenever you need me, I'll be here. Whenever you're in trouble, I'm always near.Whenever you feel alone,I'll
+                        stay with you!</p>
                 </section>
                 <section class="st-panel" id="st-panel-3">
                     <div class="st-desc" data-icon="2"></div>
-                    <h2>大腿</h2>
-                    <p>么么哒</p>
+                    <h2 style=" font-family: 'MerryChristmasFlake';">My princess</h2>
+                    <div class="roll">
+                          <ul class="roll-content">
+                              <li class="img1"></li>
+                              <li class="img2"></li>
+                              <li class="img3"></li>
+                              <li class="img4"></li>
+                          </ul>
+                    </div>
                 </section>
                 <section class="st-panel st-color" id="st-panel-4">
                     <div class="st-desc" data-icon="4"></div>
                     <h2>老婆</h2>
                     <p>么么哒</p>
                 </section>
-                <section class="st-panel" id="st-panel-5">
+                <!--<section class="st-panel" id="st-panel-5">
                     <div class="st-desc" data-icon="9"></div>
                     <h2>老婆大人</h2>
                     <p>么么哒</p>
-                </section>
+                </section>-->
             </div>
         </div>
 
     </div>
+    <script>
+        var h=window.innerHeight
+			|| document.documentElement.clientHeight
+|| document.body.clientHeight;
+var nowIndex = 0;
+var preScroll = 0;
+var dis_Scroll=0;
+var isDown =true;
+        window.onscroll=function(){
+            console.log(h);            
+            var scrollTop = window.document.body.scrollTop||document.documentElement.scrollTop;
+            console.log(scrollTop); 
+            var mInput = document.getElementsByTagName("input");
+            for(var i = 0,len = mInput.length;i<len;i++){
+                if(mInput[i].checked){
+                    nowIndex ==i;
+                    console.log(i+" #");
+                    break;
+                }
+            }
+           dis_Scroll = scrollTop - preScroll;
+           preScroll = scrollTop;
+           
+        //    (i+1)*h;
+        //    window.scrollTo(0,(i+1)*h);
+        //    mInput[i].checked=null;
+        //    mInput[i+1].checked="checked";
+           if(dis_Scroll>0){
+               isDown=true;
+           }else{
+               isDown = false;
+           }
+           console.log("Now:"+ dis_Scroll);
+           
+        }
+        window.onload=function(){
+            Move();
+        }
+        function Move(){
+            var roll = document.getElementsByClassName("roll")[0];
+            var ul = roll.getElementsByTagName("ul")[0];
+            ul.innerHTML += ul.innerHTML;
+            var li = ul.getElementsByTagName("li");
+            ul.style.width = li.length*(5+li[0].offsetWidth)+"px";
+            var speed =2;
+            setInterval(function(){
+                if(ul.offsetLeft<-(ul.offsetWidth/2))
+                {
+                    ul.style.left = "0px"
+                }else{
+                    ul.style.left = ul.offsetLeft - speed +"px";
+                }
+                console.log(ul.offsetLeft);
+            },20);
+        }
+    </script>
 </body>
 
 </html>
