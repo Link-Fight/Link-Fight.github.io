@@ -1,0 +1,424 @@
+      @font-face {
+            font-family: "MerryChristmasStar";
+            src: url('font/MerryChristmasStar.ttf');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: "MerryChristmasFlake";
+            src: url('font/MerryChristmasFlake.ttf');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: "YoungRanger";
+            src: url('font/YoungRanger.ttf');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        @font-face {
+            font-family: "Shorelines Script Bold";
+            src: url('font/Shorelines Script Bold.otf');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
+        * {
+            padding: 0;
+            margin: 0;
+        }
+        
+        body {
+            background: #ddd;
+            font-size: 15px;
+            color: #333;
+            overflow: hidden;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        .st-container {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            left: 0;
+            top: 0;
+            /*background: blue;*/
+        }
+        
+        .st-container a {
+            text-decoration: none;
+            color: #555;
+        }
+        
+        .clr {
+            width: 0;
+            height: 0;
+            overflow: hidden;
+            clear: both;
+            padding: 0;
+            margin: 0;
+        }
+        
+        .st-container >input,
+        .st-container > a {
+            position: fixed;
+            width: 25%;
+            height: 44px;
+            line-height: 44px;
+            text-align: center;
+            bottom: 0px;
+            cursor: pointer;
+        }
+        
+        .st-container >input {
+            z-index: 999;
+            opacity: 0.0;
+        }
+        
+        .st-container >a {
+            z-index: 99;
+            font-weight: 700;
+            font-size: 26px;
+            color: #eee;
+            text-shadow: 2px 2px 2px rgba(151, 24, 64, 0.2);
+            background: hotpink;
+            font-family: "MerryChristmasStar";
+        }
+        
+        #st-control-1,
+        #st-control-1+a {
+            left: 0;
+        }
+        
+        #st-control-2,
+        #st-control-2+a {
+            left: 25%;
+            /*background: lightpink;*/
+        }
+        
+        #st-control-3,
+        #st-control-3+a {
+            left: 50%;
+            /*background: lightpink;*/
+        }
+        
+        #st-control-4,
+        #st-control-4+a {
+            left: 75%;
+            /*background: lightpink;*/
+        }
+        /*#st-control-5,
+        #st-control-5+a {
+            left: 80%;
+           
+        }*/
+        
+        .st-container >input:hover + a {
+            background: deeppink;
+        }
+        
+        .st-container > input:checked + a {
+            background: mediumvioletred;
+        }
+        
+        .st-container input:checked + a::after {
+            content: "";
+            /*padding: 0px;
+           margin: 0px;*/
+            border: 20px solid transparent;
+            border-bottom-color: mediumvioletred;
+            position: absolute;
+            bottom: 100%;
+            left: 50%;
+            margin-left: -20px;
+        }
+        /*内容*/
+        
+        .st-scroll,
+        .st-panel {
+            width: 100%;
+            height: 100%;
+            position: relative;
+        }
+        
+        .st-scroll {
+            left: 0;
+            top: 0;
+            -webkit-transform: translate3d(0, 0, 0);
+            -moz-transform: translate3d(0, 0, 0);
+            -o-transform: translate3d(0, 0, 0);
+            -ms-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            -webkit-backface-visibility: hidden;
+            -webkit-transition: all 0.5s ease-in-out;
+            -moz-transition: all 0.5s ease-in-out;
+            -o-transition: all 0.5s ease-in-out;
+            -ms-transition: all 0.5s ease-in-out;
+            transition: all 0.5s ease-in-out;
+        }
+        
+        .st-panel {
+            background: #fff;
+            overflow: hidden;
+        }
+        
+        #st-control-1:checked ~ .st-scroll {
+            -webkit-transform: translateY(0%);
+            -moz-transform: translateY(0%);
+            -o-transform: translateY(0%);
+            -ms-transform: translateY(0%);
+            transform: translateY(0%);
+        }
+        
+        #st-control-2:checked ~ .st-scroll {
+            -webkit-transform: translateY(-100%);
+            -moz-transform: translateY(-100%);
+            -o-transform: translateY(-100%);
+            -ms-transform: translateY(-100%);
+            transform: translateY(-100%);
+        }
+        
+        #st-control-3:checked ~ .st-scroll {
+            -webkit-transform: translateY(-200%);
+            -moz-transform: translateY(-200%);
+            -o-transform: translateY(-200%);
+            -ms-transform: translateY(-200%);
+            transform: translateY(-200%);
+        }
+        
+        #st-control-4:checked ~ .st-scroll {
+            -webkit-transform: translateY(-300%);
+            -moz-transform: translateY(-300%);
+            -o-transform: translateY(-300%);
+            -ms-transform: translateY(-300%);
+            transform: translateY(-300%);
+        }
+        
+        #st-control-5:checked ~ .st-scroll {
+            -webkit-transform: translateY(-400%);
+            -moz-transform: translateY(-400%);
+            -o-transform: translateY(-400%);
+            -ms-transform: translateY(-400%);
+            transform: translateY(-400%);
+        }
+        
+        .st-desc {
+            width: 200px;
+            height: 200px;
+            background: lightpink;
+            position: absolute;
+            left: 50%;
+            top: 0;
+            margin-left: -100px;
+            transform: translateY(-50%) rotate(45deg);
+            -webkit-transform: translateY(-50%) rotate(45deg);
+            -moz-transform: translateY(-50%) rotate(45deg);
+            -o-transform: translateY(-50%) rotate(45deg);
+            -ms-transform: translateY(-50%) rotate(45deg);
+        }
+        
+        [data-icon]:after {
+            content: attr(data-icon);
+            width: 200px;
+            height: 200px;
+            /*background: #898;*/
+            color: #eee;
+            text-align: center;
+            font-size: 90px;
+            line-height: 200px;
+            position: absolute;
+            left: 50%;
+            top: 50%;
+            margin: -100px 0 0 -100px;
+            transform: rotate(-45deg) translateY(25%);
+            -webkit-transform: rotate(-45deg) translateY(25%);
+            -moz-transform: rotate(-45deg) translateY(25%);
+            -o-transform: rotate(-45deg) translateY(25%);
+            -ms-transform: rotate(-45deg) translateY(25%);
+            font-family: "MerryChristmasStar";
+        }
+        
+        .st-panel h2 {
+            color: #fa96b5;
+            font-size: 54px;
+            line-height: 50px;
+            text-align: center;
+            font-weight: 900;
+            width: 80%;
+            position: absolute;
+            left: 10%;
+            top: 150px;
+            margin-top: 0px;
+            font-family: "YoungRanger";
+            letter-spacing: 2px;
+        }
+        
+        #st-panel-2 p {
+            margin-top: -50px;
+            font-size: 34px;
+            letter-spacing: 5px;
+            line-height: 60px;
+            font-family: "MerryChristmasFlake";
+            width: 60%;
+            left: 20%;
+        }
+        
+        .st-panel p {
+            color: #fa96b5;
+            font-size: 84px;
+            letter-spacing: 5px;
+            line-height: 90px;
+            text-align: center;
+            /*font-weight: 900;*/
+            width: 80%;
+            position: absolute;
+            left: 10%;
+            top: 250px;
+            margin-top: 0px;
+        }
+        
+        #st-control-1:checked ~ .st-scroll #st-panel-1 h2,
+        #st-control-2:checked ~ .st-scroll #st-panel-2 h2,
+        #st-control-3:checked ~ .st-scroll #st-panel-3 h2,
+        #st-control-4:checked ~ .st-scroll #st-panel-4 h2 {
+            -webkit-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+            -moz-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+            -o-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+            -ms-animation: moveDown 0.6s ease-in-out 0.2s backwards;
+            animation: moveDown 0.6s ease-in-out 0.2s backwards;
+        }
+        
+        @-webkit-keyframes moveDown {
+            0% {
+                -webkit-transform: translateY(-20px);
+                opacity: 0;
+            }
+            90% {
+                opacity: 0.8;
+            }
+            100% {
+                -webkit-transform: translateY(0px);
+                opacity: 1;
+            }
+        }
+        
+        #st-control-1:checked ~ .st-scroll #st-panel-1 p,
+        #st-control-2:checked ~ .st-scroll #st-panel-2 p,
+        
+        #st-control-4:checked ~ .st-scroll #st-panel-4 p {
+            -webkit-animation: moveUp 0.6s ease-in-out 0.2s backwards;
+            -moz-animation: moveUp 0.6s ease-in-out 0.2s backwards;
+            -o-animation: moveUp 0.6s ease-in-out 0.2s backwards;
+            -ms-animation: moveUp 0.6s ease-in-out 0.2s backwards;
+            animation: moveUp 0.6s ease-in-out 0.2s backwards;
+        }
+        #st-control-3:checked ~ .st-scroll #st-panel-3 .roll{
+            -webkit-animation: moveUp 0.6s ease-in-out 0.4s backwards;
+            -moz-animation: moveUp 0.6s ease-in-out 0.4s backwards;
+            -o-animation: moveUp 0.6s ease-in-out 0.4s backwards;
+            -ms-animation: moveUp 0.6s ease-in-out 0.4s backwards;
+            animation: moveUp 0.6s ease-in-out 0.4s backwards;
+        }
+        @-webkit-keyframes moveUp {
+            0% {
+                -webkit-transform: translateY(50px);
+                opacity: 0;
+            }
+            100% {
+                -webkit-transform: translateY(0px);
+                opacity: 1;
+            }
+        }
+        
+        .roll {
+            position: absolute;
+            top: 50%;
+            left: 30%;
+            width: 40%;
+            height: 300px;
+            /*background: red;*/
+            margin: -100px auto;
+        }
+        .st-color{
+            background: #fa96b5;
+        }
+        .st-color .st-desc{
+           background: #fff;
+        }
+        .st-color  [data-icon]:after{
+            color: #fa96b5;
+        }
+        .st-color h2,.st-color p{
+            color: #fff;
+        }
+       @media screen and (max-width:520px) {
+         .st-panel  p{
+               font-size: 50px;
+               line-height:65px;
+               width: 90%;
+               left: 5%;
+           }
+           #st-panel-2 p{
+               width: 90%;
+               left: 5%;
+               font-size: 30px;
+               line-height: 40px;
+           }
+           #st-panel-3 h2{
+               /*display: none;*/
+               color: #fff;
+           }
+          #st-panel-3 .roll{
+              width: 90%;
+              left: 5%;
+              /*background: green;*/
+              /*width: 240px;*/
+          }
+       } 
+       .roll{
+           overflow: hidden;
+           /*box-shadow: */
+           /*background-repeat: no-repeat;*/
+       }
+        ul{
+           position: absolute;
+           width: 100%;
+           /*left: 10%;*/
+           height: 100%;
+           /*width: 600px; */
+           /*background: seagreen;*/
+        }
+        
+        ul li {
+           position:  relative;
+           float: left;
+           margin-right: 5px;  
+           list-style:  none;
+           height: 100%;
+           width: 200px;
+           background: blue;
+           /*border:1px solid yellowgreen;*/
+       }
+       ul li a{
+           height: 100%;
+           width: 100%;
+       }
+       .img1{
+           background: url("image/p1.jpg") no-repeat;
+           background-size: 200px,300px;
+       }
+       .img2{
+           background: url("image/p2.jpg") no-repeat;
+           background-size: 200px,300px;
+       }
+       .img3{
+           background: url("image/p3.jpg") no-repeat;
+           background-size: 200px,300px;
+       }
+       .img4{
+           background: url("image/p4.jpg") no-repeat;
+           background-size: 200px,300px;
+       }

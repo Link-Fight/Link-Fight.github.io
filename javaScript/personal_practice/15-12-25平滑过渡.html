@@ -3,282 +3,67 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>平滑过渡</title>
+    <title>老婆大人</title>
     <meta http-equiv="X-UA-Compatible" content="IE-edge,chrome=1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <style>
-        @font-face{
-            font-family: "MerryChristmasStar";
-            src: url('font/MerryChristmasStar.ttf');
-            font-weight: normal;
-            font-style: normal;
-        }
-         @font-face{
-            font-family: "MerryChristmasFlake";
-            src: url('font/MerryChristmasFlake.ttf');
-            font-weight: normal;
-            font-style: normal;
-        }
-        * {
-            padding: 0;
-            margin: 0;
-        }
-        
-        body {
-            background: #ddd;
-            font-size: 15px;
-            color: #333;
-            overflow: hidden;
-            -webkit-font-smoothing: antialiased;
-        }
-        
-        .st-container {
-            width: 100%;
-            height: 100%;
-            position: absolute;
-            left: 0;
-            top: 0;
-        }
-        
-        .st-container a {
-            text-decoration: none;
-            color: #555;
-        }
-        
-        .clr {
-            width: 0;
-            height: 0;
-            overflow: hidden;
-            clear: both;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .st-container >input,
-        .st-container > a {
-            position: fixed;
-            width: 20%;
-            height: 34px;
-            line-height: 34px;
-            text-align: center;
-            bottom: 0px;
-            cursor: pointer;
-        }
-        
-        .st-container >input {
-            z-index: 999;
-            opacity: 0.0;
-        }
-        
-        .st-container >a {
-            z-index: 99;
-            font-weight: 700;
-            font-size: 16px;
-            color: #eee;
-            text-shadow: 2px 2px 2px rgba(151, 24, 64, 0.2);
-            background: lightpink;
-        }
-        
-        #st-control-1,
-        #st-control-1+a {
-            left: 0;
-        }
-        
-        #st-control-2,
-        #st-control-2+a {
-            left: 20%;
-            /*background: lightpink;*/
-        }
-        
-        #st-control-3,
-        #st-control-3+a {
-            left: 40%;
-            /*background: lightpink;*/
-        }
-        
-        #st-control-4,
-        #st-control-4+a {
-            left: 60%;
-            /*background: lightpink;*/
-        }
-        
-        #st-control-5,
-        #st-control-5+a {
-            left: 80%;
-            /*background: lightpink;*/
-        }
-        
-        .st-container >input:hover + a {
-            background: hotpink;
-        }
-        
-        .st-container > input:checked + a {
-            background: deeppink;
-        }
-        
-        .st-container input:checked + a::after {
-            content: "";
-            /*padding: 0px;
-           margin: 0px;*/
-            border: 20px solid transparent;
-            border-bottom-color: deeppink;
-            position: absolute;
-            bottom: 100%;
-            left: 50%;
-            margin-left: -20px;
-        }
-        /*内容*/
-        
-        .st-scroll,
-        .st-panel {
-            width: 100%;
-            height: 100%;
-            position: relative;
-        }
-        .st-scroll{
-            left: 0;
-            top: 0;
-            -webkit-transform: translate3d(0,0,0);
-            -moz-transform: translate3d(0,0,0);
-            -o-transform: translate3d(0,0,0);
-            -ms-transform: translate3d(0,0,0);
-            transform: translate3d(0,0,0);
-            -webkit-backface-visibility: hidden;
-            
-            -webkit-transition: all 0.5s ease-in-out;
-            -moz-transition: all 0.5s ease-in-out;
-            -o-transition: all 0.5s ease-in-out;
-            -ms-transition: all 0.5s ease-in-out;
-            transition: all 0.5s ease-in-out;
-        }
-        .st-panel{
-            background: #fff;
-            overflow: hidden;
-            
-        }
-        #st-control-1:checked ~ .st-scroll{
-            -webkit-transform: translateY(0%);
-            -moz-transform: translateY(0%);
-            -o-transform: translateY(0%);
-            -ms-transform: translateY(0%);
-            transform: translateY(0%);
-        }
-        #st-control-2:checked ~ .st-scroll{
-            -webkit-transform: translateY(-100%);
-            -moz-transform: translateY(-100%);
-            -o-transform: translateY(-100%);
-            -ms-transform: translateY(-100%);
-            transform: translateY(-100%);
-        }
-        #st-control-3:checked ~ .st-scroll{
-            -webkit-transform: translateY(-200%);
-            -moz-transform: translateY(-200%);
-            -o-transform: translateY(-200%);
-            -ms-transform: translateY(-200%);
-            transform: translateY(-200%);
-        }
-        #st-control-4:checked ~ .st-scroll{
-            -webkit-transform: translateY(-300%);
-            -moz-transform: translateY(-300%);
-            -o-transform: translateY(-300%);
-            -ms-transform: translateY(-300%);
-            transform: translateY(-300%);
-        }
-        #st-control-5:checked ~ .st-scroll{
-            -webkit-transform: translateY(-400%);
-            -moz-transform: translateY(-400%);
-            -o-transform: translateY(-400%);
-            -ms-transform: translateY(-400%);
-            transform: translateY(-400%);
-        }
-        
-        .st-desc{
-            width: 200px;
-            height: 200px;
-            background: lightpink;
-            position: absolute;
-            left: 50%;
-            top: 0;
-            margin-left: -100px;
-            transform:translateY(-50%) rotate(45deg);
-            -webkit-transform:translateY(-50%) rotate(45deg);
-            -moz-transform:translateY(-50%) rotate(45deg);
-            -o-transform:translateY(-50%) rotate(45deg);
-            -ms-transform:translateY(-50%) rotate(45deg);
-        }
-        
-        [data-icon]:after{
-            content: attr(data-icon);
-            width: 200px;
-            height: 200px;
-            /*background: #898;*/
-            color: black;
-            text-align: center;
-            font-size: 90px;
-            line-height: 200px;
-            position: absolute;
-            left: 50%;
-            top: 50%;
-            margin: -100px 0 0 -100px;
-            transform: rotate(-45deg) translateY(25%);
-            -webkit-transform: rotate(-45deg) translateY(25%);
-            -moz-transform: rotate(-45deg) translateY(25%);
-            -o-transform: rotate(-45deg) translateY(25%);
-            -ms-transform: rotate(-45deg) translateY(25%);
-            font-family: "MerryChristmasStar";
-        }
-    </style>
+    <link rel="stylesheet" href="15-12-25平滑过渡.css">
 </head>
 
 <body>
     <div class="container">
         <div class="st-container">
-            <input type="radio" name="radio-set" checked="checked" id="st-control-1">
-            <a href="#st-panel-1">Serendipity</a>
+            <input type="radio" name="radio-set"  checked id="st-control-1">
+            <a href="#st-panel-1">L</a>
             <input type="radio" name="radio-set" id="st-control-2">
-            <a href="#st-panel-2">Happiness</a>
-            <input type="radio" name="radio-set" id="st-control-3">
-            <a href="#st-panel-3">Tranquillity</a>
+            <a href="#st-panel-2">O</a>
+            <input type="radio" name="radio-set"  id="st-control-3">
+            <a href="#st-panel-3">V</a>
             <input type="radio" name="radio-set" id="st-control-4">
-            <a href="#st-panel-4">Positivity</a>
-            <input type="radio" name="radio-set" id="st-control-5">
-            <a href="#st-panel-5">Passion</a>
+            <a href="#st-panel-4">E</a>
+            <!--<input type="radio" name="radio-set" id="st-control-5">
+            <a href="#st-panel-5">Passion</a>-->
             <div class="st-scroll">
                 <section class="st-panel" id="st-panel-1">
                     <div class="st-desc" data-icon="0"></div>
-                    <h2>大人</h2>
-                    <p style=" font-family: 'MerryChristmasStar';font-size:53px">么么哒
-                        0123456789
-                        <br>
-                       Merry 0  Christmas 
-                       <br>
-                       Chen Yu Juan
+                    <h2>2015 12 25</h2>
+                    <p style=" font-family: 'MerryChristmasFlake';">
+                        #Merry0Christmas+
+                        <br> Chen Yu Juan
                     </p>
                 </section>
                 <section class="st-panel st-color" id="st-panel-2">
                     <div class="st-desc" data-icon="1"></div>
-                    <h2>鸭腿</h2>
-                    <p >么么哒</p>
+                    <h2>2013 07 25</h2>
+                    <p>Whenever you need me, I'll be here. Whenever you're in trouble, I'm always near.Whenever you feel alone,I'll
+                        stay with you!</p>
                 </section>
                 <section class="st-panel" id="st-panel-3">
                     <div class="st-desc" data-icon="2"></div>
-                    <h2>大腿</h2>
-                    <p>么么哒</p>
+                    <h2 style=" font-family: 'MerryChristmasFlake';">My princess</h2>
+                    <div class="roll">
+                          <ul class="roll-content">
+                              <li class="img1"></li>
+                              <li class="img2"></li>
+                              <li class="img3"></li>
+                              <li class="img4"></li>
+                          </ul>
+                    </div>
                 </section>
                 <section class="st-panel st-color" id="st-panel-4">
                     <div class="st-desc" data-icon="4"></div>
                     <h2>老婆</h2>
                     <p>么么哒</p>
                 </section>
-                <section class="st-panel" id="st-panel-5">
+                <!--<section class="st-panel" id="st-panel-5">
                     <div class="st-desc" data-icon="9"></div>
                     <h2>老婆大人</h2>
                     <p>么么哒</p>
-                </section>
+                </section>-->
             </div>
         </div>
 
     </div>
+    <script src="15-12-25平滑过渡.js"></script>
 </body>
 
 </html>
