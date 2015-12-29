@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Foundation 实例</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="http://static.runoob.com/assets/foundation-5.5.3/foundation.min.css">
+    <script src="http://static.runoob.com/assets/jquery/2.0.3/jquery.min.js"></script>
+    <script src="http://static.runoob.com/assets/foundation-5.5.3/js/foundation.min.js"></script>
+    <script src="http://static.runoob.com/assets/foundation-5.5.3/js/vendor/modernizr.js"></script>
+</head>
+
+<body style="height:2500px;padding:20px;">
+
+    <h2>Magellan</h2>
+    <h4 class="subheader">麦哲伦导航就是一个导航索引，位置是固定的，会根据用户滚动当前展示的内容自动切换导航栏上的导航项:</h4>
+    <hr>
+
+    <div data-magellan-expedition="fixed">
+        <dl class="sub-nav">
+            <dd data-magellan-arrival="page1"><a href="#page1">Page 1</a></dd>
+            <dd data-magellan-arrival="page2"><a href="#page2">Page 2</a></dd>
+            <dd data-magellan-arrival="page3"><a href="#page3">Page 2</a></dd>
+        </dl>
+    </div>
+    <hr>
+
+    <div style="height:200px;background-color:#1abc9c;color:white;">
+        <h3 data-magellan-destination="page1">页面 1</h3>
+        <a name="page1"></a>
+        <p>滚动屏幕，查看导航栏上的变化。</p>
+    </div>
+
+    <div style="height:400px;background-color:#00ffff;color:white;">
+        <h3 data-magellan-destination="page2">页面 2</h3>
+        <a name="page2"></a>
+        <p>滚动屏幕，查看导航栏上的变化。并尝试向上滚动。</p>
+    </div>
+    
+     <div style="height:400px;background-color:#ffff00;color:white;">
+        <h3 data-magellan-destination="page3">页面 3</h3>
+        <a name="page3"></a>
+        <p>滚动屏幕，查看导航栏上的变化。并尝试向上滚动。</p>
+    </div>
+
+    <!-- 初始化 Foundation JS -->
+    <script>
+        $(document).ready(function() {
+    $(document).foundation();
+})
+
+    </script>
+
+</body>
+
+</html>

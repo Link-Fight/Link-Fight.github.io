@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>CSS3@media查询</title>
+    <style>
+        *{
+            padding:0;
+            margin: 0;
+        }
+        .main{
+            width: 800px;
+            background: yellowgreen;
+            margin: 0 auto;
+        }
+        .contain{
+            width: 80%;
+            height: 400px;
+            margin-left: 10%;
+            background: pink;
+        }
+        
+        .hiddenDiv{
+            display: none;
+            height: 0px; 
+            width: 90%;
+            background: #eee;
+            /*margin-top: 20px;*/
+            /*margin-bottom: 20px;*/
+            /*padding-bottom: 20px;*/
+            margin-left: 5%;
+            
+        }
+        
+        @-webkit-keyframes show{
+            0%{
+                 height: 0px;
+                display: block;
+                background: #000;
+            }
+            100%{
+                display: block;
+                 height: 200px;
+            }
+        }
+        
+        @keyframes show{
+            0%{
+                height: 0px;
+               display: block;
+                background: #ff00ff;
+            }
+            100%{
+                display: block;
+                 height: 200px;
+            }
+        }
+        
+        
+        @media screen and (max-width:800px){
+            .main{
+                width: 100%;
+            }
+        }
+        
+        @media screen and (max-width:1000px){
+            .contain{
+                background: hotpink;
+            }
+        }
+        
+        @media screen and (max-width:700px){
+            .hiddenDiv{
+               display: block;
+               animation:show 5s 1s  infinite alternate ease-in-out  running;
+             
+            }
+            
+            
+        }
+        
+        
+    </style>
+    <script>
+         
+        function mclick(){
+            // alert("??");
+            var div = document.getElementsByClassName("hiddenDiv")[0];
+            if(div.style.animationPlayState=""){
+                div.style.animationPlayState-"paused";
+            }else{
+                div.style.animationPlayState="";
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="main">
+        <div class="contain">
+            <span id="show"></span>
+        </div>
+        <div class="hiddenDiv"></div>
+        <button id="dd" onclick="mclick();" > clickMe</button>
+        <button onclick="mclick()">Copy Text</button>
+    </div>
+    <script>
+        window.onresize=function(){
+            var w = document.body.clientWidth;
+            var show = document.getElementById("show");
+            show.innerHTML= w;
+            var div =document.getElementsByClassName("contain")[0];
+            show.innerHTML+="<br>"+ div.offsetWidth;
+        }
+       
+        
+    </script>
+</body>
+</html>

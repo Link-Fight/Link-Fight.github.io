@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html>
+<meta charset="utf-8">
+
+<head>
+    <style>
+        #div1 {
+            position: relative;
+            height: 150px;
+            width: 150px;
+            margin: 150px auto;
+            /*padding: 10px;*/
+            border: 1px solid black;
+            font-size: 20px;
+            perspective: 163px;
+            -webkit-perspective: 163px;
+            /* Safari and Chrome */
+        }
+        
+        #div2 {
+            /*z-index: 999;*/
+            /*perspective: 15;*/
+            padding: 50px;
+            width: 50px;
+            position: absolute;
+            border: 1px solid black;
+            background-color: yellow;
+            transform: rotateX(90deg);
+            /*-webkit-transform: rotateX(14deg);*/
+            /*Safari and Chrome */
+            animation: show 5s 0s infinite linear running;
+            /*animation: show 5s 0s infinite  linear running;*/
+        }
+        
+        #div2d {
+            padding: 50px;
+            width: 50px;
+            background-color: pink;
+            border: 1px solid black;
+            opacity: 0.6;
+        }
+        /*.move {
+            animation: moveRx 5s 1s infinite alternate ease-in-out running;
+        }*/
+        
+        @keyframes show {
+            0% {
+                transform: rotateX(0deg);
+                /*transform: rotateY(0deg);*/
+                /*transform: rotate(0deg,0deg)*/
+            }
+            100% {
+                transform: rotateX(360deg);
+                /*transform: rotateY(360deg);*/
+                /*transform: rotate(360deg,360deg)*/
+            }
+        }
+    </style>
+    <style>
+        .container:hover {
+            -moz-animation: spin 5s linear infinite;
+            -o-animation: spin 5s linear infinite;
+            -webkit-animation: spin 5s linear infinite;
+            animation: spin 5s linear infinite;
+        }
+        
+        @keyframes spin {
+            0% {
+                transform: rotateY(0deg)
+            }
+            100% {
+                transform: rotateY(360deg)
+            }
+        }
+        
+        .stage {
+            width: 300px;
+            height: 300px;
+            margin: 15px auto;
+            position: relative;
+            background: url(image/bg-grid.jpg) no-repeat center center;
+            background-size: 100% 100%;
+            perspective: 1800px;
+        }
+        
+        .side {
+            background: rgba(142, 198, 63, 0.3);
+            border: 2px solid #8ec63f;
+            font-size: 60px;
+            font-weight: bold;
+            color: #fff;
+            height: 196px;
+            line-height: 196px;
+            position: absolute;
+            text-align: center;
+            text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.2);
+            text-transform: uppercase;
+            width: 196px;
+        }
+        
+        .container {
+            top: 50%;
+            left: 50%;
+            margin: -100px 0 0 -100px;
+            position: absolute;
+            transform: translateZ(-100px);
+            transform-style: preserve-3d;
+            animation: spin 5s linear infinite;
+        }
+        
+        .front {
+            -webkit-transform: translateZ(100px);
+            -moz-transform: translateZ(100px);
+            -ms-transform: translateZ(100px);
+            -o-transform: translateZ(100px);
+            transform: translateZ(100px);
+        }
+        
+        .back {
+            -webkit-transform: rotateX(180deg) translateZ(100px);
+            -moz-transform: rotateX(180deg) translateZ(100px);
+            -ms-transform: rotateX(180deg) translateZ(100px);
+            -o-transform: rotateX(180deg) translateZ(100px);
+            transform: rotateX(180deg) translateZ(100px);
+        }
+        
+        .left {
+            -webkit-transform: rotateY(-90deg) translateZ(100px);
+            -moz-transform: rotateY(-90deg) translateZ(100px);
+            -ms-transform: rotateY(-90deg) translateZ(100px);
+            -o-transform: rotateY(-90deg) translateZ(100px);
+            transform: rotateY(-90deg) translateZ(100px);
+        }
+        
+        .right {
+            -webkit-transform: rotateY(90deg) translateZ(100px);
+            -moz-transform: rotateY(90deg) translateZ(100px);
+            -ms-transform: rotateY(90deg) translateZ(100px);
+            -o-transform: rotateY(90deg) translateZ(100px);
+            transform: rotateY(90deg) translateZ(100px);
+        }
+        
+        .top {
+            -webkit-transform: rotateX(90deg) translateZ(100px);
+            -moz-transform: rotateX(90deg) translateZ(100px);
+            -ms-transform: rotateX(90deg) translateZ(100px);
+            -o-transform: rotateX(90deg) translateZ(100px);
+            transform: rotateX(90deg) translateZ(100px);
+        }
+        
+        .bottom {
+            -webkit-transform: rotateX(-90deg) translateZ(100px);
+            -moz-transform: rotateX(-90deg) translateZ(100px);
+            -ms-transform: rotateX(-90deg) translateZ(100px);
+            -o-transform: rotateX(-90deg) translateZ(100px);
+            transform: rotateX(-90deg) translateZ(100px);
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="div1">
+        <div id="div2" class="move">考拉</div>
+        <div class="" id="div2d">考拉</div>
+    </div>
+
+    <br>
+    <br>
+    <br>
+
+    <div class="stage">
+        <div class="container">
+            <div class="side front">1</div>
+            <div class="side back">2</div>
+            <div class="side left">3</div>
+            <div class="side right">4</div>
+            <div class="side top">5</div>
+            <div class="side bottom">6</div>
+        </div>
+    </div>
+</body>
+
+</html>

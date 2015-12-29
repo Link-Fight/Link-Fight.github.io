@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="../jquery-1.9.1.js"></script>
+    <script src="../jquery.validate.js"></script>
+    <style>
+        #demoForm {
+            width: 400px;
+            margin: 0 auto;
+            background: #eee;
+        }
+        
+        p {
+            margin: 10px 0;
+        }
+        
+        label {
+            display: inline-block;
+            min-width: 40px;
+        }
+        
+        label.error {
+            margin-left: 40px;
+            color: red;
+        }
+        
+        input,
+        button {
+            line-height: 35px;
+            font-size: 22px;
+            border: 1px solid #999;
+            min-width: 180px;
+        }
+        
+        input.error {
+            border: 1px solid yellowgreen;
+        }
+        
+        input[type=submit],
+        button {
+            margin-top: 20px;
+            font-size: 36px;
+            padding: 10px 0;
+        }
+    </style>
+</head>
+
+<body>
+    <form action="" id="demoForm">
+        <fieldset>
+            <legend>用户登录</legend>
+            <p>
+                <label for="username">用户名</label>
+                <input type="text" name="username">
+            </p>
+            <p>
+                <label for="password">密码</label>
+                <input type="password" name="password" id="password">
+            </p>
+            <p>
+                <label for="config-password">确认密码</label>
+                <input type="config-password" name="config-password">
+            </p>
+            <p>
+                <button id="check">检查表单</button>
+            </p>
+            <p>
+                <input type="submit" value="登陆">
+            </p>
+        </fieldset>
+    </form>
+    <script>
+        var validate;
+        $(document).ready(function(){
+          validate =   $("#demoForm").validate({
+               rules:{
+                   username:{
+                      required:true,
+                      minlength:2,
+                      maxlength:10,
+                      remote:{
+                          url: "remote.json",
+                          type:"post",
+                          data:{
+                              loginTime:function(){
+                                  return +new Date;
+                              }
+                          }
+                      }
+                     
+                   },
+                   password:{
+                       required:true,
+                       minlength:3,
+                       maxlength:10
+                   },
+                   "config-password":{
+                       equalTo:"#password",
+                   }
+               },
+               messages:{
+                   username:{
+                      required:"必填用户名",
+                      minlength:"最少两位",
+                      maxlength:"最长十位", 
+                      remote:"该用户名不存在"
+                   },
+                   password:{
+                       required:"必填密码",
+                       minlength:"最少叁位",
+                       maxlength:"最长十位"
+                   },
+                    "config-password":{
+                       
+                       equalTo:"两次输入的密码不一致",
+                   }
+               }
+           });
+        })
+        $("#check").click(
+            function(){
+                alert($("#demoForm").valid()?"填写正确!":"填写错误");
+            }
+        );
+    </script>
+</body>
+
+</html>
