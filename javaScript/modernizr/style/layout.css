@@ -1,0 +1,72 @@
+/*布局*/
+section,header,article,nav{
+    display: block;
+}
+*{
+    padding:0;
+    margin: 0;
+}
+
+body{
+    width: 60em;
+    margin: 1em auto;
+    background: url(../images/background.gif),repeat,fixed;
+    /*background-attachment: fixed;*/
+    background-position: top left;
+}
+
+header{
+    background: url(../images/guitarist.gif)  no-repeat top  right; 
+    /*background-repeat: ;*/
+    /*background-position: top  right;*/
+    border-width: .1em;
+    border-style: solid;
+    border-bottom-width:  0;
+}
+header nav{
+    background: url(../images/headernav.gif) repeat-x  bottom left;
+    background-size: 100% 100%;
+    border-width: .1em;
+    border-style: solid;
+    border-bottom-width:  0;
+    border-top-width: 0;
+    /*padding:0 10%;*/
+    
+}
+header nav ul{
+    width: 80%;
+    margin: 0 10%;
+    overflow: hidden;
+}
+header nav li {
+    box-sizing: border-box;
+     width: 20%; 
+    list-style: none;
+    display: block;
+    float: left;
+    border-left: .1em solid black;
+    border-right: .1em solid black;
+}
+header nav li a {
+     display: block;
+     padding:.5em 2em;
+     /*text-decoration: none;*/
+     text-align: center;
+}
+header img{
+    padding: 4em;
+}
+article{
+    border-width: .1em;
+    border-style: solid;
+    border-top-width: 0;
+    padding:2em 10%;
+    line-height: 1.8em;
+}
+
+article img{
+    border-width: .1em;
+    border-style: solid;
+    outline-width: .1em;
+    outline-style: solid;
+}

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>旋转鸭子</title>
+    <style>
+        body {
+            background: #aaa;
+        }
+        
+        .main {
+            width: 600px;
+            height: 600px;
+            margin: 50px auto;
+            background: #333;
+            padding-top: 50px;
+            padding-bottom: 50px;
+            position: relative;
+            perspective: 1000px;
+        }
+        
+        .rotingDiv {
+            width: 400px;
+            height: 100%;
+            /*background: pink;*/
+            margin: 0 auto;
+            transform: translateZ(-100px);
+            position: relative;
+            transform-style: preserve-3d;
+        }
+        
+        
+        .rotingDiv > div {
+            position: absolute;
+            background: rgba(142, 198, 63, 0.3);
+            border: 5px solid mediumspringgreen;
+            height: 100%;
+            line-height: 100%;
+            width: 100%;
+            box-sizing: border-box;
+            text-align: center;
+            font-size: 60px;
+            color: white;
+            text-shadow: 2px 2px 4px #000000;
+        }
+        
+        .front {
+            transform: translateZ(100px);
+        }
+        .back{
+            transform: translateZ(-100px);
+           
+        }
+        .rotingDiv :hover{
+           animation:showRolate 10s linear infinite;
+        }
+        @keyframes showRolate{
+            0%{
+                transform: rotateY(0deg);
+            }
+            100%{
+                transform: rotateY(360deg);
+            }
+        }
+        
+    </style>
+</head>
+
+<body>
+    <div class="main">
+       
+            <div class="rotingDiv">
+                <div class="front">1</div>
+                <div class="back">2</div>
+            </div>
+         
+    </div>
+</body>
+
+</html>

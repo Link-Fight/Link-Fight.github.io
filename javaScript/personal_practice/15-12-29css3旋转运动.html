@@ -32,6 +32,7 @@
             /*animation: show 5s 0s infinite  linear running;*/
         }
         
+        
         #div2d {
             padding: 50px;
             width: 50px;
@@ -61,7 +62,7 @@
             -moz-animation: spin 5s linear infinite;
             -o-animation: spin 5s linear infinite;
             -webkit-animation: spin 5s linear infinite;
-            animation: spin 5s linear infinite;
+            animation: spin 10s linear infinite;
         }
         
         @keyframes spin {
@@ -78,7 +79,7 @@
             height: 300px;
             margin: 15px auto;
             position: relative;
-            background: url(image/bg-grid.jpg) no-repeat center center;
+            background: url(image/bg-grid.jpg) #8ec63f no-repeat center center;
             background-size: 100% 100%;
             perspective: 1800px;
         }
@@ -105,7 +106,7 @@
             position: absolute;
             transform: translateZ(-100px);
             transform-style: preserve-3d;
-            animation: spin 5s linear infinite;
+            /*animation: spin 5s linear infinite;*/
         }
         
         .front {
@@ -114,6 +115,9 @@
             -ms-transform: translateZ(100px);
             -o-transform: translateZ(100px);
             transform: translateZ(100px);
+            background: url("image/p4.jpg");
+            background-size: 100% 100%;
+            -webkit-backface-visibility: hidden;
         }
         
         .back {
@@ -121,7 +125,9 @@
             -moz-transform: rotateX(180deg) translateZ(100px);
             -ms-transform: rotateX(180deg) translateZ(100px);
             -o-transform: rotateX(180deg) translateZ(100px);
-            transform: rotateX(180deg) translateZ(100px);
+            transform: rotateY(180deg) translateZ(100px);
+            background: url("image/p4.jpg") no-repeat;
+            background-size: 100% 100%;
         }
         
         .left {
