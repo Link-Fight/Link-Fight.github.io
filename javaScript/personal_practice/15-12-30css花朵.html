@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding:0;
+        }
+        
+        body {
+            background: black;
+        }
+        
+        .main {
+            width: 600px;
+            margin: 100px auto;
+            border: 2px solid #eee;
+            height: 200px;
+        }
+        
+        .state {
+            position: absolute;
+            background: rgba(0, 0, 150, 0.5);
+            border: 2px solid #eee;
+            height: 120px;
+            width: 120px;
+            box-sizing: border-box;
+        }
+        
+        .rcorners {
+            position: absolute;
+            background: rgba(0, 155, 0, 0.5);
+            border-radius: 15px 180% 30px 180%;
+            height: 120px;
+            width: 120px;
+        }
+        
+        .rotate {
+            transform: rotate(0deg);
+        }
+        
+        .rotate1 {
+            transform: rotate(45deg);
+        }
+        
+        .quen {
+            position: relative;
+            border: 2px solid #eee;
+            width: 400px;
+            height: 400px;
+            margin: 0 auto;
+            transform: translateZ(-100px);
+            /*perspective: 100px;*/
+            
+        }
+        
+        .quen .state1 {
+            position: relative;
+            /*float: left;*/
+            background: rgba(0, 0, 150, 0.5);
+            border: 2px solid #eee;
+            height: 25%;
+            width: 25%;
+            box-sizing: border-box;
+        }
+        .state1{
+            float: left;
+        }
+        .quen:last-child{
+            background: red;
+        } 
+    </style>
+</head>
+
+<body>
+    <div class="main">
+        <p class="state rotate1"></p>
+        <p class="rcorners rotate"></p>
+        <p class="rcorners rotate1"></p>
+    </div>
+    <div class="quen">
+        <p class="state1 "></p>
+        <p class="state1 "></p>
+        <p class="state1 "></p>
+        <p class="state1 "></p>
+        
+        <p class="state1 "></p>
+        <p class="state1 "></p>
+        <p class="state1 "></p>
+        <p class="state1 "></p>
+        
+        <p class="state1 "></p>
+        <p class="state1 "></p>
+        <p class="state1 "></p>
+        <p class="state1 "></p>
+        
+        <p class="state1 "></p>
+        <p class="state1 "></p>
+        <p class="state1 "></p>
+        <p class="state1 "></p>
+    </div>
+    <script>
+        window.onload=function(){
+            var p = document.getElementsByClassName("state1");
+            for(var i = p.length-1;i>0;i--){
+                p[i].style.top = p[i].offsetTop+"px";
+                p[i].style.left = p[i].offsetLeft+"px";
+                 p[i].style.position="absolute";
+               
+            }
+        }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>3D 变换</title>
+    <meta name="description" content="CSS3 3D transform视角属性prespective">
+    <meta name="keywords" content="CSS3,3D,web前端,transform,perspective">
+    <meta name="author" content="link">
+    <style>
+        .demo1{
+            text-align: center;
+        }
+        .container {
+            position: relative;
+            border: 1px solid black;
+            width: 200px;
+            height: 200px;
+            margin: 70px;
+            float: left;
+            background: #333;
+            color:#ccc;
+            -webkit-perspective: 600px;
+            -moz-perspective:600px;
+            perspective:600px;
+            transform-style: preserve-3d;
+            -webkit-transform-style: preserve-3d;
+        }
+        
+        .box {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            opacity: 0.7;
+            color: #111;   
+        }
+        
+        .roX {          
+            width: 100%;
+            height: 100%;
+            background: lightpink;
+            -webkit-transform: rotateX(45deg);
+            -moz-transform:  rotateX(45deg);
+            transform: rotateX(45deg);
+        }
+        
+        .roY {
+          
+            background: lightpink;
+            -webkit-transform:  rotateY(45deg);
+            -moz-transform:  rotateY(45deg);
+            transform:  rotateY(45deg)
+        }
+        
+        .roZ {
+            
+            background: lightpink;
+            -webkit-transform:  rotateZ(45deg);
+            -moz-transform:  rotateZ(45deg);
+            transform:  rotateZ(45deg)
+        }
+        
+        #rF_val {
+            text-align: center;
+        }
+        
+        .range_area , perspective_area {
+            text-align: center;
+            vertical-align: bottom;
+            line-height: 20px;
+            height: 20px;
+            font-size: 20px;
+        }
+        
+         [type="range"] {
+            width: 60%;
+        }
+        
+    </style>
+</head>
+
+<body>
+    <section class="demo1">
+        <h5 id="rF_val">Rotate:45deg</h5>
+        <p class="range_area">0
+            <input type="range" id="rangeFirst" min="0" max="360" step="5" value="45" autocomplete="off"> 360
+        </p>
+        <h5 id="perspective_val">Perspective:600px</h5>
+        <p class="perspective_area">-300
+            <input type="range" id="rangeSecond" min="-300" max="1000" step="10" value="600" autocomplete="off"> 1000
+        </p>    
+
+        <div class="container">
+            perspective:600px
+            <div class="box roX">
+                rotateX(45deg)
+            </div>
+        </div>
+        <div class="container">
+            perspective:600px
+            <div class="box roY">
+                rotateY(45deg)
+            </div>
+        </div>
+        <div class="container">
+            perspective:600px
+            <div class="box roZ">
+                rotateZ(45deg)
+            </div>
+        </div>
+        <section>
+            <script>
+                window.onload=function(){
+                 initEvent();
+               };
+               function initEvent(){
+                   var rangeF = document.getElementById("rangeFirst");
+                   rangeF.onchange = function(){
+                    var rF = document.getElementById("rF_val");
+                    rF.innerHTML="Rotate:"+this.value+"deg";
+                    var roX = document.getElementsByClassName("roX")[0];
+                    myTransform(roX,"X",this.value);
+                    var roY = document.getElementsByClassName("roY")[0];
+                    myTransform(roY,"Y",this.value);
+                    var roZ = document.getElementsByClassName("roZ")[0];
+                    myTransform(roZ,"Z",this.value);
+                   };
+                   var rangeS = document.getElementById("rangeSecond");
+                   rangeS.onchange=function(){
+                       var pv = document.getElementById("perspective_val");
+                       pv.innerHTML="Perspective:"+this.value+"px";
+                       var container =document.getElementsByClassName("container");
+                       for(var i =0;i<container.length;i++){
+                           container[i].style.webkitPerspective=this.value+"px";
+                           container[i].style.mozPerspective=this.value+"px";
+                           container[i].style.Perspective=this.value+"px";
+                       }     
+                   };
+               }
+               function myTransform(el,type,deg){
+                   el.style.webkitTransform = "rotate"+type+"("+deg+"deg)";
+                   el.style.mozTransform = "rotate"+type+"("+deg+"deg)";
+                   el.style.Transform = "rotate"+type+"("+deg+"deg)";
+               }
+            </script>
+</body>
+
+</html>
