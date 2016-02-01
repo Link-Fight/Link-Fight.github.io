@@ -3,6 +3,8 @@
 <head>
 	<meta charset="UTF-8">
 	<title>遮罩层-原生ajax</title>
+    <link rel="icon" href="./image/my.ico"  />
+    <link rel="Shortcut Icon" href="./image/my.ico">
 	<style>
 		*{
 			margin: 0;
@@ -53,6 +55,15 @@
 		.header>.close{
 			float: right;
 		}
+        .list{
+            list-style-type: none;
+        }
+        .list li:nth-child(2n){
+            background-color: green;
+        }
+        .list li:nth-child(2n-1){
+            background-color: red;
+        }
 	</style>
 </head>
 <body>
@@ -88,9 +99,38 @@
 		</div>
 		<input type="button" value="读取文件" id='btn1'>
 		<a href="http://www.baidu.com" target="_blank">百度</a>
+        <ul class="list">
+            <li>11</li>
+            <li>22</li>
+            <li>33</li>
+            <li>44</li>
+            <li>55</li>
+        </ul>
+        <input type="button" value="切换" id="bt2">
+        <a href="http://www.bitbug.net/" target="_blank"><img src="http://www.bitbug.net/mypagerank.php?style=1" border="0" alt="My Google PageRank" /></a>
 	</div>
 	<script>
+        function btClick(){
+            var btn = document.getElementById("bt2");
+            btn.onclick = function(){
+                var ul = document.getElementsByClassName("list")[0];
+                do{
+                ul.appendChild(ul.firstChild);
+                }while(ul.firstChild.nodeType==1);
+            }
+        }
+        
+        function setTimeClick(){
+              var btn = document.getElementById("bt2");
+            setTimeout(function(){
+                  btn.click();
+                 setTimeClick();
+            },1000);
+        }
+        
 		window.onload=function(){
+            btClick();
+            setTimeClick();
 			var btn = document.getElementById('btn1');
 			btn.onclick= function(){
 				

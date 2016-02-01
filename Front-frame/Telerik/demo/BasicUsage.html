@@ -14,10 +14,77 @@
             margin: 0 auto;
             border: 5px solid deepskyblue;
         }
+        .test{
+            position: absolute;
+            height: 100px;
+            width: 100px;
+            background: green;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            margin: auto;
+        }
+        nav{
+            width: 100%;
+            background: #555;
+        }
+        nav li{
+            background: #888;
+            float: left;
+            width: 20%;
+            text-align: center;
+            list-style: none;
+           
+            line-height: 25px;
+            height: 25px;
+        }
+        nav a{
+             text-decoration: none;
+        }
+        nav li:hover{
+            transform: scale(1.1);
+        }
+        nav li:nth-child(2) a{
+            color:  red;
+        }
+        
+         nav li:nth-child(2):hover{
+            color:  red;
+            transform: translate(40px,0px);
+        }
+        
+        nav li:nth-child(3):hover{
+            transform: rotate(90deg);
+        }
+        
+        nav li:nth-child(4):hover {
+            transform: skew(10deg,2deg);
+        }
     </style>
 </head>
 
 <body>
+    <header>
+        <nav>
+            <ul>
+                <li><a href="#">Why</a></li>
+                <li><a href="#">Hi</a></li>
+                <li><a href="#">SAAA</a></li>
+                <li><a href="#">EEEE</a></li>
+                <li><a href="#">CCCC</a></li>
+            </ul>
+        </nav>
+    </header>
+    <sectioin class="Qcontainer">
+        <div class="film">
+            <div class="face front">
+                <img src="img0.jpg" alt="" width="100px">
+            </div>
+            <div class="face back"> <h5>HOT!</h5></div>
+        </div>
+    </sectioin>
+    <div class="test">233</div>
     <iframe name="I1" style="display:none"></iframe>
     <canvas id="canvas" style="display:none"></canvas>
     <br>
@@ -50,6 +117,13 @@
         <div class="demo-section k-content wide">
             <div id="chart5" style="background: center no-repeat url('../content/shared/styles/world-map.png'); height:400px;"></div>
         </div>
+        
+          <button onclick="createChart6();">reflash</button>Pie Charts / Pie labels
+        <div class="demo-section k-content wide">
+            <div id="chart6" style="background: center no-repeat url('../content/shared/styles/world-map.png'); height:400px;"></div>
+        </div>
+        
+        
         <script type="text/javascript" src="rgbcolor.js"></script>
         <script type="text/javascript" src="StackBlur.js"></script>
         <script type="text/javascript" src="canvg.js"></script>
@@ -535,6 +609,67 @@
 
         $(document).ready(createChart5);
         $(document).bind("kendo:skinChange", createChart5);
+        </script>
+        
+        
+          <script>
+            function createChart6() {
+            $("#chart6").kendoChart({
+                   title: {
+                    position: "bottom",
+                    text: "Share of Internet Population Growth, 2007 - 2012"
+                },
+                legend: {
+                    visible: false
+                },
+                chartArea: {
+                    background: ""
+                },
+                seriesDefaults: {
+                    labels: {
+                        visible: true,
+                        background: "transparent",
+                        template: "#= category #: \n #= value#%"
+                    }
+                },
+                series: [{
+                    type: "pie",
+                    startAngle: 150,
+                    data: [{
+                        category: "Asia",
+                        value: 53.8,
+                        color: "#9de219"
+                    },{
+                        category: "Europe",
+                        value: 16.1,
+                        color: "#90cc38"
+                    },{
+                        category: "Latin America",
+                        value: 11.3,
+                        color: "#068c35"
+                    },{
+                        category: "Africa",
+                        value: 9.6,
+                        color: "#006634"
+                    },{
+                        category: "Middle East",
+                        value: 5.2,
+                        color: "#004d38"
+                    },{
+                        category: "North America",
+                        value: 3.6,
+                        color: "#033939"
+                    }]
+                }],
+                tooltip: {
+                    visible: true,
+                    format: "{0}%"
+                }
+            });
+        }
+
+        $(document).ready(createChart6);
+        $(document).bind("kendo:skinChange", createChart6);
         </script>
     </div>
 

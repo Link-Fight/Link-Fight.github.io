@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>原型模式F12</title>
+    <style>
+        body{
+            margin: 0;
+            padding:0;
+            width: 40%;
+            margin-left: 30%;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <p>在创建每一个函数时，都会有一个默认的prototype(原型)属性,</p>
+      <input type="button" value="kelin" onclick="alert(value)">
+      <form action="" method="post">
+          <input type="text" name="username" value="">
+          <input type="button" value="Echo name" onclick="alert(username.value); try{VALUE.value+=username.value+this.type;}catch(ex){}">
+          <input type="text" name="VALUE" value="">
+          <blockquote>
+              如果当前元素是一个表单输入元素，则其作用域中海会包含访问表单元素(父元素)的入口
+          </blockquote>
+          <button id="mybtn"></button>
+      </form>
+    </div>
+    <script>
+        function Person(){}
+       
+        Person.prototype.name="kelin";
+        Person.prototype.age = 21;
+        Person.prototype.job="Software Engineer";
+        Person.prototype.SayName=function(){
+            return this.name;
+        }
+        var person1 = new Person();
+        var person2 = new Person();
+    </script>
+    <script>
+        function SuperType(){
+            this.property=true;
+        }
+        SuperType.prototype.getSuperValue = function(){
+            return this.property;
+        }
+        function SubType(){
+            this.subproperty = false;
+        }
+        SubType.prototype = new SuperType();
+        SubType.prototype
+        
+    </script>
+    <script>
+        var EventUtil={
+            addHandler:function(element,type,handler){
+                if(element.addEventListener){
+                    element.addEventListener(type,handler,false);
+                }else if(element.attachEvent){
+                    element.attachEvent("on"+type,handler);
+                }else{
+                    element["on"+type] = handler;
+                }
+            },
+            removeHandler:function(element,type,handler){
+                if(element.removeEventListener){
+                    element.removeEventListener(type,handler,false);
+                }else if(element.detachEvent){
+                    element.detachEvent("on"+type,handler);
+                }else{
+                    element["on"+type] = null;
+                }
+            }
+        };
+       
+    </script>
+</body>
+</html>

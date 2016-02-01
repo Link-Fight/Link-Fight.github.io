@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>3D 图片</title>
+    <link rel="stylesheet" href="reset.css">
+    <style>
+        .stage{
+            perspective: 800px;
+            -webkit-perspective: 800px;
+            background: #888;    
+            width: 900px;
+            margin: 100px auto;
+        }
+        
+        .container{
+            position: relative;
+            width: 800px;
+            height: 400px;
+            /*background-color: rgba(10, 50, 80, 1);
+            filter: blur(5px); */
+            margin: 0 auto;
+            
+            transform-style: preserve-3d;
+            -webkit-transform-style: perserve-3d;
+             transform: rotateY(0deg); 
+             backface-visibility: hidden;
+             
+        }
+        
+        
+        .container:hover{
+           animation: rotateDiv 5s infinite linear;
+        }
+        
+        @keyframes rotateDiv{
+            0%{
+                transform: rotateY(0deg);
+                /*background: red;*/
+            }
+            100%{
+                transform: rotateY(360deg);
+                /*background: yellow;*/
+            }
+        }
+        
+        img{
+            width: 150px;
+             opacity:1;
+        }
+        
+        .container img{
+            position: absolute;
+            left: 50%;
+            top: 20%;
+            margin-left: -75px;
+            opacity:1;
+              /*backface-visibility: hidden;*/
+        }
+        
+        .container img:nth-child(1){
+            
+            transform: rotateY(0deg) translateZ(226px);
+        }
+         .container img:nth-child(2){
+            transform: rotateY(72deg) translateZ(226px);
+        }
+         .container img:nth-child(3){
+            transform: rotateY(144deg) translateZ(226px);
+        }
+         .container img:nth-child(4){
+            transform: rotateY(216deg) translateZ(226px);
+        }
+         .container img:nth-child(5){
+            transform: rotateY(288deg) translateZ(226px);
+        }
+         /*.container img:nth-child(6){
+            transform: rotateY(200deg) translateZ(226px);
+        }
+         .container img:nth-child(7){
+            transform: rotateY(240deg) translateZ(226px);
+        }
+         .container img:nth-child(8){
+            transform: rotateY(280deg) translateZ(226px);
+        }
+         .container img:nth-child(9){
+            transform: rotateY(320deg) translateZ(226px);
+        }*/
+        
+        
+    </style>
+</head>
+
+<body>
+    <section class="demo">
+        <div class="stage">
+            <div class="container">
+                <img src="image/p4.jpg" alt="1">
+                <img src="image/p3.jpg" alt="2">
+                <img src="image/p2.jpg" alt="3">
+                <img src="image/p1.jpg" alt="4">
+                <img src="image/bg-grid.jpg" alt="5">
+                <!--<img src="image/bg-grid.jpg" alt="6">
+                <img src="image/bg-grid.jpg" alt="7">
+                <img src="image/bg-grid.jpg" alt="8">
+                <img src="image/bg-grid.jpg" alt="9">-->
+            </div>
+        </div>
+    </section>
+    <script>
+        var startDeg = 0;
+        window.onload = function(){
+            console.log("start");
+            setInterval(function(){
+                // rotateContainer(startDeg+=1)
+            },30)
+        }
+        
+        function rotateContainer(deg){
+            var container = document.getElementsByClassName("container")[0];
+            container.style.transform = "rotateY("+deg+"deg)";
+        }
+    </script>
+</body>
+
+</html>
