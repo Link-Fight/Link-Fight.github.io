@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title></title>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+
+    <!--<link rel="stylesheet" href="myBootstrap.css" type="text/css">-->
+    <style type="text/css">
+        .calendar {
+            margin-left: auto;
+            margin-right: auto;
+            width: 350px;
+            height: 350px;
+            padding: 20px;
+            box-sizing: content-box;
+            border: 1px solid rbga(0, 0, 0, 0.2);
+            border-radius: 5px;
+            background-clip: padding-box;
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 13px 3px rgba(0, 0, 0, .5);
+            overflow: hidden;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 18px;
+            text-align: center;
+        }
+        /*.day {
+            background: rgba(255, 255, 255, 0.4) url(http://luismruiz.com/img/gemicon_name.png) no-repeat scroll 16px 16px;
+            padding-left: 45px;
+            border: 1px solid rgba(255, 255, 255, .4);
+            color: #fff;
+            margin-bottom: 20px;
+            border-radius: 4px;
+        }*/
+        
+        .normal-day:focus,
+        textarea:focus {
+            background-color: rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 0 5px 1px rgba(255, 255, 255, .5);
+            -webkit-box-shadow: 0 0 5px 1px rgba(255, 255, 255, .5);
+            box-shadow: 0 0 5px 1px rgba(255, 255, 255, .5);
+            overflow: hidden;
+        }
+        
+        .header {
+            height: 50px;
+        }
+        
+        .main {
+            height: 300px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .main li {
+            display: inline-block;
+            width: 350px;
+        }
+        
+        .main ul {
+            -webkit-padding-start: 0px;
+        }
+        
+        .normal-day,
+        .header-day {
+            float: left;
+            width: 50px;
+            height: 50px;
+            font-weight: bold;
+            line-height: 50px;
+            color: #FFF;
+        }
+        
+        .normal-day {
+            color: #bbb;
+        }
+        
+        .active-day {
+            cursor: pointer;
+            color: #FFF;
+        }
+        
+        .active-day:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, .4);
+            box-shadow: 0 0 1px 1px rgba(255, 255, 255, .5);
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        
+        .header-day:nth-last-child(1),
+        .header-day:nth-child(1) {
+            color: mediumspringgreen;
+        }
+        
+        .header-day:nth-last-child(1):after {
+            content: "";
+            clear: both;
+        }
+        
+        .calendar ul {
+            display: block;
+            position: absolute;
+            list-style-type: none;
+        }
+        
+        .calendar ul li {
+            float: left;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="containe">
+        <div class="calendar">
+            <div class="header">
+                <div class="header-day">日</div>
+                <div class="header-day">一</div>
+                <div class="header-day">二</div>
+                <div class="header-day">三</div>
+                <div class="header-day">四</div>
+                <div class="header-day">五</div>
+                <div class="header-day">六</div>
+            </div>
+            <div class="main">
+                <ul>
+                    <li>
+                        <div class="normal-day">1</div>
+                        <div class="normal-day">2</div>
+                        <div class="normal-day active-day">3</div>
+                        <div class="normal-day active-day">4</div>
+                        <div class="normal-day active-day">5</div>
+                        <div class="normal-day active-day">6</div>
+                        <div class="normal-day active-day">7</div>
+                    </li>
+                    <li>
+                        <div class="normal-day">8</div>
+                        <div class="normal-day">9</div>
+                        <div class="normal-day">10</div>
+                        <div class="normal-day">11</div>
+                        <div class="normal-day">12</div>
+                        <div class="normal-day">13</div>
+                        <div class="normal-day">14</div>
+                    </li>
+                    <li>
+                        <div class="normal-day">1</div>
+                        <div class="normal-day">1</div>
+                        <div class="normal-day">1</div>
+                        <div class="normal-day">1</div>
+                        <div class="normal-day">1</div>
+                        <div class="normal-day">1</div>
+                        <div class="normal-day">1</div>
+                    </li>
+                    <li>
+                        <div class="normal-day">1</div>
+                        <div class="normal-day">1</div>
+                        <div class="normal-day">1</div>
+                        <div class="normal-day">1</div>
+                        <div class="normal-day">1</div>
+                        <div class="normal-day">1</div>
+                        <div class="normal-day">1</div>
+                    </li>
+                    <li>
+                        <div class="normal-day">0</div>
+                        <div class="normal-day">0</div>
+                        <div class="normal-day">0</div>
+                        <div class="normal-day">0</div>
+                        <div class="normal-day">0</div>
+                        <div class="normal-day">0</div>
+                        <div class="normal-day">0</div>
+                    </li>
+                    <li>
+                        <div class="normal-day">9</div>
+                        <div class="normal-day">9</div>
+                        <div class="normal-day">9</div>
+                        <div class="normal-day">9</div>
+                        <div class="normal-day">9</div>
+                        <div class="normal-day">9</div>
+                        <div class="normal-day">9</div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <button id="click">
+        点我</button>
+        <button id="PreMonth">
+        上</button>
+        <button id="NextMonth">
+        下</button>
+    </div>
+    <script type="text/javascript">
+         var kelinNameSpace = new Object();
+         var link = kelinNameSpace;
+         link.calendar = new Object();
+         link.UTILITY = new Object();
+         kelinNameSpace.init = function () {
+            
+            var btn = document.getElementById("click");
+            click.onclick = function () {
+                kelinNameSpace.myAjax("getQueryDate?date=2016-01&userid=66", function (response) {
+                    var json = JSON.parse(response);
+                    var obj = new Function("return" + json)();
+                    console.log(obj);
+                });
+            }
+            
+             link.calendar.initDayUL();
+              var ul =   document.getElementsByClassName("calendar")[0].getElementsByTagName("ul")[0];
+             var pBtn  = document.getElementById("PreMonth");
+             pBtn.onclick = function(){
+               Move(ul,0);  
+             };
+             
+             var nBtn  = document.getElementById("NextMonth");
+             nBtn.onclick = function(){
+               Move(ul,-600);  
+             };
+        }
+         kelinNameSpace.getStyle = function(obj,attr){
+            return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr];
+        }
+         kelinNameSpace.getXHR = function () {
+            var XHR;
+            if (window["XMLHttpRequest"]) {
+                XHR = new XMLHttpRequest();
+            } else {
+                var XmlHttpVersions = new Array("MSXML2.XMLHTTP.6.0", "MSXML2.XMLHTTP.5.0", "MSXML2.XMLHTTP.4.0", "MSXML2.XMLHTTP.3.0", "MSXML2.XMLHTTP", "Microsoft.XMLHTTP");
+                for (var i = 0; i < XmlHttpVersions.length; i++) {
+                    try {
+                        XHR = new ActiveXObject(XmlHttpVersions[i]);
+                    }
+                    catch (e) {
+                    }
+
+                }
+            }
+            return XHR;
+        }
+        
+        kelinNameSpace.myAjax = function (url, callBack) {
+            var XHR = kelinNameSpace.getXHR();
+            XHR = new XMLHttpRequest();
+            XHR.onreadystatechange = function () {
+                if (XHR.readyState == 4) {
+                    if (XHR.status == 200) {
+                        callBack(XHR.responseText);
+                    }
+                }
+            }
+            XHR.open("GET", url, true);
+            XHR.send(null);
+
+        }
+        
+         function Move(obj,target){
+            clearInterval(obj.timer);           
+            obj.timer = setInterval(
+                function(){
+                    var currentTop = parseInt( kelinNameSpace.getStyle(obj,"top"));
+                    if(isNaN(currentTop)){
+                        obj.style["top"]="0px"
+                        top=0;
+                    }
+                     if(currentTop!=target){
+                         var speed = (target - currentTop)/5;
+                         speed = speed>0?Math.ceil(speed):Math.floor(speed);
+                          obj.style["top"]= currentTop +speed+"px";
+                    }else{
+                        clearInterval(obj.timer);
+                    }
+                },"100"
+            );
+        }
+
+       link.calendar.initDayUL = function(){
+            var ul =   document.getElementsByClassName("calendar")[0].getElementsByTagName("ul")[0];//document.getElementById("ul");
+            ul.dataHeight = kelinNameSpace.getStyle(ul,"height");
+            ul.innerHTML=ul.innerHTML+ul.innerHTML+ul.innerHTML;
+            Move(ul,-parseInt(ul.dataHeight));
+        }
+       
+      
+        
+        addLoad();
+        
+        function addLoad() {
+            if (typeof window.onload == "function") {
+                var lodLoad = window.onload;
+                window.onload = function () {
+                    lodLoad();
+                    kelinNameSpace.init();
+                }
+            } else {
+
+                kelinNameSpace.init();
+            }
+        }
+    </script>
+</body>
+
+</html>
