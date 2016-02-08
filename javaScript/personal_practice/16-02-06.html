@@ -12,10 +12,11 @@
     <!--<link rel="stylesheet" href="myBootstrap.css" type="text/css">-->
     <style type="text/css">
         .calendar {
+            margin-top: 20px;
             margin-left: auto;
             margin-right: auto;
             width: 350px;
-            height: 350px;
+            height: 400px;
             padding: 20px;
             box-sizing: content-box;
             border: 1px solid rbga(0, 0, 0, 0.2);
@@ -65,7 +66,7 @@
             -webkit-padding-start: 0px;
         }
         
-        .normal-day,
+        #calemdarDay div,
         .header-day {
             float: left;
             width: 50px;
@@ -75,11 +76,13 @@
             color: #FFF;
         }
         
-        .normal-day {
+        #calemdarDay div{
+            border: 1px solid rgba(255, 255, 255, 0);
             color: #bbb;
         }
         
-        .active-day {
+        #calemdarDay  .active-day {
+            /*border: 1px solid rgba(255, 255, 255, 0);*/
             cursor: pointer;
             color: #FFF;
         }
@@ -112,12 +115,61 @@
         .calendar ul li {
             float: left;
         }
+        .calendar .title{
+            height: 50px;
+            width: 350px;
+            line-height: 50px;
+            color: #FFF;
+            font-weight: bold;
+        }
+        .calendar .title-text{
+            display: block;
+            float: left;
+            text-indent: 20px;
+        }
+        .calendar   .title-next{
+            display: block;
+            float: right;
+            width: 50px;
+            /*background: green;*/
+             -webkit-transform: rotateZ(90deg);
+            transform: rotateZ(90deg);
+        }
+        .calendar  .title-pre {
+            display: block;
+            float: right;
+            width: 50px;
+            /*background: red;*/
+            -webkit-transform: rotateZ(-90deg);
+            transform: rotateZ(-90deg);
+        }
+        #title-pre:hover{
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            /*font-size: 20px;*/
+            box-sizing: border-box;
+             border-radius: 50%;
+        }
+        #title-next:hover{
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            /*font-size: 20px;*/
+            box-sizing: border-box;
+            border-radius: 50%;
+        }
     </style>
 </head>
 
 <body>
     <div class="containe">
-        <div class="calendar">
+        <div class="calendar" >
+            <div class="title">
+                <span class="title-text" id="title-text">2016年2月</span>
+                <span class="title-pre"  id="title-pre" >></span>
+                <span class="title-next" id="title-next">></span>
+                </div>
             <div class="header">
                 <div class="header-day">日</div>
                 <div class="header-day">一</div>
@@ -128,63 +180,63 @@
                 <div class="header-day">六</div>
             </div>
             <div class="main">
-                <ul>
+                <ul id ="calemdarDay" data-height="">
                     <li>
-                        <div class="normal-day">1</div>
-                        <div class="normal-day">2</div>
-                        <div class="normal-day active-day">3</div>
-                        <div class="normal-day active-day">4</div>
-                        <div class="normal-day active-day">5</div>
-                        <div class="normal-day active-day">6</div>
-                        <div class="normal-day active-day">7</div>
+                        <div class="normal-day">30</div>
+                        <div class="normal-day">30</div>
+                        <div class="normal-day  active-day">0</div>
+                        <div class="normal-day  active-day">0</div>
+                        <div class="normal-day  active-day">0</div>
+                        <div class="normal-day  active-day">0</div>
+                        <div class="normal-day  active-day">0</div>
                     </li>
                     <li>
-                        <div class="normal-day">8</div>
-                        <div class="normal-day">9</div>
-                        <div class="normal-day">10</div>
-                        <div class="normal-day">11</div>
-                        <div class="normal-day">12</div>
-                        <div class="normal-day">13</div>
-                        <div class="normal-day">14</div>
+                        <div class="normal-day active-day">0</div>
+                        <div class="normal-day active-day">0</div>
+                        <div class="normal-day active-day">0</div>
+                        <div class="normal-day active-day">0</div>
+                        <div class="normal-day active-day">10</div>
+                        <div class="normal-day active-day">10</div>
+                        <div class="normal-day active-day">10</div>
                     </li>
                     <li>
-                        <div class="normal-day">1</div>
-                        <div class="normal-day">1</div>
-                        <div class="normal-day">1</div>
-                        <div class="normal-day">1</div>
-                        <div class="normal-day">1</div>
-                        <div class="normal-day">1</div>
-                        <div class="normal-day">1</div>
+                        <div class="normal-day active-day">10</div>
+                        <div class="normal-day active-day">10</div>
+                        <div class="normal-day active-day">10</div>
+                        <div class="normal-day active-day">10</div>
+                        <div class="normal-day active-day">10</div>
+                        <div class="normal-day active-day">10</div>
+                        <div class="normal-day active-day">10</div>
                     </li>
                     <li>
-                        <div class="normal-day">1</div>
-                        <div class="normal-day">1</div>
-                        <div class="normal-day">1</div>
-                        <div class="normal-day">1</div>
-                        <div class="normal-day">1</div>
-                        <div class="normal-day">1</div>
-                        <div class="normal-day">1</div>
+                        <div class="normal-day active-day">20</div>
+                        <div class="normal-day active-day">20</div>
+                        <div class="normal-day active-day">20</div>
+                        <div class="normal-day active-day">20</div>
+                        <div class="normal-day active-day">20</div>
+                        <div class="normal-day active-day">20</div>
+                        <div class="normal-day active-day">20</div>
                     </li>
                     <li>
-                        <div class="normal-day">0</div>
-                        <div class="normal-day">0</div>
-                        <div class="normal-day">0</div>
-                        <div class="normal-day">0</div>
-                        <div class="normal-day">0</div>
-                        <div class="normal-day">0</div>
-                        <div class="normal-day">0</div>
+                        <div class=" ">20</div>
+                        <div class=" ">20</div>
+                        <div class=" ">20</div>
+                        <div class=" ">30</div>
+                        <div class=" ">0</div>
+                        <div class=" ">0</div>
+                        <div class=" ">0</div>
                     </li>
                     <li>
-                        <div class="normal-day">9</div>
-                        <div class="normal-day">9</div>
-                        <div class="normal-day">9</div>
-                        <div class="normal-day">9</div>
-                        <div class="normal-day">9</div>
-                        <div class="normal-day">9</div>
-                        <div class="normal-day">9</div>
+                        <div class=" ">0</div>
+                        <div class=" ">0</div>
+                        <div class=" ">0</div>
+                        <div class=" ">0</div>
+                        <div class=" ">0</div>
+                        <div class=" ">0</div>
+                        <div class=" ">10</div>
                     </li>
                 </ul>
-            </div>
+           </div>
         </div>
     </div>
     <button id="click">
@@ -221,6 +273,28 @@
              nBtn.onclick = function(){
                Move(ul,-600);  
              };
+             
+             var preBtn = document.getElementById("title-pre");
+             preBtn.onclick = function(){
+                if(dayDate&&!ul.timer){
+                    dayDate.setPreMonth();
+                    initDay("move");
+                    Move(ul,0);  
+                }    
+             }
+             
+             var nextBtn = document.getElementById("title-next");
+             nextBtn.onclick = function(){
+                if(dayDate&&!ul.timer){
+                    dayDate.setNextMonth();
+                    initDay("move");
+                    console.log(ul.dataHeight);
+                    if(ul.dataHeight){
+                        Move(ul,-(parseInt(ul.dataHeight)*2));    
+                    }
+                                  
+                }    
+             }
         }
          kelinNameSpace.getStyle = function(obj,attr){
             return obj.currentStyle?obj.currentStyle[attr]:getComputedStyle(obj)[attr];
@@ -259,7 +333,8 @@
         }
         
          function Move(obj,target){
-            clearInterval(obj.timer);           
+            clearInterval(obj.timer);   
+            obj.timer = null;        
             obj.timer = setInterval(
                 function(){
                     var currentTop = parseInt( kelinNameSpace.getStyle(obj,"top"));
@@ -273,14 +348,16 @@
                           obj.style["top"]= currentTop +speed+"px";
                     }else{
                         clearInterval(obj.timer);
+                         obj.timer = null;
                     }
-                },"100"
+                },"60"
             );
         }
 
        link.calendar.initDayUL = function(){
             var ul =   document.getElementsByClassName("calendar")[0].getElementsByTagName("ul")[0];//document.getElementById("ul");
             ul.dataHeight = kelinNameSpace.getStyle(ul,"height");
+            initDay();
             ul.innerHTML=ul.innerHTML+ul.innerHTML+ul.innerHTML;
             Move(ul,-parseInt(ul.dataHeight));
         }
@@ -301,6 +378,86 @@
                 kelinNameSpace.init();
             }
         }
+        
+        
+        function DayDate(){
+            this.taday = new Date();
+            this.firstMonthDay= function(){ return new Date(this.taday.getFullYear(),this.taday.getMonth(),1);};
+            this.totalDay = function(){ return new Date(this.taday.getFullYear(),this.taday.getMonth()+1,0).getDate();};
+            this.preTotalDay=function(){return new Date(this.taday.getFullYear(),this.taday.getMonth(),0).getDate();}; 
+            this.nextTotalDay=function(){return new Date(this.taday.getFullYear(),this.taday.getMonth()+2,0).getDate();};
+            this.setNextMonth=function(){
+                if(this.taday){
+                    this.taday.setDate(1);
+                    this.taday.setMonth(this.taday.getMonth()+1);
+                }
+            }
+            this.setPreMonth=function(){
+                if(this.taday){
+                    this.taday.setDate(1);
+                    this.taday.setMonth(this.taday.getMonth()-1);
+                }
+            }
+        }
+        
+         var dayDate;
+        
+        function initDay(type){
+            if(!dayDate){
+                dayDate = new DayDate();   
+            }
+            var mUL = document.getElementById("calemdarDay");
+            var mLIs = mUL.getElementsByTagName("li");
+            if(mLIs.length!=6){
+                mUL.style.top="0px";
+                while(mLIs.length>6){
+                    mUL.removeChild(mLIs[6]);
+                }
+            }
+            var dayCount = 1;
+            var preDayCount = dayDate.preTotalDay();
+            var nextDayCount=1;
+            for(var i =0;i<mLIs.length;i++){
+                var mDIV = mLIs[i].getElementsByTagName("div");
+                if(i==0){
+                    var startIndex = dayDate.firstMonthDay().getDay();
+                    do{
+                          mDIV[startIndex].innerHTML = dayCount++;
+                          mDIV[startIndex].className="active-day";
+                          startIndex++;
+                    }
+                    while(startIndex<mDIV.length)
+                   startIndex = dayDate.firstMonthDay().getDay();
+                   while(startIndex>0){
+                       mDIV[--startIndex].innerHTML= preDayCount;
+                       mDIV[startIndex].className="";
+                       preDayCount--;
+                   }
+                    
+                }else{
+                    for(var j=0;j<mDIV.length;j++ ){
+                        if(dayCount<=dayDate.totalDay()){
+                            mDIV[j].innerHTML= dayCount++;
+                            mDIV[j].className="active-day";    
+                        }else{
+                            mDIV[j].innerHTML=nextDayCount++;
+                            mDIV[j].className="";
+                        }
+                        
+                    }
+                }
+            }
+            
+            var titleText = document.getElementById("title-text");
+            titleText.innerHTML=dayDate.taday.getFullYear()+"年"+(dayDate.taday.getMonth()+1)+"月"
+            
+            if(type=="move"){
+                mUL.innerHTML += mUL.innerHTML+mUL.innerHTML; 
+                mUL.style.top="-"+mUL.dataHeight;
+            }
+        }
+        
+        
     </script>
 </body>
 
