@@ -1,0 +1,17 @@
+/*这是被编译的*/
+.box {
+  width: 300px;
+  height: 300px;
+  background-color: yellow;
+  border: 5px solid pink;
+}
+.border {
+  border: 5px solid pink;
+}
+.box2 {
+  width: 300px;
+  height: 300px;
+  background-color: yellow;
+  border: 5px solid pink;
+  margin-left: 100px;
+}

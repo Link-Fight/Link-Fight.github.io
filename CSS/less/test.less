@@ -1,0 +1,85 @@
+@test_width:300px;
+/*这是被编译的*/ 
+.box{
+    width: @test_width; 
+    height: @test_width;
+    background-color: yellow;
+    .border;
+}
+// 这是不被编译的3
+
+// 混合
+.border{
+    border:  5px solid pink;
+}
+
+.box2{
+    .box;
+    margin-left: 100px;
+}
+
+.sanjiao{
+    .trangle(top,30px,pink);
+}
+
+// 匹配-三角形-初始
+.trangle(@_,@w:12px,@c:red){
+    width: 0;
+    height: 0;
+    overflow: hidden;
+    color: red;
+}
+
+.trangle_transparent(@w:10px){
+    border:@w solid transparent;
+}
+// 匹配-三角形
+.trangle(top,@w:10px,@c:green){
+    .trangle_transparent(@w);
+    border-bottom-color: @c;
+}
+
+.trangle(right,@w:10px,@c:green){
+    .trangle_transparent(@w);
+    border-left-color: @c;
+}
+
+.trangle(left,@w:10px,@c:green){
+    .trangle_transparent(@w);
+    border-right-color:  @c;
+}
+
+.trangle(bottom,@w:10px,@c:green){
+    .trangle_transparent(@w);
+    border-top-color: @c;
+}
+
+// 匹配-定位
+.pos(r,@t:0px,@l:0px){
+    position: relative;
+    top: @t;
+    left: @l;
+}
+
+.pos(a,@t:0px,@l:0px){
+    position: absolute;
+    top: @t;
+    left: @l;
+}
+
+.pos(f,@t:0px,@l:0px){
+    position: fixed;
+    top: @t;
+    left: @l;
+}
+.pos(@_,@t:0,@l:0){
+    text-align: center;
+    line-height: 100px;
+    width: 100px;
+    height: 100px;
+    background: blueviolet;
+}
+.pipei{
+    .pos(r,210px,10px);
+}
+
