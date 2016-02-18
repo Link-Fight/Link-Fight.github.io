@@ -4,10 +4,44 @@
     <meta charset="UTF-8">
     <title>Document</title>
     <link rel="stylesheet" href="./style/test.css">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
 </head>
 <body>
     <p>HI</p>
     <div class="sanjiao"></div>
     <div class="pipei">22</div>
+    <button>z</button>
+    <button>y</button>
+     <div id="content"></div>
+    <script>
+          var student = [{name:"kelin",age:"24"},{name:"yazhi",age:"22"}];
+        $(function(){
+            $(student).each(function(index){
+            $("#content").append(this.name+" "+this.age+"<br>");
+        });     
+            
+            
+            var _$b= $("button");
+            _$b.bind("click",function(){
+                if(this.innerText=="z"){
+                    $(".pipei").animate({
+                       left: "+=-100px",
+                    },1000);
+                }
+                if(this.innerText=="y"){
+                    $(".pipei").animate({
+                       left: "+=100px",
+                    },1000);
+                }
+            });
+        });
+        
+         
+     
+        
+      
+           
+        </script>
+    </script>
 </body>
 </html>
