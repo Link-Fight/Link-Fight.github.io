@@ -30,7 +30,7 @@
         }
         
         div .box {
-            margin-right: 50px;
+            margin-right: 10px;
             position: relative;
             float: left;
             height: 100px;
@@ -61,22 +61,39 @@
 
             <div class="box">
                 底部
-                <div class="supBox"></div>
+                <div class="supBox">介绍文字1</div>
             </div>
 
 
             <div class="box">
-                <div class="supBox"></div>
+                <div class="supBox">介绍文字2</div>
+            </div>
+            
+            <div class="box">
+                底部
+                <div class="supBox">介绍文字3</div>
+            </div>
+
+
+            <div class="box">
+                <div class="supBox">介绍文字4</div>
+            </div>
+            
+              <div class="box">
+                底部
+                <div class="supBox">介绍文字5</div>
+            </div>
+
+
+            <div class="box">
+                <div class="supBox">介绍文字6</div>
             </div>
 
         </div>
     </div>
     <script>
-        
-        var tools;
-        
+        var tools;   
         (function(){
-            console.log("hi");
             tools={
                     // top : x>0 y<=0
                     // right:x>0 y>0   && x>y
@@ -94,7 +111,26 @@
                     }else if(x <=0&& y >0){
                          return "left";
                     }
-                }
+                },
+                move(targetEle,tarObj){
+                        clearTimeout(targetEle.timer);
+                        
+                            targetEle.timer = setTimeout( ( function(aa){
+                                return  function(){
+                                    var mL =parseInt(window.getComputedStyle(targetEle)[tarObj["DRE"]],10);
+                                    if(mL!=tarObj["Target"]){
+                                            var speed = (tarObj["Target"] -mL)/5;
+                                            speed = speed>0?Math.ceil(speed):Math.floor(speed);
+                                            targetEle.style[tarObj["DRE"]] =mL+speed+"px";
+                                            // move(targetEle,tarObj);
+                                            
+                                            aa.callee(targetEle,tarObj);
+                                        }
+                                }
+                            })(arguments),20);
+                            
+                        
+                 }
             }
         })();
         
@@ -102,49 +138,77 @@
             var box = document.getElementsByClassName("box");
             for(var i=0,len=box.length;i<len;i++){
                 box[i].onmouseenter=function(event){
+                    if(!this.mH){
+                        this.mH = getComputedStyle(event.currentTarget)["height"];
+                        this.mW = getComputedStyle(event.currentTarget)["width"];
+                    }
                      var dre = tools.getDrection(event.offsetX,event.offsetY);
-                     console.log(dre);
                      var supBox = event.currentTarget.getElementsByClassName("supBox")[0];
-                     var mH = getComputedStyle(event.currentTarget)["height"];
-                     var mW = getComputedStyle(event.currentTarget)["width"];
+                     var targetObj;
                      if(dre=="top"){
-                         supBox.style[dre]="-"+mH;
-                         supBox.style["visibility"]="visible";
+                         supBox.style[dre]="-"+this.mH;
+                         supBox.style["left"]=0;
+                         targetObj={"DRE":"top","Target":0}
                      }else if(dre=="right"){
-                          supBox.style["left"]=""+mW;
-                          supBox.style["visibility"]="visible";
+                          supBox.style["left"]=""+this.mW;
+                           supBox.style["top"]=0;
+                          targetObj={"DRE":"left","Target":0}
                      }else if(dre=="bottom"){
-                           supBox.style["top"]=""+mH;
-                           supBox.style["visibility"]="visible";
+                           supBox.style["top"]=""+this.mH;
+                           supBox.style["left"]=0;
+                           targetObj={"DRE":"top","Target":0}
                      }else if(dre=="left"){
-                           supBox.style[dre]="-"+mW;
-                           supBox.style["visibility"]="visible";
-                           MoveLeft(supBox,0);
-                           
+                           supBox.style[dre]="-"+this.mW;
+                            supBox.style["top"]=0;
+                           targetObj={"DRE":"left","Target":0}
                      }
-                    
+                     supBox.style["visibility"]="visible";
+                     tools.move(supBox,targetObj);     
                 }
                 box[i].onmouseleave=function(event){
-                     console.log(tools.getDrection(event.offsetX,event.offsetY));
+                     var dre = tools.getDrection(event.offsetX,event.offsetY);
+                     var supBox = event.currentTarget.getElementsByClassName("supBox")[0];
+                     var targetObj;
+                     if(dre=="top"){
+                        //  supBox.style[dre]="-"+this.mH;
+                         targetObj={"DRE":"top","Target":-parseInt(this.mH)}
+                     }else if(dre=="right"){
+                        //   supBox.style["left"]=""+this.mW;
+                          targetObj={"DRE":"left","Target":parseInt(this.mW)}
+                     }else if(dre=="bottom"){
+                        //    supBox.style["top"]=""+this.mH;
+                           targetObj={"DRE":"top","Target":parseInt(this.mH)}
+                     }else if(dre=="left"){
+                        //    supBox.style[dre]="-"+this.mW;
+                           targetObj={"DRE":"left","Target":-parseInt(this.mW)}
+                     }
+                     supBox.style["visibility"]="visible";
+                     tools.move(supBox,targetObj);
                 }
             }
         }
         
-        function MoveLeft(targetEle,target){
-            clearTimeout(targetEle.timer);
+        // function move(targetEle,tarObj){
+        //     clearTimeout(targetEle.timer);
             
-                targetEle.timer = setTimeout(function(){
-                       var mL =parseInt(getComputedStyle(targetEle)["left"],10);
-                       if(mL!=target){
-                            var speed = (target -mL)/5;
-                            speed = speed>0?Math.ceil(speed):Math.floor(speed);
-                            targetEle.style["left"] =mL+speed+"px";
-                           MoveLeft(targetEle,target);
-                         }
-                },40);
+        //         targetEle.timer = setTimeout( ( function(aa){
+        //             return  function(){
+        //                 var mL =parseInt(window.getComputedStyle(targetEle)[tarObj["DRE"]],10);
+        //                 if(mL!=tarObj["Target"]){
+        //                         var speed = (tarObj["Target"] -mL)/5;
+        //                         speed = speed>0?Math.ceil(speed):Math.floor(speed);
+        //                         targetEle.style[tarObj["DRE"]] =mL+speed+"px";
+        //                         // move(targetEle,tarObj);
+                                
+        //                         aa.callee(targetEle,tarObj);
+        //                     }
+        //             }
+        //         })(arguments)
+                    
+        //            ,20);
                 
             
-        }
+        // }
     </script>
 </body>
 
