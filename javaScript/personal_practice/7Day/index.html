@@ -8,9 +8,9 @@
 <link rel="stylesheet" href="css/jquery.fullPage.css">
 <style>
 .section{ position: relative; text-align: center; font: 20px "Microsoft Yahei"; color: #fff;background-image: url(images/background.png);background-repeat: no-repeat;background-position: center;background-size:100% 100%;}
-.section2 p {font-size: 13px; position: relative; left: -120%;}
-.section3 p { position: relative; bottom: -120%;}
-.section4 p { display: none;}
+/*.section2 p {font-size: 13px; position: relative; left: -120%;}*/
+/*.section3 p { position: relative; bottom: -120%;}*/
+/*.section4 p { display: none;}*/
 .maka-Arrow{
     position: fixed;
     height: 24px;
@@ -35,17 +35,22 @@
     to{bottom: 20px;}
 }
 /*第一页*/
-.section2 .top_img,.section1 .top_img{position: absolute; left: 0;right: 0;top: 40px;height: 61px;width: 263px;margin: 0 auto;background-image: url(images/top.png);background-size: 100% 100%;}
+.section4 .top_img,.section3 .top_img,.section2 .top_img,.section1 .top_img{position: absolute; left: 0;right: 0;top: 0px;height: 61px;width: 263px;margin: 0 auto;background-image: url(images/top.png);background-size: 100% 100%;}
 .section1 .top_text{line-height: 1.5;font-size: 20px;}
 .section1 .mLogo{height: 95px; width: 137px;margin: 10px auto;background-image: url(images/mainLogo.png);background-size: 100% 100%;animation: fadeInNormal 1000ms ease 600ms both running; }
 .section1 p{ position: relative;line-height: 1.5;font-size: 13px;}
-.section2 .bottom_img,.section1 .bottom_img{position: absolute;bottom: 25px;left:0;right: 0;height: 33px;width: 264px;margin:10px auto;background-image: url(images/bottom.png);background-size: 100% 100%;}
+.section4 .bottom_img,.section3 .bottom_img,.section2 .bottom_img,.section1 .bottom_img{position: absolute;bottom: 25px;left:0;right: 0;height: 33px;width: 264px;margin:10px auto;background-image: url(images/bottom.png);background-size: 100% 100%;}
 
 /*第二页*/
-.section2 .second_img{position: relative;height: 54px;width:253px; margin: 0 auto; background-image: url(images/second_top.png);background-repeat: no-repeat;background-size: 100% 100%;}
-.section2 p{color: rgb(12, 222, 230);font-size: 18px;text-align: left; line-height: 1.5;}
+.section2 .top_img{opacity: .5}
+.section .second_img{display: none;position: absolute;top:150px; left: 0;right: 0;height: 54px;width:253px; margin: 0 auto; background-image: url(images/second_top.png);background-repeat: no-repeat;background-size: 100% 100%;}
+.section2 p{opacity: 0;color: rgb(12, 222, 230);font-size: 18px;text-align: left; line-height: 1.5;}
 .section2 .text{width: 274px;height: 108px;margin: 0 auto;}
-.section2 .second_bottom_img{position: relative; top: 70px;bottom: 30px;height: 119px;width:186px; margin: 0 auto; background-image: url(images/second_bottom.png);background-repeat: no-repeat;background-size: 100% 100%;transform: rotate(353deg)}
+.section2 .second_bottom_img{display: none;position: relative; top: 70px;bottom: 30px;height: 119px;width:186px; margin: 0 auto; background-image: url(images/second_bottom.png);background-repeat: no-repeat;background-size: 100% 100%;transform: rotate(353deg)}
+
+.section4 .bottom_img,.section3 .bottom_img,.section2 .bottom_img{bottom: 0px;}
+.section3 .text{width:279px;height: 264px;margin: 0 auto;font-size: 22px;font-weight: bold;line-height: 2;}
+.section3 p{opacity: 0;color: rgb(12, 222, 230);font-size: 22px;text-align: left; line-height: 2;}
 </style>
 <script src="js/jquery-1.8.3.min.js"></script>
 <script src="js/jquery.fullPage.min.js"></script>
@@ -64,34 +69,63 @@ $(function(){
 				$('.section1').find('p').delay(500).animate({
 					left: '0'
 				}, 1500, 'easeOutExpo');
+                $(".section1 .top_img").delay(500).animate({top:"40px"},1500,"easeOutExpo").fadeIn(2000);
 			}
             if(index == 2){
-				$('.section2').find('p').delay(500).animate({
-					left: '0'
+                $(".section2 .top_img").delay().animate({top:"50px", opacity: 1,},1500,"easeOutExpo");
+                $(".section2 .second_img").delay(1500).fadeIn(3000);
+				$('.section2').find('p').delay(2000).animate({
+					left: '0',
+                    opacity: 1,
 				}, 1500, 'easeOutExpo');
+                $(".section2 .second_bottom_img").delay(500).fadeIn(3000);
+                $(".section2 .bottom_img").animate({bottom:"25px"},1500,"easeOutExpo");
 			}
 			if(index == 3){
-				$('.section3').find('p').delay(500).animate({
-					bottom: '0'
+				$(".section3 .top_img").delay().animate({top:"50px", opacity: 1,},1500,"easeOutExpo");
+                $(".section3 .second_img").delay(1500).fadeIn(3000);
+				$('.section3').find('p').delay(2000).animate({
+					left: '0',
+                    opacity: 1,
 				}, 1500, 'easeOutExpo');
+                $(".section3 .bottom_img").animate({bottom:"25px"},1500,"easeOutExpo");
 			}
 			if(index == 4){
-				$('.section4').find('p').fadeIn(2000);
+				$(".section4 .top_img").delay().animate({top:"50px", opacity: 1,},1500,"easeOutExpo");
+                $(".section4 .bottom_img").animate({bottom:"25px"},1500,"easeOutExpo");
 			}
 		},
 		onLeave: function(index, direction){
 			if(index == '2'){
-				$('.section2').find('p').delay(500).animate({
-					left: '-120%'
+				$(".section2 .top_img").delay().animate({top:"0px", opacity: 1,},1500,"easeOutExpo");
+                $(".section2 .second_img").delay(1500).fadeOut(3000);
+				$('.section2').find('p').delay(2000).animate({
+					left: '-120%',
+                    opacity: 0,
 				}, 1500, 'easeOutExpo');
+                $(".section2 .second_bottom_img").delay(500).fadeOut(3000);
+                $(".section2 .bottom_img").animate({bottom:"0px"},1500,"easeOutExpo");
 			}
 			if(index == '3'){
-				$('.section3').find('p').delay(500).animate({
-					bottom: '-120%'
+				$(".section3 .top_img").delay().animate({top:"0px", opacity: 1,},1500,"easeOutExpo");
+                $(".section3 .second_img").delay(1500).fadeOut(3000);
+                $('.section3').find('p').delay(2000).animate({
+					left: '0',
+                    opacity: 0,
 				}, 1500, 'easeOutExpo');
+                $(".section3 .bottom_img").animate({bottom:"0px"},1500,"easeOutExpo");
 			}
 			if(index == '4'){
-				$('.section4').find('p').fadeOut(2000);
+					$(".section4 .top_img").delay().animate({top:"0px", opacity: 1,},1500,"easeOutExpo");
+                    $(".section5 .bottom_img").animate({bottom:"0px"},1500,"easeOutExpo");
+			}
+            if(index == '5'){
+					$(".section4 .top_img").delay().animate({top:"0px", opacity: 1,},1500,"easeOutExpo");
+                    $(".section5 .bottom_img").animate({bottom:"0px"},1500,"easeOutExpo");
+			}
+            if(index == '6'){
+					$(".section4 .top_img").delay().animate({top:"0px", opacity: 1,},1500,"easeOutExpo");
+                    $(".section5 .bottom_img").animate({bottom:"0px"},1500,"easeOutExpo");
 			}
 		}
 	});
@@ -123,12 +157,16 @@ $(function(){
 		<div class="bottom_img"></div>
 	</div>
 	<div class="section section3">
-		<h3>第三屏</h3>
-		<p>滚动到第三屏后的回调函数执行的效果</p>
+		<div class="top_img"></div>
+        <div class="second_img"></div>
+        <div class="text"><p><br>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;铂涛旅行，是铂涛集团重磅推出的一个互联网旅行社交电商品牌，定位以用户为核心，以酒店为承载的场景化移动互联网旅行社交电商应用。</div>
+
+        <!--<div class="second_bottom_img"></div>-->
+		<div class="bottom_img"></div>
 	</div>
 	<div class="section section4">
-		<h3>第四屏</h3>
-		<p>滚动到第四屏后的回调函数执行的效果</p>
+		<div class="top_img"></div>
+		<div class="bottom_img"></div>
 	</div>
     <script>
         window.onload=function(){
