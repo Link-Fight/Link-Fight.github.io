@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <title>一个尽量能组件化的列表</title>
     <style>
-      * {
+        * {
             margin: 0;
             padding: 0;
         }
@@ -21,7 +21,7 @@
             border-radius: 30%;
         }
         
-        .main{
+        .main {
             width: 300px;
             margin: 0 auto;
             /*background-color: lightpink;*/
@@ -30,55 +30,62 @@
         }
     </style>
     <style>
-        #kelin_listwrap{
+        #kelin_listwrap {
             margin: 10px;
-            border:15px solid #aaa;
+            border: 15px solid #aaa;
             border-radius: 10px;
             padding: 5px;
             color: #fff;
             overflow: hidden;
         }
-        #kelin_listwrap a{
+        
+        #kelin_listwrap a {
             list-style: none;
             text-decoration: none;
         }
-         #kelin_listwrap dl{
-             overflow: hidden;
-         }
-         #kelin_listwrap dt{
+        
+        #kelin_listwrap dl {
+            overflow: hidden;
+        }
+        
+        #kelin_listwrap dt {
             text-indent: 10px;
             cursor: pointer;
             background: green;
-            border-bottom: 2px solid #fff; 
+            border-bottom: 2px solid #fff;
             line-height: 30px;
-            font:700 14px/30px Tahoma;
+            font: 700 14px/30px Tahoma;
         }
         
-        #kelin_listwrap dt span{
+        #kelin_listwrap dt span {
             float: right;
             text-indent: -10px;
-            font:700 10px/30px Tahoma;
+            font: 700 10px/30px Tahoma;
         }
-        #kelin_listwrap dd{
+        
+        #kelin_listwrap dd {
             text-indent: 15px;
-            border-bottom: 2px solid #fff; 
+            border-bottom: 2px solid #fff;
             line-height: 25px;
             font: 12px/25px Tahoma;
             cursor: pointer;
             background: lightseagreen;
             color: blue;
         }
-         #kelin_listwrap  .active{
-             background-color: lightgreen;
-             color: black;
-         }
+        
+        #kelin_listwrap .active {
+            background-color: lightgreen;
+            color: black;
+        }
     </style>
 </head>
 <div class="kelin_tip">
-    javascript <br>组件
+    javascript
+    <br>组件
 </div>
- 
- <div class="main"></div>
+
+<div class="main"></div>
+
 <body>
 
     <script>
@@ -120,13 +127,24 @@
                 for(var i=0;i<mDt.length;i++){
                     mDt[i].onclick =  function(event){ 
                         var activeDt = document.getElementsByClassName("active")[0];
-                        if(activeDt){
-                             activeDt.className="";
-                             that.move(activeDt.parentElement||activeDt.parentNode,"list_MinH");
-                        }
-                        var e = event||window.event;
-                            this.className="active";
-                            that.move(this.parentElement||mDt[i].parentNode,"list_MaxH");
+                         if(activeDt==this){
+                                this.className="";
+                                that.move(this.parentElement||this.parentNode,"list_MinH");   
+                                return;}
+                            if(activeDt){
+                                activeDt.className="";
+                                that.move(activeDt.parentElement||activeDt.parentNode,"list_MinH",
+                                (function(o,t){
+                                    var obj = o.parentElement||o.parentNode;
+                                    return function(){
+                                        o.className="active";
+                                        t.move(obj,"list_MaxH");
+                                    };
+                                })(this,that));
+                            }else{
+                                this.className="active";
+                                that.move(this.parentElement||this.parentNode,"list_MaxH");   
+                            }
                         };
                    var mDl = mDt[i].parentElement||mDt[i].parentNode;
                    mDl["list_MinH"] = getComputedStyle(mDt[i])["height"];
@@ -142,9 +160,9 @@
                 target.timer=setTimeout(function(){
                     var height = parseInt(getComputedStyle(target)["height"]);
                     if(height==parseInt(target[type])){
-                        
+                        if(callback)
+                            callback();
                     }else{
-                        // console.log(that);
                         var speed =( parseInt(target[type])-height )/5;
                         speed=speed>0?Math.ceil(speed):Math.floor(speed);
                         target.style.height=(height + speed)+"px";
