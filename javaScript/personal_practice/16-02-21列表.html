@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>一个尽量能组件化的列表</title>
+    <style>
+      * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .kelin_tip {
+            position: fixed;
+            top: 0;
+            right: 0;
+            background: #000000;
+            color: #ffffff;
+            padding: 10px;
+            line-height: 32px;
+            border-radius: 30%;
+        }
+        
+        .main{
+            width: 300px;
+            margin: 0 auto;
+            /*background-color: lightpink;*/
+            /*color: white;*/
+            /*font-size: 18px;*/
+        }
+    </style>
+    <style>
+        #kelin_listwrap{
+            margin: 10px;
+            border:15px solid #aaa;
+            border-radius: 10px;
+            padding: 5px;
+            color: #fff;
+            overflow: hidden;
+        }
+        #kelin_listwrap a{
+            list-style: none;
+            text-decoration: none;
+        }
+         #kelin_listwrap dl{
+             overflow: hidden;
+         }
+         #kelin_listwrap dt{
+            text-indent: 10px;
+            cursor: pointer;
+            background: green;
+            border-bottom: 2px solid #fff; 
+            line-height: 30px;
+            font:700 14px/30px Tahoma;
+        }
+        
+        #kelin_listwrap dt span{
+            float: right;
+            text-indent: -10px;
+            font:700 10px/30px Tahoma;
+        }
+        #kelin_listwrap dd{
+            text-indent: 15px;
+            border-bottom: 2px solid #fff; 
+            line-height: 25px;
+            font: 12px/25px Tahoma;
+            cursor: pointer;
+            background: lightseagreen;
+            color: blue;
+        }
+         #kelin_listwrap  .active{
+             background-color: lightgreen;
+             color: black;
+         }
+    </style>
+</head>
+<div class="kelin_tip">
+    javascript <br>组件
+</div>
+ 
+ <div class="main"></div>
+<body>
+
+    <script>
+        function CreateList(pNode,mDate){
+            this.wrap = document.createElement("div");
+            this.wrap.id="kelin_listwrap";
+            this.init.apply(this,arguments);
+            this.addEvet.call(this);
+        }
+        
+        CreateList.prototype={
+            init:function(pNode,mDate){
+                 if(!mDate["data"])
+                    return;
+                  for(var i=0,len = mDate.data.length;i<len;i++){
+                      var curDate = mDate.data[i];
+                      var mDl = document.createElement("dl");                   
+                      mDl.innerHTML="<dt>"+curDate["pNode"]+"<span>"+curDate.cNode.length+"</span></dt>";
+                      for(var j=0,mLen = curDate.cNode.length;j<mLen;j++){
+                          mDl.innerHTML+="<dd> "+(j+1)+")<a href="+curDate.cNode[j].href+" target='_blank'>"+curDate.cNode[j].text+"</a></dd>";
+                      }
+                      this.wrap.appendChild(mDl);
+                  }
+                  if(pNode)
+                  {
+                       pNode.appendChild(this.wrap);
+                  }
+                  else{
+                      document.body.appendChild(this.wrap);
+                  }
+                  mDate = null;
+            },
+            
+           
+            
+            addEvet:function(){
+                var that = this;
+                var mDt = document.getElementsByTagName("dt");
+                for(var i=0;i<mDt.length;i++){
+                    mDt[i].onclick =  function(event){ 
+                        var activeDt = document.getElementsByClassName("active")[0];
+                        if(activeDt){
+                             activeDt.className="";
+                             that.move(activeDt.parentElement||activeDt.parentNode,"list_MinH");
+                        }
+                        var e = event||window.event;
+                            this.className="active";
+                            that.move(this.parentElement||mDt[i].parentNode,"list_MaxH");
+                        };
+                   var mDl = mDt[i].parentElement||mDt[i].parentNode;
+                   mDl["list_MinH"] = getComputedStyle(mDt[i])["height"];
+                   mDl["list_MinH"] = parseInt(getComputedStyle(mDt[i])["border-bottom"])+parseInt(mDl["list_MinH"])+"px";
+                   mDl["list_MaxH"] = getComputedStyle(mDl)["height"];
+                   mDl.style.height=mDl["list_MinH"];
+                }
+            },
+            
+            move:function(target,type,callback){
+                clearTimeout(target.timer);
+                var that = this;
+                target.timer=setTimeout(function(){
+                    var height = parseInt(getComputedStyle(target)["height"]);
+                    if(height==parseInt(target[type])){
+                        
+                    }else{
+                        // console.log(that);
+                        var speed =( parseInt(target[type])-height )/5;
+                        speed=speed>0?Math.ceil(speed):Math.floor(speed);
+                        target.style.height=(height + speed)+"px";
+                        that.move(target,type,callback);
+                    }
+                },30);
+            }
+        }
+    </script>
+    <script>
+        window.onload=function(){
+              var c 
+            var targetDiv = document.getElementsByClassName("main")[0]
+            
+           c = new CreateList(targetDiv,
+               {
+               data:[
+                   {
+                    pNode:"第一课",
+                    cNode:[
+                        {text:"百度",href:"http://www.baidu.com"},
+                        {text:"bing",href:"http://wwww.bing.com"}
+                        ]
+                   },
+                   {
+                       pNode:"第二课",
+                       cNode:[
+                           {text:"1",href:"11"},
+                           {text:"2",href:"22"},
+                           {text:"3",href:"33"},
+                           {text:"4",href:"44"},
+                       ]
+                   },
+                    {
+                       pNode:"综合",
+                       cNode:[
+                           {text:"hao123",href:"11"},
+                           {text:"新浪",href:"22"},
+                           {text:"凤凰网",href:"33"},
+                           {text:"网易",href:"44"},
+                       ]
+                   },
+                    {
+                       pNode:"第四课",
+                       cNode:[
+                           {text:"1",href:"11"},
+                           {text:"2",href:"22"},
+                           {text:"3",href:"33"},
+                           {text:"4",href:"44"},
+                           {text:"1",href:"11"},
+                           {text:"2",href:"22"},
+                           {text:"3",href:"33"},
+                           {text:"4",href:"44"},
+                       ]
+                   }
+               
+               ]
+               }
+           );
+           
+        }
+    </script>
+</body>
+
+</html>

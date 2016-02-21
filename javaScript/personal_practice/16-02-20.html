@@ -106,7 +106,6 @@
                         if(x>y){
                             return  "right";
                         }
-                        
                         return "bottom";
                     }else if(x <=0&& y >0){
                          return "left";
@@ -122,14 +121,10 @@
                                             var speed = (tarObj["Target"] -mL)/5;
                                             speed = speed>0?Math.ceil(speed):Math.floor(speed);
                                             targetEle.style[tarObj["DRE"]] =mL+speed+"px";
-                                            // move(targetEle,tarObj);
-                                            
                                             aa.callee(targetEle,tarObj);
                                         }
                                 }
-                            })(arguments),20);
-                            
-                        
+                            })(arguments),20);        
                  }
             }
         })();
@@ -170,16 +165,12 @@
                      var supBox = event.currentTarget.getElementsByClassName("supBox")[0];
                      var targetObj;
                      if(dre=="top"){
-                        //  supBox.style[dre]="-"+this.mH;
                          targetObj={"DRE":"top","Target":-parseInt(this.mH)}
                      }else if(dre=="right"){
-                        //   supBox.style["left"]=""+this.mW;
                           targetObj={"DRE":"left","Target":parseInt(this.mW)}
                      }else if(dre=="bottom"){
-                        //    supBox.style["top"]=""+this.mH;
                            targetObj={"DRE":"top","Target":parseInt(this.mH)}
                      }else if(dre=="left"){
-                        //    supBox.style[dre]="-"+this.mW;
                            targetObj={"DRE":"left","Target":-parseInt(this.mW)}
                      }
                      supBox.style["visibility"]="visible";
