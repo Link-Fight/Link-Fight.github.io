@@ -48,7 +48,7 @@
 .section2 .text{width: 274px;height: 108px;margin: 0 auto;}
 .section2 .second_bottom_img{display: none;position: relative; top: 70px;bottom: 30px;height: 119px;width:186px; margin: 0 auto; background-image: url(images/second_bottom.png);background-repeat: no-repeat;background-size: 100% 100%;transform: rotate(353deg)}
 
-.section4 .bottom_img,.section3 .bottom_img,.section2 .bottom_img{bottom: 0px;}
+.section4 .bottom_img,.section3 .bottom_img,.section2 .bottom_img,.section1 .bottom_img{bottom: 0px;}
 .section3 .text{width:279px;height: 264px;margin: 0 auto;font-size: 22px;font-weight: bold;line-height: 2;}
 .section3 p{opacity: 0;color: rgb(12, 222, 230);font-size: 22px;text-align: left; line-height: 2;}
 </style>
@@ -69,7 +69,8 @@ $(function(){
 				$('.section1').find('p').delay(500).animate({
 					left: '0'
 				}, 1500, 'easeOutExpo');
-                $(".section1 .top_img").delay(500).animate({top:"40px"},1500,"easeOutExpo").fadeIn(2000);
+                $(".section1 .top_img").delay().animate({top:"40px"},1500,"easeOutExpo").fadeIn(2000);
+                $(".section1 .bottom_img").animate({bottom:"25px"},1500,"easeOutExpo");
 			}
             if(index == 2){
                 $(".section2 .top_img").delay().animate({top:"50px", opacity: 1,},1500,"easeOutExpo");
@@ -169,6 +170,13 @@ $(function(){
 		<div class="bottom_img"></div>
 	</div>
     <script>
+        
+        (function(){
+            if(window.location.hash!="page1"){
+                     window.location.hash="page1";
+            }
+        })();
+        
         window.onload=function(){
             var arrow = document.getElementById("menu");
             arrow.addEventListener("click",function(){
@@ -183,6 +191,11 @@ $(function(){
                     window.location.hash="page"+(num+1);
                 }
             },false);
+            (function(){
+                 $('.section1').find('p').delay(500).animate({left: '0'}, 1500, 'easeOutExpo');
+                $(".section1 .top_img").delay().animate({top:"40px"},1500,"easeOutExpo").fadeIn(2000);
+                $(".section1 .bottom_img").animate({bottom:"25px"},1500,"easeOutExpo");
+            })()
         }
     </script>
 </div>

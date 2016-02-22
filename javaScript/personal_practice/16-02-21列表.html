@@ -123,15 +123,21 @@
             
             addEvet:function(){
                 var that = this;
+                that.Flag =false;
                 var mDt = document.getElementsByTagName("dt");
                 for(var i=0;i<mDt.length;i++){
                     mDt[i].onclick =  function(event){ 
                         var activeDt = document.getElementsByClassName("active")[0];
+                        if(that.Flag){
+                            return;
+                        }
                          if(activeDt==this){
+                                that.Flag=true;
                                 this.className="";
                                 that.move(this.parentElement||this.parentNode,"list_MinH");   
                                 return;}
                             if(activeDt){
+                                 that.Flag=true;
                                 activeDt.className="";
                                 that.move(activeDt.parentElement||activeDt.parentNode,"list_MinH",
                                 (function(o,t){
@@ -142,6 +148,7 @@
                                     };
                                 })(this,that));
                             }else{
+                                 that.Flag=true;
                                 this.className="active";
                                 that.move(this.parentElement||this.parentNode,"list_MaxH");   
                             }
@@ -160,15 +167,20 @@
                 target.timer=setTimeout(function(){
                     var height = parseInt(getComputedStyle(target)["height"]);
                     if(height==parseInt(target[type])){
-                        if(callback)
+                        target.timer=null;
+                        
+                        if(callback){
                             callback();
+                        }else{
+                            that.Flag=false;
+                        }
                     }else{
                         var speed =( parseInt(target[type])-height )/5;
                         speed=speed>0?Math.ceil(speed):Math.floor(speed);
                         target.style.height=(height + speed)+"px";
                         that.move(target,type,callback);
                     }
-                },30);
+                },25);
             }
         }
     </script>
@@ -208,6 +220,27 @@
                     {
                        pNode:"第四课",
                        cNode:[
+                           {text:"1",href:"11"},
+                           {text:"2",href:"22"},
+                           {text:"3",href:"33"},
+                           {text:"4",href:"44"},
+                           {text:"1",href:"11"},
+                           {text:"2",href:"22"},
+                           {text:"3",href:"33"},
+                           {text:"4",href:"44"},
+                       ]
+                   },
+                    {
+                       pNode:"第五课",
+                       cNode:[
+                           {text:"1",href:"11"},
+                           {text:"2",href:"22"},
+                           {text:"3",href:"33"},
+                           {text:"4",href:"44"},
+                           {text:"1",href:"11"},
+                           {text:"2",href:"22"},
+                           {text:"3",href:"33"},
+                           {text:"4",href:"44"},
                            {text:"1",href:"11"},
                            {text:"2",href:"22"},
                            {text:"3",href:"33"},
