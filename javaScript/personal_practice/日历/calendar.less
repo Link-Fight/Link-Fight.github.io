@@ -1,0 +1,145 @@
+*{
+    padding: 0;
+    margin: 0;
+}
+@calend_base_width:120;
+@calend_base_height:80;
+@width:@calend_base_width*7;
+@title_height:50;
+@header_height:50;
+@main_height:@calend_base_height*6;
+@height:@title_height+@header_height+@main_height;
+
+@main_p_font_size:12px;
+.calendar{
+    // margin-top: 10px;
+    margin-left: auto;
+    margin-right: auto;
+    width: unit(@width,px);
+    height: unit(@height,px);
+    padding: 10px;
+    box-sizing: content-box;
+    border: 1px solid rbga(0,0,0,0.2);
+    border-radius: 10px;
+    background-clip: padding-box;
+    background: rgba(0, 0, 0, 0.5);
+    box-shadow: 0 0 13px 3px rgba(0, 0, 0, .5);
+    // overflow: hidden;
+    font-family: 'Source Sans Pro', sans-serif;
+    font-size: 18px;
+    text-align: center;
+    .title{
+        height: unit(@title_height,px);
+        width: 100%;
+        line-height: unit(@title_height,px);
+        color: #FFF;
+        font-weight: bold;
+        .title-text{
+            display: block;
+            float: left;
+            text-indent: 30px;
+        }
+       .title-next {
+            cursor: pointer;
+            display: block;
+            float: right;
+            width: 50px;
+            -webkit-transform: rotateZ(90deg);
+            transform: rotateZ(90deg);
+        }
+        .title-pre {
+            margin-right:  unit((@calend_base_width/2-50/2),px);
+            cursor: pointer;
+            display: block;
+            float: right;
+            width: 50px;
+            -webkit-transform: rotateZ(-90deg);
+            transform: rotateZ(-90deg);
+        }
+      
+    }
+    .header{
+        height: unit(@header_height,px);
+    }
+    .main{
+        height: unit(@main_height,px);
+        position: relative;
+        overflow: hidden;
+        ul{
+            display: block;
+            position: absolute;
+            list-style-type: none;
+        }
+        li{
+            width:100%;
+            height: unit(@calend_base_height,px);
+            list-style-type: none;
+            div{
+                float: left;
+                width: unit(@calend_base_width,px);
+                height: unit(@calend_base_height,px);
+                font-weight: bold;
+                color: rgba(255, 255, 255, .5);
+                float: left;
+                box-sizing: border-box;
+                line-height: unit(@calend_base_height,px);
+                overflow: hidden;
+                border: 1px solid rgba(255, 255, 255, 0);
+                vertical-align: middle;
+            }
+            .active-day{
+                // line-height: 20px;
+            }
+            .active-day:hover{
+                background-color: rgba(0, 0, 0, 0.5);
+                border: 1px solid rgba(255, 255, 255, .4);
+                box-shadow: 0 0 1px 1px rgba(255, 255, 255, .5);
+                overflow: hidden;
+            }
+            .content{
+                 line-height: 18px;
+            }
+            p{
+                font-weight: normal;
+                font-size: @main_p_font_size;
+                line-height: @main_p_font_size+8;
+             }
+        
+        }
+        
+    }
+}
+        #title-pre:hover {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            box-sizing: border-box;
+            border-radius: 50%;
+        }
+        #title-next:hover {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            box-sizing: border-box;
+            border-radius: 50%;
+        }
+        
+        .calendar .header-day {
+            float: left;
+            width: unit(@calend_base_width,px);
+            height: 50px;
+            font-weight: bold;
+            line-height: 50px;
+             color: darkblue;
+        }
+        #calemdarDay .active-day {
+            cursor: pointer;
+            color: #FFF;
+        }
+        
+        
+        .header-day:nth-last-child(1),
+        .header-day:nth-child(1) {
+            color: mediumspringgreen;
+        }
+        

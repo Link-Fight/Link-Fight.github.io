@@ -20,8 +20,8 @@
             margin-top: 20px;
             margin-left: auto;
             margin-right: auto;
-            width: 350px;
-            height: 400px;
+            width: 420px;
+            height: 580px;
             padding: 5px;
             box-sizing: content-box;
             border: 1px solid rbga(0, 0, 0, 0.2);
@@ -35,14 +35,14 @@
             text-align: center;
         }
         
-          *:before,  *:after {
+        *:before,
+        *:after {
             -webkit-box-sizing: border-box;
             -moz-box-sizing: border-box;
             box-sizing: border-box;
         }
         
-        .calendar .normal-day:focus
-        {
+        .calendar .normal-day:focus {
             background-color: rgba(0, 0, 0, 0.2);
             -moz-box-shadow: 0 0 5px 1px rgba(255, 255, 255, .5);
             -webkit-box-shadow: 0 0 5px 1px rgba(255, 255, 255, .5);
@@ -55,14 +55,15 @@
         }
         
         .calendar .main {
-            height: 300px;
+            height: 480px;
             position: relative;
+            /*z-index: 3;*/
             overflow: hidden;
         }
         
         .calendar .main li {
             display: inline-block;
-            width: 350px;
+            width: 100%;
         }
         
         .calendar .main ul {
@@ -70,9 +71,9 @@
         }
         
         #calemdarDay div,
-        .calendar  .header-day {
+        .calendar .header-day {
             float: left;
-            width: 50px;
+            width: 60px;
             height: 50px;
             font-weight: bold;
             line-height: 50px;
@@ -82,6 +83,13 @@
         #calemdarDay div {
             border: 1px solid rgba(255, 255, 255, 0);
             color: #bbb;
+            height: 80px;
+            vertical-align: middle;
+        }
+        
+        #calemdarDay div p{
+           font-size: 12px;
+           line-height: 12px;
         }
         
         #calemdarDay .active-day {
@@ -121,7 +129,7 @@
         
         .calendar .title {
             height: 50px;
-            width: 350px;
+            width: 100%;
             line-height: 50px;
             color: #FFF;
             font-weight: bold;
@@ -136,7 +144,7 @@
         .calendar .title-next {
             display: block;
             float: right;
-            width: 50px;
+            width: 60px;
             -webkit-transform: rotateZ(90deg);
             transform: rotateZ(90deg);
         }
@@ -144,7 +152,7 @@
         .calendar .title-pre {
             display: block;
             float: right;
-            width: 50px;
+            width: 60px;
             -webkit-transform: rotateZ(-90deg);
             transform: rotateZ(-90deg);
         }
@@ -169,9 +177,9 @@
 
 <body>
     <div class="myCalendar">
-        
+
     </div>
-  
+
     <button id="click">
         点我</button>
     <button id="PreMonth">
@@ -180,7 +188,6 @@
         下</button>
     </div>
     <script>
-        
         var myModule={
             DayDate:function(){
                 this.taday = new Date();
@@ -213,10 +220,57 @@
             this.initDayUL.call(this);
             this.initEvent.call(this);
             this.MOVE=initDate?(initDate["MOVE"]?initDate["MOVE"]:false):true;
+            var that = this;
+            return{
+               setDate:this.setDate.bind(that) 
+            }; 
         }
         
         
         CreateCalendar.prototype={
+            initDate:function(mDate){
+                var that = this;
+                setTimeout(function(){
+                    CreateCalendar.setDate.apply(this,arguments);
+                },0);
+            },
+            setDate:function(mDate){
+                var i,j,len,mUl,mLi,mDiv,mDIv1,mDay,mTday;
+                if(mDate["days"]){
+                    mUl =  this.wrap.getElementsByClassName("calemdarDay")[0];
+                    mLi =  mUl.getElementsByTagName("li");
+                   var flag = true;
+                   for(i=0;i<6;i++){ 
+                        mDiv =mLi[i].getElementsByTagName("div");
+                        mDIv1 =mLi[i+6].getElementsByTagName("div");
+                       for(j=0,len=mDiv.length;j<len;j++){
+                            mTday= parseInt(mDiv[j].innerHTML.replace("<"));
+                            if(mTday>1&&flag){
+                                continue;
+                            }
+                             console.log(i+"！@"+j);
+                            flag=false;
+                            if(!mDate["days"][0]){
+                                return;
+                            }
+                            var cTday = new Date(mDate["days"][0]["day"]);
+                            if(mTday!=cTday.getDate()){
+                                continue;
+                            }
+                            do{
+                                mDiv[j].innerHTML+= "<p>" + mDate["days"][0]["content"]+"</p>";
+                                mDIv1[j].innerHTML+= "<p>" + mDate["days"][0]["content"]+"</p>";
+                                mDate["days"].shift();
+                                if(!mDate["days"][0]){
+                                    return;
+                                }
+                                cTday = new Date(mDate["days"][0]["day"]);
+                            }while(mTday!=cTday.getDate());                         
+                     
+                        }
+                   }
+                }
+            },
             init:function(pNode,initDate){
                if(pNode){
                     pNode.appendChild(this.wrap);
@@ -396,6 +450,13 @@
         }
     </script>
     <script>
+        var data = {days:[
+            {time:"20",day:"2016/02/01",timeStr:"上午14:54:49",content:"准时",attr:{}},
+            {time:"40",day:"2016/02/01",timeStr:"下午14:54:49",content:"准时",attr:{}},
+            {time:"20",day:"2016/02/02",timeStr:"上午14:54:49",content:"准时",attr:{}},
+            {time:"40",day:"2016/02/02",timeStr:"下午14:54:49",content:"准时",attr:{}},
+        ]
+        };
         var opintion={
             MOVE:true,
             Day:[{
@@ -403,7 +464,18 @@
             }]
         }
         var myCalendar = document.getElementsByClassName("myCalendar")[0];
-       new CreateCalendar(myCalendar,opintion);
+    //    new CreateCalendar(myCalendar,opintion);
+       
+       
+       var createSingleton = (function(){
+           var has= false;
+           return function(fn){ return has||(has=fn())};
+       })();
+       var obj =  new CreateCalendar(myCalendar);
+       obj.setDate(data);
+    //    var mc = createSingleton(function(){return new CreateCalendar(myCalendar);});
+    //    mc();
+    //    mc();
     </script>
     <script type="text/javascript">
         var kelinNameSpace = new Object();
@@ -453,7 +525,6 @@
                 kelinNameSpace.init();
             }
         }
-        
     </script>
 </body>
 
