@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>乘法表</title>
+    <style>
+        *{
+            margin: 0;
+            top: 0;
+        }
+        .demo{
+            width: 650px;
+            margin: 20px auto;
+        }
+        ul li{
+            list-style: none;
+        }
+        li span{
+            display: inline-block;
+            border: 1px solid #666;
+            padding:  3px;
+            width: 60px;
+            height: 20px;
+            text-indent: 10px;
+            line-height: 20px;
+            margin: -1px 0 0 -1px;
+        }
+    </style>
+</head>
+<body>
+    <div class="demo">
+        <ul id="container">
+            <li></li>
+        </ul>
+    </div>
+    <script>
+       
+       var storage = new MyStorage();
+        window.onload = function(){
+            initDateArray(9);
+            if(storage.Date.length){
+                console.log("I");
+                display();
+            }
+        }
+        
+        function MyStorage(){
+            this.Date;
+            this.x=0;
+            this.y=0;
+            this.next = function(){
+                if(this.x==this.Date.length)
+                    return undefined;
+                if(!this.Date[this.x][this.y]){
+                    this.x=0;
+                    this.y++;
+                }
+                return this.Date[this.x++][this.y];
+            }
+            this.isNextLine=function(){
+                   if(this.x==this.Date.length)
+                    return false;
+                  return (!this.Date[this.x][this.y]);
+            }
+            this.reset=function(){
+                this.x=this.y=0;
+            }
+        }
+        
+        function initDateArray(len){
+         var a = new Array();
+            for(var i =0;i<len;i++){
+                var ar = new Array();
+                for(var j=0;j<len;j++){
+                    if(j>=i){
+                        ar[j] = (1+ i)+"*"+(1+j)+"="+(1+i)*(1+j);
+                    }
+                }
+                a[i]=ar;
+            }
+           storage.Date = a;
+        }
+        
+        function display(){
+            var ul = document.getElementById("container");
+            if(storage.isNextLine()){
+                ul.innerHTML=ul.innerHTML+" <li></li>";
+            }
+            var mLis = ul.getElementsByTagName("li");
+            var lastLi = mLis[mLis.length-1];
+            var text = storage.next();
+            if(text){
+                lastLi.innerHTML+="<span>"+text+"</span>";
+                setTimeout(arguments.callee,100);    
+            } 
+        }
+        
+        
+ var x = 10;
+var foo = {
+    x: 20,
+    bar: function () {
+        var x = 30;
+        return this.x;
+    }
+};
+console.log(
+    foo.bar(),                
+    (foo.bar)(),               
+    (foo.bar = foo.bar)(),     
+    (foo.bar, foo.bar)()       
+);
+    </script>
+</body>
+</html>

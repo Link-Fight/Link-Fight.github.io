@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style> 
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        
+        .container{
+            width: 600px;
+            height: 600px;
+            margin:  0 auto;
+            background-color: hotpink;
+            position: relative;
+          
+        }
+        
+        .img{
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            background-color: yellow;
+            margin:  auto auto;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+        }
+        
+        .img :nth-child(1){
+            transform: translate(50px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id ="parent">
+        <div class="img"></div>
+    </div>
+    <script type="text/javascript" src="http://www.coding123.net/getip.ashx?js=1"></script>
+<script>
+alert(ip)
+</script>
+<script>
+    var option={
+        pNode:document.getElementById("parent"),
+        id:"fw",
+        name:"fWheel",
+        cNode:{
+            radius:50,
+            eleArry:[
+                {
+                    id:"img1"
+                },{
+                    id:"img2"
+                },{
+                    id:"img3"
+                },{
+                    id:"img4"
+                },{
+                    id:"img5"
+                }
+            ]
+        },
+        
+    };
+</script>
+<script>
+    function CreateFerrisWheel(opt){
+        this.wrap = opt["pNode"]?opt["pNode"]:document.body.appendChild(document.createElement("div"));
+        this.wrap.id=opt["id"]?opt["id"]:"FerrisWheel";
+        this.wrap.name=opt["name"]?opt["name"]:"FerrisWheel";
+        
+    }
+    
+    CreateFerrisWheel.prototype={
+        init:function(opt){
+            var that,i,len;
+             that = this;
+            this.wrap.height = parseInt(getComputedStyle(this.wrap)["height"]);
+            this.wrap.width = parseInt(getComputedStyle(this.wrap)["width"]);
+            this.wrap.radius = Math.min(this.wrap.height,this.wrap.width)/2;
+            for(i=0;i<5;i++){
+                
+            }
+        }
+    }
+</script>
+</body>
+</html>

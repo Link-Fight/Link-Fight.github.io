@@ -1,0 +1,71 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,900);
+* {
+  margin: 0;
+  padding: 0;
+}
+.wrapper {
+  padding-top: 20px;
+  padding-bottom: 400px;
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #ffe;
+  background-size: cover;
+  background-image: -webkit-gradient(linear, center top, center bottom, from(#858585), to(#475769));
+}
+.wrapper .title h1 {
+  font-weight: 900;
+  padding-bottom: 5px;
+  border-bottom: solid 2px #ddd;
+  display: inline-block;
+}
+.wrapper .title p {
+  margin-top: 30px;
+}
+.wrapper .buttons {
+  margin-top: 30px;
+}
+.wrapper .buttons .button {
+  margin: 25px auto;
+  transition: all .5s;
+  overflow: hidden;
+}
+.wrapper .buttons .button-gh {
+  background-color: #305097;
+  color: #ffe;
+  width: 50px;
+  height: 50px;
+  border-radius: 25px;
+  margin-bottom: 25px;
+  text-align: center;
+  font-size: 130%;
+  line-height: 50px;
+  box-shadow: rgba(16, 25, 36, 0.65098) 3px 3px 8px 0px;
+  -webkit-box-shadow: rgba(16, 25, 36, 0.65098) 3px 3px 8px 0px;
+  -moz-box-shadow: rgba(16, 25, 36, 0.65098) 3px 3px 8px 0px;
+  -webkit-font-smoothing: antialiased;
+}
+.wrapper .buttons .button-gh a {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  text-decoration: none;
+  color: #ddd;
+  border-radius: 25px;
+  background-image: -webkit-gradient(linear, left center, right center, from(#008585), to(#002269));
+  cursor: pointer;
+}
+.wrapper .buttons .button-gh:hover {
+  width: 150px;
+}
+.wrapper .buttons .button-gh:hover a {
+  background-color: transparent;
+  background-image: none;
+}
+.wrapper .buttons .button-gh:hover li:after {
+  margin-left: 10px;
+  content: "Link-Fight";
+  font-family: 'Raleway', sans-serif;
+  font-size: 50%;
+  opacity: 0.5;
+}

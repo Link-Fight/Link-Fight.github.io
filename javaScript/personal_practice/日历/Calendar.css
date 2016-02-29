@@ -1,0 +1,149 @@
+   .calendar {
+            margin-top: 20px;
+            margin-left: auto;
+            margin-right: auto;
+            width: 700px;
+            height: 700px;
+            padding: 5px;
+            box-sizing: content-box;
+            border: 1px solid rbga(0, 0, 0, 0.2);
+            border-radius: 5px;
+            background-clip: padding-box;
+            background: rgba(0, 0, 0, 0.5);
+            box-shadow: 0 0 13px 3px rgba(0, 0, 0, .5);
+            overflow: hidden;
+            font-family: 'Source Sans Pro', sans-serif;
+            font-size: 18px;
+            text-align: center;
+        }
+        
+          *:before,  *:after {
+            -webkit-box-sizing: border-box;
+            -moz-box-sizing: border-box;
+            box-sizing: border-box;
+        }
+        
+        .calendar .normal-day:focus
+        {
+            background-color: rgba(0, 0, 0, 0.2);
+            -moz-box-shadow: 0 0 5px 1px rgba(255, 255, 255, .5);
+            -webkit-box-shadow: 0 0 5px 1px rgba(255, 255, 255, .5);
+            box-shadow: 0 0 5px 1px rgba(255, 255, 255, .5);
+            overflow: hidden;
+        }
+        
+        .calendar .header {
+            height: 50px;
+        }
+        
+        .calendar .main {
+            height: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .calendar .main li {
+            display: inline-block;
+            width: 100%;
+        }
+        
+        .calendar .main ul {
+            -webkit-padding-start: 0px;
+        }
+        
+        #calemdarDay div,
+        .calendar  .header-day {
+            float: left;
+            width: 100px;
+            height: 50px;
+            font-weight: bold;
+            line-height: 50px;
+            color: #FFF;
+        }
+        
+        #calemdarDay div {
+            border: 1px solid rgba(255, 255, 255, 0);
+            color: #bbb;
+            height: 100px;
+        }
+        
+        #calemdarDay .active-day {
+            /*border: 1px solid rgba(255, 255, 255, 0);*/
+            cursor: pointer;
+            color: #FFF;
+        }
+        
+        .active-day:hover {
+            background-color: rgba(0, 0, 0, 0.2);
+            border: 1px solid rgba(0, 0, 0, 0.1);
+            border: 1px solid rgba(255, 255, 255, .4);
+            box-shadow: 0 0 1px 1px rgba(255, 255, 255, .5);
+            overflow: hidden;
+            box-sizing: border-box;
+        }
+        
+        .header-day:nth-last-child(1),
+        .header-day:nth-child(1) {
+            color: mediumspringgreen;
+        }
+        
+        .header-day:nth-last-child(1):after {
+            content: "";
+            clear: both;
+        }
+        
+        .calendar ul {
+            display: block;
+            position: absolute;
+            list-style-type: none;
+        }
+        
+        .calendar ul li {
+            float: left;
+        }
+        
+        .calendar .title {
+            height: 50px;
+            width: 100%;
+            line-height: 50px;
+            color: #FFF;
+            font-weight: bold;
+        }
+        
+        .calendar .title-text {
+            display: block;
+            float: left;
+            text-indent: 20px;
+        }
+        
+        .calendar .title-next {
+            display: block;
+            float: right;
+            width: 50px;
+            -webkit-transform: rotateZ(90deg);
+            transform: rotateZ(90deg);
+        }
+        
+        .calendar .title-pre {
+            display: block;
+            float: right;
+            width: 50px;
+            -webkit-transform: rotateZ(-90deg);
+            transform: rotateZ(-90deg);
+        }
+        
+        #title-pre:hover {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            box-sizing: border-box;
+            border-radius: 50%;
+        }
+        
+        #title-next:hover {
+            cursor: pointer;
+            background-color: rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            box-sizing: border-box;
+            border-radius: 50%;
+        }

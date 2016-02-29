@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>组件(input)</title>
+</head>
+
+<body>
+    <div class="contain">
+        <label id="show" for="textCount">0个字</label>
+        <input id="input" type="text" name="textCount">
+    </div>
+    <script>
+        function CreateOpInput(tEle,aEle){
+            this.initEvent.apply(this,arguments);
+        }
+        var e = document.getElementById("id");
+        CreateOpInput.prototype={
+            initEvent:function(tEle,aEle){
+                tEle.addEventListener("keyup",function(){
+                    aEle.innerHTML =aEle.innerHTML.replace(/\d+/g,this.value.length); 
+                    console.log(this.value.length);
+                });
+            }
+        }
+    </script>
+    <script>
+        var show = document.getElementById("show");
+        var input = document.getElementById("input");
+        var cc =new CreateOpInput(input,show);
+    </script>
+</body>
+
+</html>

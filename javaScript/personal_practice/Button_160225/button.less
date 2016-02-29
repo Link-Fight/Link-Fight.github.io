@@ -1,0 +1,88 @@
+@import url(https://fonts.googleapis.com/css?family=Raleway:400,900);
+
+@basic_button_width:50px;
+@basic_button_height:50px;
+@hover_button_width:150px;
+
+.circle(@color:#fff){
+    background-color: @color;
+    color: #ffe;
+    width: @basic_button_width;
+    height: @basic_button_height;
+    border-radius: @basic_button_height/2;
+    margin-bottom: @basic_button_height/2;
+    text-align: center;
+    font-size: 130%;
+    line-height: @basic_button_height;
+    box-shadow: rgba(16, 25, 36, 0.65098) 3px 3px 8px 0px;
+    -webkit-box-shadow:rgba(16, 25, 36, 0.65098) 3px 3px 8px 0px;
+    -moz-box-shadow:rgba(16, 25, 36, 0.65098) 3px 3px 8px 0px;
+}
+
+ *{
+     margin: 0;
+     padding: 0;
+ }
+ 
+.wrapper{
+  padding-top: 20px;
+  padding-bottom: 400px;
+  font-family: 'Raleway', sans-serif;
+  letter-spacing: 1px;
+  text-align: center;
+  color: #ffe;
+  background-size: cover;
+  background-image: -webkit-gradient(linear,center top, center bottom,  from(#858585), to(#475769));
+  .title{
+    h1{
+      font-weight: 900;
+      padding-bottom: 5px;
+      border-bottom: solid 2px #ddd;
+      display: inline-block;
+    }
+    p{
+      margin-top: 30px;
+    }
+  }
+   .buttons{
+    margin-top: 30px;
+    .button{
+      margin: 25px auto;
+      transition: all .5s;
+      overflow: hidden;
+      
+    }
+     .button-gh{
+       .circle(#305097);
+       -webkit-font-smoothing: antialiased;
+       a{
+          display: inline-block;
+          width: @basic_button_width;
+          height: @basic_button_height;
+          text-decoration: none;
+          color: #ddd;
+          border-radius: @basic_button_height/2;
+          background-image: -webkit-gradient(linear,left center, right center,  from(#008585), to(#002269));
+          cursor: pointer;   
+       }
+    }
+     .button-gh:hover{
+      width: @hover_button_width;
+     a{
+          background-color: transparent;
+           background-image: none;
+     }
+      li:after{
+        margin-left: 10px;
+        content:"Link-Fight";
+        font-family: 'Raleway', sans-serif;
+        font-size: 50%;
+        opacity: 0.5;
+      }
+    }
+   
+    
+   }
+  
+ 
+}
