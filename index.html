@@ -1,1 +1,217 @@
-Hello World My Name is Link
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>柯琳的GitHub</title>
+    <meta name="description" content="LinkFight的博客,web开发者">
+    <meta name="keywords" content="LinkFight,web开发者">
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="http://static.hdslb.com/images/favicon.ico">
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="cache-control" content="no-cache">
+    <link rel="stylesheet" href="javaScript/personal_practice/7Day/css/jquery.fullPage.css">
+    <script src="javaScript/personal_practice/7Day/js/jquery-1.8.3.min.js"></script>
+    <script src="javaScript/personal_practice/7Day/js/jquery.fullPage.min.js"></script>
+    <script src="http://cdn.staticfile.org/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: "Microsoft YaHei", Arial, Helvetica, sans-serifsans-serif;
+        }
+        
+        #mark {
+            position: absolute;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background: #666;
+            z-index: 1000;
+        }
+        
+        .menu {
+            height: 42px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            background-color: rgba(0, 0, 0, 0.2);
+            z-index: 1;
+        }
+        
+        #menu {
+            display: block;
+            height: 42px;
+        }
+        
+        .content {
+            position: relative;
+            width: 960px;
+            margin: 0 auto;
+        }
+        
+        #menu li {
+            float: left;
+            text-align: center;
+            line-height: 42px;
+            list-style: none;
+        }
+        
+        #menu li a {
+            text-decoration: none;
+            color: #222;
+            padding: 0 15px;
+            transition: .15s background-color;
+            font-size: 13px;
+            color: white;
+            font-weight: bold;
+        }
+        
+        #person {
+            display: block;
+            position: absolute;
+            top: 42px;
+            right: 0;
+            width: 220px;
+            transition: 0.3s;
+            height: 0px;
+        }
+        
+        #person:hover {
+            height: 220px;
+            transition: 0.3s;
+        }
+        
+        #person .content {
+            overflow: hidden;
+        }
+        
+        #person:hover .content {
+            transition: 0.3s;
+        }
+        
+        #person .me {
+            position: absolute;
+            top: -39px;
+            left: 50%;
+            margin-left: -18px;
+            background-size: 100%;
+            border-radius: 50%;
+            width: 36px;
+            height: 36px;
+            transition: .3s;
+            z-index: 50;
+        }
+        
+        #person .me:hover {
+            width: 64px;
+            height: 64px;
+            right: 36px;
+            top: -36px;
+            margin-left: -32px;
+        }
+        
+        .me:after {
+            content: "联系我";
+            background-color: yellow;
+            color: red;
+            font-weight: bold;
+        }
+        
+        #person .content {
+            line-height: 30px;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.8);
+            height: 100%;
+            width: 100%;
+        }
+        
+        .menu .person {
+            background: yellow;
+            position: absolute;
+        }
+        
+        .section {
+            background-image: url("index/image/p4.jpg");
+            background-repeat: no-repeat;
+            background-size: 100% 100%;
+        }
+    </style>
+    <script>
+        $(function(){
+            $('#fullPage').fullpage({
+                resize:true,
+                sectionsColor: ['#ff00ff', '#00ffff', '#7BAABE', '#f90'],
+                anchors: ['page1', 'page2', 'page3', 'page4'],
+                loopTop:true,
+                navigation:true,
+                menu: '#menu',
+            });
+        });
+    </script>
+</head>
+
+<body>
+    <div class="menu">
+        <div class="content">
+            <ul id="menu">
+                <li data-menuanchor="page1" class=""><a href="#page1">简介</a></li>
+                <li data-menuanchor="page2" class=""><a href="#page2">学习经历</a></li>
+                <li data-menuanchor="page3" class=""><a href="#page3">工作经历</a></li>
+                <li data-menuanchor="page4" class="active"><a href="#page4">技能</a></li>
+            </ul>
+            <div id="person">
+                <img src="index/image/myface.jpg" alt="" class="me">
+                <div class="content">
+                    <br> 真名：柯琳
+                    <br> 联系电话
+                    <br>15915797485
+                    <br> 联系邮箱
+                    <br>315148032@qq.com
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--<div id="mark"></div>-->
+    <div id="fullPage">
+        <div class="section section1"></div>
+        <div class="section section2"></div>
+        <div class="section section3"></div>
+        <div class="section section4"></div>
+    </div>
+    <script>
+        window.onload=function(){
+            var divMark = document.getElementById("mark");
+            var tool = new Tool();
+            setTimeout(function(){
+                tool.move(divMark,{T:"height",V:0},function(){
+                    divMark.style.display="none";
+                });
+            },1000);
+        }
+        
+        function Tool(){
+            
+        }
+        
+        Tool.prototype={
+            move:function(obj,target,callback){
+                            clearTimeout(obj.timer);
+                            obj.timer= setTimeout(function(){
+                                var nowT =parseInt(getComputedStyle(obj)[target["T"]]);
+                                if(nowT!=target["V"]){
+                                    var speed = (target["V"]-nowT)/20;
+                                    speed=speed <0?Math.floor(speed):Math.ceil(speed);
+                                    obj.style[target["T"]]=(nowT+speed)+"px";
+                                    Tool.prototype.move(obj,target,callback);
+                                }else{
+                                    callback();
+                                }
+                            },50);
+                    }
+        }
+    </script>
+</body>
+
+</html>
