@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>列表</title>
+    <link rel="stylesheet" href="list.css">
+    <script src="list.js"></script>
+    <style>
+        .main{
+            width:300px;
+        }
+    </style>
+</head>
+<body>
+    <div class="main"></div>
+      <script>
+        window.onload=function(){
+            var c 
+            var targetDiv = document.getElementsByClassName("main")[0]
+            
+           c = new CreateList(targetDiv,
+               {
+               data:[
+                   {
+                    pNode:"第一课",
+                    cNode:[
+                        {text:"百度",href:"http://www.baidu.com"},
+                        {text:"bing",href:"http://wwww.bing.com"}
+                        ]
+                   },
+                   {
+                       pNode:"第二课",
+                       cNode:[
+                           {text:"1",href:"11"},
+                           {text:"2",href:"22"},
+                           {text:"3",href:"33"},
+                           {text:"4",href:"44"},
+                       ]
+                   },
+                    {
+                       pNode:"综合",
+                       cNode:[
+                           {text:"hao123",href:"11"},
+                           {text:"新浪",href:"22"},
+                           {text:"凤凰网",href:"33"},
+                           {text:"网易",href:"44"},
+                       ]
+                   },
+                    {
+                       pNode:"第四课",
+                       cNode:[
+                           {text:"1",href:"11"},
+                           {text:"2",href:"22"},
+                           {text:"3",href:"33"},
+                           {text:"4",href:"44"},
+                           {text:"1",href:"11"},
+                           {text:"2",href:"22"},
+                           {text:"3",href:"33"},
+                           {text:"4",href:"44"},
+                       ]
+                   },
+                    {
+                       pNode:"第五课",
+                       cNode:[
+                           {text:"1",href:"11"},
+                           {text:"2",href:"22"},
+                           {text:"3",href:"33"},
+                           {text:"4",href:"44"},
+                           {text:"1",href:"11"},
+                           {text:"2",href:"22"},
+                           {text:"3",href:"33"},
+                           {text:"4",href:"44"},
+                           {text:"1",href:"11"},
+                           {text:"2",href:"22"},
+                           {text:"3",href:"33"},
+                           {text:"4",href:"44"},
+                           {text:"1",href:"11"},
+                           {text:"2",href:"22"},
+                           {text:"3",href:"33"},
+                           {text:"4",href:"44"},
+                       ]
+                   }
+               
+               ]
+               }
+           );
+           
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,52 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        .kelin_listwrap {
+            margin: 10px;
+            border: 15px solid #aaa;
+            border-radius: 10px;
+            padding: 5px;
+            color: #fff;
+            overflow: hidden;
+        }
+        
+        .kelin_listwrap a {
+            list-style: none;
+            text-decoration: none;
+        }
+        
+        .kelin_listwrap dl {
+            overflow: hidden;
+        }
+        
+        .kelin_listwrap dt {
+            text-indent: 10px;
+            cursor: pointer;
+            background: green;
+            border-bottom: 2px solid #fff;
+            line-height: 30px;
+            font: 700 14px/30px Tahoma;
+        }
+        
+        .kelin_listwrap dt span {
+            float: right;
+            text-indent: -10px;
+            font: 700 10px/30px Tahoma;
+        }
+        
+        .kelin_listwrap dd {
+            text-indent: 15px;
+            border-bottom: 2px solid #fff;
+            line-height: 25px;
+            font: 12px/25px Tahoma;
+            cursor: pointer;
+            background: lightseagreen;
+            color: blue;
+        }
+        
+        .kelin_listwrap .active {
+            background-color: lightgreen;
+            color: black;
+        }
