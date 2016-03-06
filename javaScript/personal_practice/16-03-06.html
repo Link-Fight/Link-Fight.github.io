@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>测试textArea控制行</title>
+    <style>
+        textarea{
+            /*line-height: 40px;*/
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <textarea name="" id="ta" cols="2" ></textarea>
+    </div>
+    <script>
+        window.onload=function(){
+          var  textArea = document.getElementById("ta");
+            textArea.style.overflow="hidden";
+            textArea.rows=2;
+            textArea.flag =false;
+            textArea.onscroll=function(){
+              if(textArea.flag)
+                   return;
+              this.disabled = true;
+              this.value=this.value.slice(0,this.value.length-1);
+              textArea.flag=true;
+          };
+        };
+    </script>
+</body>
+</html>
