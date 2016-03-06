@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>关于Jquery插件</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <style>
+        .body {
+            margin-top: 100px;
+        }
+        
+        .content {
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        
+        
+        .nav>li>ul {
+            list-style: none;
+            padding-left: 10px;
+            
+            overflow: hidden;
+            transition: 0.3s;
+        }
+        
+        .nav>li>ul>li{
+            height: 0;
+            transition: 0.3s;
+        }
+        
+        .nav>li:hover>ul>li{
+            height: 20px;
+        }
+        
+        .nav>li>ul a {
+            color: #ffffff;
+            padding: 10px;
+            
+        }
+        .nav>li>ul a:hover {
+            color: #aaa;
+            padding: 10px;
+            text-decoration:none;
+        }
+        .demo {
+            margin: 10px 0px;
+            border: 2px solid #99F9FF;
+            padding: 10px;
+        }
+        
+        .color_h1 {
+            color: #32CD32;
+        }
+        
+        .color_h2 {
+            color: #00C0aa;
+        }
+        
+        .demo-img {
+            padding: 5px;
+            border: 1px solid #88C0aa;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="" id="nav"></div>
+    <script>
+        $("#nav").load("nav.html",function(response,status,xhr){});
+    </script>
+    <div class="body">
+        <div class="container">
+            <h1 class="color_h1">自定义Jquery插件</h2>
+            <pre>插件是以 jQuery 的核心代码为基础，编写出复合一定规范的应用程序。
+                <span>慕客网各种jQuery插件介绍：<a href="http://www.imooc.com/learn/385" target="blank">jQuery插件——Validation Plugin</a></span>
+                <span>jQuery官网的插件：<a href="http://plugins.jquery.com/" target="blank">The jQuery Plugin Registry</a></span></pre>
+            <p>按照功能可以分类为三种</p>
+            <ol>
+                <li>
+                    <p>封装对象方法的插件；(也就是基于某个DOM元素的JQuery对象，局部性，实用性最多)</p>
+                </li>
+                <li>
+                    <p>封装全局函数的插件；（全局性的封装）</p>
+                </li>
+                <li>
+                    <p>选择器插件。（类似与find()，例如 <code>color(red)</code>来选择所有的红色元素之类)</p>
+                </li>
+            </ol>
+            <h2 class="color_h2">插件的基本要点</h2>
+            <p>主要用以以解决各种因为插件导致的冲突、错误等问题</p>
+            <ol>
+                <li>
+                    <p>插件名推荐使用 jQuery.[插件名].js，以免和其他 js 文件或者其他库相冲突（可以使用<code>alert($.[插件名]</code>)验证是否存在该全局方法）；</p>
+                </li>
+                <li>
+                    <p>局部对象附加 jQuery.fn 对象上，全局函数附加在 jQuery对象本身上（可以使用<code>alert($(selector).[插件名]</code>)验证是否存在该局部方法）；</p>
+                </li>
+                <li>
+                    <p>插件内部，this 指向是当前的局部对象（通过选择器获取的jQuery对象）；</p>
+                </li>
+                <li>
+                    <p>可以通过 this.each 来遍历所有元素；</p>
+                </li>
+                <li>
+                    <p>所有的方法或插件，必须用分号结尾，避免出现问题（为了更稳妥，可在插件头部先加上一个分号）；</p>
+                </li>
+                <li>
+                    <p>插件应该返回的是 jQuery 对象，以保证可链式操作；</p>
+                </li>
+                <li>
+                    <p>避免插件内部使用$，如果要使用，使用闭包把传递 jQuery 进去，使插件内部继续使用$作为jQuery的别名。</p>
+                </li>
+            </ol>
+            <h2 class="color_h2">编写一个插件</h2>
+            <pre>假设是插件实现的需求是:实现一个下拉菜单，在移入该元素时，把对应的下拉列表展示出来出来，移除时收回，并且设置其展开时候的文字颜色。</pre>
+            <p>假设有如下HTML结构</p>
+            <div class="code">
+            <link rel='stylesheet' type='text/css' href='http://tools.oschina.net/js/syntaxhighlighter_3.0.83/styles/shCoreMidnight.css'/><div id="highlighter_122240" class="syntaxhighlighter  xml"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div><div class="line number21 index20 alt2">21</div><div class="line number22 index21 alt1">22</div><div class="line number23 index22 alt2">23</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="xml plain">&lt;</code><code class="xml keyword">ul</code>&nbsp;<code class="xml color1">class</code><code class="xml plain">=</code><code class="xml string">"list"</code><code class="xml plain">&gt;</code></div><div class="line number2 index1 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">li</code><code class="xml plain">&gt;导航列表1</code></div><div class="line number3 index2 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">ul</code>&nbsp;<code class="xml color1">class</code><code class="xml plain">=</code><code class="xml string">"nav"</code><code class="xml plain">&gt;</code></div><div class="line number4 index3 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">li</code><code class="xml plain">&gt;导航列表1&lt;/</code><code class="xml keyword">li</code><code class="xml plain">&gt;</code></div><div class="line number5 index4 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">li</code><code class="xml plain">&gt;导航列表2&lt;/</code><code class="xml keyword">li</code><code class="xml plain">&gt;</code></div><div class="line number6 index5 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">li</code><code class="xml plain">&gt;导航列表3&lt;/</code><code class="xml keyword">li</code><code class="xml plain">&gt;</code></div><div class="line number7 index6 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">li</code><code class="xml plain">&gt;导航列表4&lt;/</code><code class="xml keyword">li</code><code class="xml plain">&gt;</code></div><div class="line number8 index7 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">li</code><code class="xml plain">&gt;导航列表5&lt;/</code><code class="xml keyword">li</code><code class="xml plain">&gt;</code></div><div class="line number9 index8 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">li</code><code class="xml plain">&gt;导航列表6&lt;/</code><code class="xml keyword">li</code><code class="xml plain">&gt;</code></div><div class="line number10 index9 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">ul</code><code class="xml plain">&gt;</code></div><div class="line number11 index10 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">li</code><code class="xml plain">&gt;</code></div><div class="line number12 index11 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">li</code><code class="xml plain">&gt;导航列表2</code></div><div class="line number13 index12 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">ul</code>&nbsp;<code class="xml color1">class</code><code class="xml plain">=</code><code class="xml string">"nav"</code><code class="xml plain">&gt;</code></div><div class="line number14 index13 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">li</code><code class="xml plain">&gt;导航列表1&lt;/</code><code class="xml keyword">li</code><code class="xml plain">&gt;</code></div><div class="line number15 index14 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">li</code><code class="xml plain">&gt;导航列表2&lt;/</code><code class="xml keyword">li</code><code class="xml plain">&gt;</code></div><div class="line number16 index15 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">li</code><code class="xml plain">&gt;导航列表3&lt;/</code><code class="xml keyword">li</code><code class="xml plain">&gt;</code></div><div class="line number17 index16 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">li</code><code class="xml plain">&gt;导航列表4&lt;/</code><code class="xml keyword">li</code><code class="xml plain">&gt;</code></div><div class="line number18 index17 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">li</code><code class="xml plain">&gt;导航列表5&lt;/</code><code class="xml keyword">li</code><code class="xml plain">&gt;</code></div><div class="line number19 index18 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;</code><code class="xml keyword">li</code><code class="xml plain">&gt;导航列表6&lt;/</code><code class="xml keyword">li</code><code class="xml plain">&gt;</code></div><div class="line number20 index19 alt1"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">ul</code><code class="xml plain">&gt;</code></div><div class="line number21 index20 alt2"><code class="xml spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="xml plain">&lt;/</code><code class="xml keyword">li</code><code class="xml plain">&gt;</code></div><div class="line number22 index21 alt1"><code class="xml plain">&lt;/</code><code class="xml keyword">ul</code><code class="xml plain">&gt;</code></div><div class="line number23 index22 alt2"><code class="xml comments">&lt;!--&nbsp;默认已经引入jquery&nbsp;--&gt;</code></div></div></td></tr></tbody></table></div>
+            </div>
+            <pre>在这里，就是对该插件的使用有了前置的要求：首先html结构是要先定义好的，<code>对于需要hover展示的元素</code>内部下面必须要有<code>ul</code>列表，并且<code>className</code>必须是<code>nav</code>(相当于css所说的钩子，在插件内部就是要根据钩子来执行操作)</pre>
+            <p>开始编写插件，保存为<code>jQuery.nav.js</code></p>
+            <div class="code">
+                <link rel='stylesheet' type='text/css' href='http://tools.oschina.net/js/syntaxhighlighter_3.0.83/styles/shCoreMidnight.css'/><div id="highlighter_169070" class="syntaxhighlighter  js"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div><div class="line number16 index15 alt1">16</div><div class="line number17 index16 alt2">17</div><div class="line number18 index17 alt1">18</div><div class="line number19 index18 alt2">19</div><div class="line number20 index19 alt1">20</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="js plain">;(</code><code class="js keyword">function</code><code class="js plain">($){</code></div><div class="line number2 index1 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$.extend({&nbsp;</code><code class="js comments">//插件定义在全局方法上</code></div><div class="line number3 index2 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js string">"nav"</code>&nbsp;<code class="js plain">:&nbsp;</code><code class="js keyword">function</code>&nbsp;<code class="js plain">(color){</code><code class="js comments">//传参，这里只是抛砖引玉，在您编写的时候，参数选项可以更加丰富，例如传入json对象等等</code></div><div class="line number4 index3 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$(</code><code class="js string">'.nav'</code><code class="js plain">).css({</code><code class="js comments">//对展开的下拉列表设置样式，此处在下面进行详细说明</code></div><div class="line number5 index4 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js string">"list-style"</code>&nbsp;<code class="js plain">:&nbsp;</code><code class="js string">"none"</code><code class="js plain">,</code></div><div class="line number6 index5 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js string">"margin"</code>&nbsp;<code class="js plain">:&nbsp;0,</code></div><div class="line number7 index6 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js string">"padding"</code>&nbsp;<code class="js plain">:&nbsp;0,</code></div><div class="line number8 index7 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js string">"display"</code>&nbsp;<code class="js plain">:&nbsp;</code><code class="js string">"none"</code><code class="js plain">,</code></div><div class="line number9 index8 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js string">"color"</code><code class="js plain">:color</code><code class="js comments">//由用户控制hover时，展现出来列表的文字颜色</code></div><div class="line number10 index9 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">});</code></div><div class="line number11 index10 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$(</code><code class="js string">'.nav'</code><code class="js plain">).parent().hover(</code><code class="js comments">//这里用到了.nav的父节点（就是hover到的元素）</code></div><div class="line number12 index11 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js comments">//因为我们只能在插件要求的范围内进行设定，若是使用了外部的选择器，就违背了这个原则</code></div><div class="line number13 index12 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js keyword">function</code>&nbsp;<code class="js plain">(){</code></div><div class="line number14 index13 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$(</code><code class="js keyword">this</code><code class="js plain">).find(</code><code class="js string">".nav"</code><code class="js plain">).stop().slideDown(</code><code class="js string">"normal"</code><code class="js plain">);</code><code class="js comments">//注意我们在这里使用了jquery的动画方法</code></div><div class="line number15 index14 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">},</code><code class="js keyword">function</code>&nbsp;<code class="js plain">(){</code></div><div class="line number16 index15 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$(</code><code class="js keyword">this</code><code class="js plain">).find(</code><code class="js string">".nav"</code><code class="js plain">).stop().slideUp(</code><code class="js string">"normal"</code><code class="js plain">);</code><code class="js comments">//注意stop()的使用，不然会有类似手风琴效果的出现，但那并不是我们需要的</code></div><div class="line number17 index16 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">});</code></div><div class="line number18 index17 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">}</code></div><div class="line number19 index18 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">});</code></div><div class="line number20 index19 alt1"><code class="js plain">})(jQuery);</code></div></div></td></tr></tbody></table></div>
+            </div>
+            <p>依赖的css代码为：</p>
+            <div class="code">
+                <link rel='stylesheet' type='text/css' href='http://tools.oschina.net/js/syntaxhighlighter_3.0.83/styles/shCoreMidnight.css'/><div id="highlighter_324620" class="syntaxhighlighter  css"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="css plain">.hover{</code><code class="css comments">/*插件必须样式*/</code></div><div class="line number2 index1 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css keyword">list-style</code><code class="css plain">:&nbsp;</code><code class="css value">none</code><code class="css plain">;</code></div><div class="line number3 index2 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css keyword">margin</code><code class="css plain">:</code><code class="css value">0</code><code class="css plain">;</code></div><div class="line number4 index3 alt1"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css keyword">padding</code><code class="css plain">:&nbsp;</code><code class="css value">0</code><code class="css plain">;</code></div><div class="line number5 index4 alt2"><code class="css spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="css keyword">display</code><code class="css plain">:&nbsp;</code><code class="css value">none</code><code class="css plain">;</code></div><div class="line number6 index5 alt1"><code class="css plain">}</code></div></div></td></tr></tbody></table></div>
+            </div>
+            <p>js调用代码为：</p>
+            <div class="code"><link rel='stylesheet' type='text/css' href='http://tools.oschina.net/js/syntaxhighlighter_3.0.83/styles/shCoreMidnight.css'/><div id="highlighter_552557" class="syntaxhighlighter  js"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="js plain">$(</code><code class="js string">'.nav'</code><code class="js plain">).addClass(</code><code class="js string">"hover"</code><code class="js plain">);</code><code class="js comments">//将CSS与jQuery分离开来</code></div><div class="line number2 index1 alt1"><code class="js plain">$(</code><code class="js keyword">function</code>&nbsp;&nbsp;<code class="js plain">(){</code></div><div class="line number3 index2 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$.nav(</code><code class="js string">"#999"</code><code class="js plain">);</code><code class="js comments">//调用插件实现的全局方法，并且设置其展现背景颜色为#999。</code></div><div class="line number4 index3 alt1"><code class="js plain">});</code></div></div></td></tr></tbody></table></div></div>
+            <p>效果</p>
+            <div class="demo-img">
+                <img src="demo/demo.gif" alt="">
+            </div>
+            <p>效果是实现了，但是所有是 <code>class 是 nav</code>都被影响到了。 </p>
+            
+            <h2 class="color_h2">变为局部方法</h2>
+            <div class="code">
+                <link rel='stylesheet' type='text/css' href='http://tools.oschina.net/js/syntaxhighlighter_3.0.83/styles/shCoreMidnight.css'/><div id="highlighter_736971" class="syntaxhighlighter  js"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div><div class="line number5 index4 alt2">5</div><div class="line number6 index5 alt1">6</div><div class="line number7 index6 alt2">7</div><div class="line number8 index7 alt1">8</div><div class="line number9 index8 alt2">9</div><div class="line number10 index9 alt1">10</div><div class="line number11 index10 alt2">11</div><div class="line number12 index11 alt1">12</div><div class="line number13 index12 alt2">13</div><div class="line number14 index13 alt1">14</div><div class="line number15 index14 alt2">15</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="js plain">;(</code><code class="js keyword">function</code><code class="js plain">($){</code></div><div class="line number2 index1 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$.fn.extend({</code><code class="js comments">//定义为局部方法</code></div><div class="line number3 index2 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js string">"nav"</code>&nbsp;<code class="js plain">:&nbsp;</code><code class="js keyword">function</code>&nbsp;<code class="js plain">(color){</code></div><div class="line number4 index3 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$(</code><code class="js keyword">this</code><code class="js plain">).find(</code><code class="js string">'.nav'</code><code class="js plain">).addClass(</code><code class="js string">'hover'</code><code class="js plain">);</code><code class="js comments">//上面已经说过了,此时this指向调用该方法的元素</code></div><div class="line number5 index4 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$(</code><code class="js keyword">this</code><code class="js plain">).find(</code><code class="js string">'.nav'</code><code class="js plain">).css(</code><code class="js string">"color"</code><code class="js plain">,color);</code><code class="js comments">//在当前元素下，增加了一次find筛选，实现在对应的元素中执行。</code></div><div class="line number6 index5 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$(</code><code class="js keyword">this</code><code class="js plain">).find(</code><code class="js string">'.nav'</code><code class="js plain">).parent().hover(</code></div><div class="line number7 index6 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js keyword">function</code>&nbsp;<code class="js plain">(){</code></div><div class="line number8 index7 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$(</code><code class="js keyword">this</code><code class="js plain">).find(</code><code class="js string">".nav"</code><code class="js plain">).stop().slideDown(</code><code class="js string">"normal"</code><code class="js plain">);</code></div><div class="line number9 index8 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">},</code><code class="js keyword">function</code>&nbsp;<code class="js plain">(){</code></div><div class="line number10 index9 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$(</code><code class="js keyword">this</code><code class="js plain">).find(</code><code class="js string">".nav"</code><code class="js plain">).stop().slideUp(</code><code class="js string">"normal"</code><code class="js plain">);</code></div><div class="line number11 index10 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">});</code></div><div class="line number12 index11 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js keyword">return</code>&nbsp;<code class="js keyword">this</code><code class="js plain">;</code><code class="js comments">//返回当前的对象</code></div><div class="line number13 index12 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">}</code></div><div class="line number14 index13 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">});</code></div><div class="line number15 index14 alt2"><code class="js plain">})(jQuery);</code></div></div></td></tr></tbody></table></div>
+            </div>
+            
+            <p>html代码不变，调用的js代码变为</p>
+            <div class="code"><link rel='stylesheet' type='text/css' href='http://tools.oschina.net/js/syntaxhighlighter_3.0.83/styles/shCoreMidnight.css'/><div id="highlighter_702982" class="syntaxhighlighter  js"><div class="toolbar"><span><a href="#" class="toolbar_item command_help help">?</a></span></div><table border="0" cellpadding="0" cellspacing="0"><tbody><tr><td class="gutter"><div class="line number1 index0 alt2">1</div><div class="line number2 index1 alt1">2</div><div class="line number3 index2 alt2">3</div><div class="line number4 index3 alt1">4</div></td><td class="code"><div class="container"><div class="line number1 index0 alt2"><code class="js plain">$(</code><code class="js keyword">function</code>&nbsp;&nbsp;<code class="js plain">(){</code><code class="js comments">//这里的eq(0)代表只对第一份起到效果，复制后的没有效果。</code></div><div class="line number2 index1 alt1"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js comments">//（你可以把上面的find筛选删除之后再试试，您会发现，他又对余下的几份起效果了）</code></div><div class="line number3 index2 alt2"><code class="js spaces">&nbsp;&nbsp;&nbsp;&nbsp;</code><code class="js plain">$(</code><code class="js string">".list"</code><code class="js plain">).eq(0).nav(</code><code class="js string">"red"</code><code class="js plain">);</code><code class="js comments">//调用局部方法</code></div><div class="line number4 index3 alt1"><code class="js plain">});</code></div></div></td></tr></tbody></table></div></div>
+       
+            <div class="demo-img">
+                <img src="demo/demo1.gif" alt="">
+            </div>
+            
+            <h1>总结</h1>
+            <pre>以上是一个简单的jQuery插件，全局和局部的区别在于：是把扩展的方法定义在 <code>$.extend()</code>还是在<code>$.fn.extend()</code>里面。在局部里面是根据调用的对象来进行操作，而全局是根据满足的条件来进行操作。</pre>
+            
+            <div class="demo">
+                <a href="demo/demo.html"  target="blank">Demo1</a>
+                <a href="demo/demo1.html" target="blank">Demo2</a>
+            </div>
+        </div>
+
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>关于Jquery插件</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="jQuery.nav.js"></script>
+    <style>
+        .body {
+            margin-top: 100px;
+        }
+        
+        .content {
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .demo {
+            margin: 10px 0px;
+            border: 2px solid #99F9FF;
+            padding: 10px;
+        }
+        
+        .color_h1 {
+            color: #32CD32;
+        }
+        
+        .color_h2 {
+            color: #00C0aa;
+        }
+    </style>
+    <style>
+        .hover {
+            /*插件必须样式*/
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="" id="nav"></div>
+    <script>
+        $("#nav").load("nav.html",function(response,status,xhr){});
+    </script>
+    <div class="body">
+        <div class="container">
+            <ul class="list">
+                <li>导航列表1
+                    <ul class="nav">
+                        <li>导航列表1</li>
+                        <li>导航列表2</li>
+                        <li>导航列表3</li>
+                        <li>导航列表4</li>
+                        <li>导航列表5</li>
+                        <li>导航列表6</li>
+                    </ul>
+                </li>
+                <li>导航列表2
+                    <ul class="nav">
+                        <li>导航列表1</li>
+                        <li>导航列表2</li>
+                        <li>导航列表3</li>
+                        <li>导航列表4</li>
+                        <li>导航列表5</li>
+                        <li>导航列表6</li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <script>
+        $(function  (){
+               $('.nav').addClass("hover");
+                $.nav("#999");//调用插件实现的全局方法，并且设置其展现背景颜色为#999。
+            });
+    </script>
+</body>
+
+</html>

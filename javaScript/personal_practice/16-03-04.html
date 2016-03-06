@@ -73,6 +73,16 @@
     <script>
         window.onload=function(){
              var textDiv = document.getElementById("text");
+            //  textDiv.addEventListener("mouseover ",function(){alert(2)});
+            textDiv.removeEventListener
+            function One(target,event,data,fun){
+                var oneFun = function(){
+                     fun(data);
+                     target.removeEventListener(event,oneFun);
+                };
+                target.addEventListener(event,oneFun);
+            }
+            One(textDiv,"click","233",function(v){alert(v+"@")});
              var  moveText = CreateMoveText(textDiv);
              moveText.init();
              var btnO = document.getElementById("demo-btn-ou");
