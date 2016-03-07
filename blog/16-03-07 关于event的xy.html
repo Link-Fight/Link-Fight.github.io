@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>关于Event的XY</title>
+
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/nav.css">
+</head>
+
+<body>
+    <div class="" id="nav"></div>
+    <script>
+        $("#nav").load("nav.html",function(response,status,xhr){});
+    </script>
+    <div class="body">
+        <div class="container">
+            <h1 class="color_h1">关于event里面的xy</h1>
+            <p>首先：这里说的event，是指<code>MouseEvent</code>，就是当鼠标点击后，可以获取的事件实例，而我将细细谈谈<code>event的xy</code>里面的琐碎的事。</p>
+            <ul>在event里面的属性中包含有X有以下6个：(以chrome为例,并摘抄<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/MouseEvent" target="blank"> MDN</a>的部分讲解)
+                <li> <code>screenX</code> <span>MouseEvent</span> :The X coordinate of the mouse pointer in global (screen) coordinates.</li>
+                <li> <code>clientX</code> <span>MouseEvent</span> :The X coordinate of the mouse pointer in local (DOM content)
+                    coordinates.
+                </li>
+                <li> <code>offsetX</code> <span>MouseEvent</span> :The read-only property provides the offset in the X coordinate
+                    of the mouse pointer between that event and the padding edge of the target node.</li>
+                <li> <code>(moz/webkit)movementX</code> <span>MouseEvent</span>:The X coordinate of the mouse pointer relative
+                    to the position of the last mousemove event.</li>
+                <li> <code>pageX</code> <span>UIEvent</span>:pageX 是鼠标事件触发时，鼠标指针相对于整个文档 X 坐标上像素点的整数值。这一属性同时也参照了页面的水平滚动距离。</li>
+                <li> <code>layerX</code> <span>UIEvent</span>:The read-only property returns the horizontal coordinate of the
+                    event relative to the current layer.</li>
+                <li>还有一个属性x,就是<code>event.x/MouseEvent.x</code>但是它其实是<code>MouseEvent.clientX</code>的别名，并且在 <a href="https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent/x"
+                    target="blank">MSD</a>推荐使用后者代替。(我瞄了眼兼容表：其实就是Firefox不兼容 =_=)</li>
+
+            </ul>
+            <p>兼容表：</p>
+            <pre><code> screenX/screenY：W3C+ IE+ Firefox+ Opera+ Safari+ chrome+ <br> clientX/clientY：W3C+ IE+ Firefox+ Opera+ Safari+ chrome+   <br> offsetX/offsetY：W3C- IE+ Firefox- Opera+ Safari+ chrome+ <br> movementX/movementY：W3C- IE- Firefox+ Opera- Safari- chrome+ <br> pageX/pageY：W3C- IE- Firefox+ Opera+ Safari+ chrome+ <br> layerX/layerY：W3C- IE- Firefox+ Opera- Safari+ chrome+  <br> x/y：W3C- IE+ Firefox- Opera+ Safari+ chrome+  </code></pre>
+            
+            <h2 class="color_h2">screenX/Y</h2>
+            <p>这里的参照的点击坐标是指电脑屏幕的左边上角为(0，0)坐标了。</p>
+            <p>screenX的兼容性是最高的之一，但是我想到的用途就是计算两次点击之间的位移了=_=</p>
+            <h2 class="color_h2">clientX/Y</h2>
+            <p>这里的参照的点坐标是浏览器展示页面的部分,就是相当于浏览器全屏浏览时候除了滚动条的部分。</p>
+            <h2 class="color_h2">offsetX/Y</h2>
+            <p>这里的参照的点坐标是源事件元素，就是相对于点击元素右上角为(0,0)</p>
+            <p>注意1：参照上面的兼容表：firefox应该是不支持该属性的，但是经我实验，在(4.2)版本上市支持，并最终在MDN上找到依据。</p>
+            <div class="demo_img"><img src="image/offsetX.jpg" alt=""></div>
+            <p>注意2：要考虑上 <code>盒子模型</code> 上的 <code>padding</code> 和 <code>border</code>
+                <br>对于 chrome来说： <img src="image/chromeOffsetX.jpg" alt="" style="height:200px">,参照系的(0,0)是在位于包含border的左上角。
+                <br>而对于firefox和IE11来说:<img src="image/IEOffsetX.jpg" alt="" style="height:200px">,参照系的(0,0)是在于包含padding的左上角，也就是说如果在点击比padding的左上角还要左上角的区域将会得到负数。
+            </p>
+        </div>
+    </div>
+</body>
+
+</html>

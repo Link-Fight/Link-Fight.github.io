@@ -15,6 +15,7 @@
     <script src="javaScript/personal_practice/7Day/js/jquery-1.8.3.min.js"></script>
     <script src="javaScript/personal_practice/7Day/js/jquery.fullPage.min.js"></script>
     <script src="http://cdn.staticfile.org/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <script src="javaScript/personal_practice/canvas/canvasShow.js"></script>
     <style>
         * {
             margin: 0;
@@ -134,18 +135,24 @@
         
         .section {
             position: relative;
-            background-image: url("index/image/p4.jpg");
+            /*background-image: url("index/image/p4.jpg");*/
             background-repeat: no-repeat;
             background-size: 100% 100%;
         }
-        
+        .canvasBg{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 42px;
+        }    
         .container {
             position: relative;
             height: 100%;
             width: 100%;
             /*background: yellow;*/
         }
-        .article{
+        
+        .article {
             position: absolute;
             width: 500px;
             height: 400px;
@@ -157,9 +164,12 @@
             /*background: yellow;*/
             list-style: none;
             overflow: auto;
+            background-color: rgba(0, 0, 0, 0.1);
+            padding: 5px;
+            
         }
         
-        .article ul{
+        .article ul {
             list-style: none;
             position: absolute;
             top: 0;
@@ -173,16 +183,18 @@
             line-height: 22px;
             font-size: 16px;
         }
-        .article li a{
+        
+        .article li a {
             text-decoration: none;
             color: black;
             font-weight: bold;
         }
         
-        .article li a:hover{
+        .article li a:hover {
             font-weight: bolder;
         }
-        .article li span{
+        
+        .article li span {
             float: right;
             padding-right: 10px;
         }
@@ -191,7 +203,7 @@
         $(function(){
             $('#fullPage').fullpage({
                 resize:true,
-                sectionsColor: ['#ff00ff', '#00ffff'],
+                sectionsColor: ['#ffffff', '#00ffff'],
                 anchors: ['page1', 'page2'],
                 loopTop:true,
                 navigation:true,
@@ -224,6 +236,10 @@
     <div id="mark"></div>
     <div id="fullPage">
         <div class="section section1">
+            <div class="canvasBg">
+                <canvas id="canvas"></canvas>
+            </div>
+
             <div class="container">
                 <div class="article">
                     <ul>
@@ -236,6 +252,20 @@
         <!--<div class="section section3"></div>-->
         <!--<div class="section section4"></div>-->
     </div>
+    <script>
+         
+          var mCanvasShow = new CanvasShow(document.getElementById('canvas'),{
+              WIDTH : window.innerWidth, 
+              HEIGHT : window.innerHeight-42,
+              TEXT:["linkfight","javaScript","css","html","css3","html5","jQuery","ajax","less","bootstrap","canvas","MVC","MVP","MVVM","JSON","ES6","NODEjs",""]
+         });
+         mCanvasShow.initCricle();
+         mCanvasShow.timer=setInterval(
+             function(){
+                   mCanvasShow.draw();
+             },100
+         );
+    </script>
     <script>
         window.onload=function(){
             var divMark = document.getElementById("mark");

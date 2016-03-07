@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>canvas</title>
+    <script src="canvasShow.js"></script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            text-align: center;
+            background: #F7FAFC;
+            overflow: hidden;
+            background: #fff;
+        }
+        
+        #canvas {
+            display: inline-block;
+        }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas"></canvas>
+    
+    <script>
+        var mCanvas = document.getElementById('canvas');
+         var opt = {
+              WIDTH : window.innerWidth, 
+              HEIGHT : window.innerHeight,
+              TEXT:["linkfight","javaScript","css","html","jQuery","ajax","less","bootstrap","canvas","MVC","MVP","MVVM","JSON","ES6","NODEjs",""]
+         };
+         mCanvasShow = new CanvasShow(mCanvas,opt);
+         mCanvasShow.initCricle();
+         setInterval(
+             function(){
+                   mCanvasShow.draw();
+             },100
+         );
+         mCanvas.onclick= function(evnet){
+             event= event||window.event;
+             
+         };
+    </script>
+</body>
+
+</html>

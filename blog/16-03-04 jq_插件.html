@@ -8,71 +8,12 @@
     <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-    <style>
-        .body {
-            margin-top: 100px;
-        }
-        
-        .content {
-            padding-left: 10px;
-            padding-right: 10px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        
-        
-        .nav>li>ul {
-            list-style: none;
-            padding-left: 10px;
-            
-            overflow: hidden;
-            transition: 0.3s;
-        }
-        
-        .nav>li>ul>li{
-            height: 0;
-            transition: 0.3s;
-        }
-        
-        .nav>li:hover>ul>li{
-            height: 20px;
-        }
-        
-        .nav>li>ul a {
-            color: #ffffff;
-            padding: 10px;
-            
-        }
-        .nav>li>ul a:hover {
-            color: #aaa;
-            padding: 10px;
-            text-decoration:none;
-        }
-        .demo {
-            margin: 10px 0px;
-            border: 2px solid #99F9FF;
-            padding: 10px;
-        }
-        
-        .color_h1 {
-            color: #32CD32;
-        }
-        
-        .color_h2 {
-            color: #00C0aa;
-        }
-        
-        .demo-img {
-            padding: 5px;
-            border: 1px solid #88C0aa;
-            text-align: center;
-        }
-    </style>
+    <link rel="stylesheet" href="css/nav.css">
 </head>
 
 <body>
-    <div class="" id="nav"></div>
+    <div class="" id="nav">
+    </div>
     <script>
         $("#nav").load("nav.html",function(response,status,xhr){});
     </script>
@@ -156,9 +97,9 @@
             
             <h1>总结</h1>
             <pre>以上是一个简单的jQuery插件，全局和局部的区别在于：是把扩展的方法定义在 <code>$.extend()</code>还是在<code>$.fn.extend()</code>里面。在局部里面是根据调用的对象来进行操作，而全局是根据满足的条件来进行操作。</pre>
-            
+
             <div class="demo">
-                <a href="demo/demo.html"  target="blank">Demo1</a>
+                <a href="demo/demo.html" target="blank">Demo1</a>
                 <a href="demo/demo1.html" target="blank">Demo2</a>
             </div>
         </div>
