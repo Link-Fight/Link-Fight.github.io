@@ -13,6 +13,7 @@ function CanvasShow(canvas, option) {
     this.context.fillStyle = 'rgba(0,0,0,0.35)';//设置或返回用于填充绘画的颜色、渐变或模式
     this.circleArr = [];
     this.text = option["TEXT"] || [];
+    this.globalCompositeOperation="lighter";
 }
 CanvasShow.prototype = {
 
@@ -46,22 +47,41 @@ CanvasShow.prototype = {
     },
 
     drawCircle: function (circle) {
+        this.context.save();
         if ((circle.text)) {
-            var oldStyle = this.context.fillStyle;
+            // var oldStyle = this.context.fillStyle;
             this.context.font = ((circle.r * 2) / circle.text.length) + "px Georgia";
             var gradient = this.context.createLinearGradient(0, 0, this.canvas.width, 0);
             gradient.addColorStop("0", "magenta");
             gradient.addColorStop("0.5", "blue");
             gradient.addColorStop("1.0", "red");
+            
+            var text =this.context.measureText(circle.text);
+            this.context.beginPath();
+            this.context.fillStyle = "#919191";//'rgba(0,0,0,0.8)';
+            this.context.arc(circle.x,circle.y,text.width/2,0,2*Math.PI);
+            this.context.closePath();
+            this.context.fill();
+            
+            this.context.textBaseline="middle";
             this.context.fillStyle = gradient;//'rgba(0,0,0,0.8)';
-            this.context.fillText(circle.text, circle.x - (circle.r), circle.y);
-            this.context.fillStyle = oldStyle;
+            this.context.fillText(circle.text, circle.x - text.width/2, circle.y);
+            // this.context.fillStyle = oldStyle;
+            
         } else {
+            var radgrad = this.context.createRadialGradient(circle.x,circle.y,circle.r/2,circle.x,circle.y,circle.r);
+            radgrad.addColorStop(0,"#0079FF");
+            radgrad.addColorStop(0.75,"#00B5E2");
+            radgrad.addColorStop(1,"rgba(0,201,255,0)");
+            this.context.fillStyle= radgrad;
+            
+            
             this.context.beginPath();
             this.context.arc(circle.x, circle.y, circle.r, 0, 2 * Math.PI)
             this.context.closePath()
             this.context.fill();
         }
+        this.context.restore();
         return circle;
     },
 

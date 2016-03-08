@@ -19,14 +19,21 @@
         }
         
         #canvas {
-            display: inline-block;
+            display: block;
+            position: absolute;
+            z-index: 10;
+        }
+        #myCanvas{
+            display: block;
+            position: absolute;
+            z-index: 1;
         }
     </style>
 </head>
 
 <body>
     <canvas id="canvas"></canvas>
-    
+    <canvas id="myCanvas"></canvas>
     <script>
         var mCanvas = document.getElementById('canvas');
          var opt = {
@@ -38,14 +45,16 @@
          mCanvasShow.initCricle();
          setInterval(
              function(){
-                   mCanvasShow.draw();
+            window.requestAnimationFrame( mCanvasShow.draw());
              },100
          );
+         window.requestAnimationFrame( mCanvasShow.draw());
          mCanvas.onclick= function(evnet){
              event= event||window.event;
              
          };
     </script>
+    <script src="start.js"></script>"></script>
 </body>
 
 </html>
