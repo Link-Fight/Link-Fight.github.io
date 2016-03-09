@@ -23,7 +23,8 @@
             position: absolute;
             z-index: 10;
         }
-        #myCanvas{
+        
+        #myCanvas {
             display: block;
             position: absolute;
             z-index: 1;
@@ -35,6 +36,7 @@
     <canvas id="canvas"></canvas>
     <canvas id="myCanvas"></canvas>
     <script>
+
         var mCanvas = document.getElementById('canvas');
          var opt = {
               WIDTH : window.innerWidth, 
@@ -45,10 +47,10 @@
          mCanvasShow.initCricle();
          setInterval(
              function(){
-            window.requestAnimationFrame( mCanvasShow.draw());
+             mCanvasShow.draw();
              },100
          );
-         window.requestAnimationFrame( mCanvasShow.draw());
+        //  window.requestAnimationFrame( mCanvasShow.draw());
          mCanvas.onclick= function(evnet){
              event= event||window.event;
              

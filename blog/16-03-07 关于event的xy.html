@@ -9,6 +9,14 @@
     <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
     <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
     <link rel="stylesheet" href="css/nav.css">
+    <style>
+        h2 {
+            margin-top: 20px;
+        }
+        body{
+            padding-bottom: 100px;
+        }
+    </style>
 </head>
 
 <body>
@@ -38,20 +46,37 @@
             </ul>
             <p>兼容表：</p>
             <pre><code> screenX/screenY：W3C+ IE+ Firefox+ Opera+ Safari+ chrome+ <br> clientX/clientY：W3C+ IE+ Firefox+ Opera+ Safari+ chrome+   <br> offsetX/offsetY：W3C- IE+ Firefox- Opera+ Safari+ chrome+ <br> movementX/movementY：W3C- IE- Firefox+ Opera- Safari- chrome+ <br> pageX/pageY：W3C- IE- Firefox+ Opera+ Safari+ chrome+ <br> layerX/layerY：W3C- IE- Firefox+ Opera- Safari+ chrome+  <br> x/y：W3C- IE+ Firefox- Opera+ Safari+ chrome+  </code></pre>
-            
+
             <h2 class="color_h2">screenX/Y</h2>
             <p>这里的参照的点击坐标是指电脑屏幕的左边上角为(0，0)坐标了。</p>
             <p>screenX的兼容性是最高的之一，但是我想到的用途就是计算两次点击之间的位移了=_=</p>
             <h2 class="color_h2">clientX/Y</h2>
-            <p>这里的参照的点坐标是浏览器展示页面的部分,就是相当于浏览器全屏浏览时候除了滚动条的部分。</p>
+            <p>这里的参照的点坐标是相对于浏览器可视区域的左上角(不包括上面的浏览器提供的界面),就是相当于浏览器全屏浏览时候除了滚动条的部分,不随着页面滚动变化。</p>
             <h2 class="color_h2">offsetX/Y</h2>
             <p>这里的参照的点坐标是源事件元素，就是相对于点击元素右上角为(0,0)</p>
             <p>注意1：参照上面的兼容表：firefox应该是不支持该属性的，但是经我实验，在(4.2)版本上市支持，并最终在MDN上找到依据。</p>
             <div class="demo_img"><img src="image/offsetX.jpg" alt=""></div>
-            <p>注意2：要考虑上 <code>盒子模型</code> 上的 <code>padding</code> 和 <code>border</code>
-                <br>对于 chrome来说： <img src="image/chromeOffsetX.jpg" alt="" style="height:200px">,参照系的(0,0)是在位于包含border的左上角。
-                <br>而对于firefox和IE11来说:<img src="image/IEOffsetX.jpg" alt="" style="height:200px">,参照系的(0,0)是在于包含padding的左上角，也就是说如果在点击比padding的左上角还要左上角的区域将会得到负数。
+            <div>
+                <img src="image/chromeOffsetX.jpg" alt="" style="float:right;height:150px">
+                <img src="image/IEOffsetX.jpg" alt="" style="float:right;height:150px">
+                <p>注意2：要考虑上 <code>盒子模型</code> 上的 <code>padding</code> 和 <code>border</code>
+
+                    <br>对于 chrome来说： 参照系的(0,0)是在位于包含border的左上角。
+                    <br>而对于firefox和IE11来说:参照系的(0,0)是在于包含padding的左上角，也就是说如果在点击比padding的左上角还要左上角的区域将会得到负数。
+                </p>
+            </div>
+            <h2 class="color_h2">(moz/webkit)movementX/Y</h2>
+            <p>这个属性现在只有chorme和firefox有，意思就是在前后两次点击中，事件在x/y上的位移。就是<code>currentEvent.movementX = currentEvent.screenX - previousEvent.screenX.</code></p>
+            <h2 class="color_h2">pageX/Y</h2>
+            <p>这里参照的点坐标是一整个document对象，整个document内容较多时，下面内容需要滚动才能看到。而pageX/Y的坐标系就在这个document上面,会随着页面的滚动而变化。</p>
+            <h2 class="color_h2">layerX/Y</h2>
+            <p>在chrome上面:它的表现和offsetX/Y一样，以当前点击元素(包括padding和margin区域)的左上角为(0,0)</p>
+            <p>在firefox(4.2)上:在之前ff没有支持offsetX/Y时候，是拿着个来替代的，但是有个前提就是触发的dom需要被定位过(就是设置position:relative/absolut),此时就是像chrome的pageX/Y一样的返回。
+                <b>
+                如果没有满足该前提条件，就返回相对html文档区域左上角的距离。                
             </p>
+            <p>而对于IE(11):返回的就是相对html文档区域左上角的距离。</p>
+            
         </div>
     </div>
 </body>

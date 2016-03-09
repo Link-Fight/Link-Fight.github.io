@@ -1,3 +1,5 @@
+
+var count =1;
 function CanvasShow(canvas, option) {
     if (!(this instanceof CanvasShow)) {
         return new CanvasShow(optioin);
@@ -100,6 +102,7 @@ CanvasShow.prototype = {
     },
 
     draw: function () {
+        // console.log(count++);
         this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
         for (var i = 0; i < this.num; i++) {
             this.drawCircle(this.circleArr[i]);
