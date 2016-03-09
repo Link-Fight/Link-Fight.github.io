@@ -3,17 +3,42 @@ function psWheel(obj, option) {
     this.scoll = null;
     this.scale = null;
     this.scollShift = null;
-    this.scollSpeed =10;
+    this.scollSpeed = 3;
     this.option = option;
+    psWheel.say(1);
     this.init();
+    psWheel.say(2);
+    this.wrap.parentNode.onmousewheel = psWheel.listenMouseWheel.bind(this);
+    this.scoll.addEventListener("mousedown", psWheel.listenmousedown.bind(this))
+    // this.scoll.parentNode.addEventListener("mousedown",psWheel.listenmousedown.bind(this))
+}
+psWheel.say = function(params) {
+    console.info("hi" + params);
+}
 
-    this.wrap.onmousewheel = psWheel.listenMouseWheel.bind(this);
+psWheel.listenmousedown = function(event) {
+    // console.log(event.offsetX + " @ " + event.offsetY);
+    var data_moveY = event.offsetY;
+    var that = this;
+    this.scoll.style.top + this.scoll.data_moveY;
+    event.target.onmousemove = function(event) {
+        var shift = parseInt(data_moveY) - parseInt(event.offsetY);
+        that.scoll.style.top = parseInt(that.scoll.style.top) - shift + "px";
+        psWheel.scollMove.call(that, that.scoll.style.top, 0);
+        return false;
+    }
+
+    event.target.onmouseup = function(event) {
+        event.target.onmousemove = null;
+    }
+}
+
+psWheel.listenMouseMove = function(event) {
 
 }
 
 psWheel.listenMouseWheel = function(event) {
     event = event || window.event;
-
     var t1 = document.getElementById("wheelDelta");
     var t2 = document.getElementById("detail");
     var value = event.wheelDelta;
@@ -23,54 +48,60 @@ psWheel.listenMouseWheel = function(event) {
         t2.value = event.detail;
         var value = event.detail;
     }
-    var top = parseInt(this.scoll.style.top);
-    if (value < 0) {  //向下
-        this.scoll.style.top = top + ( this.scollSpeed) + "px";
-    } else if (value > 0) { //向上
+    psWheel.scollMove.call(this, this.scoll.style.top, value);
+    return false;
+}
+
+psWheel.scollMove = function(position, direction) {
+    var top = parseInt(position);
+    if (direction < 0) {  //向下
+        this.scoll.style.top = top + (this.scollSpeed) + "px";
+    } else if (direction > 0) { //向上
         this.scoll.style.top = top + (- this.scollSpeed) + "px";
     }
     top = parseInt(this.scoll.style.top);
-    if (top < 0){//临界范围
+    if (top < 0) {//临界范围
         this.scoll.style.top = 0;
-        top=0;
+        top = 0;
     }
     else if (top > this.scollShift) {
         this.scoll.style.top = this.scollShift + "px";
-          top=this.scollShift;
+        top = this.scollShift;
     }
-    
-    this.wrap.style.top = -Math.ceil((top/this.scale))+"px";
-    
-    console.log(this.scoll.style.top + " " + this.scoll.style.button);
-    return false;
+    this.wrap.style.top = -Math.ceil((top / this.scale)) + "px";
 }
 
 psWheel.prototype = {
     init: function() {
-        var div = document.createElement("div");
-        div.className = "psWheel_Wrap";
-        var height = getComputedStyle(this.wrap.parentNode)["height"];//容器的高度
-        var mHeight = getComputedStyle(this.wrap)["height"];//内容的高度
-        this.scale = parseInt(height) / parseInt(mHeight);//两者比例
-        this.scollShift = parseInt(height) - parseInt(mHeight);//滑块能滚动的位移
+        var style = getComputedStyle(this.wrap.parentNode);//容器的高度
+        var height = parseInt(style["height"]);
+        if (style.boxSizing == "border-box") {
+            height =height- parseInt(style["paddingBottom"]) - parseInt(style["paddingTop"]) - parseInt(style["borderTopWidth"]) - parseInt(style["borderBottomWidth"]);
+        }
+        var mStyle = getComputedStyle(this.wrap);//内容的高度
+        var mHeight = parseInt(mStyle["height"]);
+        this.scale = height / mHeight;//两者比例
+        this.scollShift = height - mHeight;//滑块能滚动的位移
         if (this.scollShift == 0)
             return;
+        var div = document.createElement("div");//滑块的容器
+        div.className = "psWheel_Wrap";
         div.style.position = "absolute"
         div.style.right = 0;
         div.style.top = 0;
-        div.style.height = height;
+        div.style.height = height+"px";
         div.style.background = "yellow";
         div.style.width = "15px";
 
-        mDiv = document.createElement("div");
+        mDiv = document.createElement("div");//滑块
         mDiv.style.position = "absolute"
         mDiv.style.right = 0;
         mDiv.style.top = 0;
-        mDiv.style.height = parseInt(height) / parseInt(mHeight) * parseInt(height) + "px";
+        mDiv.style.height = (height / mHeight) * height + "px";
         mDiv.style.background = "red";
         mDiv.style.width = "15px";
 
-        this.scollShift = parseInt(height) - parseInt(mDiv.style.height);//滑块能滚动的位移
+        this.scollShift = height - parseInt(mDiv.style.height);//滑块能滚动的位移
         if (this.scollShift == 0)
             return;
         this.wrap.parentNode.appendChild(div);
