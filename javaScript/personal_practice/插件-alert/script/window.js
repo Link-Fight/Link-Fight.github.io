@@ -1,143 +1,94 @@
-// define(function() {
-//     'use strict';
-//     function Owindow(params) {
-//         this.cfg = {
-//             content: "",
-//             title: "消息",
-//             handler: null,
-//             width: 500,
-//             height: 300,
-//             hasCloseBtn:false,
-//             handler4AlertBtn:null,
-//             handler4CloseBtn:null,
-//             skinClassName:"",
-//         }
-        
-//     }
-//     // document.body.removeChild
-//     Owindow.prototype = {
-//         alert: function(cfg) {
-//             var CFG = $.extend(this.cfg, cfg);
-//             var boundingBox = $("<div class='windows_boundingBox'>" +
-//                 "<div class =window_header>" + CFG.title + "</div>" +
-//                 "<div class =window_body>" + CFG.content + "</div>" +
-//                 "<div class =window_footer><button id=alertSure>确定</button></div>" +
-//                 +"</div>");
-//             boundingBox.appendTo("body");
-//             var btn = boundingBox.find("#alertSure");
-//             btn.appendTo(boundingBox);
-//             btn.click(function() {
-//                 CFG.handler4AlertBtn && CFG.handler4AlertBtn();
-//                 boundingBox.remove();
-//             });
+define(["Widget"], function(WIDGET) {
 
-//             boundingBox.css({
-//                 width: this.cfg.width + "px",
-//                 height: this.cfg.height + "px",
-//                 left: (this.cfg.x || (window.innerWidth - this.cfg.width) / 2) + "px",
-//                 top: (this.cfg.y || (window.innerHeight - this.cfg.height) / 2) + "px"
-//             });
-            
-//             if(CFG.hasCloseBtn){
-//                 var closeBtn = $("<span class=window_closeBtn>X</span>")
-//                 closeBtn.appendTo(boundingBox);
-//                 closeBtn.click(function(){ 
-//                     CFG.handler4CloseBtn && CFG.handler4CloseBtn();
-//                     boundingBox.remove()}
-//                     );
-                    
-//             }
-//             if(CFG.skinClassName){
-//                 boundingBox.addClass(CFG.skinClassName);
-//             }
-//             return {
-//                 remove: function() { boundingBox[0].parentElement.removeChild(boundingBox[0]); }
-//             }
-//         },
-//         confirm: function() {
+    function mixin(dest, src) {
+        var target = dest;
+        for (var key in src) {
+            dest[key] = src[key];
+        }
+        return target;
+    }
 
-//         },
-//         prompt: function() {
-
-//         }
-//     }
-
-//     return {
-//         Owindow: Owindow
-//     }
-// });
-(function(window,undefined){
-    
-    console.log("hi")
-       function Owindow(params) {
+    function Owindow(params) {
+        WIDGET.Widget.call(this);
         this.cfg = {
             content: "",
             title: "消息",
             handler: null,
             width: 500,
             height: 300,
-            hasCloseBtn:false,
-            handler4AlertBtn:null,
-            handler4CloseBtn:null,
-            skinClassName:"",
-        }
-        
+            hasMask: true,
+            hasCloseBtn: false,
+            text4AlertBtn: "确定",
+            skinClassName: "",
+        };
+        this.mask = null;
+        this.EventListener = {};
     }
-    Owindow.prototype = {
-        alert: function(cfg) {
-            var CFG = $.extend(this.cfg, cfg);
-            var boundingBox = $("<div class='windows_boundingBox'>" +
-                "<div class =window_header>" + CFG.title + "</div>" +
-                "<div class =window_body>" + CFG.content + "</div>" +
-                "<div class =window_footer><button id=alertSure>确定</button></div>" +
-                +"</div>");
-            boundingBox.appendTo("body");
-            var btn = boundingBox.find("#alertSure");
-            btn.appendTo(boundingBox);
-            btn.click(function() {
-                CFG.handler4AlertBtn && CFG.handler4AlertBtn();
-                boundingBox.remove();
-            });
+    Owindow.prototype = mixin(Object.create(WIDGET.Widget.prototype),
+        {
+            constructor: Owindow,
+            renderUI: function(container) {
+                this.boundingBox = $("<div class='windows_boundingBox'>" +
+                    "<div class =window_header>" + this.cfg.title + "</div>" +
+                    "<div class =window_body>" + this.cfg.content + "</div>" +
+                    "<div class =window_footer><button id=alertSure>" + this.cfg.text4AlertBtn + "</button></div>" +
+                    +"</div>");
+                if (this.cfg.hasMask) {
+                    this.mask = document.createElement("div");
+                    this.mask.className = "windows_mask";
+                    container.appendChild(this.mask);
+                }
+                if (this.cfg.hasCloseBtn) {
+                    var closeBtn = document.createElement("span");
+                    closeBtn.className = "window_closeBtn";
+                    closeBtn.innerHTML = "X";
+                    this.boundingBox[0].appendChild(closeBtn);
+                }
+            },
+            bindUI: function() {
+                var that = this;
+                document.body.getElementsByClassName("")[0]
+                var alertBtn = this.boundingBox[0].querySelector("#alertSure")
+                alertBtn.onclick = function() {
+                    that.fire("alertSure", "close alertSure");
+                    that.destroy();
+                };
+                var closeBtn = this.boundingBox[0].querySelector(".window_closeBtn");
+                closeBtn.onclick = function() {
+                    that.fire("clostBtn", "close btn");
+                    that.destroy();
+                }
+            },
+            syncUI: function(params) {
+                this.boundingBox.css({
+                    width: this.cfg.width + "px",
+                    height: this.cfg.height + "px",
+                    left: (this.cfg.x || (window.innerWidth - this.cfg.width) / 2) + "px",
+                    top: (this.cfg.y || (window.innerHeight - this.cfg.height) / 2) + "px"
+                });
+                if (this.cfg.skinClassName) {
+                    this.boundingBox[0].classList.add(this.cfg.skinClassName);
+                }
+            },
+            destructor: function(params) {
+                this.mask && this.mask.parentElement.removeChild(this.mask)
+            },
+            alert: function(container, cfg) {
+                mixin(this.cfg, cfg);
+                this.render(container);
+                return this;
+            },
+            confirm: function() {
 
-            boundingBox.css({
-                width: this.cfg.width + "px",
-                height: this.cfg.height + "px",
-                left: (this.cfg.x || (window.innerWidth - this.cfg.width) / 2) + "px",
-                top: (this.cfg.y || (window.innerHeight - this.cfg.height) / 2) + "px"
-            });
-            
-            if(CFG.hasCloseBtn){
-                var closeBtn = $("<span class=window_closeBtn>X</span>")
-                closeBtn.appendTo(boundingBox);
-                closeBtn.click(function(){ 
-                    CFG.handler4CloseBtn && CFG.handler4CloseBtn();
-                    boundingBox.remove()}
-                    );
-                    
+            },
+            prompt: function() {
+
+            },
+            say: function() {
+                console.log("I'm window" + "@:" + this);
             }
-            if(CFG.skinClassName){
-                boundingBox.addClass(CFG.skinClassName);
-            }
-            return {
-                remove: function() { boundingBox[0].parentElement.removeChild(boundingBox[0]); }
-            }
-        },
-        confirm: function() {
+        });
 
-        },
-        prompt: function() {
-
-        }
-    }
-    
-       
-    if ( typeof define === "function" && define.amd && !(define.amd.Owindow) ) {//既能符合require.js的要求 又能独立工作
-        define(function () {
-                return {Owindow}; 
-                } 
-            );
-    }else{
-        window.Owindow = Owindow;
-    }
-
-})(window);
+    return { Owindow };
+}
+);

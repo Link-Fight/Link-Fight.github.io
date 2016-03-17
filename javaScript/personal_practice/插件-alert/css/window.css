@@ -49,6 +49,15 @@
 .window_closeBtn:hover{
     font-size: 1.1em;
 }
+
+.windows_mask{
+    background: rgba(0, 0, 0, 0.6);
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
 /*skin for a */
 .skin_a.windows_boundingBox{
     background-color: rgba(0, 0, 0, 0.8);
@@ -64,4 +73,8 @@
       top: 0;
       right: 0;
       border-radius: unset;
+}
+
+.skin_a #alertSure{
+    line-height: 25px;
 }
