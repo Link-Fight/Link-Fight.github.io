@@ -5,7 +5,7 @@
 
 
 ## 练习页面
-*[新世界](http://link-fight.github.io/blog/16-03-04%20jq_%E6%8F%92%E4%BB%B6.html)
+ * [新世界](http://link-fight.github.io/task/task07/task07.html)
 
 
 ## 学习路上的小文章
