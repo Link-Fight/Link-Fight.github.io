@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>task19</title>
+    <style>
+        .content {
+            overflow: auto;
+        }
+        
+        .content div {
+            padding: 10px;
+            background-color: red;
+            margin: 5px;
+            float: left;
+        }
+        
+        .chart>div {
+            float: left;
+            background-color: #999;
+            width: 18px;
+            margin-left: 2px;
+            position: relative;
+            font-size: 6px;
+            text-align: center;
+        }
+        
+        .chart>div>div {
+            position: absolute;
+            bottom: 0;
+            width: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <input type="number" id="input" min="10" max="100">
+        <span id="controller">
+            <button>左侧入</button>
+            <button>右侧入</button>
+            <button>左侧出</button>
+            <button>右侧出</button>
+        </span>
+
+        <div class="content" id="content">
+            <div>12</div>
+            <div>23</div>
+        </div>
+        <p id="chartBtn">
+            <button>生成</button>
+            <button id='sort'>排序</button>
+            <label for="bubbleSort">
+                <input type="radio" name="sort" id='bubbleSort' value="bubbleSort" checked>冒泡</label>
+            <label for="selectionSort">
+                <input type="radio" name="sort" id='selectionSort' value="selectionSort">选择</label>
+        </p>
+        <div class="chart" id="chart"></div>
+    </div>
+    <script src="task.js"></script>
+</body>
+
+</html>
