@@ -1,0 +1,78 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+html {
+  font-size: 16px; }
+
+.container .universe {
+  background: black;
+  height: 500px;
+  position: relative; }
+.container .planet {
+  position: absolute;
+  left: 50%;
+  margin-left: -100px;
+  top: 50%;
+  margin-top: -100px;
+  background: dodgerblue;
+  height: 200px;
+  width: 200px;
+  border-radius: 50%; }
+  .container .planet .spaceArea:nth-of-type(1) {
+    height: 114%;
+    width: 114%;
+    left: -7%;
+    top: -7%; }
+  .container .planet .spaceArea:nth-of-type(2) {
+    height: 114%;
+    width: 114%;
+    left: -7%;
+    top: -7%; }
+  .container .planet .spaceArea:nth-of-type(3) {
+    height: 114%;
+    width: 114%;
+    left: -7%;
+    top: -7%; }
+  .container .planet .spaceArea:nth-of-type(4) {
+    height: 114%;
+    width: 114%;
+    left: -7%;
+    top: -7%; }
+  .container .planet .spaceArea {
+    position: absolute; }
+  .container .planet span {
+    position: absolute;
+    top: -15px;
+    left: -50px;
+    height: 30px;
+    width: 100px;
+    background-color: yellow;
+    line-height: 30px;
+    text-align: center;
+    border-radius: 15px;
+    transform: rotate(-45deg); }
+  .container .planet span::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 0, 200, 0.5);
+    width: 15px;
+    height: 30px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px; }
+
+.control td, .control input {
+  font-size: 0.75rem;
+  padding: 0.5em 1em; }
+.control input[type=button] {
+  border: none;
+  font-weight: bold; }
+.control input[type=button]:hover {
+  background-color: #232323;
+  color: #fff; }
+.control #addSpaceShip {
+  margin-left: 5%; }
+
+/*# sourceMappingURL=css.css.map */

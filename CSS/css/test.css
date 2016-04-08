@@ -15,3 +15,21 @@
   border: 5px solid pink;
   margin-left: 100px;
 }
+.sanjiao {
+  width: 0;
+  height: 0;
+  overflow: hidden;
+  color: red;
+  border: 30px solid transparent;
+  border-bottom-color: #ffc0cb;
+}
+.pipei {
+  position: relative;
+  top: 210px;
+  left: 10px;
+  text-align: center;
+  line-height: 100px;
+  width: 100px;
+  height: 100px;
+  background: blueviolet;
+}
