@@ -3,5 +3,6 @@ window.onload=function() {
             AREA: document.getElementById("spaceShipArea"),
             BOARD: document.getElementById("controlBoard"),
             ADD: document.getElementById("addSpaceShip"),
+            LOGAREA: document.getElementById("logArea"),
     });
 }

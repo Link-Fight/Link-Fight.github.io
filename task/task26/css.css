@@ -40,7 +40,11 @@ html {
     left: -7%;
     top: -7%; }
   .container .planet .spaceArea {
-    position: absolute; }
+    position: absolute;
+    height: 114%;
+    width: 114%;
+    left: -7%;
+    top: -7%; }
   .container .planet span {
     position: absolute;
     top: -15px;
@@ -63,16 +67,36 @@ html {
     border-bottom-right-radius: 15px;
     border-top-right-radius: 15px; }
 
-.control td, .control input {
-  font-size: 0.75rem;
-  padding: 0.5em 1em; }
-.control input[type=button] {
-  border: none;
-  font-weight: bold; }
-.control input[type=button]:hover {
-  background-color: #232323;
-  color: #fff; }
-.control #addSpaceShip {
-  margin-left: 5%; }
+.control {
+  position: relative; }
+  .control td, .control input {
+    font-size: 0.75rem;
+    padding: 0.5em 1em; }
+  .control input[type=button] {
+    border: none;
+    font-weight: bold; }
+  .control input[type=button]:hover {
+    background-color: #232323;
+    color: #fff; }
+  .control #addSpaceShip {
+    margin-left: 5%; }
+  .control .consoleLog {
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 50%;
+    height: 160px;
+    border: 2px solid brown;
+    overflow: auto;
+    overflow-y: visible;
+    transition: all 1s;
+    font-size: 10px; }
+    .control .consoleLog .info {
+      color: blue;
+      line-height: 1.4em; }
+    .control .consoleLog .success {
+      color: darkred; }
+    .control .consoleLog .fail {
+      color: black; }
 
 /*# sourceMappingURL=css.css.map */

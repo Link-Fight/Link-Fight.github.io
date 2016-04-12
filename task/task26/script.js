@@ -8,6 +8,7 @@
         this.MSG;
         //丢包率
         this.Packetloss = obj["loss"] || 0.3;
+        this.LogArea =  obj["AREA"] || null;
     }
 
     Mediator.prototype = {
@@ -16,13 +17,28 @@
             var that = this;
             this.shipArray.forEach(function(ship) {
                 if (ship instanceof SpaceShip) {
-                        console.log(that.MSG);
+                    var p = document.createElement("p");
+                    p.className="info";
+                    p.innerText=""+(new Date().toLocaleTimeString())+" "+ JSON.stringify(that.MSG);
+                    that.LogArea&&that.LogArea.appendChild(p);
+                    
+                    console.log(that.MSG);  
+                    var p = document.createElement("p");
                     if (Math.random() > that.Packetloss) {
                         //模拟30%的丢包
                         ship.receiveMessage(that.MSG);
                         console.info("send Success!")
+                      
+                        p.className="success";
+                        p.innerText=""+(new Date().toLocaleTimeString())+" send Success!";
+                    }else
+                    {
+                        p.className="fail";
+                        p.innerText=""+(new Date().toLocaleTimeString())+" send Fail!";
+                        
                     }
-                    
+                      that.LogArea&&that.LogArea.appendChild(p);
+                      that.LogArea.scrollTop=9999;
                 }
             });
         }
@@ -151,7 +167,7 @@
         this.addBtn = obj["ADD"];
         //限制飞船数量
         this.LIMITCOUNT = 4;
-        this.Mediator = new Mediator({});
+        this.Mediator = new Mediator({AREA:obj["LOGAREA"]});
         this.init();
     }
 

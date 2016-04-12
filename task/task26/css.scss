@@ -86,7 +86,7 @@ html{
 }
 
 .control{
-    
+    position: relative;
     td,input{
         font-size: 0.75rem;
         padding: 0.5em 1em;
@@ -103,5 +103,29 @@ html{
     }
     #addSpaceShip{
         margin-left: 5%;
+    }
+    
+    .consoleLog{
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 50%;
+        height: 160px;
+        border: 2px solid brown;
+        overflow: auto;
+        overflow-y: visible;
+        transition: all 1s;
+        font-size: 10px;
+       .info{
+           color: blue;
+           line-height: 1.4em;
+       }
+       .success{
+           color: darkred;
+       }
+       
+       .fail{
+        color: black;   
+       }
     }
 }
