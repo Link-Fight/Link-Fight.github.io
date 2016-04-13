@@ -22,8 +22,7 @@
             </aside>
         </div>
     </header>
-    <section class="main">
-        <div class="center">
+    <section class="main center">
             <section class="mainLeft">
                 <header class="person-info">
                     <div>
@@ -34,42 +33,89 @@
                             <span class="top-info fontSimHei"><a href="#">KELIN</a></span>
                         </div>
                     </div>
-                    <div class="info fontSimHei" >
-                        <div class="left"> <a href="#">110</a></div><div class="right"><a href="#">313</a></div>
+                    <div class="info">
+                        <div class="left fontSimHei"><a href="#">110</a></div>
+                        <div class="right fontSimHei"><a href="#">313</a></div>
                     </div>
-                    <div class="info fontSimSun">
-                        <div class="left">收藏</div><div class="right">粉丝</div>
+                    <div class="info">
+                        <div class="left fontSimSun">收藏</div>
+                        <div class="right fontSimSun">粉丝</div>
                     </div>
                 </header>
                 <section class="info-tree">
-                    <ul>
-                        <li>  
-                            <div class="">个人报表
-                                <ul>
-                                    <li></li>
-                                </ul>
+                    <ul class="root-tree">
+                        <li class="active">
+                            <div class="level-1"> <span></span> 个人报表
                             </div>
+                            <ul>
+                                <li>
+                                    <div class="level-2"> <span></span><span></span> 文件一</div>
+                                </li>
+                                <li class="active">
+                                    <div class="level-2"><span></span><span></span>文件二</div>
+                                    <ul>
+                                        <li class="active">
+                                            <div class="level-3"><span></span> 文档1</div>
+                                        </li>
+                                        <li>
+                                            <div class="level-3"><span></span> 文档2</div>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <div class="level-2"><span></span><span></span>文件三</div>
+                                </li>
+                            </ul>
                         </li>
                         <li>
-                            <div>个人收藏</div>
+                            <div class="level-1"><span></span>个人收藏</div>
                         </li>
                         <li>
-                            <div>我的分享</div>
+                            <div class="level-1"><span></span>我的分享</div>
                         </li>
                         <li>
-                            <div>图库</div>
+                            <div class="level-1"><span></span>图库</div>
                         </li>
                         <li>
-                            <div>成长记录</div>
+                            <div class="level-1"><span></span>成长记录</div>
                         </li>
                         <li>
-                            <div>账户信息</div>
+                            <div class="level-1"><span></span>账户信息</div>
                         </li>
                     </ul>
                 </section>
             </section>
-        </div>
-    </section>
+            <section class="mainSection">
+                <nav>
+                    <ul>
+                        <li>C站</li>
+                        <li>个人报表</li>
+                        <li>文件二</li>
+                        <li>文档1</li>
+                    </ul>
+                </nav>
+                <form action="">
+                    <div class="section-1">
+                        <div> <label for="fist-search">查询项</label> 
+                            <div class="select">
+                                <input type="text" id="fist-search" value="第一项">
+                                <span></span>
+                                <ul>
+                                    <li>第一项</li>
+                                    <li>第二项</li>
+                                    <li>第三项</li>
+                                </ul>
+                            </div>
+                        <div>2</div>
+                        <div>2</div>
+                        <div>2</div>
+                    </div>
+                </form>
+                </section>
+         
+        </section>
+        <script src="script/main.js"></script>
+       <script src="script/index.js"></script>
 </body>
 
 </html>

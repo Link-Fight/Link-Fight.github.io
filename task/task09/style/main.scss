@@ -37,7 +37,7 @@ header{
             height:100%;
             background-image: url("../image/head-logo.png");
             background-repeat: no-repeat;
-            background-position-y: center;
+            background-position:0 center;
             margin-left: 50px;
         }
     }
@@ -102,7 +102,6 @@ header{
     float: left;
     background-color: #2a2e3d;
     width: 260px;
-   
 }
  header.person-info{
           background-color: #2a2e3d;
@@ -111,17 +110,19 @@ header{
           vertical-align: middle;
           font-size: 0;
           color: #fff;
+          
            a{
                  color: #fff;
                  &:active,&:hover{                     
                      color: $base_color;
                  }
-             }
+            }
+             
           .fontSimHei{
               font-size: 16px;
               font-family: SimHei;
-              
           }
+          
           .fontSimSun{
               font-size: 12px;
               font-family: SimSun;
@@ -165,6 +166,7 @@ header{
           
           div.info{
               height: 18px;
+              position: relative;
                 div.left,div.right{
                       height: 18px;
                 }
@@ -175,7 +177,7 @@ header{
                 div.right{
                     text-indent: -32px;
                 }
-                position: relative;
+                
                 &::after{
                     content: "";
                     width: 0;
@@ -190,10 +192,219 @@ header{
     }
     
   .info-tree{
-     outline: red solid thick;
+    //  outline: red solid thick;
      font-size: 12px;
      font-family: SimHei;
-     color: #fff;
+     color: #6e8095;
      line-height: 32px;
-     padding-left: 44px;
+   .level-1{
+        text-indent: 22px;
+        position: relative;
+        span{
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -7px;
+            width: 12px;
+            height: 12px;
+            background-image:url("../image/tree-bg.png");
+            background-repeat: no-repeat;
+            background-position: -12px 0px;
+        }
+       & + ul>li{
+              padding-left: 20px;   
+        }
+      }
+      .root-tree{
+        //  padding-left: 44px;
+        &>li{
+            padding-left: 44px;
+            
+            &:nth-of-type(2) span, &:nth-of-type(4) span, &:nth-of-type(5) span{
+                 background-position: -12px -12px;
+            }
+             &:nth-of-type(3) span{
+                 background-position: -12px -24px;
+            }
+             &:nth-of-type(6) span{
+                 background-position: -12px -36px;
+            }
+        }
+     }
+   .level-2{
+       position: relative;
+       padding-left: 34px;
+       span{
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -7px;
+            width: 12px;
+            height: 12px;
+            background-image:url("../image/tree-bg.png");
+            background-repeat: no-repeat;
+            background-position: -12px -60px;
+            &:nth-of-type(1){
+                   background-position: -12px -72px;
+            }
+            &:nth-of-type(2){
+                left: 16px;
+            }
+       }
+        & + ul>li{
+              padding-left: 32px;   
+        }
+   }
+    .level-3{
+       position: relative;
+       padding-left: 16px;
+       span{
+            display: block;
+            position: absolute;
+            left: 0;
+            top: 50%;
+            margin-top: -7px;
+            width: 12px;
+            height: 12px;
+            background-image:url("../image/tree-bg.png");
+            background-repeat: no-repeat;
+            background-position: -12px -60px;
+            &:nth-of-type(1){
+                   background-position: -12px -48px;
+            }
+            &:nth-of-type(2){
+                left: 16px;
+            }
+       }
+       
+   }
+   .active{
+       background-color: #393d4e;
+       >div[class*="level"]{
+          color: #fff;
+          span{
+              background-position-x: 0;
+          }
+       }
+   }
   }
+  
+  .mainSection{
+      margin-left:  260px;
+      background-color: #eeeeed;
+      nav{
+         font-size: 0;
+        
+         height: 30px;
+         background-color: #fff;
+         padding-left: 30px;
+         li{
+             height: 30px;
+             line-height: 30px;
+             display: inline-block;
+             font-family: SimHei;
+             color: #aaa;
+             font-size: 12.5px;
+             margin-right: 10px;
+            &:hover{
+                color: $base_color;
+                cursor: pointer;
+            }
+         }
+         li:nth-child(n+2)::before{
+           content: "/";
+           margin-right: 4px;
+         }
+          li:nth-child(n+2):hover::before{
+             color: #aaa;
+          }
+          
+      }
+      
+  }
+  
+    .section-1{
+        
+          background-color: #fff;
+          width: 890px;
+          height: 86px;
+          margin: 0 auto;
+          margin-top: 19px;
+          border: 1px solid #dcdedf;
+          font-size: 0;
+          padding-top: 14px;
+          padding-bottom: 14px;
+          label{
+              font-size: 12px;
+              line-height: 26px;
+              color:#aaa;
+              font-family: SimHei;
+              margin-right: 15px;
+          }
+         
+         >div{
+              display: inline-block;
+              vertical-align: top;
+              height: 100%;
+             
+          }
+          >div:nth-of-type(1){
+              width: 180px;
+              outline: yellow solid thin;
+              padding-left: 30px;
+              
+          }
+           .select{
+                display: inline-block;
+                vertical-align: top;
+                position: relative;
+                   input{
+                       height: 22px;
+                       width: 68px;
+                       border: none;
+                       outline:  0 none;
+                       border:1px solid #cacbcb;
+                       font-size: 12px;
+                       text-indent: 10px;
+                       cursor: pointer;
+                   }
+                   ul{
+                        position: absolute;
+                        width: 68px;
+                        border:  none;
+                        transition: all 0.5s;
+                   }
+                   span{
+                       position: absolute;
+                       top: 9px;
+                       right: 8px;
+                       width: 9px;
+                       height: 5px;
+                       background-image: url("../image/s1-select.png");
+                       background-position: 0 0;
+                   }
+                   li{
+                       height: 0px;
+                       line-height: 22px;
+                       font-size: 0px;
+                       text-indent: 10px;
+                       color: #323333;
+                       transition: height 0.5s;
+                       background-color: $base_color;
+                       &:hover{
+                           background-color: $base_color;
+                           cursor: pointer;
+                       }
+                   }
+                   &:hover ul{
+                         border:1px solid #cacbcb;
+                   }
+                   &:hover li{
+                      height: 22px;
+                      font-size: 12px;
+                      background-color: #fff;
+                   }
+               }
+      }

@@ -31,7 +31,7 @@ header {
       height: 100%;
       background-image: url("../image/head-logo.png");
       background-repeat: no-repeat;
-      background-position-y: center;
+      background-position: 0 center;
       margin-left: 50px; }
   header aside.right {
     float: right;
@@ -101,8 +101,7 @@ header.person-info {
     font-family: SimHei; }
   header.person-info .fontSimSun {
     font-size: 12px;
-    font-family: SimSun;
-    }
+    font-family: SimSun; }
   header.person-info .top-img {
     display: inline-block;
     width: 48px;
@@ -133,18 +132,14 @@ header.person-info {
     width: 50%;
     height: 98px;
     vertical-align: top;
-    position: relative;
-    }
+    position: relative; }
   header.person-info div.info {
     height: 18px;
-    position: relative;
-    }
+    position: relative; }
     header.person-info div.info div.left, header.person-info div.info div.right {
-      height: 18px;
-      }
+      height: 18px; }
     header.person-info div.info div.left {
-      text-indent: 32px;
-      }
+      text-indent: 32px; }
     header.person-info div.info div.right {
       text-indent: -32px; }
     header.person-info div.info::after {
@@ -158,10 +153,172 @@ header.person-info {
       margin-left: -2px; }
 
 .info-tree {
-  outline: red solid thick;
   font-size: 12px;
   font-family: SimHei;
-  color: #fff;
+  color: #6e8095;
   line-height: 32px; }
+  .info-tree .level-1 {
+    text-indent: 22px;
+    position: relative; }
+    .info-tree .level-1 span {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      margin-top: -7px;
+      width: 12px;
+      height: 12px;
+      background-image: url("../image/tree-bg.png");
+      background-repeat: no-repeat;
+      background-position: -12px 0px; }
+    .info-tree .level-1 + ul > li {
+      padding-left: 20px; }
+  .info-tree .root-tree > li {
+    padding-left: 44px; }
+    .info-tree .root-tree > li:nth-of-type(2) span, .info-tree .root-tree > li:nth-of-type(4) span, .info-tree .root-tree > li:nth-of-type(5) span {
+      background-position: -12px -12px; }
+    .info-tree .root-tree > li:nth-of-type(3) span {
+      background-position: -12px -24px; }
+    .info-tree .root-tree > li:nth-of-type(6) span {
+      background-position: -12px -36px; }
+  .info-tree .level-2 {
+    position: relative;
+    padding-left: 34px; }
+    .info-tree .level-2 span {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      margin-top: -7px;
+      width: 12px;
+      height: 12px;
+      background-image: url("../image/tree-bg.png");
+      background-repeat: no-repeat;
+      background-position: -12px -60px; }
+      .info-tree .level-2 span:nth-of-type(1) {
+        background-position: -12px -72px; }
+      .info-tree .level-2 span:nth-of-type(2) {
+        left: 16px; }
+    .info-tree .level-2 + ul > li {
+      padding-left: 32px; }
+  .info-tree .level-3 {
+    position: relative;
+    padding-left: 16px; }
+    .info-tree .level-3 span {
+      display: block;
+      position: absolute;
+      left: 0;
+      top: 50%;
+      margin-top: -7px;
+      width: 12px;
+      height: 12px;
+      background-image: url("../image/tree-bg.png");
+      background-repeat: no-repeat;
+      background-position: -12px -60px; }
+      .info-tree .level-3 span:nth-of-type(1) {
+        background-position: -12px -48px; }
+      .info-tree .level-3 span:nth-of-type(2) {
+        left: 16px; }
+  .info-tree .active {
+    background-color: #393d4e; }
+    .info-tree .active > div[class*="level"] {
+      color: #fff; }
+      .info-tree .active > div[class*="level"] span {
+        background-position-x: 0; }
+
+.mainSection {
+  margin-left: 260px;
+  background-color: #eeeeed; }
+  .mainSection nav {
+    font-size: 0;
+    height: 30px;
+    background-color: #fff;
+    padding-left: 30px; }
+    .mainSection nav li {
+      height: 30px;
+      line-height: 30px;
+      display: inline-block;
+      font-family: SimHei;
+      color: #aaa;
+      font-size: 12.5px;
+      margin-right: 10px; }
+      .mainSection nav li:hover {
+        color: #2189bf;
+        cursor: pointer; }
+    .mainSection nav li:nth-child(n+2)::before {
+      content: "/";
+      margin-right: 4px; }
+    .mainSection nav li:nth-child(n+2):hover::before {
+      color: #aaa; }
+
+.section-1 {
+  background-color: #fff;
+  width: 890px;
+  height: 86px;
+  margin: 0 auto;
+  margin-top: 19px;
+  border: 1px solid #dcdedf;
+  font-size: 0;
+  padding-top: 14px;
+  padding-bottom: 14px; }
+  .section-1 label {
+    font-size: 12px;
+    line-height: 26px;
+    color: #aaa;
+    font-family: SimHei;
+    margin-right: 15px; }
+  .section-1 > div {
+    display: inline-block;
+    vertical-align: top;
+    height: 100%; }
+  .section-1 > div:nth-of-type(1) {
+    width: 180px;
+    outline: yellow solid thin;
+    padding-left: 30px; }
+  .section-1 .select {
+    display: inline-block;
+    vertical-align: top;
+    position: relative; }
+    .section-1 .select input {
+      height: 22px;
+      width: 68px;
+      border: none;
+      outline: 0 none;
+      border: 1px solid #cacbcb;
+      font-size: 12px;
+      text-indent: 10px;
+      cursor: pointer; }
+    .section-1 .select ul {
+      position: absolute;
+      width: 68px;
+      border: none;
+      -webkit-transition: all 0.5s;
+              transition: all 0.5s; }
+    .section-1 .select span {
+      position: absolute;
+      top: 9px;
+      right: 8px;
+      width: 9px;
+      height: 5px;
+      background-image: url("../image/s1-select.png");
+      background-position: 0 0; }
+    .section-1 .select li {
+      height: 0px;
+      line-height: 22px;
+      font-size: 0px;
+      text-indent: 10px;
+      color: #323333;
+      -webkit-transition: height 0.5s;
+              transition: height 0.5s;
+      background-color: #2189bf; }
+      .section-1 .select li:hover {
+        background-color: #2189bf;
+        cursor: pointer; }
+    .section-1 .select:hover ul {
+      border: 1px solid #cacbcb; }
+    .section-1 .select:hover li {
+      height: 22px;
+      font-size: 12px;
+      background-color: #fff; }
 
 /*# sourceMappingURL=main.css.map */
