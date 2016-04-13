@@ -1,0 +1,163 @@
+* {
+  margin: 0;
+  padding: 0; }
+
+a {
+  text-decoration: none; }
+
+ul, li {
+  list-style: none;
+  margin: 0;
+  padding: 0; }
+
+html {
+  font-size: 62.5%; }
+
+.center {
+  width: 1280px;
+  margin: 0 auto;
+  height: 100%; }
+
+header {
+  background-color: #2189bf;
+  height: 55px; }
+  header aside.left {
+    float: left;
+    height: 100%;
+    line-height: 55px; }
+    header aside.left .logo {
+      display: block;
+      width: 36px;
+      height: 100%;
+      background-image: url("../image/head-logo.png");
+      background-repeat: no-repeat;
+      background-position-y: center;
+      margin-left: 50px; }
+  header aside.right {
+    float: right;
+    height: 100%;
+    line-height: 55px;
+    vertical-align: middle;
+    position: relative; }
+    header aside.right input {
+      height: 28px;
+      width: 313px;
+      border-radius: 14px;
+      border: none;
+      text-indent: 36px;
+      color: #232323;
+      font-size: 14px;
+      outline: 0 none; }
+    header aside.right button {
+      position: absolute;
+      width: 17px;
+      height: 55px;
+      border: none;
+      background-color: transparent;
+      background-image: url("../image/head-search.png");
+      background-position-y: center;
+      left: 16px;
+      top: 0;
+      background-repeat: no-repeat;
+      cursor: pointer;
+      outline: 0 none; }
+      header aside.right button::hover, header aside.right button::click {
+        border: none; }
+    header aside.right a {
+      font-size: 12px;
+      color: #fff;
+      font-family: SimHei;
+      text-decoration: none;
+      margin-left: 20px;
+      position: relative;
+      margin-right: 90px; }
+      header aside.right a::after {
+        content: "";
+        position: absolute;
+        left: -19px;
+        top: -2px;
+        width: 15px;
+        height: 16px;
+        background-image: url("../image/head-login.png"); }
+
+.mainLeft {
+  float: left;
+  background-color: #2a2e3d;
+  width: 260px; }
+
+header.person-info {
+  background-color: #2a2e3d;
+  height: 148px;
+  text-align: center;
+  vertical-align: middle;
+  font-size: 0;
+  color: #fff; }
+  header.person-info a {
+    color: #fff; }
+    header.person-info a:active, header.person-info a:hover {
+      color: #2189bf; }
+  header.person-info .fontSimHei {
+    font-size: 16px;
+    font-family: SimHei; }
+  header.person-info .fontSimSun {
+    font-size: 12px;
+    font-family: SimSun; }
+  header.person-info .top-img {
+    display: inline-block;
+    width: 48px;
+    height: 48px;
+    background-color: #b9babe;
+    border-radius: 50%;
+    text-align: right;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -24px;
+    margin-right: 22px; }
+    header.person-info .top-img::after {
+      content: "";
+      position: absolute;
+      left: -5px;
+      top: -5px;
+      height: 58px;
+      width: 58px;
+      box-sizing: border-box;
+      border: 1px solid #fff;
+      border-radius: 50%; }
+  header.person-info .top-info {
+    float: left;
+    line-height: 98px; }
+  header.person-info div.left, header.person-info div.right {
+    display: inline-block;
+    width: 50%;
+    height: 98px;
+    vertical-align: top;
+    position: relative; }
+  header.person-info div.info {
+    height: 18px;
+    position: relative; }
+    header.person-info div.info div.left, header.person-info div.info div.right {
+      height: 18px; }
+    header.person-info div.info div.left {
+      text-indent: 32px; }
+    header.person-info div.info div.right {
+      text-indent: -32px; }
+    header.person-info div.info::after {
+      content: "";
+      width: 0;
+      height: 100%;
+      position: absolute;
+      top: 0;
+      left: 50%;
+      border: 2px solid #323647;
+      margin-left: -2px; }
+
+.info-tree {
+  outline: red solid thick;
+  font-size: 12px;
+  font-family: SimHei;
+  color: #fff;
+  line-height: 32px;
+  padding-left: 44px; }
+
+/*# sourceMappingURL=main.css.map */

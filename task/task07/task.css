@@ -84,7 +84,7 @@
     margin-left: 10px;
     color: red;
     background-image: url("nav-login.png");
-    background-position-y: 18px;
+    background-position:0  18px;
     background-repeat: no-repeat;
 }
 
@@ -220,8 +220,8 @@
  
  .section-3{
      background-image: url("s3-icon1.png");
-     background-position-x: center;
-     background-position-y: 90px;
+     background-position: center 90px;
+     /*background-position: 90px;*/
      background-repeat: no-repeat;
      /*box-sizing: border-box;*/
      padding-top: 224px;
@@ -338,16 +338,18 @@
  
  .section-4 .input:hover li{
      line-height: 33px;
+      height: 33px;
      /*height: 100%;*/
  }
  
  .section-4 .input li{
      line-height: 0px;
+     height: 0;
      list-style: none;
      overflow: hidden;
-     -webkit-transition: line-height 0.5s;
-     -moz-transition: line-height 0.5s;
-     transition: line-height 0.5s;
+     -webkit-transition: line-height 0.5s,height 0.5s;
+     -moz-transition: line-height 0.5s,height 0.5s;
+     transition: line-height 0.5s,height 0.5s;
      /*height: 0;*/
  }
  
@@ -356,8 +358,8 @@
      background-color: rgb(191, 78, 72);
      background-image: url("s4-gou.png");
      background-repeat: no-repeat;
-     background-position-y: center;
-     background-position-x: 5px;
+     background-position: 5px center;
+     /*background-position-x: ;*/
      color: #fff;
  }
   
