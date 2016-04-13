@@ -101,7 +101,8 @@ header.person-info {
     font-family: SimHei; }
   header.person-info .fontSimSun {
     font-size: 12px;
-    font-family: SimSun; }
+    font-family: SimSun;
+    }
   header.person-info .top-img {
     display: inline-block;
     width: 48px;
@@ -132,14 +133,18 @@ header.person-info {
     width: 50%;
     height: 98px;
     vertical-align: top;
-    position: relative; }
+    position: relative;
+    }
   header.person-info div.info {
     height: 18px;
-    position: relative; }
+    position: relative;
+    }
     header.person-info div.info div.left, header.person-info div.info div.right {
-      height: 18px; }
+      height: 18px;
+      }
     header.person-info div.info div.left {
-      text-indent: 32px; }
+      text-indent: 32px;
+      }
     header.person-info div.info div.right {
       text-indent: -32px; }
     header.person-info div.info::after {
@@ -157,7 +162,6 @@ header.person-info {
   font-size: 12px;
   font-family: SimHei;
   color: #fff;
-  line-height: 32px;
-  padding-left: 44px; }
+  line-height: 32px; }
 
 /*# sourceMappingURL=main.css.map */
