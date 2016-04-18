@@ -6,14 +6,15 @@
     function linkDropDownList(obj) {
         this.wrap = obj["WRAP"];
         this.valueInput =  this.wrap.getElementsByTagName("input")[0];
-        this.ul =   this.wrap.getElementsByTagName("input")[0];
+        this.ul =   this.wrap.getElementsByTagName("ul")[0];
+        this.iniEvent();
     }
     
     linkDropDownList.prototype={
        constructor:linkDropDownList,
        iniEvent:function() {
            var that = this;
-           this.ul.addEventListener("click",function(event) {
+           this.ul&&this.ul.addEventListener("click",function(event) {
               event = event||window.event;
               if(event.target.nodeName=="LI"){
                   that.valueInput.value = event.target.innerText;
