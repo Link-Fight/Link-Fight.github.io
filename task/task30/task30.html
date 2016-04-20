@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Task30</title>
+    <style>
+        body {
+            padding: 20px;
+        }
+        
+        p {
+            font-size: 14px;
+            height: 30px;
+            margin: 40px;
+            font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        
+        input[type=button]{
+            padding: 0;
+            border: none;
+            outline: none;
+            height: 100%;
+        }
+        .wrap  input.tip {
+            padding: 0;
+            border: none;  
+            outline: none;
+           
+        }
+        
+        .wrap input{
+            padding: 0;
+            border: none;
+            outline: none;
+            height: calc(100% - 2px);
+            width: 250px;
+            margin-right: 20px;
+            border: 1px solid #aaa;
+            line-height: 100%;
+           
+        }
+        
+       .wrap input:nth-of-type(1):focus {
+            border-color: yellow;
+            box-shadow: 0 0 2px deepskyblue;
+        }
+        
+        input[type=button] {
+            background-color: cornflowerblue;
+            color: #fff;
+            font-family: "宋体";
+            cursor: pointer;
+            padding-left: 10px;
+            padding-right: 10px;
+        }
+        
+        input[type=button]:hover {
+            background-color: deepskyblue;
+        }
+        
+        label {
+            float: left;
+            text-align: right;
+            padding-right: 25px;
+            width: 100px;
+            height: 30px;
+            line-height: 30px;
+        }
+        
+        span {
+            position: relative;
+        }
+        
+        span>.tip {
+            font-family: 黑体;
+            position: absolute;
+            top: 28px;
+            left: 0;
+            font-size: 10px;
+            display: none;
+        }
+        
+        span.info-correct input {
+            border-color: greenyellow;
+            outline-color: greenyellow;
+        }
+        
+        span.info-correct .tip {
+            color: greenyellow;
+        }
+        
+        span.info-error input {
+            border-color: red;
+            outline-color: red;
+        }
+        
+        span.info-error .tip{
+            color: red;
+        }
+        
+        span:hover>.tip{
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <p>
+        <label for="">名字</label>
+        <span class="wrap">
+        <input type="text" id="input-01">
+        <input class="tip" type="text" placeholder="必填，长度为4~6个字符" readonly >
+        </span>
+        
+    </p>
+    <p>
+        <label for=""> 密码 </label>
+        <span class="wrap">
+        <input type="password" id="input-02">
+        <input class="tip" type="text" placeholder="必填，长度为6~10，不能为纯数字" readonly>
+        </span>
+        
+    </p>
+    <p>
+        <label for=""> 确认密码 </label>
+        <span class="wrap">
+        <input type="password" id="input-03">
+        <input class="tip" type="text" placeholder="再次输入密码" readonly>
+        </span>
+        
+
+    </p>
+    <p>
+        <label for=""> 邮箱 </label>
+        <span class="wrap">
+        <input type="email" id="input-04">
+        <input class="tip" type="text" placeholder="输入正确邮箱" readonly>
+        </span>
+        
+
+    </p>
+    <p>
+        <label for=""> 手机 </label>
+        <span class="wrap">
+        <input type="tel" id="input-05">
+        <input class="tip" type="text" placeholder="长度为11位的数字" readonly>
+        </span>
+        
+
+    </p>
+    <p>
+        <input type="button" value="提交" id="subBtn">
+    </p>
+    <script src="script.js"></script>
+</body>
+
+</html>

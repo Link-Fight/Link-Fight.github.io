@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>task32</title>
+    <style>
+        * {
+            padding: 0;
+            margin: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        
+        li {
+            list-style: none;
+        }
+        
+        .container {
+            width: 400px;
+            margin: 20px auto;
+        }
+        
+        .tap-control {
+            /*background-color: red;*/
+            height: 40px;
+            line-height: 40px;
+        }
+        
+        .tap-control li {
+            width: 50%;
+            float: left;
+            text-indent: 40px;
+        }
+        
+        .tap-context {
+            text-align: center;
+        }
+        
+        .tap-context li {
+            height: 100px;
+            padding: 50px;
+            /*background-color: orangered;*/
+            display: none;
+        }
+        
+        li.show {
+            display: block;
+        }
+        .wrap{
+            width: calc(100% - 50px);
+            margin: 50 auto;
+            background-color: #aaa;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="control">
+            <fieldset>
+                <legend>
+                    <label for=""> 
+                        <input type="radio" >
+                    </label>
+                </legend>
+            </fieldset>
+        </div>
+        <div class="context"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>
