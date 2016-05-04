@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>练习：</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <style>
+        html,
+        body {
+            font-size-adjust: 100%;
+            overflow: auto;
+            min-height: 100%;
+            background-color: #f4f4f4;
+            font: 1rem/1.5 'Microsoft YaHei', 'Droid Sans Fallback', SimHei, Arial, Helvetica, tahoma, sans-serif;
+        }
+        
+        .app.loaded .load-cover {
+            visibility: hidden;
+            opacity: 0;
+        }
+        
+        .app .load-cover {
+            display: block;
+            position: fixed;
+            height: 100%;
+            width: 100%;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 10010;
+            visibility: visible;
+            background: #f8f8f8;
+            transition: all 0.3s;
+        }
+        
+        .app .load-cover .loading-text {
+            position: absolute;
+            top: 50%;
+            text-align: center;
+            width: 100%;
+            height: 2em;
+            line-height: 2em;
+            margin-top: -1em;
+            color: #666;
+        }
+        
+        .nav-bar {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2.5rem;
+            line-height: 2.5rem;
+            color: #fff;
+            background-color: #fff;
+            font-size: 14px;
+            z-index: 100010;
+            border-bottom: 1px solid #e7e7e7;
+            overflow: hidden;
+            padding-right: 0.5em;
+        }
+        
+        .nav-bar .nav-wrp {
+            position: relative;
+            height: 100%;
+            z-index: 100;
+            background-color: #fff;
+        }
+        
+        .nav-bar .cell {
+            float: right;
+            width: 44px;
+            height: 40px;
+            position: relative;
+            box-sizing: border-box;
+            margin-right: 5px;
+        }
+        
+        .nav-bar .logo {
+            float: left;
+            margin-top: 6px;
+            display: block;
+            width: 63px;
+            height: 28px;
+            background-size: 63px 28px;
+            margin-left: 18px;
+        }
+        
+        .logo {
+            background: url(./img/logo.png) center no-repeat;
+        }
+        
+        a {
+            cursor: pointer;
+            text-decoration: none;
+            color: #00a1d6;
+        }
+        
+        
+    </style>
+</head>
+
+<body>
+    <div class="app loaded">
+        <div class="load-cover">
+            <div class="loading-text">((´・ω・｀)正在加载...)</div>
+        </div>
+        <nav class="nav-bar">
+            <div class="nav-wrp">
+                <a href="#" class="logo"></a>
+                <a href="#" class="cell">
+                    <i class="nav-icon bili-icon-history"></i>
+                </a>
+                <a href="#" toggole-switch=".search" class="cell"></a>
+            </div>
+        </nav>
+    </div>
+</body>
+
+</html>
