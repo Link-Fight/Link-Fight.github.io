@@ -18,6 +18,7 @@
             background: #888;
             font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
             font-size: 20px;
+            padding-top: 120px;
         }
         
         a {
@@ -185,7 +186,7 @@
         }
         
         section.about {
-            margin-top: 120px;
+            
             font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
             padding: 50px 20px;
             color: #fff;
@@ -297,13 +298,6 @@
                 margin-left: 8%;
                 margin-right: 8%;
             }
-        }
-        
-        .test {
-            width: 200px;
-            height: 300px;
-            background-image: url(img1.jpg);
-            background-size: 100% 100%;
         }
         
         section.contact {
@@ -454,16 +448,16 @@
                 </button>
                 <nav id="navbar">
                     <ul>
-                        <li><a class="active" href="#about">about</a></li>
-                        <li><a href="#portfolio">portfolio</a></li>
-                        <li><a href="#contact">contact</a></li>
+                        <li><a class="active" data-href="#about" data-target="#about">about</a></li>
+                        <li><a data-href="#portfolio" data-target="#portfolio">portfolio</a></li>
+                        <li><a data-href="#contact" data-target="#contact">contact</a></li>
                     </ul>
                 </nav>
 
             </div>
         </header>
         <div class="main clearfix">
-            <section class="about">
+            <section  class="about">
                 <h2 id="about"></h2>
                 <div class="img"></div>
                 <div class="info">
