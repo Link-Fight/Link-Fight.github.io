@@ -1,0 +1,38 @@
+/*
+@auth: EleanorMao;
+@email: danningmao@outlook.com;
+*/
+@charset "UTF-8";
+*{margin:0;padding:0;box-sizing: border-box;}
+body{font-family:"Helvetica Neue",Helvetica,STHeiTi,sans-serif;line-height:1.5;font-size:16px;color:#000;background-color:#eee;-webkit-user-select:none;-webkit-text-size-adjust:100%;-webkit-tap-highlight-color:transparent;outline:0;}
+table{border-collapse:collapse;border-spacing:0;}
+fieldset,img{border:0;}
+li{list-style:none;}
+a{-webkit-touch-callout:none;text-decoration:none;}
+:focus{outline:0;-webkit-tap-highlight-color:transparent;}
+
+body{background: #f5f5f5;}
+h1,h2,h3,h4,h5,h6{font-weight: 400;}
+img{width:100%}
+.clearfix:before, .clearfix:after{content:'';clear: both;display:block;}
+.ds-ib{display: inline-block;}
+.ps-a{position: absolute;}
+.ps-r{position: relative;}
+.ui-border-l{border-left: 1px solid #ccc;}
+.ui-border-r{border-right:1px solid #ccc;}
+.ui-border-t{border-top:1px solid #ccc;}
+.ui-border-b{border-bottom:1px solid #ccc;}
+.fs-14{font-size: 14px;}
+.pv-10{padding-top: 10px;padding-bottom: 10px;}
+.ph-15{padding-left: 15px;padding-right: 15px;}
+.p-15{padding: 15px;}
+.pt-10{padding-top: 10px;}
+.pl-5{padding-left: 5px;}
+.pl-10{padding-left: 10px;}
+.mb-15{margin-bottom: 15px;}
+.mh-15{margin-right:15px;margin-left:15px;}
+.text-center{text-align: center;}
+.ui-arrow-left:before{content: "<";-webkit-font-smoothing:antialiased;}
+.ui-img-square, .ui-img-rectangle{display: inline-block;background-size: cover;}
+.ellipsis{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ui-text{}

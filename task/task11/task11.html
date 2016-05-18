@@ -1,0 +1,432 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>task11</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximun-scale=1.0,user-scalable=no">
+    <meta name="full-screen" content="yes">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no">
+    <meta name="format-detection" content="address=no">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            font-size: 20px;
+        }
+        
+        header {
+            width: 100%;
+            height: 4rem;
+            background-color: #91D4DA;
+            position: relative;
+            color: #fff;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        header a {
+            display: block;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+            padding-left: 0.8rem;
+            line-height: 4rem;
+            font-size: 1.1rem;
+            color: #fff;
+        }
+        
+        header a img {
+            vertical-align: middle;
+            /*padding-right: 4px;*/
+        }
+        
+        header h1 {
+            text-align: center;
+            line-height: 4rem;
+            font-size: 1.1rem;
+        }
+        
+        nav {
+            background-color: #fff;
+            font-size: 0;
+        }
+        
+        nav .nav-item {
+            display: inline-block;
+            box-sizing: border-box;
+            width: 20%;
+            height: 3rem;
+            line-height: 3rem;
+            font-size: 1.1rem;
+            color: #000;
+            text-align: center;
+            border-bottom: 4px solid transparent;
+        }
+        
+        nav .nav-item a {
+            color: #000;
+        }
+        
+        nav .nav-item.hover {
+            border-bottom: 4px solid #91D4DA;
+        }
+        
+        .banner-wap {
+            position: relative;
+            width: 100%;
+            height: 10rem;
+            background-color: yellow;
+            overflow: hidden;
+        }
+        
+        .banner {
+            width: 100%;
+        }
+        
+        .banner li {
+            display: inline-block;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .banner li img {
+            width: 100%;
+            height: 10rem;
+        }
+        
+        .tapArea ul {
+            font-size: 0;
+        }
+        
+        .tap-item {
+            text-align: center;
+            font-size: 1rem;
+            width: 20%;
+            box-sizing: border-box;
+            padding: 1.5rem .5rem;
+            display: inline-block;
+        }
+        
+        .tap-item img {
+            max-width: 4rem;
+            width: 100%;
+        }
+        
+        .tap-item span {
+            display: block;
+        }
+        
+        hr.col-tap {
+            width: 94%;
+            margin: 0 auto;
+            margin-bottom: 1rem;
+        }
+        
+        .colArea {
+            text-align: center;
+            font-size: 0;
+            padding-bottom: 1rem;
+        }
+        
+        .colArea ul {
+            overflow: hidden;
+        }
+        
+        .col-item {
+            width: 33.33%;
+            /*height: 6rem;*/
+            box-sizing: border-box;
+            display: inline-block;
+            border-right: 1px solid #232323;
+            vertical-align: bottom;
+            padding-top: 200px;
+            margin-top: -200px;
+        }
+        
+        .col-item:nth-last-of-type(1) {
+            border-right: 1px solid transparent;
+        }
+        
+        .col-item img {
+            box-sizing: border-box;
+            padding: 0.2rem 1rem;
+            padding-bottom: 0;
+            width: 100%;
+        }
+        
+        .colArea .text .col-item {
+            height: auto;
+        }
+        
+        .colArea .text aside {
+            font-size: 0.8rem;
+            padding-top: .1rem;
+            padding-bottom: 0.8rem;
+        }
+        
+        hr.col-modl {
+            width: 100%;
+            height: 1rem;
+            background-color: #eee;
+            border: none;
+        }
+        
+        .model {
+            width: 94%;
+            margin: 0 auto;
+        }
+        
+        .model h1 {
+            line-height: 3rem;
+        }
+        
+        .model img {
+            border: 2px solid #f0c757;
+            width: 4rem;
+            height: 88px;
+        }
+        
+        .model ul {
+            margin-top: 0.5rem;
+            font-size: 0;
+        }
+        
+        .model ul li {
+            font-size: 0.8rem;
+            display: inline-block;
+            width: 33%;
+            text-align: center;
+            vertical-align: top;
+            padding-bottom: 5px;
+        }
+        
+        .model ul .image {
+            width: 30%;
+            text-align: left;
+        }
+        
+        .model .model-item {
+            box-sizing: border-box;
+            margin-right: 4%;
+            font-size: 0.8rem;
+        }
+        
+        .model .model-item.right {
+            margin-right: 0;
+        }
+        
+        .model-item p {
+            background: #f8f8f8;
+            height: 2rem;
+            line-height: 2rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .model-item p:nth-last-of-type(1) {
+            margin-bottom: 0;
+        }
+        
+        .new li {
+            list-style: none;
+            overflow: hidden;
+            padding: 15px 2rem 15px 15px;
+            border-bottom: 2px solid #eee;
+        }
+        
+        .new img {
+            box-sizing: border-box;
+            width: 30%;
+            height: 84px;
+            padding-right: 0.5rem;
+            float: left;
+           
+        }
+        
+        .new li h3 {
+            font-size: 0.9rem;
+        }
+        
+        .new li p {
+            font-size: 0.8rem;
+            color: #888;
+            line-height: 1.8em;
+            clear: both;
+        }
+        
+        .new .floatTime {
+            position: relative;
+        }
+        
+        .new .floatTime p{
+            position: absolute;
+            bottom: 12px;
+            left: 30%;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="contaier">
+        <header>
+            <a href="#"> <img src="image/back.png" alt="">返回</a>
+            <h1>这是标题</h1>
+        </header>
+        <nav>
+            <ul>
+                <li class="nav-item"><a href="#">导航</a></li>
+                <li class="nav-item hover"><a href="#">导航</a></li>
+                <li class="nav-item"><a href="#">导航</a></li>
+                <li class="nav-item"><a href="#">导航</a></li>
+                <li class="nav-item"><a href="#">导航</a></li>
+            </ul>
+        </nav>
+        <section class="banner-wap">
+            <ul class="banner">
+                <li class="banner-item"> <img src="image/bear.png" alt=""> </li>
+                <li><img src="image/bear.png" alt=""> </li>
+            </ul>
+        </section>
+        <section class="tapArea">
+            <ul>
+                <li class="tap-item"><img src="image/tab.png" alt=""><span>标签</span></li>
+                <li class="tap-item"><img src="image/tab.png" alt=""><span>标签</span></li>
+                <li class="tap-item"><img src="image/tab.png" alt=""><span>标签</span></li>
+                <li class="tap-item"><img src="image/tab.png" alt=""><span>标签</span></li>
+                <li class="tap-item"><img src="image/tab.png" alt=""><span>标签</span></li>
+            </ul>
+        </section>
+        <hr class="col-tap">
+        <section class="colArea">
+            <ul>
+                <li class="col-item">
+                    <img src="image/col-1.png" alt="">
+
+                </li>
+                <li class="col-item">
+                    <img src="image/col-3.png" alt="">
+
+                </li>
+                <li class="col-item">
+                    <img src="image/col-2.png" alt="">
+
+                </li>
+            </ul>
+            <ul class="text">
+                <li class="col-item">
+                    <aside>
+                        <h3>分栏一</h3>
+                        <h4>分栏小标题</h4>
+                    </aside>
+                </li>
+                <li class="col-item">
+                    <aside>
+                        <h3>分栏二</h3>
+                        <h4>分栏小标题</h4>
+                    </aside>
+                </li>
+                <li class="col-item">
+                    <aside>
+                        <h3>分栏三</h3>
+                        <h4>分栏小标题</h4>
+                    </aside>
+                </li>
+            </ul>
+        </section>
+
+        <hr class="col-modl">
+
+
+        <section class="model model-1">
+            <h1>模块一</h1>
+            <hr>
+            <ul>
+                <li class="image">
+                    <img src="image/mod.png" alt="">
+                </li>
+                <li class="model-item">
+                    <p>这是文案</p>
+                    <p>这是文案</p>
+                </li>
+                <li class="model-item right">
+                    <p>这是文案</p>
+                    <p>这是文案</p>
+                </li>
+            </ul>
+            <ul>
+                <li class="image">
+                    <img src="image/mod.png" alt="">
+                </li>
+                <li class="model-item">
+                    <p>这是文案</p>
+                    <p>这是文案</p>
+                </li>
+                <li class="model-item right">
+                    <p>这是文案</p>
+                    <p>这是文案</p>
+                </li>
+            </ul>
+        </section>
+        <hr class="col-modl">
+        <section class="model model-1">
+            <h1>模块二</h1>
+            <hr>
+            <ul>
+                <li class="image">
+                    <img src="image/mod.png" alt="">
+                </li>
+                <li class="model-item">
+                    <p>这是文案</p>
+                    <p>这是文案</p>
+                </li>
+                <li class="model-item right">
+                    <p>这是文案</p>
+                    <p>这是文案</p>
+                </li>
+            </ul>
+            <ul>
+                <li class="image">
+                    <img src="image/mod.png" alt="">
+                </li>
+                <li class="model-item">
+                    <p>这是文案</p>
+                    <p>这是文案</p>
+                </li>
+                <li class="model-item right">
+                    <p>这是文案</p>
+                    <p>这是文案</p>
+                </li>
+            </ul>
+        </section>
+        <hr class="col-modl">
+        <section class="new">
+            <ul>
+                <li class="floatTime"> <img src="image/article.png" alt="">
+                    <h3>这是文章标题自豪是22的文章标题</h3>
+                    <p>文章来源 <span>6分钟之前</span></p>
+                </li>
+                <li class="floatTime"> <img src="image/article.png" alt="">
+                    <h3>这是文章标题</h3>
+                    <p>文章来源 <span>7分钟之前</span></p>
+                </li>
+                <li>
+                    <h3>这是文章标题233</h3>
+                    <img src="image/article.png" alt="">
+                    <img src="image/article.png" alt="">
+                    <img src="image/article.png" alt="">  
+                    <p>文章来源 <span>8分钟之前</span></p>
+                </li>
+            </ul>
+        </section>
+    </div>
+</body>
+
+</html>

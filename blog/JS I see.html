@@ -57,6 +57,7 @@
             padding: 30px;
             color: #696969;
             box-shadow: 0 3px rgba(0, 0, 0, .08);
+            line-height: 1.5em;
         }
         
         .section h3 {
@@ -340,6 +341,9 @@
                 on the first line, in order to avoid false expectations with a var that got declared late but happened to
                 hold a value before - this is a common problem for programmers coming from languages with block scope.
             </p>
+            <p>
+                <b>注意:</b>对于直接暴露在script标签里面的代码(就是没有被其他函数包裹)，变量不仅仅会发生声明提升，并且赋值也会提升。并且两个script标签里面直接暴露的同名的function不会像在包裹在同一个函数里那样发生函数提升的同时发生同名函数覆盖，这只会发生先加载的被后加载的覆盖。
+            </p>
             <p class="source">
                 Source: <a target="_blank" href="http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html">JavaScript Scoping and Hoisting</a>
             </p>
@@ -430,7 +434,8 @@
             <section class="txt">
                 <ul>
                     <li><a target="_blank" href="http://www.joezimjs.com/javascript/javascript-design-patterns-chain-of-responsibility/">Chain of Responsibility</a></li>
-                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#commandpatternjavascript">Command</a></li>
+                    <li><a target="_blank" href="http://a
+                    ddyosmani.com/resources/essentialjsdesignpatterns/book/#commandpatternjavascript">Command</a></li>
                     <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#mediatorpatternjavascript">Mediator</a></li>
                     <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript">Observer</a></li>
                 </ul>
