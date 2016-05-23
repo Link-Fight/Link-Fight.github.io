@@ -166,6 +166,46 @@
                 }
             })
         }
+        
+        function createXiaoHuaInfo(startIndex){
+             startIndex =startIndex||1;
+             var flag = true;
+             function getXiaoHuaInfo(num){
+                 if(flag){
+                     flag = !flag;
+                     console.time(2);
+                     for(var i=0;i<10000;i++){
+                          for(var j=0;j < 10000;j++){
+                         }
+                     }
+                     console.timeEnd(2);
+                     console.time(3);
+                        myAjax("http://apis.baidu.com/showapi_open_bus/showapi_joke/joke_text?page="+num,function(data){
+                            data = JSON.parse(data);
+                            console.log(data["showapi_res_body"]);
+                            console.timeEnd(3);
+                            startIndex++;
+                            flag = !flag;
+                        });
+                 }
+             }
+             return {
+                 next:function(){
+                     getXiaoHuaInfo(startIndex);                     
+                 },
+                 getCurrentPage:function(){
+                     return startIndex;
+                 }
+             }
+        }
+        
+        function getXiaoHua(num){
+            num=num||1;
+            myAjax("http://apis.baidu.com/showapi_open_bus/showapi_joke/joke_text?page="+num,function(data){
+                data = JSON.parse(data);
+                console.log(data["showapi_res_body"]);
+            });
+        }
     </script>
 </body>
 

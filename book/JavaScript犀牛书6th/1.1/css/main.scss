@@ -1,0 +1,195 @@
+*{
+    margin: 0;
+    padding: 0;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+}
+body {
+            background-color: #aaa;
+}
+.warp{
+     background-color: #eee;
+                width: 800px;
+                margin: 5% auto;
+                padding: 10px;
+                clear: both;
+                border-radius: 10px;
+                &::after{
+                    content: "";
+                    display: block;
+                    clear: both;
+                }
+}
+        input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        }
+
+        input::-webkit-outer-spin-button {
+        -webkit-appearance: none;
+        }
+.left-input{
+    float: left;
+    height: 320px;
+    width: 100%;
+    & input, & textarea{
+        border: 0;
+        outline: 0;
+        font-size: 1.1rem;
+        background-color: transparent;
+    }
+    
+    p.tip{
+        border-bottom: 1px solid #aaa;
+        // margin-top: 10px;
+        width: 200px;
+        padding-top: 30px;
+        padding-bottom: 5px;
+        position: relative;
+        span{
+            position: absolute;
+            left: 0;
+            top: 5px;
+            font-size: 0.9em;
+            display: none;
+        }
+        &.activeTip span{
+            display: block;
+            animation: tipMoveUp 0.5s ease-in alternate;
+        }
+        &.focusTip span{
+            color: #2200bb;
+            font-weight: bold;
+        }
+    }
+    
+    table{
+        margin-top: 10px;
+        tr{
+            height: 30px;
+        }
+        td:nth-child(odd){
+            color: #cc2222;
+            text-align: right;
+        }
+        .output{
+            color: #226622;
+        }
+        button{
+            width: 100px;
+        }
+    } 
+    
+}
+
+
+.right-graph{
+     
+     float: left;
+     margin-left: -502px;
+     .graph-warp{
+           position: relative;
+           border-radius: 5px;
+            &::after{
+             content: "";
+             position: absolute;
+             border: 1px solid #111;
+             top: 0;
+             bottom: 0;
+             left: 0;
+             right: 0;
+             border-radius: 5px;
+             background-color: #eee;
+             transition: left 1s ease-in-out ;
+         }
+            &:hover #downGraph{
+            display: block;
+        }
+     }
+     .graph-warp.show{
+            &::after{
+             content: "";
+             left: 100%;  
+             border:none;
+         }
+     }
+     #graph{
+         border: 1px solid #111;
+         border-radius: 5px;
+         position: relative;
+         
+     }
+     #downGraph{
+         position: absolute;
+         right: 4px;
+         bottom: 5px;
+         color: #fff;
+         cursor: pointer;
+         width: 16px;
+         display: none;
+     }
+    
+     h3{
+         text-align: center;
+     }
+}
+
+  @keyframes tipMoveUp {
+            from {
+                top: 25px;
+                opacity: 0.3;
+            }
+            to {
+                top: 0px;
+                opacity: 1;
+            }
+        }
+        
+        
+    @media(max-width:820px){
+          
+            .warp{
+                width: 100%;
+                padding: 0;
+                margin: 0;
+                background-color: transparent;
+            }
+            .left-input,.right-graph{
+                background-color: #eee;
+                float: none;
+                width: 100%;
+                border-radius: 10px;
+                margin-top: 10px;
+                box-sizing: border-box;
+                margin-left:0;
+            }
+             .right-graph{
+                  box-sizing: border-box;
+                &>.graph-warp{
+                    margin: 0 auto;
+                    box-sizing: border-box;
+                }
+            }
+            #graph{                 
+                 width: 100%;
+                 
+                 margin: 0 auto;
+            }
+            .left-input{
+                display: block;
+                h3{
+                    text-align: center;
+                }
+                p.tip{
+                    width: 100%;
+                    max-width: 400px;
+                    margin: 0 auto;
+                }
+                table{
+                    width: 100%;
+                    max-width: 400px;
+                    margin: 0 auto;
+                }
+               
+            }
+            
+           
+        }
