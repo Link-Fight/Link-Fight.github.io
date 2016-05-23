@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>进行类型检测</title>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="css/nav.css">
+    <style>
+        .body {
+            margin-top: 51px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="" id="nav"></div>
+    <script>
+        $("#nav").load("nav.html",function(response,status,xhr){});
+    </script>
+    <div class="body">
+        <div class="container">
+            <h1 class="color_h1">进行类型检测</h1>
+            <ul>
+                <li><code> typeof</code>   <span>适合基本类型以function检测，遇到null失效 </span> </li>
+                <li><code> instanceof</code> <span> </span>适合自定义对象和原生对象，在不同iframe和windows间失效 </li>
+                <li><code> Object.protype.toString</code> <span> 通过{}.toString拿到，适合内置对象和基元类型，遇到null和undefined失效</span> </li>
+                <li><code> constructor</code> <span> </span> </li>
+                <li><code> duck type</code> <span> </span> </li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

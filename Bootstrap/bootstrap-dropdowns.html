@@ -1,111 +1,113 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>bootstrap 字体图标</title>
-	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="myBootstrap.css" type="text/css">
-	<style type="text/css">
-		ul li{
-			margin-left: 0px !important;
-		}
-	</style>
-	
+    <meta charset="UTF-8">
+    <title>bootstrap 字体图标</title>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="myBootstrap.css" type="text/css">
+    <style type="text/css">
+        ul li {
+            margin-left: 0px !important;
+        }
+    </style>
+
 </head>
+
 <body>
-	<div class="main">
-		<h1>Bootstrap <span class="color_h1">下拉菜单(Dropdowns)</span></h1>
-		<pre>基本的下拉菜单，添加class<i>.dropdown</i></pre>
-		<div class="demo">
-			<div class="dropdown">
-				<button type="button" class="btn dropdown-toggle" id="dropdownMenu1"
-				data-toggle='dropdown'>
-					主题<span class='caret'></span>
-				</button>
-				<ul class="dropdown-menu" role='menu' aria-labelledby="dropdownMenu2">
-					<li  role='presentation'>
-						<a href="#" role='menuitem' tabindex="-1">Java</a>
-					</li>
-					<li   role='presentation'>
-						<a href="#" role='menuitem' tabindex="-1">C#</a>
-					</li>
-					<li   role='presentation'>
-						<a href="" role='menitem' tabindex="-1">javaScript</a>
-					</li>
-					<li  role='presentation' class="divider"></li>
-					<li  role='presentation'>
-						<a href="#" role='menuitem' tabindex="-1" href="#">new</a>
-					</li>
-				</ul>
-			</div>
-		</div>
-		<pre>下拉菜单的标签区域添加标题，使用class<i>.dropdown-header</i></pre>		
-		<div class="demo">	
-			<div class="dropdown">
-			   <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" 
-			      data-toggle="dropdown">
-			      主题
-			      <span class="caret"></span>
-			   </button>
-			   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-			      <li role="presentation" class="dropdown-header">下拉菜单标题</li>
-			      <li role="presentation" >
-			         <a role="menuitem" tabindex="-1" href="#">Java</a>
-			      </li>
-			      <li role="presentation">
-			         <a role="menuitem" tabindex="-1" href="#">数据挖掘</a>
-			      </li>
-			      <li role="presentation">
-			         <a role="menuitem" tabindex="-1" href="#">
+    <div class="main">
+        <h1>Bootstrap <span class="color_h1">下拉菜单(Dropdowns)</span></h1>
+        <pre>基本的下拉菜单，添加class<i>.dropdown</i></pre>
+        <div class="demo">
+            <div class="dropdown">
+                <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle='dropdown'>
+                    主题<span class='caret'></span>
+                </button>
+                <ul class="dropdown-menu" role='menu' aria-labelledby="dropdownMenu2">
+                    <li role='presentation'>
+                        <a href="#" role='menuitem' tabindex="-1">Java</a>
+                    </li>
+                    <li role='presentation'>
+                        <a href="#" role='menuitem' tabindex="-1">C#</a>
+                    </li>
+                    <li role='presentation'>
+                        <a href="" role='menitem' tabindex="-1">javaScript</a>
+                    </li>
+                    <li role='presentation' class="divider"></li>
+                    <li role='presentation'>
+                        <a href="#" role='menuitem' tabindex="-1" href="#">new</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <pre>下拉菜单的标签区域添加标题，使用class<i>.dropdown-header</i></pre>
+        <div class="demo">
+            <div class="dropdown">
+                <button type="button" class="btn dropdown-toggle" id="dropdownMenu1" data-toggle="dropdown">
+                    主题
+                    <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+                    <li role="presentation" class="dropdown-header">下拉菜单标题</li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="#">Java</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="#">数据挖掘</a>
+                    </li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="#">
 			            数据通信/网络
 			         </a>
-			      </li>
-			      <li role="presentation" class="divider"></li>
-			      <li role="presentation" class="dropdown-header">下拉菜单标题</li>
-			      <li role="presentation">
-			         <a role="menuitem" tabindex="-1" href="#">分离的链接</a>
-			      </li>
-			   </ul>
-			</div>	
-		</div>
-	</div>
-	<div>
-		<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-		     <div class="container">
-		       <div class="navbar-header">
-		         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-		           <span class="sr-only">Toggle navigation</span>
-		           <span class="icon-bar"></span>
-		           <span class="icon-bar"></span>
-		           <span class="icon-bar"></span>
-		         </button>
-		         <a class="navbar-brand" href="#">Link博客</a>
-		       </div>
-		       <div class="collapse navbar-collapse">
-		         <ul class="nav navbar-nav">
-		           <li class="active"><a href="#"><span class="glyphicon ">css</span></a></li>
-		           <li><a href="#shop"><span class="glyphicon">javaScript</span></a></li>
-		           <li><a href="#support"><span class="glyphicon ">jQuery</span></a></li>
-		           <li><a href="#bootstrap"><span class="glyphicon ">bootstrap</span></a></li>
-		         </ul>
-		       </div><!-- /.nav-collapse -->
-		     </div><!-- /.container -->
-		   </div>
-	</div>
-	<div class="previous-next-links">
-		<div class="previous-design-link">← <a href="bootstrap-glyphicons.html" rel="prev" title="
+                    </li>
+                    <li role="presentation" class="divider"></li>
+                    <li role="presentation" class="dropdown-header">下拉菜单标题</li>
+                    <li role="presentation">
+                        <a role="menuitem" tabindex="-1" href="#">分离的链接</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <div>
+        <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Link博客</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#"><span class="glyphicon ">css</span></a></li>
+                        <li><a href="#shop"><span class="glyphicon">javaScript</span></a></li>
+                        <li><a href="#support"><span class="glyphicon ">jQuery</span></a></li>
+                        <li><a href="#bootstrap"><span class="glyphicon ">bootstrap</span></a></li>
+                    </ul>
+                </div>
+                <!-- /.nav-collapse -->
+            </div>
+            <!-- /.container -->
+        </div>
+    </div>
+    <div class="previous-next-links">
+        <div class="previous-design-link">← <a href="bootstrap-glyphicons.html" rel="prev" title="
 	Bootstrap 字体图标	">
 	Bootstrap 字体图标	</a>
-		</div>
-		<div class="next-design-link"><a href="bootstrap-button-groups.html" rel="next" title="
+        </div>
+        <div class="next-design-link"><a href="bootstrap-button-groups.html" rel="next" title="
 	Bootstrap 按钮组	">
 	Bootstrap 按钮组	</a> →
-		</div>
-	</div>
-	<script type="text/javascript">
-	window.onload=function() {
+        </div>
+    </div>
+    <script type="text/javascript">
+        window.onload=function() {
 		var btn = document.getElementById('dropdownMenu1');
 		var width = btn.offsetWidth;
 		var ul =btn.nextSibling;
@@ -116,6 +118,7 @@
 		}
 		ul.style.width = width+"px";
 	};
-	</script>
+    </script>
 </body>
+
 </html>

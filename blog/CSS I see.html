@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS I see</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        .wrapper {
+            padding-top: 30px;
+            padding-bottom: 15px;
+            width: 80%;
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        #css {
+            background-color: rgb(195, 92, 72);
+        }
+        
+        #patterns {
+            background-color: rgb(15, 92, 72);
+        }
+        
+        #Terminology {
+            background-color: rgb(15, 92, 172);
+        }
+        
+        .section h1 {
+            font-size: 40px;
+            text-align: center;
+            text-transform: uppercase;
+            /*text-shadow: 1px 4px 2px rgba(0, 0, 0, 0.16);*/
+        }
+        
+        .section h1 a {
+            color: #fff;
+            text-shadow: 1px 4px 2px rgba(0, 0, 0, 0.16);
+        }
+        
+        .section p {
+            margin-top: 15px;
+            background-color: #fff;
+            padding: 30px;
+            color: #696969;
+            box-shadow: 0 3px rgba(0, 0, 0, .08);
+        }
+        
+        p.target {
+            padding: 10px;
+            background-color: rgba(0, 0, 0, .08);
+            color: #FFF;
+        }
+        
+        .section h3 {
+            font-weight: bold;
+            font-size: 1.17em;
+            line-height: 28px;
+            border-bottom: 3px solid rgba(0, 0, 0, .08);
+            display: inline-block;
+            text-transform: uppercase;
+            clear: both;
+            color: #fff;
+            margin: 30px 0;
+        }
+        
+        .section p.source {
+            margin-top: 0;
+            padding: 15px 30px;
+            color: #FFF;
+            background: rgba(0, 0, 0, .09)!important;
+            box-shadow: none!important;
+        }
+        
+        .section p a:hover,
+        .txt a:hover {
+            text-decoration: underline;
+        }
+        
+        .section p a,
+        .txt a {
+            color: #FF8484;
+            text-decoration: none;
+        }
+        
+        .txt {
+            background: #FFF;
+            color: #696969;
+            padding: 20px;
+            box-shadow: 0 3px rgba(0, 0, 0, .08);
+            clear: both;
+            margin-top: 1em;
+            /*text-indent: 2em;*/
+        }
+        
+        .txt li {
+            text-indent: 0;
+            margin-left: 10px;
+        }
+        
+        .section ul {
+            clear: both;
+            margin: 0;
+            padding: 0 20px;
+        }
+        
+        .section p a,
+        .txt a {
+            color: #FF8484;
+            text-decoration: none;
+        }
+        
+        .txt>span {
+            text-indent: 2rem;
+        }
+        
+        th {
+            background-color: rgba(0, 0, 0, .08);
+        }
+        
+        td {
+            height: 2em;
+        }
+        
+        table {
+            border-collapse: separate;
+        }
+        
+        .old {
+            background-color: rgba(0, 0, 0, .2);
+        }
+        
+        div.attrShow::after {
+            content: attr(data-height);
+            background-color: red;
+        }
+        
+        .txt code {
+            color: #aa1133;
+        }
+    </style>
+    <style>
+        .demo-0 {
+            background-color: rgba(0, 200, 0, 0.16);
+            /*font-size: 0;*/
+            color: #fff;
+        }
+        
+        .demo-0 span {
+            background-color: red;
+            font-size: 1rem;
+            margin: 10px;
+        }
+        
+        .demo-0 .a,
+        .demo-0 .b {
+            height: 100px;
+            margin: 20px;
+            overflow: auto;
+            background-color: rgba(0, 200, 0, 0.56);
+        }
+        
+        .demo-0 .nomorl {
+            background-color: rgba(0, 200, 0, 0.56);
+        }
+        
+        .demo-0 .aa,
+        .demo-0 .ab {
+            width: 35px;
+            height: 35px;
+            background-color: green;
+            margin: 10px;
+        }
+        
+        .demo-0 .float {
+            float: left;
+            margin-left: 10px;
+            margin-right: 10px;
+            width: 100px;
+            height: 100px;
+            background-color: blue;
+        }
+        
+        .demo-0 .nomorl .na,
+        .demo-0 .nomorl .nb {
+            height: 50px;
+            width: 50px;
+            margin: 20px;
+            background-color: yellow;
+        }
+        
+        .demo-0 .nomorl .wrp {
+            overflow: auto;
+        }
+        
+        .demo {
+            border: 20px solid rgba(255, 255, 255, 0.2);
+            margin: 15px 0;
+            border-width: 30px 0;
+            background: #eee;
+            background-clip: padding-box;
+            box-sizing: border-box;
+            width: 100%;
+        }
+        
+        .demo-1 header,
+        .demo-2 header,
+        footer {
+            /*height: 1rem;*/
+            text-align: center;
+            background-color: #2288ff;
+            line-height: 2;
+        }
+        
+        .demo-1 .main,
+        .demo-2 .main {
+            height: 5rem;
+            overflow: hidden;
+        }
+        
+        .demo-1 .main>div {
+            padding-bottom: 999px;
+            margin-bottom: -999px;
+        }
+        
+        .demo-1 .center {
+            background-color: #8888ff;
+            width: calc(100% - 10px);
+            float: left;
+            padding-left: 10px;
+        }
+        
+        .demo-1 .center .content {
+            margin-left: 130px;
+            margin-right: 160px;
+            background-color: orange;
+        }
+        
+        .demo-1 .left {
+            width: 120px;
+            background-color: #ff88ff;
+            float: left;
+            margin-left: -100%;
+        }
+        
+        .demo-1 .right {
+            width: 150px;
+            background-color: #22aaff;
+            float: left;
+            margin-left: -150px;
+        }
+        
+        .demo-2 .center,
+        .demo-2 .left,
+        .demo-2 .right {
+            float: left;
+            position: relative;
+        }
+        
+        .demo-2 .main {
+            padding-left: 150px;
+            padding-right: 130px;
+        }
+        
+        .demo-2 .center {
+            width: 100%;
+            background-color: #11dd88;
+        }
+        
+        .demo-2 .left {
+            width: 150px;
+            background-color: #FF8484;
+            margin-left: -100%;
+            left: -150px;
+        }
+        
+        .demo-2 .right {
+            width: 130px;
+            right: -130px;
+            margin-left: -130px;
+            background-color: #66aa44;
+        }
+    </style>
+</head>
+
+<body>
+    <section class="section" id='html'>
+        <div class="wrapper">
+
+        </div>
+    </section>
+    <section class="section" id="css">
+        <div class="wrapper">
+            <h1><a href="#css">css/层叠样式</a>  </h1>
+            <h3>BFC(Block Formatting Content)/格式化上下文</h3>
+            <p class="target">Describe BFC(Block Formatting Context) and how it works.</p>
+            <section class="txt">简单来说BFC会形成一个独立的容器，该容器不受外界相邻元素的影响，同时也不影响外界元素(可以避免margin穿透，清除浮动)。
+                <br> 触发BFC的方法有：
+                <ul>
+                    <li>根元素</li>
+                    <li>float属性不为none</li>
+                    <li>position为absolute或fixed</li>
+                    <li>display为inline-block, table-cell, table-caption, flex, inline-flex</li>
+                    <li>overflow不为visible</li>
+                </ul>
+                <br> 布局规则：
+                <ul>
+                    <li>内部的Box会在垂直方向，一个接一个地放置</li>
+                    <li>Box垂直方向的距离由margin决定。属于同一个BFC的两个相邻Box的margin会发生重叠</li>
+                    <li>每个元素的margin box的左边， 与包含块border box的左边相接触(对于从左往右的格式化，否则相反)。即使存在浮动也是如此。</li>
+                    <li>BFC的区域不会与float box重叠。</li>
+                    <li>BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素。反之也如此。</li>
+                    <li>计算BFC的高度时，浮动元素也参与计算</li>
+                </ul>
+            </section>
+            <div class="demo-0">
+                <div class="float"> float </div>
+                <div class="float"> float </div>
+                <div class="a">
+                    BFC
+                    <div class="aa"></div>
+                    <div class="ab"></div>
+                    <div class="float"></div>
+                </div>
+                <div class="b"></div>
+                <div class="nomorl">
+                    <div class="na"></div>
+                    <div class="wrp">
+                        <div class="nb"></div>
+                        <div class="nb"></div>
+                    </div>
+                </div>
+            </div>
+            <p class="source">更多: <a target="_blank" href="http://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html">更多了解BFC</a>                / <a target="_blank" href="http://www.zhangxinxu.com/wordpress/2015/02/css-deep-understand-flow-bfc-column-two-auto-layout/">利用BFC来实现多栏自适应布局</a>                </p>
+
+            <h3>圣杯布局/双飞翼布局</h3>
+            <p class="target">目标是解决：三栏布局中，左右两栏固定宽度，中间部分自适应并且优先加载。</p>
+
+            <section class="demo demo-1">
+                <header> 双飞翼布局 </header>
+                <section class="main">
+                    <div class="center">
+                        <div class="content">1:)Main</div>
+                    </div>
+                    <div class="left">2:)left <br>356 <br>665 <br>54 </div>
+                    <div class="right">3:)right</div>
+                </section>
+                <footer>footer</footer>
+            </section>
+
+            <section class="text"></section>
+
+            <section class="demo demo-2">
+                <header> 圣杯布局 </header>
+                <section class="main">
+                    <div class="center">
+                        1:)Main
+                    </div>
+                    <div class="left">2:)left <br>356 <br>665 <br>54 </div>
+                    <div class="right">3:)right</div>
+                </section>
+                <footer>footer</footer>
+            </section>
+
+            <section class="txt">
+
+                <ul>
+                    <li>双飞翼布局使用了：浮动，负边距。</li>
+                    <li>圣杯布局使用了：浮动，负边距，相对定位。 </li>
+                </ul>
+                <br>
+                <ul>
+                    <li>使用浮动，可以让块级元素可以布局在同一行。但是这样需要让中间(Main)的宽度为自适应(100%),会把后面添加的浮动元素挤到下一行。</li>
+                    <li>此时，使用负边距让浮动元素在水平方向上移动。 当负边距设置比较大的值时候，将从当前行移动到上一行。例如：这里的对 <b>left</b>设置：<code> margin-left: -100%</code>将把<b>left</b>移动到上一层<b>Main</b>元素的顶部。不过通过负边距把左右部分分别移动到<b>Main</b>的左右两边的时候，也会占据并遮挡左右两边的内容。
+                    </li>
+                    <li>而两者不同就在于如何解决左右两边被屏蔽的问题。双飞翼就采用在<b>Main</b>里添加元素<code>div</code>并设置左右<code>margin</code>值。 而圣杯布局就采用在 <b>Main</b>上设置左右
+                        <code>padding </code>值，并在左右内容设置相对定位。
+                    </li>
+                </ul>
+
+
+            </section>
+
+
+            <h3>自适应的正方形</h3>
+            <p>使用纯 CSS 制作出能够自适应大小的正方形</p>
+            <section class="txt"> 除了CSS3 中的视口相对单位，主要利用到 margin, padding 的百分比数值相对父元素宽度的宽度计算得出 来制作宽高相等、且相对视口宽度自适应的正方形。如果需求是制作相对视口高度自适应的正方形，估计就只能使用
+                vh 单位了</section>
+            <p class="source"> 更多:<a href="http://www.cocoachina.com/webapp/20150807/12940.html">自适应的正方形</a> </p>
+        </div>
+    </section>
+</body>
+
+
+
+</html>

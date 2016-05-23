@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日期</title>
+    <link rel="stylesheet" href="calendar.css">
+    <script src="calendar.js"></script>
+</head>
+<body>
+    <div class="container" id="container"></div>
+    <script>
+         var data = {days:[
+            {day:1,time:"20",day:"2016/02/01",timeStr:"上午14:54:49",content:"准时",attr:{}},
+            {day:1,time:"40",day:"2016/02/01",timeStr:"下午14:54:49",content:"准时",attr:{}},
+            {day:2,time:"20",day:"2016/02/02",timeStr:"上午14:54:49",content:"准时",attr:{}},
+            {day:2,time:"40",day:"2016/02/02",timeStr:"下午14:54:49",content:"准时",attr:{}},
+            {day:4,time:"20",day:"2016/02/04",timeStr:"上午14:54:49",content:"准时",attr:{}},
+            {day:5,time:"40",day:"2016/02/05",timeStr:"下午14:54:49",content:"准时",attr:{}},
+            {day:5,time:"20",day:"2016/02/05",timeStr:"上午14:54:49",content:"准时",attr:{}},
+            {day:5,time:"40",day:"2016/02/05",timeStr:"下午14:54:49",content:"加班",attr:{}},
+        ]
+        };
+          var containrDiv = document.getElementById("container");
+          var obj =  new CreateCalendar(containrDiv);
+          obj.setDate(data);
+    </script>
+</body>
+</html>

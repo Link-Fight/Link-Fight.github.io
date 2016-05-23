@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script src="http://apps.bdimg.com/libs/jquery/1.8.3/jquery.min.js"></script>
+    <script src="http://cdn.staticfile.org/jquery-easing/1.3/jquery.easing.min.js"></script>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            width: 90%;
+            margin: 0px auto;
+            background-color: #aaa;
+            height: 400px;
+            padding: 100px;
+            
+        }
+        .box{
+            position: relative;
+            background: greenyellow;
+            float: left;
+            height: 100px;
+            width: 100px;
+            margin-right: 100px;
+            /*margin-left: 100px;*/
+        }
+        .supbox{
+            position: relative;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 0, 255, 0.4);
+            left: -50%;
+        }
+    </style>
+    <style>
+        .lodingPage{
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: #444;
+        }
+        .lodingPage .content{
+            width: 100px;
+            color: white;
+            font-weight: bold;
+            margin: 0 auto;
+        }
+    </style>
+</head>
+<body>
+    
+    <div class="container">
+        <div class="box">
+            <div class="supbox"></div>
+        </div>
+        
+    </div>
+    
+    <div class="lodingPage">
+        <div class="content">加载ing</div>
+    </div>
+    <script>
+        
+    </script>
+    <script>
+        console.log(1);
+        window.onload=function(){
+            console.log(2);
+            var box = document.getElementsByClassName("box");
+            for(var i=0,len = box.length;i<len;i++){
+                var d = box[i];
+                d.onmouseenter = function(){
+     
+                };
+                d.onmouseleave = function(){
+     
+                };
+            }
+        };
+    </script>
+    <script>
+        (function(){
+            if(window.onload){
+                var preOnload = window.onload;
+                window.onload = function(){
+                    preOnload();
+                    myInit();
+                }
+            }else{
+                myInit();
+            }
+            
+            
+           function myInit(){
+            $(".lodingPage").delay("1000").animate({height:"0px"},1500,"swing",function(){
+                this.style["display"]="none";
+            });
+           }
+            
+            
+            function move(){
+                var load = document.getElementsByClassName("lodingPage")[0];
+                clearTimeout(load.timer);
+                var speed = 10;
+                load.timer=setTimeout(function(){
+                    var height=parseInt(getComputedStyle(load)["height"]);
+                    if(height>10){
+                        load.style["height"]=(height-speed)+"px";
+                        move();
+                    }else{
+                        load.style["display"]="none";
+                    }
+                },30);
+            }
+            
+            
+        })();
+        
+       
+    </script>
+</body>
+</html>

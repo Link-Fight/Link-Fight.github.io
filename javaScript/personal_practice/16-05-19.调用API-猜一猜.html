@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>猜一猜</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-family: arial, 宋体;
+            font-size: 18px;
+        }
+        
+        body {
+            background-color: #2288aa;
+        }
+        
+        .warp {
+            position: absolute;
+            top: 25%;
+            border-radius: 10px;
+            padding: 40px 20px 20px;
+            width: 400px;
+            left: 50%;
+            margin-left: -200px;
+            color: rgb(33, 113, 194);
+            background-color: #fff;
+        }
+        
+        .warp p {
+            line-height: 30px;
+            min-height: 30px;
+            margin: 5px 0;
+        }
+        
+        .warp button {
+            border: none;
+            outline: none;
+            color: #fff;
+            background-color: rgb(33, 113, 194);
+            padding: 5px;
+        }
+        
+        .warp button#nextInfo {
+            float: right;
+        }
+        
+        .warp button:hover {
+            box-shadow: 2px 5px 5px rgba(0, 0, 0, 0.2);
+        }
+        
+        #answer {
+            position: relative;
+            color: transparent;
+        }
+        
+        #answer::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            background-color: #fff;
+            transition: background-color 1s;
+        }
+        
+        #answer.show {
+            color: rgb(33, 113, 194);
+        }
+        
+        #answer.show::after {
+            background-color: transparent;
+        }
+        
+        span.logo {
+            position: absolute;
+            left: 0;
+            bottom: -30px;
+            width: 100%;
+            text-align: center;
+            background-color: transparent;
+        }
+        
+        span.logo a {
+            color: #fff;
+            text-decoration: none;
+            font-size: 16px;
+        }
+    </style>
+</head>
+
+
+<body>
+    <div class="parent">
+        <div class="warp">
+            <p class="problem" id="problem"></p>
+            <p class="" id="answer"></p>
+            <p class="control" id="control">
+                <button id="lookAnswer">看答案</button>
+                <button id="nextInfo">下一个</button>
+            </p>
+            <span class="logo"> <a href="https://github.com/Link-Fight">by linkFight</a> </span>
+        </div>
+    </div>
+    <script>
+        function CreateXHR() {
+            var XHR;
+            if (window["XMLHttpRequest"]) {
+                XHR = new XMLHttpRequest();
+            } else {
+                var XmlHttpVersions = new Array("MSXML2.XMLHTTP.6.0", "MSXML2.XMLHTTP.5.0", "MSXML2.XMLHTTP.4.0", "MSXML2.XMLHTTP.3.0", "MSXML2.XMLHTTP", "Microsoft.XMLHTTP");
+                for (var i = 0; i < XmlHttpVersions.length; i++) {
+                    try {
+                        XHR = new ActiveXObject(XmlHttpVersions[i]);
+                    } catch (e) {}
+
+                }
+            }
+            return XHR;
+        }
+
+        function myAjax(url, callBack) {
+            var XHR = CreateXHR();
+
+            XHR.onreadystatechange = function() {
+                if (XHR.readyState == 4) {
+                    if (XHR.status == 200) {
+                        callBack(XHR.responseText);
+                    }
+                }
+            }
+            XHR.open("GET", url, true);
+            XHR.setRequestHeader("apikey", "1fb3e0964820f29d0546c9be1bc196ba");
+            XHR.send(null);
+        }
+
+        function getInfo() {
+            myAjax("http://apis.baidu.com/myml/c1c/c1c", function(data) {
+                var pProblem = document.getElementById("problem");
+                var pAnswer = document.getElementById("answer");
+                pAnswer.className = "";
+                data = JSON.parse(data);
+                pProblem.innerHTML = data.Title;
+                pAnswer.innerHTML = data.Answer;
+                console.log(data);
+            });
+        }
+
+        window.onload = main;
+
+        function main() {
+            getInfo();
+            var eControl = document.getElementById("control");
+            eControl.addEventListener("click", function(e) {
+                e = e || window.event;
+                switch (e.target.id) {
+                    case "lookAnswer":
+                        var pAnswer = document.getElementById("answer");
+                        pAnswer.className = "show";
+                        break;
+                    case "nextInfo":
+                        getInfo();
+                        break;
+                }
+            })
+        }
+    </script>
+</body>
+
+</html>

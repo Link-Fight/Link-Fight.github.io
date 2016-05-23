@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+        }
+        
+        .container {
+            position: relative;
+            margin: 20px;
+            padding: 20px;
+            background-color: #eee;
+            border: 1px solid #999;
+            overflow: auto;
+        }
+        
+        .left {
+            /*float: left;*/
+            box-sizing: border-box;
+            background-color: #fff;
+            text-align: center;
+            padding: 20px;
+            width: 200px;
+            border: 1px solid #999;
+            overflow: auto;
+        }
+        
+        .left .log {
+            box-sizing: border-box;
+            float: left;
+            width: 80px;
+            height: 80px;
+            background-color: cadetblue;
+            border: 1px solid #999;
+        }
+        
+        .right {
+            /*float: right;*/
+            box-sizing: border-box;
+            width: 120px;
+            border: 1px solid #999;
+            /*padding: 20px;*/
+            background-color: #fff;
+        }
+        
+        .right .person {
+            box-sizing: border-box;
+            width: 80px;
+            height: 80px;
+            border: 1px solid #999;
+            margin: 20px;
+        }
+        
+        .right .person:nth-child(1) {
+            background-color: yellowgreen;
+        }
+        
+        .right .person:nth-child(2) {
+            background-color: greenyellow;
+        }
+        
+        .right .person:nth-child(3) {
+            background-color: yellow;
+        }
+        
+        .right .person:nth-child(4) {
+            background-color: green;
+        }
+        
+        .main {
+            /*margin-left: 240px;
+            margin-right: 160px;*/
+            box-sizing: border-box;
+            padding: 20px;
+            background-color: #fff;
+            border: 1px solid #999;
+        }
+        
+        .main p {
+            margin-bottom: 20px;
+        }
+    </style>
+    
+    <style>
+        .tip {
+            position: fixed;
+            bottom: 0;
+            height: 50px;
+            width: 100%;
+            background-color: rgba(52, 52, 52, 0.5);
+            text-align: center;
+        }
+        
+        .tip button {
+            font-weight: bold;
+            background: transparent;
+            border: none;
+            height: 50px;
+            margin:  0 50px;
+        }
+    </style>
+    <!--<link id="var" rel="stylesheet" href="margin+float.css">-->
+    <link id="var" rel="stylesheet" href="margin+position.css">
+</head>
+
+<body>
+    <div class="container">
+        <div class="left">
+            <div class="log"></div>
+            团队名称
+        </div>
+        <div class="right">
+
+            <div class="person"></div>
+
+            <div class="person"></div>
+
+            <div class="person"></div>
+
+            <div class="person"></div>
+
+            </ul>
+        </div>
+        <div class="main">
+            <p>一枚野生前端工程师</p>
+            <p>目前正在参加IFE的学习，为了更好的学习，与一群有着相同目标的小朋友组成了这个小团队。</p>
+            <p>该任务三是一个三列布局的应用</p>
+            <p>任务目标是掌握HTML/CSS布局概念，掌握盒模型的概念，掌握postition与float的概念以及在布局时的用法。</p>
+        </div>
+    </div>
+
+    <div class="tip">
+        <button>Default</button>
+        <button>Position</button>
+        <button>Margin</button>
+    </div>
+</body>
+
+</html>

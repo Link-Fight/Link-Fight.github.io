@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .kelin_tip {
+            position: fixed;
+            top: 0;
+            left: 0;
+            background: #000000;
+            color: #ffffff;
+            padding: 10px;
+            line-height: 32px;
+            border-radius: 30%;
+        }
+        
+        .main {
+            height: 100px;
+            width: 800px;
+            margin: 20px auto;
+            background-color: #444444;
+            padding: 50px;
+        }
+        
+        div .box {
+            margin-right: 10px;
+            position: relative;
+            float: left;
+            height: 100px;
+            width: 100px;
+            background-color: wheat;
+            overflow: hidden;
+        }
+        
+        .box .supBox {
+         
+            visibility: hidden;
+            position: absolute;
+            
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 100%;
+            background-color: rgba(0, 255, 0, 0.6);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="kelin_tip"> <span>javscript</span>
+        <br><span>动画效果</span> </div>
+    <div class="main">
+        <div class="demo">
+
+            <div class="box">
+                底部
+                <div class="supBox">介绍文字1</div>
+            </div>
+
+
+            <div class="box">
+                <div class="supBox">介绍文字2</div>
+            </div>
+            
+            <div class="box">
+                底部
+                <div class="supBox">介绍文字3</div>
+            </div>
+
+
+            <div class="box">
+                <div class="supBox">介绍文字4</div>
+            </div>
+            
+              <div class="box">
+                底部
+                <div class="supBox">介绍文字5</div>
+            </div>
+
+
+            <div class="box">
+                <div class="supBox">介绍文字6</div>
+            </div>
+
+        </div>
+    </div>
+    <script>
+        var tools;   
+        (function(){
+            tools={
+                    // top : x>0 y<=0
+                    // right:x>0 y>0   && x>y
+                    // bottom:x>0 y>0  && x<y
+                    // left: x<=0 y>0
+                getDrection(x,y){
+                     if(x>0&&y <=0){
+                        return "top";
+                    }else if(x>0&&y>0){
+                        if(x>y){
+                            return  "right";
+                        }
+                        return "bottom";
+                    }else if(x <=0&& y >0){
+                         return "left";
+                    }
+                },
+                move(targetEle,tarObj){
+                        clearTimeout(targetEle.timer);
+                        
+                            targetEle.timer = setTimeout( ( function(aa){
+                                return  function(){
+                                    var mL =parseInt(window.getComputedStyle(targetEle)[tarObj["DRE"]],10);
+                                    if(mL!=tarObj["Target"]){
+                                            var speed = (tarObj["Target"] -mL)/5;
+                                            speed = speed>0?Math.ceil(speed):Math.floor(speed);
+                                            targetEle.style[tarObj["DRE"]] =mL+speed+"px";
+                                            aa.callee(targetEle,tarObj);
+                                        }
+                                }
+                            })(arguments),20);        
+                 }
+            }
+        })();
+        
+        window.onload=function(){
+            var box = document.getElementsByClassName("box");
+            for(var i=0,len=box.length;i<len;i++){
+                box[i].onmouseenter=function(event){
+                    if(!this.mH){
+                        this.mH = getComputedStyle(event.currentTarget)["height"];
+                        this.mW = getComputedStyle(event.currentTarget)["width"];
+                    }
+                     var dre = tools.getDrection(event.offsetX,event.offsetY);
+                     var supBox = event.currentTarget.getElementsByClassName("supBox")[0];
+                     var targetObj;
+                     if(dre=="top"){
+                         supBox.style[dre]="-"+this.mH;
+                         supBox.style["left"]=0;
+                         targetObj={"DRE":"top","Target":0}
+                     }else if(dre=="right"){
+                          supBox.style["left"]=""+this.mW;
+                           supBox.style["top"]=0;
+                          targetObj={"DRE":"left","Target":0}
+                     }else if(dre=="bottom"){
+                           supBox.style["top"]=""+this.mH;
+                           supBox.style["left"]=0;
+                           targetObj={"DRE":"top","Target":0}
+                     }else if(dre=="left"){
+                           supBox.style[dre]="-"+this.mW;
+                            supBox.style["top"]=0;
+                           targetObj={"DRE":"left","Target":0}
+                     }
+                     supBox.style["visibility"]="visible";
+                     tools.move(supBox,targetObj);     
+                }
+                box[i].onmouseleave=function(event){
+                     var dre = tools.getDrection(event.offsetX,event.offsetY);
+                     var supBox = event.currentTarget.getElementsByClassName("supBox")[0];
+                     var targetObj;
+                     if(dre=="top"){
+                         targetObj={"DRE":"top","Target":-parseInt(this.mH)}
+                     }else if(dre=="right"){
+                          targetObj={"DRE":"left","Target":parseInt(this.mW)}
+                     }else if(dre=="bottom"){
+                           targetObj={"DRE":"top","Target":parseInt(this.mH)}
+                     }else if(dre=="left"){
+                           targetObj={"DRE":"left","Target":-parseInt(this.mW)}
+                     }
+                     supBox.style["visibility"]="visible";
+                     tools.move(supBox,targetObj);
+                }
+            }
+        }
+        
+        // function move(targetEle,tarObj){
+        //     clearTimeout(targetEle.timer);
+            
+        //         targetEle.timer = setTimeout( ( function(aa){
+        //             return  function(){
+        //                 var mL =parseInt(window.getComputedStyle(targetEle)[tarObj["DRE"]],10);
+        //                 if(mL!=tarObj["Target"]){
+        //                         var speed = (tarObj["Target"] -mL)/5;
+        //                         speed = speed>0?Math.ceil(speed):Math.floor(speed);
+        //                         targetEle.style[tarObj["DRE"]] =mL+speed+"px";
+        //                         // move(targetEle,tarObj);
+                                
+        //                         aa.callee(targetEle,tarObj);
+        //                     }
+        //             }
+        //         })(arguments)
+                    
+        //            ,20);
+                
+            
+        // }
+    </script>
+</body>
+
+</html>

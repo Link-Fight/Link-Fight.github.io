@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>贷款计算器</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .output {
+            font-weight: bold;
+        }
+        
+        #payment {
+            text-decoration: underline;
+        }
+        
+        #graph {
+            border: 1px solid #000;
+        }
+        
+        th td {
+            vertical-align: top;
+        }
+    </style>
+</head>
+
+<body>
+    <!--<table>
+        <tr>
+            <th>输入贷款信息:</th>
+            <td></td>
+            <th>贷款利息，累计利息和支付利息</th>
+        </tr>
+        <tr>
+            <td>贷款金额(￥):</td>
+            <td><input type="text" id="amount" onchange="calculate();"></td>
+            <td rowspan="8">
+                <canvas id="graph" width="400" height="250"></canvas>
+            </td>
+        </tr>
+        <tr>
+            <td>支付利息(%):</td>
+            <td><input type="text" id="apr" onchange="calculate();"></td>
+        </tr>
+        <tr>
+            <td>贷款时长(年):</td>
+            <td><input type="text" id="years" onchange="calculate();"></td>
+        </tr>
+        <tr>
+            <td>邮编(找贷款机构):</td>
+            <td><input type="zipcode" id="zipcode" onchange="calculate();"></td>
+        </tr>
+        <tr>
+            <td>支付的费用:</td>
+            <td><button onclick="calculate();">计算</button></td>
+        </tr>
+        <tr>
+            <td>月供:</td>
+            <td>￥<span class="output" id="payment"> </span></td>
+        </tr>
+        <tr>
+            <td>总共支付:</td>
+            <td>￥<span class="output" id="total"> </span></td>
+        </tr>
+        <tr>
+            <td>总共利息:</td>
+            <td>￥<span class="output" id="totalinterest"> </span></td>
+        </tr>
+        <tr>
+            <th>负责人:</th>
+            <td colspan="2">
+                233333333333
+                <div id="lenders"></div>
+            </td>
+        </tr>
+    </table>-->
+
+    <div class="warp">
+        <div class="left">
+            <table>
+                <tr>
+                    <th>输入贷款信息:</th>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>贷款金额(￥):</td>
+                    <td><input type="text" id="amount" onchange="calculate();"></td>
+                </tr>
+                <tr>
+                    <td>支付利息(%):</td>
+                    <td><input type="text" id="apr" onchange="calculate();"></td>
+                </tr>
+                <tr>
+                    <td>贷款时长(年):</td>
+                    <td><input type="text" id="years" onchange="calculate();"></td>
+                </tr>
+                <tr>
+                    <td>邮编(找贷款机构):</td>
+                    <td><input type="zipcode" id="zipcode" onchange="calculate();"></td>
+                </tr>
+                <tr>
+                    <td>支付的费用:</td>
+                    <td><button onclick="calculate();">计算</button></td>
+                </tr>
+                <tr>
+                    <td>月供:</td>
+                    <td>￥<span class="output" id="payment"> </span></td>
+                </tr>
+                <tr>
+                    <td>总共支付:</td>
+                    <td>￥<span class="output" id="total"> </span></td>
+                </tr>
+                <tr>
+                    <td>总共利息:</td>
+                    <td>￥<span class="output" id="totalinterest"> </span></td>
+                </tr>
+                <tr>
+                    <th>负责人:</th>
+                    <td >
+                        233333333333
+                        <div id="lenders"></div>
+                    </td>
+                </tr>
+            </table>
+        </div>
+        <div class="right">
+            <h3>贷款利息，累计利息和支付利息</h3>
+            <canvas id="graph" width="600" height="300"></canvas>
+
+        </div>
+    </div>
+    <script src="1.1.js"></script>
+</body>
+
+</html>

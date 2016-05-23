@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>前端MVC的学习</title>
+    <meta name="keywords" content="MVC 框架学习">
+    <meta name="description" content="MVC 控件学习">
+</head>
+
+<body>
+    <p>1MVC的基础是观察者模式，是实现modle和view同步的关键</p>
+    <div class="div1" id="div1"></div>
+    <script>
+        function Model(value){
+            this._value = typeof value === 'undefined'?'':value;
+            this._listeners=[];
+        }
+        
+        Model.prototype.set = function(value){
+            var self = this;
+            self._value = value;
+            //modle中的值改变的时候，应该通知注册过的回调函数
+            // 按照Javascript事件处理的一般机制，我们异步地调用回调函数
+            // requestAnimationFrame
+            setTimeout(
+                function(){
+                    self._listeners.forEach(function(listener){
+                        listener.call(self,value);
+                    });
+                }
+            );
+        };
+        
+        Model.prototype.watch = function(listener){
+            this._listeners.push(listener);   
+        };
+        
+        window.onload=function(){         
+                (function(){
+                    var model = new Model();
+                    var div1 = document.getElementById("div1");
+                    model.watch(
+                        function(value){
+                            div1.innerHTML=value;
+                        }
+                    );
+                
+                model.set("Hi");     
+                })();
+        
+        var name = "1";
+        this.name = "2";        
+        // setTimeout(sayName);
+        
+        var p = new Person();
+        p.sayName(2);
+        setTimeout(p.sayName.bind(p,33));
+        
+        var cat = new Cat("kaola");
+        cat.sayName();
+        
+        }
+        
+        function sayName(value){
+            console.log(this.name+" "+value);
+        }
+        
+        
+        function Person(){
+            this.name ="k1";
+            this.sayName(22);
+            setTimeout(this.sayname);
+        }
+        Person.prototype ={
+           sayName:function(v){
+               console.log(this.name+"@"+v);
+           } 
+        }
+        
+        
+        function Animal(name){
+            this.name = name;
+            this.sayName = function(){
+                console.log(this.name);
+            }
+        }
+        
+        function Cat(name){
+            Animal.call(this,name);
+        }
+    </script>
+</body>
+
+</html>

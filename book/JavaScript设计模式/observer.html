@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Observer观察者模式(发布者-订阅者模式)</title>
+</head>
+
+<body>
+    <script>
+        Event = function(){
+            var listen,log,obj,one,remove,trigger,__this;
+            obj={};
+            __this = this;
+            //把简历扔盒子,key就是联系方式
+            listen = function(key,eventfn){
+                var stack,_ref;
+                // 查看简历盒子里面是否有对应的类别
+                stack = (_ref=obj[key])!=null?_ref:obj[key] = [];
+                // 放入对应的盒子
+                return stack.push(eventfn);
+            };
+            // 保证响应的盒子只有唯一一份简历？？
+            one = function(key,eventfn){
+                remove(key);
+                return listen(key,eventfn);
+            };
+            // 清空一整个对应的盒子？？
+           remove=function(key){
+               var _ref;
+               return (_ref=obj[key])!=null?_ref.length=0:void 0;
+           };  
+           trigger=function(){
+               var fn,stack,_i,_len,_ref,key;
+            //    默认第一个传递进来的是具体是哪个"类型"的盒子
+               key=Array.prototype.shift.call(arguments);
+            
+               stack = ( _ref = obj[ key ] ) != null ? _ref : obj[ key ] = [];
+               for(_i=0,_len=stack.length;_i < _len;_i++){
+                   fn=stack[_i];
+                   if(fn.apply(__this,arguments)===false){
+                       return false;
+                   }
+               }
+           }
+           
+           return{
+               listen:listen,
+               one:one,
+               remove:remove,
+               trigger:trigger
+           };
+        }
+    </script>
+    <script>
+        var aduTv = new Event();
+        aduTv.listen('play',function(data){
+           console.log(data.name+"1");
+        });
+        
+        aduTv.trigger("play",{"name":"kelin"});
+    </script>
+</body>
+
+</html>

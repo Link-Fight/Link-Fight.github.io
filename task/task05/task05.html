@@ -1,0 +1,481 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>任务二</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .nav {
+            background-color: #333333;
+            height: 60px;
+        }
+        
+        .nav img {
+            padding-left: 18px;
+            height: 60px;
+        }
+        
+        .nav ul {
+            float: right;
+            margin-top: 20px;
+        }
+        
+        .nav ul li {
+            float: left;
+            margin-right: 20px;
+        }
+        
+        .nav ul a {
+            text-decoration: none;
+            line-height: 12px;
+            font-size: 12px;
+            font-weight: bold;
+            color: white;
+        }
+        
+        .content {
+            position: relative;
+            padding: 20px;
+            padding-right: 400px;
+            background-color: #DEDEDE;
+        }
+        
+        .content .article {
+            padding: 20px;
+            background-color: #FFF;
+            margin-bottom: 20px;
+        }
+        
+        .content .article h1 {
+            font-size: 22px;
+            margin: 20px 0;
+        }
+        
+        .content .article h2 {
+            font-size: 14px;
+            color: #c1c0bc;
+        }
+        
+        .content .article .tip {
+            color: #c1c0bc;
+            font-size: 8px;
+            margin: 20px 0;
+            text-indent: 0;
+        }
+        
+        .content .article p {
+            text-indent: 30px;
+            font-size: 15px;
+        }
+        
+        .content .article img {
+            margin: 20px 0;
+        }
+        
+        .content ul {
+            overflow: auto;
+        }
+        
+        .content ul li {
+            padding-left: 20px;
+            list-style: none;
+            margin: 15px 0;
+        }
+        
+        .content ul.pic li {
+            float: left;
+        }
+        
+        .content ul.pic div {
+            display: inline-block;
+            width: auto;
+            border: 1px solid #c3c3c3;
+            padding: 0 10px 10px 10px;
+        }
+        
+        .content ul.pic .picTitle {
+            text-align: center;
+            font-size: 13px;
+            line-height: 33px;
+        }
+        
+        .content ul.pic img {
+            width: 200px;
+            height: 200px;
+            margin: 0;
+        }
+        
+        .content ol {
+            margin-left: 45px;
+            margin-bottom: 15px;
+        }
+        
+        .content table {
+            width: 100%;
+            border-collapse: collapse;
+            border-color: #ccc;
+            text-align: left;
+            font-size: 12px;
+            font-weight: bold;
+            text-indent: 5px;
+        }
+        
+        .content thead {
+            line-height: 20px;
+            width: 100%;
+            background-color: #333;
+            color: #fff;
+        }
+        
+        .content tbody {
+            line-height: 25px;
+        }
+        
+        .content tfoot {
+            line-height: 25px;
+            background-color: #ccc;
+        }
+        
+        .sild {
+            box-sizing: border-box;
+            width: 380px;
+            position: absolute;
+            top: 0;
+            right: 0;
+            padding-top: 20px;
+            padding-right: 20px;
+            background-color: #DEDEDE;
+        }
+        
+        .sild form {
+            padding: 20px;
+            background-color: #fff;
+            font-size: 12px;
+        }
+        
+        .sild .title span {
+            float: left;
+            /*display: inline-block;*/
+            height: 36px;
+            width: 0;
+            border: 2px solid #DEDEDE;
+        }
+        
+        .sild .title {
+            text-indent: 10px;
+            /*margin: 20px 0;*/
+            line-height: 40px;
+            font-size: 18px;
+            font-weight: bold;
+        }
+        
+        .sild table td:nth-child(1) {
+            vertical-align: top;
+            width:100px;
+            padding-bottom: 5px;
+            text-align: right;
+            font-weight: normal;
+        }
+        
+        .sild table td:nth-child(2) {
+            width: auto;
+        }
+        
+        .sild table span {
+            color: #DEDEDE;
+        }
+        
+        .sild table textarea {
+            width: 210px;
+            height: 100px;
+        }
+        
+        .sild .submit {
+            height: 40px;
+            border-radius: 10px;
+            text-align: center;
+            line-height: 40px;
+            background-color: #3355d0;
+        }
+        
+        .sild input[type=submit] {
+            color: #fff;
+            font-weight: bold;
+            background-color: transparent;
+            border: none;
+            font-size: 15px;
+        }
+        
+        .sild .submit:hover {
+            background-color: #3355a0;
+        }
+        
+        .sild input[type=radio] {
+            border-color: red;
+            background-color: blue;
+        }
+        
+        .footer {
+            background: #000;
+            width: 100%;
+            height: 65px;
+            text-align: center;
+            color: #fff;
+            font-size: 14px;
+            line-height: 55px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="nav">
+        <img src="log.jpg" alt="">
+
+        <ul>
+            <li><a href="#">导航链接一</a></li>
+            <li><a href="#">导航链接二</a></li>
+            <li><a href="#">导航链接三</a></li>
+            <li><a href="#">导航链接四</a></li>
+        </ul>
+    </div>
+    <div class="content">
+        <div class="article">
+            <h1>文章一级标题</h1>
+            <h2>文章二级标题</h2>
+            <p class="tip">文章作者 发表时间</p>
+            <p>写点啥好呢,好呢写点啥好呢写点啥好呢写点,好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢 换行了
+                <br> 写点啥好呢写点啥好呢，写点啥好呢写点啥好呢写点啥好呢写点啥好呢
+                <a href="http://link-fight.github.io/">链接到我的http://link-fight.github.io/</a> 写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢</p>
+            <img src="baidu.jpg" alt="">
+            <p>写点啥好呢写点啥好呢写点啥好写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢 换行了
+                <br>写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢
+                <a href="http://link-fight.github.io/">链接到我的http://link-fight.github.io/</a> 写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢</p>
+        </div>
+        <div class="article">
+            <h1>另一个一级标题</h1>
+            <h2>二级标题</h2>
+            <p class="tip">文章作者 发表时间</p>
+            <p>写点啥好呢写点啥好呢写点啥好写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢
+                <br>换行了
+                <br>写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢
+                <a href="http://link-fight.github.io/">链接到我的http://link-fight.github.io/</a> 写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢写点啥好呢</p>
+            <img src="baidu.jpg" alt="">
+            <ul>
+                <li>列表项一</li>
+                <li>列表项二</li>
+                <li>列表项三</li>
+            </ul>
+        </div>
+        <div class="article">
+            <h1>图片</h1>
+            <ul class="pic">
+                <li>
+                    <div>
+                        <p class="picTitle">好看的图片</p>
+                        <img src="baidu.jpg" alt="">
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p class="picTitle">好看的图片</p>
+                        <img src="baidu.jpg" alt="">
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p class="picTitle">好看的图片</p>
+                        <img src="baidu.jpg" alt="">
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p class="picTitle">好看的图片</p>
+                        <img src="baidu.jpg" alt="">
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p class="picTitle">好看的图片</p>
+                        <img src="baidu.jpg" alt="">
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p class="picTitle">好看的图片</p>
+                        <img src="baidu.jpg" alt="">
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p class="picTitle">好看的图片</p>
+                        <img src="baidu.jpg" alt="">
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p class="picTitle">好看的图片</p>
+                        <img src="baidu.jpg" alt="">
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p class="picTitle">好看的图片</p>
+                        <img src="baidu.jpg" alt="">
+                    </div>
+                </li>
+                <li>
+                    <div>
+                        <p class="picTitle">好看的图片</p>
+                        <img src="baidu.jpg" alt="">
+                    </div>
+                </li>
+            </ul>
+
+        </div>
+        <div class="article">
+            <h1>最后一个一级标题</h1>
+            <h2>二级标题</h2>
+            <p class="tip">文章作者 发表时间</p>
+            <ol>
+                <li>排名1</li>
+                <li>排名2</li>
+                <li>排名3</li>
+            </ol>
+            <span>这是一个<code>border="1"</code>的表格</span>
+            <br>
+            <table border="1">
+                <thead>
+                    <th>表头</th>
+                    <th>表头</th>
+                    <th>表头</th>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>表内容单元格</td>
+                        <td>表内容单元格</td>
+                        <td><a href="">操作</a></td>
+                    </tr>
+                    <tr>
+                        <td>表内容单元格</td>
+                        <td>表内容单元格</td>
+                        <td><a href="">操作</a></td>
+                    </tr>
+                    <tr>
+                        <td>表内容单元格</td>
+                        <td>表内容单元格</td>
+                        <td><a href="">操作</a></td>
+                    </tr>
+                    <tr>
+                        <td>表内容单元格</td>
+                        <td>表内容单元格</td>
+                        <td><a href="">操作</a></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <td>总计</td>
+                    <td colspan="2">1000</td>
+                </tfoot>
+
+            </table>
+        </div>
+        <div class="sild">
+
+            <form action="">
+                <div class="title"><span></span>这里将是侧边栏和标题 </div>
+                <table>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <label for="email">请输入邮箱地址</label>
+                            </td>
+                            <td>
+                                <input name="email" type="text" placeholder="文本输入框">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td><span>邮箱地址请按要求格式输入</span></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="psw">请输入密码</label>
+                            </td>
+                            <td>
+                                <input name="psw" type="password" placeholder="文本输入框">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="psw">请重复输入密码</label>
+                            </td>
+                            <td>
+                                <input name="rpsw" type="password" placeholder="文本输入框">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td></td>
+                            <td> <span>密码请为6-16位英文数字</span> </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="sex">性别:</label>
+                            </td>
+                            <td>
+                                <input type="radio" name="sex">男
+                                <input type="radio" name="sex">女</td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="city">城市</label>
+                            </td>
+                            <td>
+                                <select name="city" id="city">
+                                    <option value="1">北京</option>
+                                    <option value="2">上海</option>
+                                    <option value="3">广州</option>
+                                    <option value="4">深圳</option>
+                                </select>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="love">爱好</label>
+                            </td>
+                            <td>
+                                <input type="checkbox" name="love">运动
+                                <input type="checkbox" name="love">艺术
+                                <input type="checkbox" name="love">科学</td>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <label for="info">个人描述</label>
+                            </td>
+                            <td>
+                                <textarea></textarea>
+                            </td>
+                        </tr>
+                    </tbody>
+
+                </table>
+                <div class="submit">
+                    <input type="submit" value="确认提交">
+                </div>
+
+            </form>
+        </div>
+    </div>
+
+    <div class="footer">
+        版权所有©
+    </div>
+</body>
+
+</html>

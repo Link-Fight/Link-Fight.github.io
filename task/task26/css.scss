@@ -1,0 +1,131 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+html{
+    font-size: 16px;
+}
+
+@mixin spaceAre_WH($default_WH:100%){
+    height:  $default_WH;
+    width:  $default_WH;
+    left: (100% - $default_WH)/2;
+    top:  (100% - $default_WH)/2;
+}
+
+.container{
+    
+    .universe{
+       background: black;
+       height: 500px;
+       position: relative;
+    }
+    
+    .planet{
+        position: absolute;
+        left: 50%;
+        margin-left: -100px;
+        top: 50%;
+        margin-top: -100px;
+        background: dodgerblue;
+        height: 200px;
+        width: 200px;
+        border-radius: 50%;
+        // margin: 0 auto;
+         $default_WH:84%;
+       
+         @function getWH($n){
+             @return  (1 )*30% + $default_WH;
+         }
+           
+          
+         @for $i from 1 to 5{
+              .spaceArea:nth-of-type(#{$i}){
+                        $i_default_WH :getWH($i);
+                        height: $i_default_WH;
+                        width:  $i_default_WH;
+                        left: (100% - $i_default_WH)/2;
+                        top:  (100% - $i_default_WH)/2;
+                        // transform: rotate($i*20deg);
+              }
+         }
+        .spaceArea{
+            position: absolute;
+            height: 114%;
+             width: 114%;
+             left: -7%;
+             top: -7%;
+        }
+        
+        span{
+            position: absolute;
+            top: -15px;
+            left: -50px;
+            height: 30px;
+            width: 100px;
+            background-color: yellow;
+            line-height: 30px;
+            text-align: center;
+            border-radius: 15px;
+            transform: rotate(-45deg);
+        }
+        span::after{
+            content: "";
+            position: absolute;
+            top: 0;
+            right: 0;
+            background-color: rgba(0, 0, 200, 0.5);
+            width: 15px;
+            height: 30px;
+            // border-radius: 50%;
+            border-bottom-right-radius: 15px;
+            border-top-right-radius: 15px;
+        }
+    }
+}
+
+.control{
+    position: relative;
+    td,input{
+        font-size: 0.75rem;
+        padding: 0.5em 1em;
+    }
+    
+    input[type=button]{
+        border: none;
+        font-weight: bold;
+    }
+    
+    input[type=button]:hover{
+        background-color: #232323;
+        color: #fff;
+    }
+    #addSpaceShip{
+        margin-left: 5%;
+    }
+    
+    .consoleLog{
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 50%;
+        height: 160px;
+        border: 2px solid brown;
+        overflow: auto;
+        overflow-y: visible;
+        transition: all 1s;
+        font-size: 10px;
+       .info{
+           color: blue;
+           line-height: 1.4em;
+       }
+       .success{
+           color: darkred;
+       }
+       
+       .fail{
+        color: black;   
+       }
+    }
+}

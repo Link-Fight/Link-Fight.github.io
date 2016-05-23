@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>单例模式</title>
+</head>
+<body>
+  
+  <script>
+     var  createSingleton = function(){
+         var has =false;
+         var obj ={name:"kelin",age:22};
+         return function(){
+             return has||(has=obj);
+         };
+     }();
+     
+     var createSingleton2 = function(){
+         var has =false;
+         return function(fn){
+                return has||(has=fn());  
+         };
+     }();
+     
+     var b = createSingleton2(
+         function(){
+             return { name:"kelin",age:24};
+         }
+     );
+  </script>
+</body>
+</html>

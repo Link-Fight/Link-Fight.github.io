@@ -1,0 +1,463 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS I see</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        .wrapper {
+            padding-top: 30px;
+            padding-bottom: 15px;
+            width: 80%;
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        #the-good-parts {
+            background-color: rgb(195, 92, 72);
+        }
+        
+        #patterns {
+            background-color: rgb(15, 92, 72);
+        }
+        
+        #Terminology {
+            background-color: rgb(15, 92, 172);
+        }
+        
+        .section h1 {
+            font-size: 40px;
+            text-align: center;
+            text-transform: uppercase;
+            /*text-shadow: 1px 4px 2px rgba(0, 0, 0, 0.16);*/
+        }
+        
+        .section h1 a {
+            color: #fff;
+            text-shadow: 1px 4px 2px rgba(0, 0, 0, 0.16);
+        }
+        
+        .section p {
+            margin-top: 15px;
+            background-color: #fff;
+            padding: 30px;
+            color: #696969;
+            box-shadow: 0 3px rgba(0, 0, 0, .08);
+            line-height: 1.5em;
+        }
+        
+        .section h3 {
+            font-weight: bold;
+            font-size: 1.17em;
+            line-height: 28px;
+            border-bottom: 3px solid rgba(0, 0, 0, .08);
+            display: inline-block;
+            text-transform: uppercase;
+            clear: both;
+            color: #fff;
+            margin: 30px 0;
+        }
+        
+        .section p.source {
+            margin-top: 0;
+            padding: 15px 30px;
+            color: #FFF;
+            background: rgba(0, 0, 0, .09)!important;
+            box-shadow: none!important;
+        }
+        
+        .section p a:hover,
+        .txt a:hover {
+            text-decoration: underline;
+        }
+        
+        .section p a,
+        .txt a {
+            color: #FF8484;
+            text-decoration: none;
+        }
+        
+        .txt {
+            background: #FFF;
+            color: #696969;
+            padding: 20px;
+            box-shadow: 0 3px rgba(0, 0, 0, .08);
+            clear: both;
+            margin-top: 1em;
+        }
+        
+        .section ul {
+            clear: both;
+            margin: 0;
+            padding: 0 20px;
+        }
+        
+        .section p a,
+        .txt a {
+            color: #FF8484;
+            text-decoration: none;
+        }
+        
+        th {
+            background-color: rgba(0, 0, 0, .08);
+        }
+        
+        td {
+            height: 2em;
+        }
+        
+        table {
+            border-collapse: separate;
+        }
+        
+        .old {
+            background-color: rgba(0, 0, 0, .2);
+        }
+    </style>
+</head>
+
+<body>
+    <section class="section" id='Terminology'>
+        <div class="wrapper">
+            <h1><a href="#Terminology">Terminology/术语</a>  </h1>
+            <h3>Namespace/命名空间</h3>
+            <p>
+                允许开发人员在一个独特，应用相关的名字的名称下捆绑所有功能的容器。
+                <br> 在javaScript中，命名空间只是一个包含方法，属性，对象的对象。
+            </p>
+            <h3>types/JS的类型有</h3>
+            <section class="txt">
+                <ul>
+                    <li><a title="The Number JavaScript object is a wrapper object allowing you to work with numerical values. A Number object is created using the Number() constructor."
+                            href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number"><code>Number</code></a></li>
+                    <li><a title="The String global object is a constructor for strings, or a sequence of characters." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/String"><code>String</code></a></li>
+                    <li><a title="The Boolean object is an object wrapper for a boolean value." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"><code>Boolean</code></a></li>
+                    <li><a title="A symbol is a unique and immutable data type and may be used as an identifier for object properties. The symbol object is an implicit object wrapper for the symbol primitive data type."
+                            href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol"><code>Symbol</code></a> (new in
+                        Edition 6)</li>
+                    <li><a title="The Object constructor creates an object wrapper." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"><code>Object</code></a>
+                        <ul>
+                            <li><a title="The Function constructor creates a new Function object. In JavaScript every function is actually a Function object."
+                                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"><code>Function</code></a></li>
+                            <li><a title="The JavaScript Array&nbsp;object is a global object that&nbsp;is used in the&nbsp;construction&nbsp;of&nbsp;arrays; which are high-level, list-like objects."
+                                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"><code>Array</code></a></li>
+                            <li><a title="Creates a JavaScript Date instance that represents a single moment in time. Date objects are based on a time value that is the number of milliseconds since 1 January, 1970 UTC."
+                                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a></li>
+                            <li><a title="The RegExp constructor creates a regular expression object for matching text with a pattern."
+                                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"><code>RegExp</code></a></li>
+                        </ul>
+                    </li>
+                    <li><a title="The value null&nbsp;represents the intentional absence of any object value. It is one of JavaScript's primitive values."
+                            href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/null"><code>null</code></a></li>
+                    <li><a title="The global undefined property represents the primitive value undefined. It is one of JavaScript's primitive types."
+                            href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined"><code>undefined</code></a></li>
+                </ul>
+            </section>
+            <h3>memory leak/内存泄漏</h3>
+            <p>
+                使用闭包的坏处是：在IE浏览器中它容易导致内存泄漏。
+                <br> 在IE中，每当在一个JavaScript对象和一个本地对象之间形成循环应用时，就会发生内存泄漏。
+            </p>
+            <p class="source">
+                more：<a target="_blank" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/A_re-introduction_to_JavaScript#%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2">MDN:内存泄漏</a>
+            </p>
+            <h3>Data property/数据属性</h3>
+            <section class="txt">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>特征</th>
+                            <th>数据类型</th>
+                            <th>描述</th>
+                            <th>默认值</th>
+                        </tr>
+                        <tr>
+                            <td>[[Value]]</td>
+                            <td>任何JavaScript类型</td>
+                            <td>这个属性的数据值</td>
+                            <td>undefined</td>
+                        </tr>
+                        <tr>
+                            <td>[[Writable]]</td>
+                            <td>Boolean</td>
+                            <td>false:则该属性的[[Value]]特性不能被修改</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>[[Enumerable]]</td>
+                            <td>Boolean</td>
+                            <td>false:则不出现在for...in的枚举中</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>[[Configurable]]</td>
+                            <td>Boolean</td>
+                            <td>false:则该属性不能被删除，并且除[[Value]]和[[Writable]]以外的特征不能被修改</td>
+                            <td>false</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <span class="">过时的属性(在ECMAScript 3定义的, 在ECMAScript 5被重命名)</span>
+                <br>
+                <table class="old">
+                    <tbody>
+                        <tr>
+                            <th>属性</th>
+                            <th>类型</th>
+                            <th>描述</th>
+
+                        </tr>
+                        <tr>
+                            <td>Read-only</td>
+                            <td>任何JavaScript类型</td>
+                            <td>ES5 [[Writable]] 属性的反状态(Reversed state)</td>
+
+                        </tr>
+                        <tr>
+                            <td>DontEnum</td>
+                            <td>Boolean</td>
+                            <td>ES5 [[Enumerable]] 属性的反状态</td>
+                        </tr>
+                        <tr>
+                            <td>DontDelete</td>
+                            <td>Boolean</td>
+                            <td>ES5 [[Configurable]] 属性的反状态</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </section>
+            <h3>Accessor property/访问器属性</h3>
+            <section class="txt">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>特征</th>
+                            <th>数据类型</th>
+                            <th>描述</th>
+                            <th>默认值</th>
+                        </tr>
+                        <tr>
+                            <td>[[Get]]</td>
+                            <td>函数对象或者 undefined</td>
+                            <td>该函数使用一个空的参数列表，能够在有权访问的情况下读取属性值。另见 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/get">get</a>。</code></td>
+                            <td>undefined</td>
+                        </tr>
+                        <tr>
+                            <td>[[Set]]</td>
+                            <td>函数对象或者 undefined</td>
+                            <td>该函数有一个参数，用来写入属性值，另见 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/set">set</a>。</code></td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>[[Enumerable]]</td>
+                            <td>Boolean</td>
+                            <td>false:则不出现在for...in的枚举中</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>[[Configurable]]</td>
+                            <td>Boolean</td>
+                            <td>false:则该属性不能被删除，并且除[[Value]]和[[Writable]]以外的特征不能被修改</td>
+                            <td>false</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </section>
+    <section class="section" id="the-good-parts">
+        <div class="wrapper">
+            <h1><a href="#the-good-parts">THE GOOD PARTS/精华部分</a></h1>
+            <h3>Object Oriented/面向对象</h3>
+            <p>
+
+                JavaScript has strong object-oriented programming capabilities, even though some debates have taken place due to the differences
+                in object-oriented JavaScript compared to other languages.
+            </p>
+            <p class="hide">
+                including modularity, polymorphism, and encapsulation.
+            </p>
+            <p class="source">
+                Source: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Introduction_to_Object-Oriented_JavaScript">Introduction to Object-Oriented JavaScript</a>
+            </p>
+            <h3>ANONYMOUS FUNCTIONS/匿名函数</h3>
+            <p>
+                Anonymous function are functions that are dynamically declared at runtime.They're called anonymous functions because they
+                aren't given a name in the same way as normal functions.
+            </p>
+            <p class="source">
+                Source: <a target="_blank" href="http://helephant.com/2008/08/23/javascript-anonymous-functions/">JavaScript anonymous functions</a>
+            </p>
+            <h3>FUNCTIONS AS FIRST-CLASS OBJECTS/函数是一等对象</h3>
+            <p>
+                Function in JavaScript are first class objects.This means that JavaScript functions are just a special type of object that
+                can do all the thing that regular object can do.
+            </p>
+            <p class="source">
+                更多<a href="###" target="_blank">Functions are first class objects in JavaScript</a>
+            </p>
+            <h3>Loose typing/松散类型</h3>
+            <p>
+                For many front-end developers, JavaScript was their first taste of a scripting and/or interpretive language. To these developers,
+                the concept and implications of loosely typed variables may be second nature. However, the explosive growth
+                in demand for modern web applications has resulted in a growing number of back-end developers that have had
+                to dip their feet into the pool of client-side technologies. Many of these developers are coming from a background
+                of strongly typed languages, such as C# or Java, and are unfamiliar with both the freedom and the potential
+                pitfalls involved in working with loosely typed variables.
+            </p>
+            <p class="hide">
+                JavaScript 是一种弱类型或者说动态语言。这意味着你不用提前声明变量的类型，在程序运行过程中，类型会被自动确定。这也意味着你可以使用同一个变量保存不同类型的数据。
+            </p>
+            <p class="source">
+                更多<a href="###" target="_blank">Functions are first class objects in JavaScript</a>
+            </p>
+            <h3>Scoping and Hoisting/作用域和声明提升</h3>
+            <p>
+                <b>Scoping:</b> In JavaScript, functions are our <i>de facto</i> scope delimiters for declaring vars, which
+                means that usual blocks from loops and conditionals (such as if, for, while, switch and try) DON'T delimit
+                scope, unlike most other languages. Therefore, those blocks will share the same scope as the function which
+                contains them. This way, it might be dangerous to declare vars inside blocks as it would seem the var belongs
+                to that block only.
+            </p>
+            <p>
+                <b>Hoisting:</b> On runtime, all var and function declarations are moved to the beginning of each function
+                (its scope) - this is known as Hoisting. Having said so, it is a good practice to declare all the vars altogether
+                on the first line, in order to avoid false expectations with a var that got declared late but happened to
+                hold a value before - this is a common problem for programmers coming from languages with block scope.
+            </p>
+            <p>
+                <b>注意:</b>对于直接暴露在script标签里面的代码(就是没有被其他函数包裹)，变量不仅仅会发生声明提升，并且赋值也会提升。并且两个script标签里面直接暴露的同名的function不会像在包裹在同一个函数里那样发生函数提升的同时发生同名函数覆盖，这只会发生先加载的被后加载的覆盖。
+            </p>
+            <p class="source">
+                Source: <a target="_blank" href="http://www.adequatelygood.com/JavaScript-Scoping-and-Hoisting.html">JavaScript Scoping and Hoisting</a>
+            </p>
+            <h3>Function Binding/函数绑定</h3>
+            <p>
+                Function binding is most probably the least of your concerns when beginning with JavaScript, but when you realize that you
+                need a solution to the problem of how to keep the context of this within another function, then you might
+                realize that what you actually need is <b>Function.prototype.bind()</b>.
+            </p>
+            <p class="source">
+                Source: <a target="_blank" href="http://coding.smashingmagazine.com/2014/01/23/understanding-javascript-function-prototype-bind/">Understanding JavaScript’s Function.prototype.bind</a>
+            </p>
+            <h3>Closure Function/闭包</h3>
+            <p>
+                Closures are functions that refer to independent (free) variables. In other words, the function defined in the closure 'remembers'
+                the environment in which it was created in. It is an important concept to understand as it can be useful
+                during development, like emulating private methods. It can also help to learn how to avoid common mistakes,
+                like creating closures in loops.
+            </p>
+            <p class="source">
+                Source: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Closures/">MDN - Closures</a>
+            </p>
+            <h3>Strict mode/严格模式</h3>
+            <p>
+                ECMAScript 5's strict mode is a way to opt in to a restricted variant of JavaScript. Strict mode isn't just a subset: it
+                intentionally has different semantics from normal code. Browsers not supporting strict mode will run strict
+                mode code with different behavior from browsers that do, so don't rely on strict mode without feature-testing
+                for support for the relevant aspects of strict mode. Strict mode code and non-strict mode code can coexist,
+                so scripts can opt into strict mode incrementally.
+            </p>
+            <p class="source">
+                Source: <a target="_blank" href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions_and_function_scope/Strict_mode/">MDN - Strict mode</a>
+            </p>
+            <h3>Immediately-Invoked Function Expression (IIFE)/立即执行函数</h3>
+            <p>
+                An immediately-invoked function expression is a pattern which produces a lexical scope using JavaScript's function scoping.
+                Immediately-invoked function expressions can be used to avoid variable hoisting from within blocks, protect
+                against polluting the global environment and simultaneously allow public access to methods while retaining
+                privacy for variables defined within the function.<br><br>
+                <i>This pattern has been referred to as a self-executing anonymous function, but <a target="_blank" href="http://twitter.com/cowboy">@cowboy</a> (Ben Alman) introduced the term IIFE as a more semantically accurate term for the pattern</i>.
+            </p>
+            <p class="source">
+                Source: <a target="_blank" href="http://benalman.com/news/2010/11/immediately-invoked-function-expression/">Immediately-Invoked Function Expression (IIFE)</a>
+            </p>
+        </div>
+    </section>
+    <section class="section" id="patterns">
+        <div class="wrapper">
+            <h1><a href="#patterns">PATTERNS/模式</a></h1>
+            <h3>Description/描述</h3>
+            <p>
+                While JavaScript contains design patterns that are exclusive to the language, many classical design patterns can also be
+                implemented.
+            </p>
+            <p>
+                A good way to learn about these is <a target="_blank" href="https://twitter.com/addyosmani">Addy Osmani</a>’s
+                open source book <a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/">Learning JavaScript Design Patterns</a>,
+                and the links below are (in the majority) based on it.
+            </p>
+            <h3>design patterns/设计模式</h3>
+            <section class="txt">
+                <ul>
+                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#factorypatternjavascript">Factory</a></li>
+                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#prototypepatternjavascript">Prototype</a></li>
+                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#mixinpatternjavascript">Mixin</a></li>
+                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#singletonpatternjavascript">Singleton</a></li>
+                </ul>
+            </section>
+            <p class="source">
+                Creational Design Patterns/创建型设计模式
+            </p>
+            <section class="txt">
+                <ul>
+                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#wrapperpatternjquery">Adapter</a></li>
+                    <li><a target="_blank" href="http://www.joezimjs.com/javascript/javascript-design-patterns-bridge/">Bridge</a></li>
+                    <li><a target="_blank" href="http://www.joezimjs.com/javascript/javascript-design-patterns-composite/">Composite</a></li>
+                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#decoratorpatternjavascript">Decorator</a></li>
+                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#facadepatternjavascript">Facade</a></li>
+                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#detailflyweight">Flyweight</a></li>
+                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#modulepatternjavascript">Module</a></li>
+                    <li><a target="_blank" href="http://www.joezimjs.com/javascript/javascript-design-patterns-proxy/">Proxy</a></li>
+                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#revealingmodulepatternjavascript">Revealing Module</a></li>
+                </ul>
+            </section>
+            <p class="source">
+                Structural Design Patterns/结构型设计模式
+            </p>
+            <section class="txt">
+                <ul>
+                    <li><a target="_blank" href="http://www.joezimjs.com/javascript/javascript-design-patterns-chain-of-responsibility/">Chain of Responsibility</a></li>
+                    <li><a target="_blank" href="http://a
+                    ddyosmani.com/resources/essentialjsdesignpatterns/book/#commandpatternjavascript">Command</a></li>
+                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#mediatorpatternjavascript">Mediator</a></li>
+                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#observerpatternjavascript">Observer</a></li>
+                </ul>
+            </section>
+            <p class="source">
+                Behavioral Design Patterns/ 行为设计模式
+            </p>
+            <h3>MV* Patterns</h3>
+            <section class="txt">
+                There are some implementations of the traditional MVC Pattern and its variations in JavaScript.
+            </section>
+            <section class="txt">
+                <ul>
+                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#detailmvc">MVC Pattern</a></li>
+                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#detailmvp">MVP Pattern</a></li>
+                    <li><a target="_blank" href="http://addyosmani.com/resources/essentialjsdesignpatterns/book/#detailmvvm">MVVM Pattern</a></li>
+                </ul>
+            </section>
+        </div>
+    </section>
+</body>
+
+
+
+</html>

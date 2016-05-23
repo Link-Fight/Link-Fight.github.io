@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>一个可以逐字输出的控件CreateMoveText</title>
+    <style>
+        ul li{
+            line-height: 24px;
+        }
+        .code{
+            border-radius: 10px;
+            font-weight: bold;
+            line-height: 24px;
+            padding: 10px;
+            background-color: greenyellow;
+        }
+        .demo{
+            text-align: center;
+            
+        }
+        #text{          
+            width: 200px;
+            margin: 10px auto;   
+            background: black;
+            padding: 20px;
+            color: green;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="info">
+        <dl>
+            <dt>
+                <dd></dd>
+            </dt>
+        </dl>
+        <ul>这是一个用来把容器内的文字逐字输出的小控件
+            <li>调用CreateMoveText(target):target指的是目标dom容器，并且文字内容直接在该容器中。eg：
+                <br><span class="code"> var  moveText = CreateMoveText(textDiv);</span></li>
+            <li>该CreateMoveText暴露出五个方法
+                <ul>
+                    <li>init():进行一定的初始化。可以传递一个参数对象，定义speed属性将调节速度，默认100；定义initState将决定初始后容器内的文字是默认出现还是不出现，默认false不出现.eg:
+                        <br><span class="code">moveText.init({speed:120,initState:true});</span></li>
+                    <li>addEventListner(event,callback):进行事件注册事件监听并添加回调，当每次输出或删除完毕将触发监听“finsh”的时间。eg:
+                        <br>
+                        <span class="code">moveText.addEventListner("finsh",function(){console.log(this);})</span>
+                    </li>
+                    <li>start():调用输出效果 eg: <br>
+                        <span class="code">moveText.start();</span>
+                    </li>
+                    <li>reStart():调用删除效果 eg: <br>
+                        <span class="code">moveText.reStart();</span>
+                    </li>
+                    <li>stop():停止。。。eg :<br>
+                        <span class="code">moveText.stop();</span>
+                    </li>
+                </ul>
+            </li>
+
+        </ul>
+    </div>
+
+    <div class="demo">
+        <p id="text">
+            linkfight边走边聊作为OneNote的重度患者，之前一直把资料收集，读书笔记，心得体会都放在上面。现在，准备把读书笔记还有心得体会都写出来，还将同步在github上，希望能得到各位的指点。
+        </p>
+        <button id="demo-btn-ou">输出</button>
+        <button id="demo-btn-st">停止</button>
+        <button id="demo-btn-de">删除</button>
+    </div>
+    <script>
+        window.onload=function(){
+             var textDiv = document.getElementById("text");
+            //  textDiv.addEventListener("mouseover ",function(){alert(2)});
+            textDiv.removeEventListener
+            function One(target,event,data,fun){
+                var oneFun = function(){
+                     fun(data);
+                     target.removeEventListener(event,oneFun);
+                };
+                target.addEventListener(event,oneFun);
+            }
+            One(textDiv,"click","233",function(v){alert(v+"@")});
+             var  moveText = CreateMoveText(textDiv);
+             moveText.init();
+             var btnO = document.getElementById("demo-btn-ou");
+             btnO.onclick=function(){ moveText.start();};
+             var btn1 = document.getElementById("demo-btn-de");
+             btn1.onclick=function(){moveText.reStart();};
+             var btn3 = document.getElementById("demo-btn-st");
+             btn3.onclick=function(){moveText.stop();};
+             moveText.addEventListner("finsh",function(){console.log(this);})
+         }
+    </script>
+    <script>
+        function CreateMoveText(pNode){
+			//linkfight@gmail.com
+            if(!(this instanceof CreateMoveText)){
+                return new CreateMoveText(pNode,text);
+            }
+            this.wrap = pNode;
+            this.wrap.style["height"]=getComputedStyle(pNode)["height"];
+            this.wrap.style["width"]=getComputedStyle(pNode)["width"];
+            this.speed=100;
+            this.text=[];
+            this.index=0;
+            this.initState=false;//false内容不可见  true 内容可见
+            this.moveType;//0 输出的 : 1  收回的
+            this.timer = undefined;
+            this.eventListener={};
+            var that = this;
+            return {
+                addEventListner:that.addEventListner.bind(that),
+                init:that.init.bind(that),
+                start:that.start.bind(that),
+                reStart:that.reStart.bind(that),
+                stop:that.stop.bind(that)
+            }
+        }
+        
+        CreateMoveText.prototype={
+            addEventListner:function(key,fn){
+                 var stack = this.eventListener[key];
+                 stack = stack ? stack : (stack = this.eventListener[key] = []);
+                 return stack.push(fn);
+            },
+            trigger:function(){
+                var key = Array.prototype.shift.call(arguments);
+                var that = this;
+                var arg = arguments;
+                 var stack = this.eventListener[key];
+                 if(stack&&stack.length>0){
+                     stack.forEach(function(fn){fn.apply(that,arg);});
+                 }
+            },
+            init:function(opt){
+                 this.text.length>0|| ((this.text=this.wrap.innerText.split("")));
+                //  this.index=this.text.length;
+                 if(opt&&opt["initState"]){
+                     this.initState = true;
+                     this.index=this.text.length;
+                 }else{
+                    this.wrap.innerText=null;
+                 }
+                 if(opt&&opt["speed"]){
+                     this["speed"] =opt["speed"];
+                      console.log(this);
+                 }
+            },
+            stop:function(){
+              clearInterval(this.timer);  
+            },
+            start:function(){
+                 this.text= this.text.length>0?this.text:this.wrap.innerText.split("");
+                 this.wrap.innerText=null;
+                 clearInterval(this.timer);
+                 var that = this;
+                 this.moveType=0;
+                 this.timer=setInterval(this.textMove.bind(that),this.speed);
+            },
+            reStart:function(){
+                 this.text= this.text.length>0?this.text:this.wrap.innerText.split("");
+                 clearInterval(this.timer);
+                 var that = this;
+                 this.moveType=1;
+                 this.timer=setInterval(this.textMove.bind(that),this.speed);
+            },
+            textMove:function(){
+                this.wrap.innerHTML=this.text.slice(0,this.index).join("");
+                if((this.moveType==0&&this.index==this.text.length)||(this.moveType==1&&this.index==0)){
+                    clearInterval(this.timer);
+                    this.wrap.innerHTML.replace("<span>_</span>","")
+                    this.trigger("finsh");
+                }else{
+                    this.moveType==0&& this.index++;
+                    this.moveType==1&& this.index--;
+                    this.wrap.innerHTML+="<span>_</span>"
+                }
+            },
+        };
+    </script>
+
+</body>
+
+</html>

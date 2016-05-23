@@ -1,0 +1,62 @@
+.mask_msg {
+    position: fixed;
+    left: 0;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    background-color: rgba(10, 10, 10, 0.4);
+}
+
+.mask_msg>.wrap {
+    width: 320px;
+    height: 270px;
+    background-color: #ccc;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-top: -135px;
+    margin-left: -160px;
+    border-radius: 10px;
+}
+
+.mask_msg>.wrap>.title {
+    height: 30px;
+    line-height: 30px;
+    background-color: skyblue;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    cursor: move;
+    text-align: center;
+    color: #fff;
+    font-size: 14px;
+    /*letter-spacing: 1em;*/
+    font-family: "宋体";
+}
+.mask_msg>.wrap{
+    text-align: center;
+}
+.wrap>.control {
+    position: absolute;
+    width: 100%;
+    height: 40px;
+    left: 0;
+    bottom: 0;
+    font-size: 13px;
+    font-family: "宋体";
+    letter-spacing: 0.5em;
+}
+
+.wrap>.control>.button{
+    float: right;
+    height: 25px;
+    line-height: 25px;
+    padding:  0 5px;
+    background-color: tomato;
+    margin-right: 20px;
+    letter-spacing: 0;
+    border-radius: 5px;
+    cursor: pointer;
+}
+.wrap>.control>.button:hover{
+    color: #fff;
+}

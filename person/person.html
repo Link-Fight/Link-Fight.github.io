@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>linkFight</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        body {
+            margin: 0;
+            padding: 0;
+            color: #666;
+            background: #888;
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            font-size: 20px;
+            padding-top: 120px;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 80px;
+            background-color: #2200bb;
+            color: #fff;
+            z-index: 1000;
+        }
+        
+        .main {
+            width: 100%;
+            max-width: 980px;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .main .logo {
+            float: left;
+            margin-left: 20px;
+            height: 80px;
+            line-height: 80px;
+            font-size: 40px;
+        }
+        
+        .main nav {
+            margin-right: 10px;
+            float: right;
+            font-size: 0;
+            background-color: #2200bb;
+        }
+        
+        .main li {
+            display: inline-block;
+            height: 80px;
+            line-height: 80px;
+            color: #fff;
+        }
+        
+        .main li a {
+            margin-left: 10px;
+            /*background-color: #fff;*/
+            color: #aaa;
+            padding: 10px 10px;
+            text-transform: uppercase;
+            font-size: 20px;
+            box-shadow: 3px 3px 5px #aaa;
+            transition: all 1s;
+        }
+        
+        .main li a:hover {
+            color: #2200bb;
+            background-color: #aaa;
+        }
+        
+        .main li a.active {
+            color: #2200ff;
+            background-color: #eee;
+        }
+        
+        hr {
+            height: 0;
+        }
+        
+        hr.star-bright:after {
+            background-color: rgb(170, 170, 170);
+        }
+        
+        hr.star-dark:after {
+            background-color: #fff;
+        }
+        
+        hr.star-bright,
+        hr.star-dark {
+            margin: 40px auto 30px;
+            padding: 0;
+            max-width: 512px;
+            border: 0px;
+            border-top: solid 5px;
+            text-align: center;
+        }
+        
+        hr.star-bright:after,
+        hr.star-dark:after {
+            content: '\f121';
+            font-family: FontAwesome;
+            display: inline-block;
+            position: relative;
+            top: -.6em;
+            padding: 0 .25em;
+            font-size: 2em;
+        }
+        
+        header .toggle-nav-btn {
+            font-size: 40px;
+            font-family: FontAwesome;
+            height: 80px;
+            width: 100px;
+            float: right;
+            background-color: transparent;
+            border: none;
+            outline: none;
+            color: #fff;
+        }
+        
+        header .toggle-nav-btn {
+            display: none;
+        }
+        
+        @media(max-width:768px) {
+            header #navbar {
+                border-top: 2px solid #fff;
+                /*border-bottom: 2px solid #0a0;*/
+                position: absolute;
+                top: 100%;
+                width: 100%;
+                background-color: #2200bb;
+                /*z-index: 1000;*/
+                overflow: hidden;
+                /*display: none;*/
+            }
+            #navbar.showDiv {
+                display: block;
+            }
+            #navbar.showDiv li {
+                height: 60px;
+                line-height: 60px;
+                display: block;
+            }
+            #navbar li {
+                transition: height 0.5s;
+                height: 0px;
+                line-height: 0px;
+                font-size: 0;
+                display: list-item;
+            }
+            #navbar li a {
+                font-size: 1rem;
+            }
+            header .toggle-nav-btn {
+                display: block;
+            }
+        }
+        
+        .clearfix:after {
+            content: ".";
+            display: block;
+            height: 0;
+            clear: both;
+            visibility: hidden
+        }
+        
+        .clearfix {
+            *+height: 1%;
+        }
+        
+        .showDiv {
+            display: block;
+        }
+        
+        section.about {
+            
+            font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+            padding: 50px 20px;
+            color: #fff;
+            font-size: 20px;
+            background-color: rgb(170, 170, 170);
+        }
+        
+        section.about .info {
+            width: 80%;
+        }
+        
+        section.about .title {
+            text-align: center;
+        }
+        
+        section.about .img {
+            float: right;
+            width: 20%;
+            padding-top: 20%;
+            border-radius: 50%;
+            background-color: yellow;
+        }
+        
+        @media(max-width:768px) {
+            section.about .img {
+                float: none;
+                margin: -20px auto 20px;
+            }
+            section.about .info {
+                width: 100%;
+            }
+        }
+        
+        section.portfolio {
+            padding-top: 40px;
+            padding-bottom: 40px;
+            background-color: #fff;
+        }
+        
+        h2 {
+            text-align: center;
+        }
+        
+        section.portfolio .demo-img {
+            margin-top: 30px;
+            float: left;
+            width: 44%;
+            padding-top: 34%;
+            background-color: rebeccapurple;
+            position: relative;
+            background-size: 100% 100%;
+            overflow: hidden;
+        }
+        
+        section.portfolio .demo-img:hover>.link {
+            bottom: 0;
+        }
+        
+        section.portfolio .demo-img>.link {
+            position: absolute;
+            display: inline-block;
+            bottom: -50%;
+            width: 100%;
+            padding: 10% 0;
+            text-align: center;
+            background-color: rgba(0, 0, 0, 0.6);
+            color: #aaa;
+            transition: all 1s;
+        }
+        
+        section.portfolio .demo-img>.link a {
+            margin-top: 10%;
+            color: #aaa;
+        }
+        
+        section.portfolio .demo-img>.link a:hover {
+            color: #eee;
+        }
+        
+        section.portfolio .demo-img:nth-child(odd) {
+            margin-left: 3%;
+        }
+        
+        section.portfolio .demo-img:nth-child(even) {
+            float: right;
+            margin-right: 3%;
+        }
+        /*section.portfolio .demo-img {
+            background-image: url(img1.jpg);
+        }
+        
+        section.portfolio .demo-img::nth-child(2) {
+            background-image: url(img2.jpg);
+        }*/
+        
+        section.portfolio .demo-img img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+        }
+        
+        @media(max-width:768px) {
+            .main section.portfolio div.demo-img {
+                float: none;
+                width: 84%;
+                padding-top: 64%;
+                margin-left: 8%;
+                margin-right: 8%;
+            }
+        }
+        
+        section.contact {
+            background-color: #fff;
+            border-top: 2px solid #aaa;
+            padding-top: 40px;
+        }
+        /*section.contact div {
+            padding: 0 50px;
+        }*/
+        
+        input::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+        }
+        
+        input::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+        
+        .contact .left p {
+            border-bottom: 1px solid #aaa;
+            padding-top: 30px;
+            padding-bottom: 10px;
+        }
+        
+        .contact input,
+        .contact textarea {
+            border: 0;
+            outline: 0;
+            font-size: 1.5rem;
+            width: 98%;
+        }
+        
+        .contact>div {
+            width: 40%;
+        }
+        
+        .contact .left {
+            float: left;
+            margin-left: 6%;
+        }
+        
+        .contact .left p {
+            position: relative;
+            width: 98%;
+        }
+        
+        .contact .left span {
+            position: absolute;
+            left: 0;
+            top: 5px;
+            font-size: 0.9em;
+            display: none;
+        }
+        
+        .contact .left textarea {
+            height: 160px;
+            width: 98%;
+            font-family: Arial;
+        }
+        
+        .contact .right {
+            padding-top: 40px;
+            float: right;
+            margin-right: 6%;
+        }
+        
+        .contact .activeTip span {
+            display: block;
+            animation: tipMoveUp 0.5s ease-in backwards;
+        }
+        
+        @keyframes tipMovDown {
+            from {
+                top: 5px;
+                opacity: 1;
+            }
+            to {
+                top: 25px;
+                opacity: 0.3;
+                display: none;
+            }
+        }
+        
+        @keyframes tipMoveUp {
+            from {
+                top: 25px;
+                opacity: 0.3;
+            }
+            to {
+                top: 5px;
+                opacity: 1;
+            }
+        }
+        
+        .contact .focusTip span {
+            color: #2200bb;
+        }
+        
+        .contact button {
+            margin: 5px;
+            padding: 5px;
+        }
+        
+        .contact .right p {
+            margin-top: 50px;
+            line-height: 1.8em;
+        }
+        
+        @media(max-width:768px) {
+            .contact .left,
+            .contact .right {
+                float: none;
+                width: 80%;
+                margin-left: 10%;
+                margin-right: 10%;
+            }
+        }
+        
+        .test1 {
+            padding: 120px;
+            background-color: green;
+            float: left;
+            max-height: 100px;
+        }
+        
+        footer {
+            height: 60px;
+            line-height: 60px;
+            background-color: #2200bb;
+            color: #fff;
+            text-align: center;
+        }
+        footer a{
+            color: #eee;
+        }
+    </style>
+</head>
+
+<body >
+
+    <div class="wrap">
+        <header>
+            <div class="main clearfix">
+                <span class="logo">LinkFight</span>
+                <button class="toggle-nav-btn " data-target="#navbar" data-toggle-class="showDiv">
+                  &#xf0c9
+                </button>
+                <nav id="navbar">
+                    <ul>
+                        <li><a class="active" data-href="#about" data-target="#about">about</a></li>
+                        <li><a data-href="#portfolio" data-target="#portfolio">portfolio</a></li>
+                        <li><a data-href="#contact" data-target="#contact">contact</a></li>
+                    </ul>
+                </nav>
+
+            </div>
+        </header>
+        <div class="main clearfix">
+            <section  class="about">
+                <h2 id="about"></h2>
+                <div class="img"></div>
+                <div class="info">
+                    <p> 我的中文名是柯琳，而linkfight是我在gmail，github，freecodecamp等网站上的代号。我是一名web网站开发者，之前一直都是使用asp.net使用Razor还有html，css以及javaScript来编写系统页面。
+                    </p>
+                    <hr class="star-bright">
+                    <p class="title">Web Developer</p>
+                </div>
+
+            </section>
+            <section class="portfolio clearfix">
+                <h2 id="portfolio">练习</h2>
+                <hr class="star-dark">
+                <div class="demo-img">
+                    <img src="img1.jpg" alt="">
+                    <div class="link"><a target="_blank" href="http://link-fight.github.io/task/task07/task07.html">Have a look</a> </div>
+                </div>
+                <div class="demo-img">
+                    <img src="img2.jpg" alt="2">
+                    <div class="link"><a target="_blank" href="http://link-fight.github.io/task/task06/task06.html">Have a look</a> </div>
+                </div>
+                <div class="demo-img">
+                    <img src="img3.jpg" alt="2">
+                    <div class="link"><a target="_blank" href="http://link-fight.github.io/task/task09/task09.html">Have a look</a> </div>
+                </div>
+                <div class="demo-img">
+                    <img src="img4.jpg" alt="2">
+                    <div class="link"><a target="_blank" href="http://link-fight.github.io/javaScript/personal_practice/canvas/myCanvas">Have a look</a> </div>
+                </div>
+            </section>
+            <section class="contact clearfix">
+                <h2 id="contact">contact</h2>
+                <hr class="star-dark">
+                <div class="left">
+                    <p class="">
+                        <input class="moveInput" type="text" placeholder="Name">
+                        <span>Name</span>
+                    </p>
+                    <p> <input class="moveInput" type="email" placeholder="Email Address">
+                        <span>Email Address</span></p>
+                    <p><input class="moveInput" type="number" placeholder="Phone Number">
+                        <span>Phone Number</span>
+                    </p>
+                    <p><textarea class="moveInput" name="" id="" cols="30" rows="10" placeholder="Message"></textarea>
+                        <span>Message</span></p>
+                    <button>Send</button>
+                </div>
+                <div class="right">
+                    <p>
+                        想和我联系吗？需要要求更多关于我个人的经验信息，问我的简历，如何解决你的数独，关于宇宙和生命的意义的随机问题，或即使只是在惊人的一些不错的菲卡 多伦多…随时可以联系我。
+                    </p>
+                    <p>我保证回复:)</p>
+                </div>
+            </section>
+        </div>
+
+        <footer> <a href="https://github.com/Link-Fight" target="_blank">LinkFight</a> © 2016. All Rights Reversed </footer>
+    </div>
+    <script src="script.js"></script>
+</body>
+
+</html>

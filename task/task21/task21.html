@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>task21</title>
+    <style>
+        .content {
+            overflow: auto;
+        }
+        
+        .content div {
+            padding: 10px;
+            background-color: red;
+            margin: 5px;
+            float: left;
+        }
+        
+        .content.tag div {
+            background-color: rgb(129, 183, 245);
+            font-size: 1.3em;
+            color: #fff;
+            cursor: pointer;
+            transition: all 1.5s;
+            border-radius: 5px;
+            /*width: 200px;*/
+        }
+        
+        .content.tag div:hover {
+            background-color: rgb(255, 20, 30);
+        }
+        
+        .content.tag div:hover:before {
+            content: "点击删除";
+            padding-right: 5px;
+            font-size: 0.8em;
+        }
+        
+        .target {
+            background: black;
+            color: #fff;
+            font-size: 1.2em;
+        }
+        
+        form input {
+            border: 2px solid rgb(129, 183, 245);
+            /**/
+        }
+        
+        form label {
+            line-height: 40px;
+        }
+        
+        form input:focus {
+            transition: border linear .2s, box-shadow linear .5s;
+            -moz-transition: border linear .2s, -moz-box-shadow linear .5s;
+            -webkit-transition: border linear .2s, -webkit-box-shadow linear .5s;
+            outline: none;
+            border-color: rgba(93, 149, 242, .75);
+            box-shadow: 0 0 8px rgba(93, 149, 242, .105);
+            -moz-box-shadow: 0 0 8px rgba(93, 149, 242, .5);
+            -webkit-box-shadow: 0 0 8px rgba(93, 149, 242, 3);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <form action="">
+            <div>
+                <label for="">Tag:
+                    <input type="text" id="tagInput" placeholder="输入tag：">
+                </label>
+            </div>
+            <div class="content tag" id="tagConent">
+                <div>HTML5</div>
+                <div>JS</div>
+            </div>
+            <div>
+                <textarea id="habbyInput" name="" id="" cols="30" rows="10"></textarea>
+                <br>
+                <input type="button" id="interestBtn"value="确认兴趣爱好">
+                <div class="content interest" id="interestContent"></div>
+                
+            </div>
+        </form>
+    </div>
+    <script src="task.js"></script>
+</body>
+
+</html>

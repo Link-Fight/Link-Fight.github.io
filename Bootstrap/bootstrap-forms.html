@@ -1,209 +1,212 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8">
-	<title>Bootstrap的边学边练</title>
-	<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
-	<script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
-	<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
-	<link rel="stylesheet" href="myBootstrap.css" type="text/css">
+    <meta charset="UTF-8">
+    <title>Bootstrap的边学边练</title>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="myBootstrap.css" type="text/css">
 </head>
 
 <body>
-	<div class="main">
-		<h1>Bootstrap <span class='color_h1'>表单</span></h1>
-		<h2 class="tutheader">表单布局</h2> Bootstrap的表单布局的类型有:
-		<br>
-		<ul>
-			<li>垂直表单(默认)</li>
-			<li>内联表单</li>
-			<li>水平表单</li>
-		</ul>
-		<h3>垂直或基本表单</h3>
-		<p>创建步骤</p>
-		<ul>
-			<li>向父&lt;form&gt;元素添加role='<i>form</i>'</li>
-			<li>把标签和控件放在一个带有class<i>.form-group</i>的&lt;div&gt;中。这是获取最佳间距所必需</li>
-			<li>向所有文本元素&lt;input&gt;&lt;textarea&gt;和&lt;select&gt;添加class<i>.form-control</i></li>
-		</ul>
-		<div class="demo">
-			<form action="" role='form'>
-				<div class="form-group">
-					<label for="name">名称</label>
-					<input type="text" class="form-control" id='name' placeholder="请输入名称">
-				</div>
-				<div class="form-group">
-					<label for="inputfile">文件输入</label>
-					<input type="file" id='inputfile'>
-					<p class="help-block">这里是块状帮助文本的实例</p>
-				</div>
-				<div class="checkbox">
-					<label>
-						<input type="checkbox">请打勾
-					</label>
-				</div>
-				<button type="submit" class="btn btn-default">提交</button>
-			</form>
-		</div>
-		<h3>内联表单</h3>
-		<pre>里面所有元素是内联的，向左对齐的，标签并排的，请向&lt;form&gt;标签添加class<i>.form-inline</i></pre>
-		<div class="demo">
-			<form class="form-inline" role="form">
-				<div class="form-group">
-					<label class="sr-only" for="name">名称</label>
-					<input type="text" class="form-control" id="name" placeholder="请输入名称">
-				</div>
-				<div class="form-group">
-					<label class="sr-only" for="inputfile">文件输入</label>
-					<input type="file" id="inputfile">
-				</div>
-				<div class="checkbox">
-					<label>
-						<input type="checkbox"> 请打勾
-					</label>
-				</div>
-				<button type="submit" class="btn btn-default">提交</button>
-			</form>
-		</div>
-		<ul>
-			<li>默认下，Bootstrap中的input，select和textarea有100%宽度</li>
-			<li>使用 class<i>.sr-only</i>可以隐藏内联表单的标签</li>
-		</ul>
-		<h3>水平表单</h3>
-		<p>创建步骤</p>
-		<ul>
-			<li>向父&lt;form&gt;元素添加class<i>.form-horizontal</i></li>
-			<li>把标签和控件放在一个带有class<i>.form-group</i>的&lt;div&gt;中</li>
-			<li>向标签添加class<i>.control-label</i></li>
-		</ul>
-		<div class="demo">
-			<form class="form-horizontal" role="form">
-				<div class="form-group">
-					<label for="firstname" class="col-sm-2 control-label col-xs-2">名字</label>
-					<div class="col-sm-10 col-xs-10">
-						<input type="text" class="form-control" id="firstname" placeholder="请输入名字">
-					</div>
-				</div>
-				<div class="form-group">
-					<label for="lastname" class="col-sm-2 control-label col-xs-2">姓</label>
-					<div class="col-sm-10 col-xs-10">
-						<input type="text" class="form-control" id="lastname" placeholder="请输入姓">
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<div class="checkbox">
-							<label>
-								<input type="checkbox"> 请记住我
-							</label>
-						</div>
-					</div>
-				</div>
-				<div class="form-group">
-					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-default">登录</button>
-					</div>
-				</div>
-			</form>
-		</div>
-		<h3>表单控件状态</h3>
-		<p>除了<i>:focus</i>状态，Bootstrap还提供了其他状态</p>
-		<h4>输入框焦点</h4>
-		<p>当输入框input接收到 <i>:focus</i>时，输入框的轮廓会被移除，同时应用<i>box-shadow</i></p>
-		<h4>禁用的输入框input</h4>
-		<p>添加<i>disabled</i>属性，不仅禁用输入框，还改变其样式已经鼠标的指针悬停在其上面的样式</p>
-		<h4>禁用的字段集fieldset</h4>
-		<p>对&lt;fieldset&gt;添加<i>disabled</i>属性来禁用&lt;fieldset&gt;内的所有控件</p>
-		<h4>验证状态</h4>
-		<p>对父元素添加class(<i>.has-warning</i>, <i>.has-error</i>或<i>.has-success</i>)即可使用验证状态</p>
+    <div class="main">
+        <h1>Bootstrap <span class='color_h1'>表单</span></h1>
+        <h2 class="tutheader">表单布局</h2> Bootstrap的表单布局的类型有:
+        <br>
+        <ul>
+            <li>垂直表单(默认)</li>
+            <li>内联表单</li>
+            <li>水平表单</li>
+        </ul>
+        <h3>垂直或基本表单</h3>
+        <p>创建步骤</p>
+        <ul>
+            <li>向父&lt;form&gt;元素添加role='<i>form</i>'</li>
+            <li>把标签和控件放在一个带有class<i>.form-group</i>的&lt;div&gt;中。这是获取最佳间距所必需</li>
+            <li>向所有文本元素&lt;input&gt;&lt;textarea&gt;和&lt;select&gt;添加class<i>.form-control</i></li>
+        </ul>
+        <div class="demo">
+            <form action="" role='form'>
+                <div class="form-group">
+                    <label for="name">名称</label>
+                    <input type="text" class="form-control" id='name' placeholder="请输入名称">
+                </div>
+                <div class="form-group">
+                    <label for="inputfile">文件输入</label>
+                    <input type="file" id='inputfile'>
+                    <p class="help-block">这里是块状帮助文本的实例</p>
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox">请打勾
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-default">提交</button>
+            </form>
+        </div>
+        <h3>内联表单</h3>
+        <pre>里面所有元素是内联的，向左对齐的，标签并排的，请向&lt;form&gt;标签添加class<i>.form-inline</i></pre>
+        <div class="demo">
+            <form class="form-inline" role="form">
+                <div class="form-group">
+                    <label class="sr-only" for="name">名称</label>
+                    <input type="text" class="form-control" id="name" placeholder="请输入名称">
+                </div>
+                <div class="form-group">
+                    <label class="sr-only" for="inputfile">文件输入</label>
+                    <input type="file" id="inputfile">
+                </div>
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox"> 请打勾
+                    </label>
+                </div>
+                <button type="submit" class="btn btn-default">提交</button>
+            </form>
+        </div>
+        <ul>
+            <li>默认下，Bootstrap中的input，select和textarea有100%宽度</li>
+            <li>使用 class<i>.sr-only</i>可以隐藏内联表单的标签</li>
+        </ul>
+        <h3>水平表单</h3>
+        <p>创建步骤</p>
+        <ul>
+            <li>向父&lt;form&gt;元素添加class<i>.form-horizontal</i></li>
+            <li>把标签和控件放在一个带有class<i>.form-group</i>的&lt;div&gt;中</li>
+            <li>向标签添加class<i>.control-label</i></li>
+        </ul>
+        <div class="demo">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label for="firstname" class="col-sm-2 control-label col-xs-2">名字</label>
+                    <div class="col-sm-10 col-xs-10">
+                        <input type="text" class="form-control" id="firstname" placeholder="请输入名字">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastname" class="col-sm-2 control-label col-xs-2">姓</label>
+                    <div class="col-sm-10 col-xs-10">
+                        <input type="text" class="form-control" id="lastname" placeholder="请输入姓">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox"> 请记住我
+                            </label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-sm-offset-2 col-sm-10">
+                        <button type="submit" class="btn btn-default">登录</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+        <h3>表单控件状态</h3>
+        <p>除了<i>:focus</i>状态，Bootstrap还提供了其他状态</p>
+        <h4>输入框焦点</h4>
+        <p>当输入框input接收到 <i>:focus</i>时，输入框的轮廓会被移除，同时应用<i>box-shadow</i></p>
+        <h4>禁用的输入框input</h4>
+        <p>添加<i>disabled</i>属性，不仅禁用输入框，还改变其样式已经鼠标的指针悬停在其上面的样式</p>
+        <h4>禁用的字段集fieldset</h4>
+        <p>对&lt;fieldset&gt;添加<i>disabled</i>属性来禁用&lt;fieldset&gt;内的所有控件</p>
+        <h4>验证状态</h4>
+        <p>对父元素添加class(<i>.has-warning</i>, <i>.has-error</i>或<i>.has-success</i>)即可使用验证状态</p>
 
-		<div class="demo">
-			<form class="form-horizontal" role="form">
-				<div class="form-group">
-					<label class="col-sm-2 control-label">聚焦</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="focusedInput" value="该输入框获得焦点">
-					</div>
-				</div>
-				<div class="form-group">
-					<label class="col-sm-2 control-label">禁用</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control" id="focusedInput" value="该输入框禁止输入" disabled>
-					</div>
-				</div>
-				<fieldset disabled>
-					<div class="form-group">
-						<label class="col-sm-2 control-label">禁用输入(Fieldset disabled)</label>
-						<div class="col-sm-10">
-							<input type="text" class="form-control" id="focusedInput" placeholder="禁止输入">
-						</div>
-					</div>
-					<div class="form-group">
-						<label for="" class="col-sm-2 control-label">禁止选择菜单</label>
-						<div class="col-sm-10">
-							<select name="" id="disabledSelect" class="form-control">
-								<option value="0">禁止选择</option>
-							</select>
-						</div>
-					</div>
-				</fieldset>
-				<div class="form-group has-success">
-					<label for="" class="col-sm-2 control-label">输入成功</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control">
-					</div>
-				</div>
-				<div class="form-group has-warning">
-					<label for="" class="col-sm-2 control-label">输入警告</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control">
-					</div>
-				</div>
-				<div class="form-group has-error">
-					<label for="" class="col-sm-2 control-label">输入错误</label>
-					<div class="col-sm-10">
-						<input type="text" class="form-control">
-					</div>
-				</div>
+        <div class="demo">
+            <form class="form-horizontal" role="form">
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">聚焦</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="focusedInput" value="该输入框获得焦点">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label class="col-sm-2 control-label">禁用</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control" id="focusedInput" value="该输入框禁止输入" disabled>
+                    </div>
+                </div>
+                <fieldset disabled>
+                    <div class="form-group">
+                        <label class="col-sm-2 control-label">禁用输入(Fieldset disabled)</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" id="focusedInput" placeholder="禁止输入">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="col-sm-2 control-label">禁止选择菜单</label>
+                        <div class="col-sm-10">
+                            <select name="" id="disabledSelect" class="form-control">
+                                <option value="0">禁止选择</option>
+                            </select>
+                        </div>
+                    </div>
+                </fieldset>
+                <div class="form-group has-success">
+                    <label for="" class="col-sm-2 control-label">输入成功</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group has-warning">
+                    <label for="" class="col-sm-2 control-label">输入警告</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+                <div class="form-group has-error">
+                    <label for="" class="col-sm-2 control-label">输入错误</label>
+                    <div class="col-sm-10">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
 
-			</form>
-		</div>
-<h3>表单控件大小</h3>
-<p>可以使用class<i>.input-lg</i>和<i>.col-lg-*</i>来设置表单的高度和宽度</p>
-	</div>
-	<div>
-		<div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
-		     <div class="container">
-		       <div class="navbar-header">
-		         <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
-		           <span class="sr-only">Toggle navigation</span>
-		           <span class="icon-bar"></span>
-		           <span class="icon-bar"></span>
-		           <span class="icon-bar"></span>
-		         </button>
-		         <a class="navbar-brand" href="#">Link博客</a>
-		       </div>
-		       <div class="collapse navbar-collapse">
-		         <ul class="nav navbar-nav">
-		           <li class="active"><a href="#"><span class="glyphicon ">css</span></a></li>
-		           <li><a href="#shop"><span class="glyphicon">javaScript</span></a></li>
-		           <li><a href="#support"><span class="glyphicon ">jQuery</span></a></li>
-		           <li><a href="#bootstrap"><span class="glyphicon ">bootstrap</span></a></li>
-		         </ul>
-		       </div><!-- /.nav-collapse -->
-		     </div><!-- /.container -->
-		   </div>
-	</div>
-	<div class="previous-next-links">
-		<div class="previous-design-link">← <a href="index.html" rel="prev" title="
+            </form>
+        </div>
+        <h3>表单控件大小</h3>
+        <p>可以使用class<i>.input-lg</i>和<i>.col-lg-*</i>来设置表单的高度和宽度</p>
+    </div>
+    <div>
+        <div class="navbar navbar-fixed-top navbar-inverse" role="navigation">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" href="#">Link博客</a>
+                </div>
+                <div class="collapse navbar-collapse">
+                    <ul class="nav navbar-nav">
+                        <li class="active"><a href="#"><span class="glyphicon ">css</span></a></li>
+                        <li><a href="#shop"><span class="glyphicon">javaScript</span></a></li>
+                        <li><a href="#support"><span class="glyphicon ">jQuery</span></a></li>
+                        <li><a href="#bootstrap"><span class="glyphicon ">bootstrap</span></a></li>
+                    </ul>
+                </div>
+                <!-- /.nav-collapse -->
+            </div>
+            <!-- /.container -->
+        </div>
+    </div>
+    <div class="previous-next-links">
+        <div class="previous-design-link">← <a href="index.html" rel="prev" title="
 	Bootstrap 代码	">
 	Bootstrap 代码	</a>
-		</div>
-		<div class="next-design-link"><a href="bootstrap-buttons.html" rel="next" title="
+        </div>
+        <div class="next-design-link"><a href="bootstrap-buttons.html" rel="next" title="
 	Bootstrap 按钮	">
 	Bootstrap 按钮	</a> →
-		</div>
-	</div>
+        </div>
+    </div>
 </body>
-</html>
 
+</html>

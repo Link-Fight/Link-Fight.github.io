@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>个人信息</title>
+    <link href="css/style.css" type="text/css" rel="stylesheet">
+    <!--<link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">-->
+    <script src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <!--<script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>-->
+    <script src="http://libs.baidu.com/jquery/1.10.2/jquery.min.js"></script>
+</head>
+<body>
+    <div id="content">
+        <div id="sectionA">
+                <div id="sectionA-01"><img src="images/icons/icon_arrow_t_left.png" ></div>
+                <div id="sectionA-02"><a href="#" target="_self">返回赛事管理主页</a></div>
+        </div>
+        <div id="sectionB">
+            <div id="sectionB-01" class="div-01">
+                <div id="changeInfoBtn">修改信息</div>
+                <div id="saveBtn" class="btn-01">保存</div>
+            </div>
+            <div id="sectionB-02" class="div-02">
+                <div class="label-01">账号手机</div>
+                <div class="inputBox-01"><input id="phoneNum"  type="text" maxlength="11" placeholder="请填写手机号码" onKeyUp="value=value.replace(/[^\d]/g,'') " ></div>
+            </div>
+            <div id="sectionB-03" class="div-02">
+                <div class="label-01">用户名</div>
+                <div class="inputBox-01"><input id="userName"  type="text" placeholder="请填写用户名"></div>
+            </div>
+            <div id="sectionB-04" class="div-02">
+                <div id="sectionB-04-01" class="label-01">所在城市/区</div>
+                <div id="sectionB-04-02" class="inputBox-01">
+                    <input id="cityDistrict"  type="text" placeholder="请填写所在城市/区">
+                    <div id="showCity">
+                        <div id="tapSelect">
+                            <div class="span-01"><a href="#popularCity" class="a-01">热门城市</a></div>
+                            <div class="span-01"><a href="#aCity" class="a-02">ABCDEFG</a></div>
+                            <div class="span-01"><a href="#hCity" class="a-02">HJKL</a></div>
+                            <div class="span-01"><a href="#mCity" class="a-02">MNPQRST</a></div>
+                            <div class="span-01"><a href="#wCity" class="a-02">WXYZ</a></div>
+                        </div>
+                        <!--热门城市-->
+                        <div id="displayCity">
+                            <ul class="clearfix">
+                                <li class="city-item">上海</li>
+                                <li class="city-item">北京</li>
+                                <li class="city-item">广州</li>
+                                <li class="city-item">杭州</li>
+                                <li class="city-item">厦门</li>
+                                <li class="city-item">南京</li>
+                                <li class="city-item">澳门</li>
+                                <li class="city-item">成都</li>
+                                <li class="city-item">青岛</li>
+                                <li class="city-item">福州</li>
+                                <li class="city-item">天津</li>
+                                <li class="city-item">深圳</li>
+                                <li class="city-item">大连</li>
+                                <li class="city-item">沈阳</li>
+                                <li class="city-item">昆明</li>
+                                <li class="city-item">武汉</li>
+                                <li class="city-item">宁波</li>
+                                <li class="city-item">无锡</li>
+                                <li class="city-item">重庆</li>
+                                <li class="city-item">三亚</li>
+                                <li class="city-item">西安</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div id="sectionB-05" class="div-02">
+                <div id="sectionB-05-01" class="label-01">性质</div>
+                <div id="sectionB-05-02" class="inputBox-01">
+                    <div id="sectionB-05-02-01">
+                        <input  id="nature" type="text" placeholder="请选择性质">
+                    </div>
+                    <div id="sectionB-05-02-02">
+                        <img id="natureBox" src="images/icons/icon_arrow_gray_left.png">
+                    </div>
+                    <div id="showChoice" >
+                        <div id="showChoice-01">
+                            <div class="button-01" >官方足协</div>
+                            <div class="button-01" >个人</div>
+                            <div class="button-01" >球场主</div>
+                            <div class="button-01">学校</div>
+                        </div>
+                        <div id="showChoice-02"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+</body>
+<script src="app.js"></script>
+</html>

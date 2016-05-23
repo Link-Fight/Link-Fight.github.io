@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>博客模板</title>
+    <link href="http://libs.baidu.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet">
+    <script type="text/javascript" src="http://www.imooc.com/data/jquery-1.8.2.min.js"></script>
+    <script src="http://libs.baidu.com/bootstrap/3.0.3/js/bootstrap.min.js"></script>
+    <script src="js/jquery.jqzoom.js"></script>
+    <style>
+        .body {
+            margin-top: 100px;
+        }
+        
+        .content {
+            padding-left: 10px;
+            padding-right: 10px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .demo {
+            margin: 10px 0px;
+            border: 2px solid #99F9FF;
+            padding: 10px;
+        }
+        
+        .color_h1 {
+            color: #32CD32;
+        }
+        
+        .color_h2 {
+            color: #00C0aa;
+        }
+        
+        .demo-img {
+            padding: 5px;
+            border: 1px solid #88C0aa;
+            text-align: center;
+        }
+        .demo-img img, .demo-img a{
+            float: left;
+            height:130px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="" id="nav"></div>
+    <script>
+        $("#nav").load("nav.html",function(response,status,xhr){});
+    </script>
+    <div class="body">
+        <div class="container">
+            <div class="">
+                你们好好
+                <a href="image/img_jqzoom.jpg" id="jqzoom1">
+                    <img src="image/img_jqzoom_min.jpg" alt="">
+                </a>
+            </div>
+        </div>
+        
+    </div>
+    <script>
+         $(function () {
+                $("#jqzoom1").jqzoom({ //绑定图片放大插件jqzoom
+                    zoomWidth: 123, //小图片所选区域的宽
+                    zoomHeight: 223, //小图片所选区域的高
+                    zoomType: 'reverse' //设置放大镜的类型
+                });
+            });
+    </script>
+</body>
+
+</html>
