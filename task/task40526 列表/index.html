@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        .freezeArea {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -100;
+            width: 100%;
+            height: 300px;
+            background-color: rgb(20, 90, 200);
+            /*display: none;*/
+        }
+        
+        .freezeArea .wrap {
+            width: 100%;
+            height: 100%;
+            text-align: center;
+        }
+        
+        .freezeArea .wrap::after {
+            display: inline-block;
+            content: "";
+            width: 0;
+            vertical-align: middle;
+            height: 100%;
+        }
+        
+        .freezeArea .context {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 1.5rem;
+            line-height: 180%;
+            color: #fff;
+        }
+        
+        .center {
+            width: 100%;
+            max-width: 860px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        nav {
+            margin-top: 300px;
+        }
+        
+        nav ul {
+            font-size: 0;
+        }
+        
+        nav ul>li {
+            display: inline-block;
+            vertical-align: middle;
+            font-size: 1.2rem;
+            width: 33%;
+            box-sizing: border-box;
+            padding: 2% 5%;
+            text-align: center;
+            color: rgb(20, 90, 200);
+        }
+        
+        .btn {
+            height: 40px;
+            width: 100px;
+            background-color: transparent;
+            border: none;
+            border: 2px solid #000;
+            float: left;
+        }
+        
+        .btn.listShow {
+            padding-left: 15px;
+            color: rgb(20, 90, 200);
+            border-color: rgb(20, 90, 200);
+            
+        }
+        
+        listShow.active {
+            color: rgb(20, 90, 200);
+            color: fff;
+        }
+        
+        .btn.more {
+            float: right;
+            color: rgb(220, 20, 20);
+            border-color: rgb(220, 20, 20);
+            padding-right: 15px;
+        }
+        .listArea{
+            background-color: rgb(185, 185, 255);
+            height: 400px;
+            padding-top: 80px;
+        }
+       
+        .listItem{
+          width: 100%;
+          background-color: #fff;
+          height: 200px;
+          margin-top: 10px; 
+        }
+       .btn.listShow,.btn.more{
+           position: relative;
+           top: -60px;
+       }
+       
+    </style>
+</head>
+
+<body>
+    <header>
+        <div class="freezeArea ">
+            <div class="wrap center">
+                <div class="context">233
+                    <br> 322
+                    <br>哇哈哈
+                </div>
+            </div>
+
+        </div>
+        <nav class="center">
+            <ul>
+                <li>独立完成PC端页面，兼容不同内核浏览器。</li>
+                <li>完成所需要的各种动态效果。</li>
+                <li>添加数据交换以及各种交互效果。</li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="listArea ">
+        <div class="listWrap center">
+            <button class="btn listShow active">查看章节</button>
+            <button class="btn listShow">全部展开</button>
+            <button class="btn more">查看更多</button>
+            
+            <section class="listItem">
+                <h3>入门基础</h3>
+                
+            </section>
+            <section class="listItem"></section>
+        </div>
+
+    </section>
+
+</body>
+
+</html>
