@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>JS I see</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+        
+        html {
+            font-family: 'Open Sans', sans-serif;
+        }
+        
+        a {
+            text-decoration: none;
+        }
+        
+        .wrapper {
+            padding-top: 30px;
+            padding-bottom: 15px;
+            width: 80%;
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+        
+        #the-good-parts {
+            background-color: rgb(195, 92, 72);
+        }
+        
+        #patterns {
+            background-color: rgb(15, 92, 72);
+        }
+        
+        #Terminology {
+            background-color: rgb(15, 92, 172);
+        }
+        
+        .section h1 {
+            font-size: 40px;
+            text-align: center;
+            text-transform: uppercase;
+            /*text-shadow: 1px 4px 2px rgba(0, 0, 0, 0.16);*/
+        }
+        
+        .section h1 a {
+            color: #fff;
+            text-shadow: 1px 4px 2px rgba(0, 0, 0, 0.16);
+        }
+        
+        .section p {
+            margin-top: 15px;
+            background-color: #fff;
+            padding: 30px;
+            color: #696969;
+            box-shadow: 0 3px rgba(0, 0, 0, .08);
+            line-height: 1.5em;
+        }
+        
+        .section h3 {
+            font-weight: bold;
+            font-size: 1.17em;
+            line-height: 28px;
+            border-bottom: 3px solid rgba(0, 0, 0, .08);
+            display: inline-block;
+            text-transform: uppercase;
+            clear: both;
+            color: #fff;
+            margin: 30px 0;
+        }
+        
+        .section p.source {
+            margin-top: 0;
+            padding: 15px 30px;
+            color: #FFF;
+            background: rgba(0, 0, 0, .09)!important;
+            box-shadow: none!important;
+        }
+        
+        .section p a:hover,
+        .txt a:hover {
+            text-decoration: underline;
+        }
+        
+        .section p a,
+        .txt a {
+            color: #FF8484;
+            text-decoration: none;
+        }
+        
+        .txt {
+            background: #FFF;
+            color: #696969;
+            padding: 20px;
+            box-shadow: 0 3px rgba(0, 0, 0, .08);
+            clear: both;
+            margin-top: 1em;
+        }
+        
+        .section ul {
+            clear: both;
+            margin: 0;
+            padding: 0 20px;
+        }
+        
+        .section p a,
+        .txt a {
+            color: #FF8484;
+            text-decoration: none;
+        }
+        
+        th {
+            background-color: rgba(0, 0, 0, .08);
+        }
+        
+        td {
+            height: 2em;
+        }
+        
+        table {
+            border-collapse: separate;
+        }
+        
+        .old {
+            background-color: rgba(0, 0, 0, .2);
+        }
+    </style>
+</head>
+
+<body>
+    <section class="section" id='Terminology'>
+        <div class="wrapper">
+            <h1><a href="#Terminology">Terminology/术语</a>  </h1>
+            <h3>Namespace/命名空间</h3>
+            <p>
+                允许开发人员在一个独特，应用相关的名字的名称下捆绑所有功能的容器。
+                <br> 在javaScript中，命名空间只是一个包含方法，属性，对象的对象。
+            </p>
+            <h3>types/JS的类型有</h3>
+            <section class="txt">
+                <ul>
+                    <li><a title="The Number JavaScript object is a wrapper object allowing you to work with numerical values. A Number object is created using the Number() constructor."
+                            href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number"><code>Number</code></a></li>
+                    <li><a title="The String global object is a constructor for strings, or a sequence of characters." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/String"><code>String</code></a></li>
+                    <li><a title="The Boolean object is an object wrapper for a boolean value." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"><code>Boolean</code></a></li>
+                    <li><a title="A symbol is a unique and immutable data type and may be used as an identifier for object properties. The symbol object is an implicit object wrapper for the symbol primitive data type."
+                            href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol"><code>Symbol</code></a> (new in
+                        Edition 6)</li>
+                    <li><a title="The Object constructor creates an object wrapper." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"><code>Object</code></a>
+                        <ul>
+                            <li><a title="The Function constructor creates a new Function object. In JavaScript every function is actually a Function object."
+                                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"><code>Function</code></a></li>
+                            <li><a title="The JavaScript Array&nbsp;object is a global object that&nbsp;is used in the&nbsp;construction&nbsp;of&nbsp;arrays; which are high-level, list-like objects."
+                                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"><code>Array</code></a></li>
+                            <li><a title="Creates a JavaScript Date instance that represents a single moment in time. Date objects are based on a time value that is the number of milliseconds since 1 January, 1970 UTC."
+                                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a></li>
+                            <li><a title="The RegExp constructor creates a regular expression object for matching text with a pattern."
+                                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"><code>RegExp</code></a></li>
+                        </ul>
+                    </li>
+                    <li><a title="The value null&nbsp;represents the intentional absence of any object value. It is one of JavaScript's primitive values."
+                            href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/null"><code>null</code></a></li>
+                    <li><a title="The global undefined property represents the primitive value undefined. It is one of JavaScript's primitive types."
+                            href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined"><code>undefined</code></a></li>
+                </ul>
+            </section>
+            <h3>memory leak/内存泄漏</h3>
+            <p>
+                使用闭包的坏处是：在IE浏览器中它容易导致内存泄漏。
+                <br> 在IE中，每当在一个JavaScript对象和一个本地对象之间形成循环应用时，就会发生内存泄漏。
+            </p>
+            <p class="source">
+                more：<a target="_blank" href="https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/A_re-introduction_to_JavaScript#%E5%86%85%E5%AD%98%E6%B3%84%E9%9C%B2">MDN:内存泄漏</a>
+            </p>
+            <h3>Data property/数据属性</h3>
+            <section class="txt">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>特征</th>
+                            <th>数据类型</th>
+                            <th>描述</th>
+                            <th>默认值</th>
+                        </tr>
+                        <tr>
+                            <td>[[Value]]</td>
+                            <td>任何JavaScript类型</td>
+                            <td>这个属性的数据值</td>
+                            <td>undefined</td>
+                        </tr>
+                        <tr>
+                            <td>[[Writable]]</td>
+                            <td>Boolean</td>
+                            <td>false:则该属性的[[Value]]特性不能被修改</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>[[Enumerable]]</td>
+                            <td>Boolean</td>
+                            <td>false:则不出现在for...in的枚举中</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>[[Configurable]]</td>
+                            <td>Boolean</td>
+                            <td>false:则该属性不能被删除，并且除[[Value]]和[[Writable]]以外的特征不能被修改</td>
+                            <td>false</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <br>
+                <span class="">过时的属性(在ECMAScript 3定义的, 在ECMAScript 5被重命名)</span>
+                <br>
+                <table class="old">
+                    <tbody>
+                        <tr>
+                            <th>属性</th>
+                            <th>类型</th>
+                            <th>描述</th>
+
+                        </tr>
+                        <tr>
+                            <td>Read-only</td>
+                            <td>任何JavaScript类型</td>
+                            <td>ES5 [[Writable]] 属性的反状态(Reversed state)</td>
+
+                        </tr>
+                        <tr>
+                            <td>DontEnum</td>
+                            <td>Boolean</td>
+                            <td>ES5 [[Enumerable]] 属性的反状态</td>
+                        </tr>
+                        <tr>
+                            <td>DontDelete</td>
+                            <td>Boolean</td>
+                            <td>ES5 [[Configurable]] 属性的反状态</td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </section>
+            <h3>Accessor property/访问器属性</h3>
+            <section class="txt">
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>特征</th>
+                            <th>数据类型</th>
+                            <th>描述</th>
+                            <th>默认值</th>
+                        </tr>
+                        <tr>
+                            <td>[[Get]]</td>
+                            <td>函数对象或者 undefined</td>
+                            <td>该函数使用一个空的参数列表，能够在有权访问的情况下读取属性值。另见 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/get">get</a>。</code></td>
+                            <td>undefined</td>
+                        </tr>
+                        <tr>
+                            <td>[[Set]]</td>
+                            <td>函数对象或者 undefined</td>
+                            <td>该函数有一个参数，用来写入属性值，另见 <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/set">set</a>。</code></td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>[[Enumerable]]</td>
+                            <td>Boolean</td>
+                            <td>false:则不出现在for...in的枚举中</td>
+                            <td>false</td>
+                        </tr>
+                        <tr>
+                            <td>[[Configurable]]</td>
+                            <td>Boolean</td>
+                            <td>false:则该属性不能被删除，并且除[[Value]]和[[Writable]]以外的特征不能被修改</td>
+                            <td>false</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </section>
+    
+</body>
+
+
+
+</html>

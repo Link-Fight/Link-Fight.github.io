@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body ng-app="Weather">
+    <div class="container" ng-controller="MainCtrl">
+        <div class="row">
+            <header class="col-xs-12 text-center">
+                <h1>Free C<i class="wi wi-hail"></i>de Camp </h1>
+                <h1>Weather App</h1>
+            </header>
+
+            <div class="col-xs-8 col-xs-offset-2">
+                <div class="text-center status">
+                    <p>{{Data.city}}, {{Data.country}}</p>
+                    <p>{{Data.temp}} &#176;<span class="temp" ng-click="Data.sys()">{{Data.unit}}</span></p>
+                    <p>{{Data.des}}</p>
+                </div>
+
+                <div class="text-center all-icon">
+                    <div class="icon sun-shower hide ">
+                        <div class="cloud"></div>
+                        <div class="sun">
+                            <div class="rays"></div>
+                        </div>
+                        <div class="rain"></div>
+                    </div>
+                    <div class="icon thunder-storm hide thunderstom">
+                        <div class="cloud"></div>
+                        <div class="lightning">
+                            <div class="bolt"></div>
+                            <div class="bolt"></div>
+                        </div>
+                    </div>
+                    <div class="icon cloudy hide clouds">
+                        <div class="cloud"></div>
+                        <div class="cloud"></div>
+                    </div>
+                    <div class="icon flurries hide snow">
+                        <div class="cloud"></div>
+                        <div class="snow">
+                            <div class="flake"></div>
+                            <div class="flake"></div>
+                        </div>
+                    </div>
+                    <div class="icon sunny hide clear">
+                        <div class="sun">
+                            <div class="rays"></div>
+                        </div>
+                    </div>
+                    <div class="icon rainy hide rain">
+                        <div class="cloud"></div>
+                        <div class="rain"></div>
+                    </div>
+                </div>
+
+                <p class="text-center">Inspired By <a href="http://codepen.io/joshbader/full/EjXgqr/" target="_blank">joshbader</a></p>
+            </div>
+        </div>
+    </div>
+</body>
