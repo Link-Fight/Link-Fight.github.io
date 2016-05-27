@@ -182,7 +182,11 @@ function calculate(params) {
 
 
 
-
+/**
+ * @param  {any} amount
+ * @param  {any} apr
+ * @param  {any} years
+ */
 function save(amount, apr, years) {
     if (window.localStorage) {
         localStorage.loan_amount = amount;
@@ -262,10 +266,15 @@ function getLenders(amount, apr, years) {
     };
 }
 
-
+/**
+ * @param  {any} principal
+ * @param  {any} interest
+ * @param  {any} monthly
+ * @param  {any} payments
+ */
 function chart(principal, interest, monthly, payments) {
     var graph = document.getElementById("graph");
-    removeClass(graph.parentNode,"show");
+    removeClass(graph.parentNode, "show");
     graph.width = graph.width;
 
     if (arguments.length == 0 || !graph.getContext) return;
@@ -341,5 +350,33 @@ function chart(principal, interest, monthly, payments) {
         g.fillRect(rightEdge - 3, y - 0.5, 3, 1);
         g.fillText(String(ticks[i].toFixed(0)), rightEdge - 5, y);
     }
-    addClass(graph.parentNode,"show");
+    addClass(graph.parentNode, "show");
+}
+
+ 
+function saveCanvas(canvas){
+    var type = "png";
+    /**
+     *  得到的数据格式是：data:image/png;base64,...
+     */
+    var imgData = canvas.toDataURL(type);
+    
+    /**
+     * @param  {any} type
+     * @return 
+     */
+    var _fixType = function(type){
+        type = "".toLowerCase().replace(/jpg/i,'jpeg');
+        var r = type.match(/png|jpeg|bmp|gif/)[0];
+        return 'image/'+r;
+    };
+    /**
+     * 将mime-type改为image/octet-stream，强制让浏览器直接download;
+     */
+    imgData = imgData.replace(_fixType(type),"image/octet-stream");
+    
+    
+    var saveFile = function(data,filename){
+      var save_link = document.createElementNS();  
+    };
 }

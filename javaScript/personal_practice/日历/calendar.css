@@ -71,6 +71,7 @@
             /*border: 1px solid rgba(255, 255, 255, 0);*/
             cursor: pointer;
             color: #FFF;
+            box-sizing: border-box;
         }
         
         .active-day:hover {
