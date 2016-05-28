@@ -131,6 +131,47 @@
         });
     };
 
+    /**
+     * @param {canvas} canvas 要保存的canvas对象
+     * @param {string} type 保存成图片的格式
+     * @param {string} filename 文件名 
+     * 
+     */
+    var saveCanvas = function (canvas, type, filename) {
+        type = type || "png";
+        filename = filename ? filename + (new Date().toLocaleString()) + "." + type : (new Date().toLocaleString()) + "." + type;
+        /**
+         *  得到的数据格式是：data:image/png;base64,...
+         */
+        var imgData = canvas.toDataURL(type);
+
+        /**
+         * @param  {any} type
+         * @return 
+         */
+        var _fixType = function (type) {
+            type = type.toLowerCase().replace(/jpg/i, 'jpeg');
+            var r = type.match(/png|jpeg|bmp|gif/)[0];
+            return 'image/' + r;
+        };
+        /**
+         * 将mime-type改为image/octet-stream，强制让浏览器直接download;
+         */
+        imgData = imgData.replace(_fixType(type), "image/octet-stream");
+
+
+        var saveFile = function (data, filename) {
+            var save_link = document.createElement("a");
+            save_link.href = data;
+            save_link.download = filename;
+
+            var event = document.createEvent("MouseEvents");
+            event.initMouseEvent("click", true, false, window, 0, 0, 0, 0, 0, false, false, false, false, 0, null);
+            save_link.dispatchEvent(event);
+        };
+        saveFile(imgData, filename);
+    }
+
 
     win.addEvent = addEvent;
     win.$$all = $$all;
@@ -138,6 +179,7 @@
     win.addClass = addClass;
     win.removeClass = removeClass;
     win.startMove = startMove;
+    win.saveCanvas = saveCanvas;
 })(window);
 
 
@@ -229,6 +271,10 @@ function init() {
         addClass(this.parentNode, "focusTip");
         calculate();
     }
+    var downloadBtn = document.getElementById("downGraph");
+    downloadBtn.onclick = function () {
+        saveCanvas(document.getElementById("graph"), "png", "贷款计算" + (new Date()).getTime());
+    };
 
 }
 
@@ -288,6 +334,8 @@ function chart(principal, interest, monthly, payments) {
     function amountToY(a) {
         return height - (a * height / (monthly * payments * 1.05));
     }
+    g.fillStyle = "#fff";
+    g.fillRect(0, 0, graph.width, graph.height);
 
     g.moveTo(paymentToX(0), amountToY(0));
     g.lineTo(paymentToX(payments), amountToY(monthly * payments));
@@ -353,30 +401,4 @@ function chart(principal, interest, monthly, payments) {
     addClass(graph.parentNode, "show");
 }
 
- 
-function saveCanvas(canvas){
-    var type = "png";
-    /**
-     *  得到的数据格式是：data:image/png;base64,...
-     */
-    var imgData = canvas.toDataURL(type);
-    
-    /**
-     * @param  {any} type
-     * @return 
-     */
-    var _fixType = function(type){
-        type = "".toLowerCase().replace(/jpg/i,'jpeg');
-        var r = type.match(/png|jpeg|bmp|gif/)[0];
-        return 'image/'+r;
-    };
-    /**
-     * 将mime-type改为image/octet-stream，强制让浏览器直接download;
-     */
-    imgData = imgData.replace(_fixType(type),"image/octet-stream");
-    
-    
-    var saveFile = function(data,filename){
-      var save_link = document.createElementNS();  
-    };
-}
+
