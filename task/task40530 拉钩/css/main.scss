@@ -1,0 +1,268 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+a{
+    text-decoration: none;
+}
+li{
+    list-style: none;
+}
+$base_color:#00b3fa;
+
+body {
+height: 1300px;
+    font-size: 14px;
+    font-family: "Hiragino Sans GB","Microsoft Yahei",SimSun,Arial,"Helvetica Neue",Helvetica;
+    color: #333;
+    word-wrap: break-word;
+    -webkit-font-smoothing: antialiased;
+}
+
+.header_wrap{
+    background-color: #000;
+    height: 30px;
+ 
+    a{
+        line-height: 30px;
+        color: rgb(196, 195, 195);
+        text-decoration: none;
+        &:hover{
+            color: #fff;
+        }
+    }
+    li{
+        list-style: none;
+    }
+    
+    .top_tap{
+        .to_app{
+            float: left;
+            padding: 0 12px 0 27px;
+            color: $base_color;
+            background-image: url(http://pstatic.lagou.com/www/static/common/widgets/header_c/modules/img/app_icon_4940eb3.png);
+            background-repeat: no-repeat;
+            background-clip: border-box;
+            background-origin: padding-box;
+            background-position: 10px 48%;
+            &:hover{
+                color: lightness($base_color);
+            }
+        }
+        .to_oa{
+            float: left;
+            padding: 0 12px;
+            line-height: 15px;
+            margin-top: 7px;
+            border-left:  1px solid $base_color;
+        }
+    }
+    .top_nav{
+        float: right;
+      
+    }
+    .top_nav_wrap{
+        height: 30px;
+        &>li{
+         float: left;
+       
+            &>a{
+                float: left;
+                padding: 0 12px;
+                line-height: 15px;
+                margin-top: 7px;
+            }
+        }            
+       
+        .top_it{
+            
+             border-left:  1px solid $base_color;
+        }
+    }
+     
+     
+    .sec_nav{
+        display: none;
+        margin-top: 30px;
+       
+        
+      
+        a{
+            padding: 0 12px;
+        }
+        li:hover{
+            background-color: #333;
+        }
+    }
+    .nav_dpdown{
+        // padding-right: 10px;
+        background-color: #000;
+        padding-bottom: 8px;
+        .top_it{
+                  padding-right: 25px;
+        }
+        
+        // 画三角形
+        i{
+            position: absolute;
+            top: 12px;
+            right: 10px;
+            font-size: 0;
+            height: 0;
+            width: 0;
+            border-width: 5px 4px 0;
+            border-style: solid dashed;
+            border-color: #fff transparent transparent;            
+            transition:  all 0.4s ease 0s;
+            animation-fill-mode: forwards;
+        }
+        &:hover{
+            i{
+                transform: rotate(180deg);
+                
+            }
+            .sec_nav{
+             
+             display: block;   
+            }
+        }
+    }
+    
+    
+    
+} 
+
+
+.main_head{
+    
+    height: 54px;
+    border-top: 1px solid #aaa;
+    border-bottom: 1px solid #aaa;
+    .wrap{
+        max-width: 1024px;
+        margin: 0 auto;    
+    }
+    .left_wrap{
+        float: left;
+        height: 100%;
+        width: 260px;
+    }
+    .logo{
+        float: left;
+        background-image: url(http://pstatic.lagou.com/www/static/common/widgets/header_c/modules/img/logo_1c5763c.png);
+        width: 97px;
+        height: 34px;
+        margin-top: 10px;
+    }
+    .city{
+        position: relative;
+        top: 20px;
+        font-size: 18px;
+        font-weight: 400;
+        padding-left: 12px;
+        color: #222;
+    }
+    
+    
+    .swipCity{
+        position: relative;
+        top: 20px;
+        padding-left: 4px;
+        font-size: 12px;
+        cursor:  pointer;
+        color: #888;
+    }
+    
+    
+    ul:hover {
+        // a{
+        //     border-bottom: 2px solid transparent;
+        // }
+         .ul-it.cur>a{
+              border-bottom: 2px solid transparent;
+         }
+        .ul-it.cur:hover>a{
+              border-bottom: 2px solid $base_color;
+        }
+    }
+    
+    li.ul-it{
+        display: inline-block;
+        margin: 0 16px;
+        position: relative;         
+    }
+    
+    
+      .ul-it>a{
+          display: block;
+          font-size: 18px;
+          width: 36px;
+          height: 53px;
+          line-height: 53px;
+          padding: 0 5px;
+          color: rgb(51, 51, 51);          
+      }
+       .ul-it.cur>a{
+              border-bottom: 2px solid $base_color;
+       }
+      
+       .ul-it:hover a{
+              border-bottom: 2px solid $base_color;
+       }
+    
+      
+}
+
+.container{
+    max-width: 1024px;
+    height: 100%;
+    margin: 0 auto;
+    margin-top: 35px;
+    // background-color: red;
+}
+.sidebar{
+    width: 230px;
+    position: relative;
+    color: rgb(51, 51, 51);
+    h2{
+        font-size: 18px;
+        line-height: 22px;
+        margin: 10px 0;
+        padding-left: 8px;
+        font-weight: 500;
+        span{
+            width: 13px;
+            height: 14px;
+            background-image: url(http://pstatic.lagou.com/www/static/index/modules/sidebar/img/arr_6c6ecd7.png);
+            float: right;
+            margin-top: 4px;
+        }
+    }
+    a{
+        font-size: 14px;
+        line-height: 22px;
+        padding:  0 8px;
+        margin-right: 5px;
+        margin-bottom: 5px;
+        white-space: nowrap;
+        color: rgb(85, 85, 85);
+        float: left;
+    }
+    .menu_box{
+        position: relative;
+    }
+    .menu_item{
+        line-height: 22px;
+        padding: 6px 12px;
+        border: 2px solid #000;
+        border-right: none;
+        overflow: hidden;
+    }
+    .side_item{
+        position: absolute;
+        left: 230px;
+        width: 540px;
+        padding: 5px 30px;
+        border: 2px solid #000;
+    }
+}
