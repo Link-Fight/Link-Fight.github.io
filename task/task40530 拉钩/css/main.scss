@@ -9,7 +9,7 @@ li{
     list-style: none;
 }
 $base_color:#00b3fa;
-
+$base_color_an:#00a0ff;
 body {
 height: 1300px;
     font-size: 14px;
@@ -224,6 +224,7 @@ height: 1300px;
     width: 230px;
     position: relative;
     color: rgb(51, 51, 51);
+    float: left;
     h2{
         font-size: 18px;
         line-height: 22px;
@@ -252,17 +253,327 @@ height: 1300px;
         position: relative;
     }
     .menu_item{
+        position: relative;
         line-height: 22px;
         padding: 6px 12px;
-        border: 2px solid #000;
+        border: 2px solid transparent;
         border-right: none;
         overflow: hidden;
+        z-index: 112;
+        background-color: #fff
     }
     .side_item{
         position: absolute;
         left: 230px;
         width: 540px;
-        padding: 5px 30px;
+        padding: 15px 30px 5px;
         border: 2px solid #000;
+        top: 0;
+        z-index: 100;
+        display: none;
+        background-color: #fff;
+        dl{
+            margin: 0 0 20px;
+        }
+        dt>a{
+            width: 70px;
+            font-size: 14px;
+            line-height: 28px;
+            margin: 0;
+            text-align: right;
+            position: absolute;
+            text-decoration: underline;
+            &:hover{                 
+                    color: $base_color;
+            }
+        }
+        
+        dd{
+            margin-left: 100px;
+            overflow: hidden;
+            a{
+                white-space: normal;
+                font-size: 14px;
+                line-height: 28px;
+                padding: 0 10px;
+                background-image: url(http://pstatic.lagou.com/www/static/index/modules/sidebar/img/arr_6c6ecd7.png);
+                background-repeat: no-repeat;
+                background-position: -29px center;
+                margin-left: -1px;
+                
+            }
+           a:hover{
+               text-decoration: underline;
+               color: $base_color;
+           }
+            .curr{
+                color: $base_color;
+                
+            }
+        }
+    }
+    
+    .menu_box:hover{
+        .menu_item{
+                width: 206px;
+                border: 2px solid #000;
+                border-right:none;
+        }
+         .side_item{
+             display: block;
+         }
+    }
+    
+    footer{
+        margin-top: 12px;
+        padding-left:  20px;
+        width: 210px;
+        height: 46px;
+        border-bottom: 2px solid $base_color;
+        &>a{
+            font-size: 18px;
+            line-height: 46px;
+            width: 210px;
+            i{
+                display: block;
+                float: right;
+                margin-right: 20px;
+                margin-top: 14px;
+                width: 21px;
+                height: 46px;
+                background: url(http://pstatic.lagou.com/www/static/index/modules/sidebar/img/arr_btn_34cdbac.png) 0 -19px no-repeat;
+            } 
+            &:hover{
+                // text-decoration: underline;
+                color: $base_color;
+            }   
+        }
+    }
+}
+
+.content{
+    margin-left: 280px;
+}
+
+.search_box{
+    width: 740px;
+    position: relative;
+    // height: 37px;
+    font-family: 'Hiragino Sans GB', 'Microsoft Yahei', SimSun, Arial, 'Helvetica Neue', Helvetica;
+    form{
+        height: 100%;
+        overflow: hidden;
+    }
+    input[type=submit]{
+        float: left;
+        width: 146px;
+        font-size: 18px;
+        height: 37px;
+        border: 2px solid $base_color;
+        color: #fff;
+        cursor: pointer;
+        background-color: $base_color;
+      
+        &:focus{
+            outline: 0 none;
+            
+        }
+        &:hover{
+             background-color:$base_color_an;
+        }
+    }
+    input[type=search]{
+        float: left;
+        width: 590px;
+        height: 37px;
+        font-size: 16px;
+        padding: 5px 8px 5px 10px ;
+        border: 2px solid $base_color;
+        border-right-width: 0;
+        margin: 0;
+        &:focus{
+            outline: 0 none;
+            color: red;
+        }
+    }
+     
+   .guess_search{
+       position: absolute;
+       top: 35px;
+       left: 0;
+       width: 588px;
+       border:2px solid $base_color;
+       display: none;
+       z-index: 100;
+       background-color: #fff;
+       span{
+           display: block;
+           font-size: 15px;
+           color: #999;
+           line-height: 22px;
+           padding: 5px 6px;
+       }
+       li{
+           font-size: 1.1em;
+           color: #444;
+           padding: 5px 6px;
+           &:hover{
+               background-color: $base_color;
+               color: #fff;
+           }
+       }
+   }
+}
+
+.hot_search{
+    margin: 6px 0 18px;
+    overflow: hidden;
+    line-height: 22px;
+    dt{
+        width: 70px;
+        font-size: 14px;
+        float: left;
+    }
+    dd{
+        margin-right: 20px;
+        float: left;
+    }
+    a{
+        color: $base_color;
+        &:hover{
+            text-decoration: underline;
+        }
+    }
+}
+.home_banner{
+    height: 160px;
+    position: relative;
+    margin-bottom: 18px;
+    overflow: hidden;
+    li{
+        margin: 0;
+        padding: 0;
+    }
+    a{
+      display: list-item;
+    }
+    .banner_bg{
+        width:612px;
+        position: absolute;
+        li{
+            height: 160px;
+            width: 612px;
+        }
+        img{
+            width: 612px;
+            height: 160px;
+        }
+    }
+    .banner_control{
+        position: absolute;
+        right: 0;
+        top: 0;
+        em{
+            position: absolute;
+            left: 0;
+            top: 0;
+            border: 4px solid $base_color;
+             width: 113px;
+            height: 42px;
+            z-index: 100;
+            &::before{
+              content: "";
+              position: absolute;
+              left:-16px; 
+              top: 15px;
+              width: 0;
+              height: 0;
+              border: 6px solid transparent;  
+              border-right-color:  $base_color;
+            }
+        }
+        li{
+            border: 4px solid #d3d3d3;
+            margin-bottom: 5px;
+            position: relative;
+            height: 42px;          
+        }
+        i{
+            position: absolute;
+            left: 0;
+            right: 0;
+            top:0;
+            bottom: 0;
+            background-color: rgba(0, 0, 0, .3);
+        }
+        img{
+            width: 113px;
+            height: 42px;
+            border: 0;
+            margin: 0;
+            padding: 0;
+        }
+    }
+    
+    .current{
+        i{
+            background-color: transparent;
+        }
+    }
+}
+
+.showCompany{
+    height: 118px;
+    margin-bottom: 25px;
+    overflow: hidden;
+    ul{
+        overflow: hidden;
+    }
+    li{
+        float: left;
+        width: 113px;
+        height: 113px;
+        // padding: 10px;
+        // border: 2px solid transparent;
+        margin-right: 8px;
+        background-color: yellow;
+        position: relative;
+        overflow: hidden;
+    }
+    li:nth-last-child(1)
+    {
+        margin-right: 0;
+    }
+    
+    .info{
+        position: absolute;
+        left: -100%;
+         
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: $base_color;
+        color: #fff;
+        h2{
+            font-size: 24px;
+            height: 24px;
+            line-height: 24px;
+            margin: 10px 8px 8px;
+            font-weight: 400;
+            text-align: center;
+            overflow: hidden;
+        }
+        p{
+            font-size: 12px;
+            line-height: 18px;
+            margin: 6px 8px;
+        }
+        em{
+            display: block;
+            width: 100px;
+            height: 5px;
+            background-color: rgba(255, 255, 255, .3);
+            margin: 0 auto;
+        }
     }
 }

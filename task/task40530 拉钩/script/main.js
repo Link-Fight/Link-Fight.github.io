@@ -1,13 +1,12 @@
 
-
 !(function (win) {
-   "use strict";
+    "use strict";
     // JavaScript Document
 
-    var startMove = function startMove(obj, json, endFn) {
+    var startMove = function startMove(obj, json, endFn, speed) {
 
         clearInterval(obj.timer);
-
+        // console.log(obj+"#"+obj.timer)
         obj.timer = setInterval(function () {
 
             var bBtn = true;
@@ -60,7 +59,7 @@
                 }
             }
 
-        }, 30);
+        }, speed || 30);
 
     }
 
@@ -251,221 +250,170 @@
 
 
 
-function calculate(params) {
-    var amount = document.getElementById("amount");
-    var apr = document.getElementById("apr");
-    var years = document.getElementById("years");
-    // var zipcode = document.getElementById("zipcode");
-    var payment = document.getElementById("payment");
-    var total = document.getElementById("total");
-    var totalinterest = document.getElementById("totalinterest");
+window.onload = function () {
+    var searchInpt = document.getElementById("search_input");
+    addEvent(searchInpt, "blur", function () {
+        var guessDiv = document.getElementsByClassName("guess_search")[0];
+        guessDiv.style.display = "none";
+        var temp = this.placeholder;
+        this.placeholder = this.getAttribute("data-tg-ph")
+        this.setAttribute("data-tg-ph", temp);
+    });
+    addEvent(searchInpt, "focus", function () {
+        var guessDiv = document.getElementsByClassName("guess_search")[0];
+        guessDiv.style.display = "block";
+        var temp = this.placeholder;
+        this.placeholder = this.getAttribute("data-tg-ph")
+        this.setAttribute("data-tg-ph", temp);
+    });
 
-    var principal = parseFloat(amount.value);
-    var interest = parseFloat(apr.value) / 100 / 12;
-    var payments = parseFloat(years.value) * 12;
-
-    var x = Math.pow(1 + interest, payments);
-    var monthly = (principal * x * interest) / (x - 1);
-
-
-    if (isFinite(monthly)) {
-        payment.innerHTML = monthly.toFixed(2);
-        total.innerHTML = (monthly * payments).toFixed(2);
-        totalinterest.innerHTML = ((monthly * payments) - principal).toFixed(2);
-
-        save(amount.value, apr.value, years.value);
-
-        try {
-            getLenders(amount.value, apr.value, years.value);
-        } catch (e) { }
-
-        chart(principal, interest, monthly, payments);
-    } else {
-
-        payment.innerHTML = "";
-        toolbar.innerHTML = "";
-        totalinterest.innerHTML = "";
-        chart();
-    }
-}
+    bannerControll();
 
 
+    var showCompanyView = document.querySelector(".showCompany>ul")
 
-/**
- * @param  {any} amount
- * @param  {any} apr
- * @param  {any} years
- */
-function save(amount, apr, years) {
-    if (window.localStorage) {
-        localStorage.loan_amount = amount;
-        localStorage.loan_apr = apr;
-        localStorage.loan_years = years;
-    }
-
-}
-
-function init() {
-    if (window.localStorage && window.localStorage.loan_amount) {
-        document.getElementById("amount").value = localStorage.loan_amount;
-        document.getElementById("apr").value = localStorage.loan_apr;
-        document.getElementById("years").value = localStorage.loan_years;
-    }
-    var mInputs = $$all(".moveInput");
-    for (var i = 0, len = mInputs.length; i < len; i++) {
-        addEvent(mInputs[i], "input", inputChange);
-        addEvent(mInputs[i], "focus", inputFocus);
-        addEvent(mInputs[i], "blur", inputBlur);
-        mInputs[i]["__input"] = inputChange;
-        mInputs[i]["__input"]();
-        delete mInputs[i]["__input"];
-    }
-    function inputChange(e) {
-        var span;
+    showCompanyView.addEventListener("mouseover", function (e) {
         e = e || window.event;
-        if (this.value.length > 0) {
-            addClass(this.parentNode, "activeTip");
-        } else {
-            removeClass(this.parentNode, "activeTip");
+        var target = e.target || e.srcElement;
+        if (target.nodeName == "LI") {
+            var dirctionModel = new DirctionModel(0, 0, 130);
+            var info = target.getElementsByClassName("info")[0];
+            if (!!!info) return false;
+            dirctionModel.x = e.offsetX;
+            dirctionModel.y = e.offsetY;
+            var dirctionViewState = dirctionModel.getDirction();
+            info.style.top = dirctionViewState.top + "px";
+            info.style.left = dirctionViewState.left + "px";
+            startMove(info, { top: 0, left: 0 }, null, 20);
+
         }
-    }
-    function inputBlur(e) {
+    }, false);
+    showCompanyView.addEventListener("mouseout", function (e) {
         e = e || window.event;
-        removeClass(this.parentNode, "focusTip");
-    }
-    function inputFocus(e) {
-        e = e || window.event;
-        addClass(this.parentNode, "focusTip");
-        calculate();
-    }
-    var downloadBtn = document.getElementById("downGraph");
-    downloadBtn.onclick = function () {
-        saveCanvas(document.getElementById("graph"), "png", "贷款计算" + (new Date()).getTime());
-    };
-
+        var target = e.target || e.srcElement;
+        if (target.nodeName == "DIV") {
+            var dirctionModel = new DirctionModel(0, 0, 130);
+            var info = target.getElementsByClassName("info")[0];
+            // if (!!!info) return false;
+            dirctionModel.x = e.offsetX;
+            dirctionModel.y = e.offsetY;
+            var dirctionViewState = dirctionModel.getDirction();
+            startMove(info, dirctionViewState, null, 20);
+        }
+    }, false)
 }
 
-window.onload = function name(params) {
-    init();
-}
 
-function getLenders(amount, apr, years) {
-    if (!window.XMLHttpRequest) return;
-    var ad = document.getElementById("lenders") || document.createElement("div");
-    if (!ad) return;
-
-    var url = "getLenders.php" +
-        "?amt=" + encodeURIComponent(amount) +
-        "&apr" + encodeURIComponent(apr) +
-        "&years" + encodeURIComponent(years);
-
-
-    var req = new XMLHttpRequest();
-    req.open("GET", url);
-    req.send(null);
-
-    req.onreadystatechange = function () {
-        if (req.readyState == 4 && req.status == 200) {
-            var response = req.responseText;
-            var lenders = JSON.parse(response);
-
-            var list = "";
-            for (var i = 0; i < lenders.length; i++) {
-                list += "<li><a href='" + lenders[i].url + "'>" + lenders[i].name + "</a>";
+var DirctionModel = function (x, y, distance) {
+    this.x = x;
+    this.y = y;
+    this.getDirction = function () {
+        console.log(this.x+" "+ this.y);
+        if (this.x > this.y && this.x > distance / 2) {
+            // right
+            return {
+                top: 0,
+                left: distance,
             }
-            ad.innerHTML = "<ul>" + list + "</ul>";
-            ad.parentNode || console.log(ad);
+        }
+        else if (this.x > this.y && this.y < distance / 2) {
+            // top
+            return {
+                top: -distance,
+                left: 0,
+
+            }
+
+        } else if (this.x < this.y && this.x < distance / 2) {
+            // x < y && x < distance / 2
+            // left
+            return {
+                top: 0,
+                left: -distance
+            }
+        } else if (this.x < this.y && this.y > distance / 2) {
+            // bottom
+            return {
+                top: distance,
+                left: 0,
+            }
+        }
+    }
+}
+
+// banner图 
+// 需要知道的状态有  
+//     当前显示哪张图，对应的control是那个
+//     下一张图是在哪
+var bannerBgModel = {
+    count: 3,
+    index: 0,
+    distance: 160,
+    controlDistance: 55
+}
+
+var BannerBgBLL = function (model) {
+    if (!(this instanceof BannerBgBLL)) {
+        return new BannerBgBLL(model);
+    }
+    this.model = JSON.parse(JSON.stringify(model));
+    this.flag = true;
+    this.next = function () {
+        if (this.flag) {
+            this.model.index++;
+            if (this.model.index == this.model.count)
+                this.model.index = 0;
+        }
+        return {
+            bgDistance: -this.model.index * this.model.distance,
+            conDistance: this.model.index * this.model.controlDistance,
         }
     };
-}
-
-/**
- * @param  {any} principal
- * @param  {any} interest
- * @param  {any} monthly
- * @param  {any} payments
- */
-function chart(principal, interest, monthly, payments) {
-    var graph = document.getElementById("graph");
-    removeClass(graph.parentNode, "show");
-    graph.width = graph.width;
-
-    if (arguments.length == 0 || !graph.getContext) return;
-
-
-    var g = graph.getContext("2d");
-    var width = graph.width, height = graph.height;
-    function paymentToX(n) {
-        return n * width / payments;
-    }
-    function amountToY(a) {
-        return height - (a * height / (monthly * payments * 1.05));
-    }
-    g.fillStyle = "#fff";
-    g.fillRect(0, 0, graph.width, graph.height);
-
-    g.moveTo(paymentToX(0), amountToY(0));
-    g.lineTo(paymentToX(payments), amountToY(monthly * payments));
-    g.lineTo(paymentToX(payments), amountToY(0));
-    g.closePath();
-    g.fillStyle = "#f88";
-    g.fill();
-    g.font = "bold 12px sans-serif";
-    g.fillText("一共支付", 20, 20);
-
-    var equity = 0;
-    g.beginPath();
-    g.moveTo(paymentToX(0), amountToY(0));
-    for (var p = 1; p <= payments; p++) {
-        var thisMonthsInterest = (principal - equity) * interest;
-        equity += (monthly - thisMonthsInterest);
-        g.lineTo(paymentToX(p), amountToY(equity));
-    }
-
-    g.lineTo(paymentToX(payments), amountToY(0));
-    g.closePath();
-    g.fillStyle = "green";
-    g.fill();
-    g.fillText("一共利息", 20, 35)
-
-    var bal = principal;
-    g.beginPath();
-    g.moveTo(paymentToX(0), amountToY(bal));
-    g.fillStyle = "#000";
-    for (var p = 1; p < payments; p++) {
-        var thisMonthsInterest = bal * interest;
-        bal -= (monthly - thisMonthsInterest);
-        g.lineTo(paymentToX(p), amountToY(bal));
-    }
-
-    g.lineWidth = 3;
-    g.stroke();
-
-    g.fillText("贷款余额", 20, 50);
-
-    g.fillStyle = "blue";
-    g.textAlign = "center";
-    var y = amountToY(0);
-    for (var year = 1; year * 12 <= payments; year++) {
-        var x = paymentToX(year * 12);
-        g.fillRect(x - 0.5, y - 3, 1, 3);
-        if (year == 1) g.fillText("年", x, y - 5);
-        if (year % 5 === 0 && year * 12 !== payments) {
-            g.fillText(String(year), x, y - 5);
+    this.currentDistance = function () {
+        return {
+            bgDistance: this.model.index * this.model.distance,
+            conDistance: this.model.index * this.model.controlDistance
         }
     }
 
-    g.textAlign = "right";
-    g.textBaseline = "middle";
-
-    var ticks = [monthly * payments, principal];
-    var rightEdge = paymentToX(payments);
-    for (var i = 0; i < ticks.length; i++) {
-        var y = amountToY(ticks[i]);
-        g.fillRect(rightEdge - 3, y - 0.5, 3, 1);
-        g.fillText(String(ticks[i].toFixed(0)), rightEdge - 5, y);
-    }
-    addClass(graph.parentNode, "show");
 }
 
+var bannerControll = function () {
 
+    var bll = new BannerBgBLL(bannerBgModel);
+    var bgView = document.getElementsByClassName("banner_bg")[0];
+    var conView = document.getElementById("baner_index");
+    var conItemView = document.getElementsByClassName("control")[0]
+    setInterval(function () {
+        // view.style.top = bll.next().distance+"px";
+        if (bll.flag) {
+            moveView();
+        }
+    }, 1500)
+
+    var moveView = function () {
+        var viewState = bll.next();
+        startMove(bgView, { top: viewState.bgDistance }, null, 20);
+        startMove(conView, { top: viewState.conDistance }, null, 20);
+    }
+
+    bgView.addEventListener("mouseenter", function () {
+        bll.flag = false;
+    }, false);
+    bgView.addEventListener("mouseleave", function () {
+        bll.flag = true;
+    }, false);
+    conItemView.addEventListener("mouseover", function (e) {
+        e = e || window.event;
+        var target = e.target || e.srcElement;
+        if (target.nodeName == "LI") {
+            bll.flag = false;
+            var lis = this.getElementsByTagName("li");
+            bll.model.index = Array.prototype.indexOf.call(lis, target);
+            moveView();
+        }
+    }, false);
+    conItemView.parentNode.addEventListener("mouseleave", function () {
+        bll.flag = true;
+    }, false);
+}
