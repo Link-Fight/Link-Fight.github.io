@@ -1,12 +1,11 @@
 
 !(function (win) {
-    "use strict";
+    // "use strict";
     // JavaScript Document
 
     var startMove = function startMove(obj, json, endFn, speed) {
 
         clearInterval(obj.timer);
-        // console.log(obj+"#"+obj.timer)
         obj.timer = setInterval(function () {
 
             var bBtn = true;
@@ -136,7 +135,7 @@
     /**
     * @param  {function} fn 
     */
-    var readyEvent = function (fn) {
+    var onloadEvent = function (fn) {
         if (typeof fn !== "function") {
             return null;
         }
@@ -150,6 +149,70 @@
             }
         }
     }
+
+
+    /**
+     * @param  {any} fn
+     * 简单模仿jquery的ready时间
+     */
+    var readyEvent = function (fn) {
+        if (document.addEventListener) {
+            document.addEventListener('DOMContentLoaded', function () {
+                //注销事件, 避免反复触发
+                // console.count("2");
+                document.removeEventListener('DOMContentLoaded', arguments.callee, false);
+                fn();            //执行函数
+            }, false);
+        } else if (document.attachEvent) {        //IE
+            document.attachEvent('onreadystatechange', function () {
+                if (document.readyState == 'complete') {
+                    document.detachEvent('onreadystatechange', arguments.callee);
+                    fn();        //函数执行
+                }
+            });
+        }
+    };
+    /**
+     * @param  {any} function
+     * ready事件是在DOM模型构造完毕时触发
+     * load事件是在页面加载完毕后触发
+     */
+    var whenReady = (function () {
+        var funcs = [];
+        var ready = false;
+
+        function handler(e) {
+            if (ready) return;
+
+            if (e.type === 'onreadystatechange' && document.readyState !== 'complete') {
+                return;
+            }
+
+            for (var i = 0; i < funcs.length; i++) {
+                funcs[i].call(document);
+            }
+
+            ready = true;
+            funcs = null;
+
+        }
+
+        if (document.addEventListener) {
+            document.addEventListener("DOMContentLoaded", handler, false);
+            document.addEventListener("readystatechange", handler, false);
+            window.addEventListener("load", handler, false);
+        } else if (document.attachEvent) {
+            document.attachEvent("onreadystatechange", handler);
+            window.attachEvent("onload", handler);
+        }
+
+        return function (fn) {
+            if (ready) { fn.call(document); }
+            else {
+                funcs.push(fn);
+            }
+        }
+    })();
 
     var $$all = function (sector) {
         return document.querySelectorAll(sector);
@@ -237,7 +300,35 @@
         saveFile(imgData, filename);
     }
 
-
+    /**
+    * 简单的防抖函数
+    * 就是时间触发后wait 毫秒后，callback事件才被执行
+    */
+    var debounce = function (callBackFunc, wait) {
+        var timeout;
+        wait = wait || 0;
+        return function () {
+            clearTimeout(timeout);
+            timeout = setTimeout(callBackFunc.bind(this), wait);
+        };
+    }
+    /**函数节流
+     * @param  {any} callBackFunc
+     * @param  {any} wait
+     * 事件会每隔wait毫秒就会触发一次
+     */
+    var throttle = function (callBackFunc, wait) {
+        var timeout;
+        wait = wait || 0;
+        return function () {
+            if (!!!timeout) {
+                timeout = setTimeout(function () {
+                    callBackFunc();
+                    timeout = null;
+                }.bind(this), wait);
+            }
+        };
+    }
 
     win.addEvent = addEvent;
     win.$$all = $$all;
@@ -246,11 +337,77 @@
     win.removeClass = removeClass;
     win.startMove = startMove;
     win.saveCanvas = saveCanvas;
+    win.readyEvent = readyEvent;
+    win.whenReady = whenReady;
+    win.debounce = debounce;
+    win.throttle = throttle;
 })(window);
 
+readyEvent(function () {
+    // 为公司列 提供鼠标移入移出效果
+    console.trace(window.event.type);
+    console.log("readyEvent");
+    var showCompanyLiView = document.querySelectorAll(".showCompany>ul>li")
+    for (var i = 0, len = showCompanyLiView.length; i < len; i++) {
+        addEvent(showCompanyLiView[i], "mouseenter", showLiViewMouseenter);
+        addEvent(showCompanyLiView[i], "mouseleave", showLiViewMouseleave);
+    }
+    function showLiViewMouseenter(e) {
+        e = e || window.event;
+        var target = e.target || e.srcElement;
+        if (target.nodeName == "LI") {
+            // console.log(target);
+            var dirctionModel = new DirctionModel(0, 0, 113);
+            var info = target.getElementsByClassName("info")[0];
+            if (!!!info) return false;
+            dirctionModel.x = e.offsetX;
+            dirctionModel.y = e.offsetY;
+            // console.log(dirctionModel.getDirc());
+            var dirctionViewState = dirctionModel.getDirction();
+            info.style.top = dirctionViewState.top + "px";
+            info.style.left = dirctionViewState.left + "px";
+            startMove(info, { top: 0, left: 0 }, null, 16);
+        }
+    }
+    function showLiViewMouseleave(e) {
+        e = e || window.event;
+        var target = e.target || e.srcElement;
+        // console.info(target);
+        if (target.nodeName == "LI") {
+            var dirctionModel = new DirctionModel(0, 0, 113);
+            var info = target.getElementsByClassName("info")[0];
+            if (!!!info) return false;
+            dirctionModel.x = e.offsetX;
+            dirctionModel.y = e.offsetY;
+            var dirctionViewState = dirctionModel.getDirction();
+            startMove(info, dirctionViewState, null, 16);
+        }
+    }
+});
 
+whenReady(function () {
+    console.trace(window.event.type);
+    console.log("whenReady");
+    window.addEventListener("scroll", throttle(function () {
+        var fixDiv = document.getElementById("fixed");
+        if (fixDiv["data-offsetTop"] === undefined) {
+            fixDiv["data-offsetTop"] = fixDiv.offsetTop;
+            fixDiv["data-top"] = fixDiv.style.top;
+        }
+        if (fixDiv["data-offsetTop"] < document.body.scrollTop) {
+            fixDiv.style.position = "fixed";
+            fixDiv.style.top = "0";
+        } else {
+            fixDiv.style.position = "relative";
+            fixDiv.style.top = fixDiv["data-top"] + "px";
+        }
+    }, 20), false);
+});
 
 window.onload = function () {
+    console.trace(window.event.type);
+    console.log("onload");
+    //为搜索输入 切换placeholder 以及dropDownList
     var searchInpt = document.getElementById("search_input");
     addEvent(searchInpt, "blur", function () {
         var guessDiv = document.getElementsByClassName("guess_search")[0];
@@ -267,80 +424,98 @@ window.onload = function () {
         this.setAttribute("data-tg-ph", temp);
     });
 
+
     bannerControll();
+    tapControll();
 
-
-    var showCompanyView = document.querySelector(".showCompany>ul")
-
-    showCompanyView.addEventListener("mouseover", function (e) {
-        e = e || window.event;
-        var target = e.target || e.srcElement;
-        if (target.nodeName == "LI") {
-            var dirctionModel = new DirctionModel(0, 0, 130);
-            var info = target.getElementsByClassName("info")[0];
-            if (!!!info) return false;
-            dirctionModel.x = e.offsetX;
-            dirctionModel.y = e.offsetY;
-            var dirctionViewState = dirctionModel.getDirction();
-            info.style.top = dirctionViewState.top + "px";
-            info.style.left = dirctionViewState.left + "px";
-            startMove(info, { top: 0, left: 0 }, null, 20);
-
-        }
-    }, false);
-    showCompanyView.addEventListener("mouseout", function (e) {
-        e = e || window.event;
-        var target = e.target || e.srcElement;
-        if (target.nodeName == "DIV") {
-            var dirctionModel = new DirctionModel(0, 0, 130);
-            var info = target.getElementsByClassName("info")[0];
-            // if (!!!info) return false;
-            dirctionModel.x = e.offsetX;
-            dirctionModel.y = e.offsetY;
-            var dirctionViewState = dirctionModel.getDirction();
-            startMove(info, dirctionViewState, null, 20);
-        }
-    }, false)
 }
 
 
 var DirctionModel = function (x, y, distance) {
     this.x = x;
     this.y = y;
-    this.getDirction = function () {
-        console.log(this.x+" "+ this.y);
-        if (this.x > this.y && this.x > distance / 2) {
-            // right
-            return {
-                top: 0,
-                left: distance,
-            }
+    this.getDirc = function () {
+        if (this.x >= this.y && (this.x + this.y) <= distance) {
+            return "TOP";
+        } else if (this.x <= this.y && (this.x + this.y) <= distance) {
+            return "LEFT";
+        } else if (this.x <= this.y && (this.x + this.y) >= distance) {
+            return "BOTTOM";
+        } else if (this.x >= this.y && (this.x + this.y) >= distance) {
+            return "RIGHT";
         }
-        else if (this.x > this.y && this.y < distance / 2) {
-            // top
-            return {
-                top: -distance,
-                left: 0,
+    };
+    this.getDirction = function () {
+        switch (this.getDirc()) {
+            case "TOP":
+                return {
+                    top: -distance,
+                    left: 0,
+                };
+            case "LEFT":
+                return {
+                    top: 0,
+                    left: -distance
+                };
+            case "BOTTOM":
+                return {
+                    top: distance,
+                    left: 0,
+                };
+            case "RIGHT":
+                return {
+                    top: 0,
+                    left: distance,
+                };
 
-            }
-
-        } else if (this.x < this.y && this.x < distance / 2) {
-            // x < y && x < distance / 2
-            // left
-            return {
-                top: 0,
-                left: -distance
-            }
-        } else if (this.x < this.y && this.y > distance / 2) {
-            // bottom
-            return {
-                top: distance,
-                left: 0,
-            }
         }
     }
 }
 
+
+// var tapModel = {
+//     count: 3,
+//     index: 0
+// }
+
+// var tapBll = function (model) {
+//     this.model = JSON.parse(JSON.stringify(model));
+//     this.next = function () {
+//         this.model.index++;
+//         this.model.index = this.model.index % this.model.count;
+//         return this.model.index;
+//     }
+// }
+
+var tapControll = function () {
+    var tapView = document.getElementById("js_tap_control");
+    addEvent(tapView, "click", function (e) {
+        e = e || window.event;
+        var target = e.target || e.srcElement;
+        if (target.nodeName == "LI") {
+            var index = Array.prototype.indexOf.call(this.children, target);
+
+            Array.prototype.forEach.call(this.children, function (v, i) {
+
+                if (index === i) {
+                    addClass(v, "curr");
+                } else {
+                    removeClass(v, "curr");
+                }
+                return true;
+            });
+
+            var tap_content = document.getElementsByClassName("tap_content")[0].children;
+            Array.prototype.forEach.call(tap_content, function (v, i) {
+                v.style.display = "none";
+                if (i == index) {
+                    v.style.display = "block";
+                }
+                return true;
+            });
+        }
+    });
+}
 // banner图 
 // 需要知道的状态有  
 //     当前显示哪张图，对应的control是那个
@@ -384,6 +559,7 @@ var bannerControll = function () {
     var bgView = document.getElementsByClassName("banner_bg")[0];
     var conView = document.getElementById("baner_index");
     var conItemView = document.getElementsByClassName("control")[0]
+    var lis = conItemView.getElementsByTagName("li");
     setInterval(function () {
         // view.style.top = bll.next().distance+"px";
         if (bll.flag) {
@@ -393,27 +569,35 @@ var bannerControll = function () {
 
     var moveView = function () {
         var viewState = bll.next();
-        startMove(bgView, { top: viewState.bgDistance }, null, 20);
-        startMove(conView, { top: viewState.conDistance }, null, 20);
+        startMove(bgView, { top: viewState.bgDistance }, null, 16);
+        startMove(conView, { top: viewState.conDistance }, null, 16);
     }
 
     bgView.addEventListener("mouseenter", function () {
         bll.flag = false;
+        console.log("bgView");
     }, false);
     bgView.addEventListener("mouseleave", function () {
         bll.flag = true;
     }, false);
-    conItemView.addEventListener("mouseover", function (e) {
-        e = e || window.event;
-        var target = e.target || e.srcElement;
-        if (target.nodeName == "LI") {
-            bll.flag = false;
-            var lis = this.getElementsByTagName("li");
-            bll.model.index = Array.prototype.indexOf.call(lis, target);
-            moveView();
-        }
-    }, false);
+
+    Array.prototype.forEach.call(lis, function (item) {
+        addEvent(item, "mouseover", function (e) {
+            e = e || window.event;
+            var target = e.target || e.srcElement;
+            console.count();
+            if (target.nodeName == "LI") {
+                // console.count("mouseover");
+                bll.flag = false;
+                bll.model.index = Array.prototype.indexOf.call(lis, target);
+                console.count("bll.model.index" + bll.model.index + " ");
+                moveView();
+            }
+        });
+    });
     conItemView.parentNode.addEventListener("mouseleave", function () {
-        bll.flag = true;
+        setTimeout(function () {
+            bll.flag = true;
+        }, 500);
     }, false);
 }

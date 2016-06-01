@@ -9,16 +9,20 @@ li {
   list-style: none; }
 
 body {
-  height: 1300px;
   font-size: 14px;
   font-family: "Hiragino Sans GB","Microsoft Yahei",SimSun,Arial,"Helvetica Neue",Helvetica;
   color: #333;
   word-wrap: break-word;
   -webkit-font-smoothing: antialiased; }
 
+header {
+  background-color: #000; }
+
 .header_wrap {
-  background-color: #000;
-  height: 30px; }
+  position: relative;
+  height: 30px;
+  max-width: 1224px;
+  margin: 0 auto; }
   .header_wrap a {
     line-height: 30px;
     color: #c4c3c3;
@@ -59,7 +63,9 @@ body {
       border-left: 1px solid #00b3fa; }
   .header_wrap .sec_nav {
     display: none;
-    margin-top: 30px; }
+    margin-top: 30px;
+    position: absolute;
+    background-color: #000; }
     .header_wrap .sec_nav a {
       padding: 0 12px; }
     .header_wrap .sec_nav li:hover {
@@ -87,6 +93,7 @@ body {
       display: block; }
 
 .main_head {
+  background-color: #fff;
   height: 54px;
   border-top: 1px solid #aaa;
   border-bottom: 1px solid #aaa; }
@@ -180,7 +187,7 @@ body {
     border-right: none;
     overflow: hidden;
     z-index: 112;
-    background-color: #fff; }
+    background-color: #eee; }
   .sidebar .side_item {
     position: absolute;
     left: 230px;
@@ -223,15 +230,19 @@ body {
   .sidebar .menu_box:hover .menu_item {
     width: 206px;
     border: 2px solid #000;
-    border-right: none; }
+    border-right: none;
+    z-index: 1001;
+    background-color: #fff; }
   .sidebar .menu_box:hover .side_item {
-    display: block; }
+    display: block;
+    z-index: 1000; }
   .sidebar footer {
     margin-top: 12px;
     padding-left: 20px;
     width: 210px;
     height: 46px;
-    border-bottom: 2px solid #00b3fa; }
+    border-bottom: 2px solid #00b3fa;
+    background-color: #eee; }
     .sidebar footer > a {
       font-size: 18px;
       line-height: 46px;
@@ -257,29 +268,30 @@ body {
   .search_box form {
     height: 100%;
     overflow: hidden; }
-  .search_box input[type=submit] {
+  .search_box #search_btn {
     float: left;
     width: 146px;
     font-size: 18px;
-    height: 37px;
+    height: 33px;
     border: 2px solid #00b3fa;
     color: #fff;
     cursor: pointer;
-    background-color: #00b3fa; }
-    .search_box input[type=submit]:focus {
+    background-color: #00b3fa;
+    text-align: center; }
+    .search_box #search_btn:focus {
       outline: 0 none; }
-    .search_box input[type=submit]:hover {
+    .search_box #search_btn:hover {
       background-color: #00a0ff; }
-  .search_box input[type=search] {
+  .search_box #search_input {
     float: left;
-    width: 590px;
-    height: 37px;
+    width: 570px;
+    height: 23px;
     font-size: 16px;
     padding: 5px 8px 5px 10px;
     border: 2px solid #00b3fa;
     border-right-width: 0;
     margin: 0; }
-    .search_box input[type=search]:focus {
+    .search_box #search_input:focus {
       outline: 0 none;
       color: red; }
   .search_box .guess_search {
@@ -385,13 +397,16 @@ body {
 .showCompany {
   height: 118px;
   margin-bottom: 25px;
-  overflow: hidden; }
+  overflow: hidden;
+  font-size: 0; }
   .showCompany ul {
     overflow: hidden; }
   .showCompany li {
-    float: left;
+    display: inline-block;
     width: 113px;
     height: 113px;
+    z-index: 0;
+    border: 2px solid transparent;
     margin-right: 8px;
     background-color: yellow;
     position: relative;
@@ -424,5 +439,104 @@ body {
       height: 5px;
       background-color: rgba(255, 255, 255, 0.3);
       margin: 0 auto; }
+
+.tap_control {
+  width: 744px;
+  height: 39px;
+  background-color: #eee; }
+  .tap_control li {
+    width: 72px;
+    height: 22px;
+    padding: 7px 20px;
+    border-top: 3px solid transparent;
+    font-size: 18px;
+    line-height: 22px;
+    float: left;
+    cursor: pointer; }
+    .tap_control li.curr {
+      border-color: #00b3fa;
+      background-color: #fff; }
+
+.tap_content .hot_tap {
+  display: none; }
+.tap_content .new_tap {
+  display: none; }
+.tap_content .item {
+  padding: 22px 0 0 15px;
+  font-size: 14px;
+  line-height: 22px;
+  border-bottom: 1px dashed #00b3fa; }
+  .tap_content .item .job_content {
+    width: 60%;
+    float: left; }
+  .tap_content .item .company_content {
+    margin-left: 60%; }
+  .tap_content .item a {
+    font-size: 16px;
+    line-height: 22px;
+    color: #00b3fa; }
+    .tap_content .item a span {
+      margin-left: 0.5em; }
+  .tap_content .item p {
+    margin: 10px 0; }
+    .tap_content .item p b {
+      color: red;
+      margin-right: 0.5em; }
+    .tap_content .item p > span {
+      display: inline-block;
+      padding: 3px;
+      border: 1px solid #dcdcdc;
+      margin-right: 10px; }
+  .tap_content .item h3 > span {
+    font-size: 14px;
+    color: #999999; }
+.tap_content .list_more {
+  display: block;
+  padding: 5px 40px 5px 15px;
+  background-color: #00b3fa;
+  color: #fff;
+  width: 64px;
+  line-height: 22px;
+  font-size: 16px;
+  margin-top: 25px;
+  float: right;
+  background-image: url(http://pstatic.lagou.com/www/static/index/modules/job_list/img/arrow_54116b2.png);
+  background-repeat: no-repeat;
+  background-position: 85px 50%; }
+
+.linkbox {
+  margin-top: 90px;
+  overflow: hidden; }
+  .linkbox dt {
+    width: 70px;
+    float: left;
+    font-size: 15px; }
+  .linkbox dd {
+    margin-left: 70px; }
+    .linkbox dd a {
+      white-space: nowrap;
+      float: left;
+      height: 15px;
+      padding: 8px 9px;
+      font-size: 12px;
+      line-height: 15px;
+      color: #555;
+      text-decoration: none; }
+    .linkbox dd span {
+      float: left;
+      padding: 7px 0 9px;
+      font-size: 12px;
+      line-height: 15px;
+      color: #999; }
+
+.last_footer {
+  height: 100px;
+  text-align: center;
+  line-height: 100px;
+  color: #00b3fa;
+  font-size: 18px; }
+  .last_footer a {
+    color: #00b3fa;
+    font-weight: bold; }
 
 /*# sourceMappingURL=main.css.map */
