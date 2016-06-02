@@ -424,10 +424,9 @@ window.onload = function () {
         this.setAttribute("data-tg-ph", temp);
     });
 
-
     bannerControll();
     tapControll();
-
+    setPosition();
 }
 
 
@@ -472,20 +471,6 @@ var DirctionModel = function (x, y, distance) {
     }
 }
 
-
-// var tapModel = {
-//     count: 3,
-//     index: 0
-// }
-
-// var tapBll = function (model) {
-//     this.model = JSON.parse(JSON.stringify(model));
-//     this.next = function () {
-//         this.model.index++;
-//         this.model.index = this.model.index % this.model.count;
-//         return this.model.index;
-//     }
-// }
 
 var tapControll = function () {
     var tapView = document.getElementById("js_tap_control");
@@ -600,4 +585,19 @@ var bannerControll = function () {
             bll.flag = true;
         }, 500);
     }, false);
+}
+
+
+function setPosition() {
+    var menu_boxs = document.querySelectorAll(".menu_box");
+    Array.prototype.forEach.call(menu_boxs, function (item) {
+        item.addEventListener("mouseenter", function () {
+            console.count("menu_box");
+            var side_item = this.getElementsByClassName("side_item")[0];
+            var clientRect = side_item.getBoundingClientRect();
+            if (clientRect.bottom > window.innerHeight) {
+                side_item.style.top = -(clientRect.bottom - window.innerHeight + 10) + "px";
+            }
+        }, false);
+    });
 }
