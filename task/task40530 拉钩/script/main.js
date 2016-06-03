@@ -549,11 +549,11 @@ var bannerControll = function () {
         var timeOut;
         wait = wait || 1500;
         return {
-            start: function () {
+            start: debounce(function () {
                 timeOut = setInterval(function () {
                     fn();
                 }, wait);
-            },
+            }, 500),
             stop: function () {
                 clearTimeout(timeOut);
             }
