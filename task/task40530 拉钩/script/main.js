@@ -545,14 +545,23 @@ var bannerControll = function () {
     var conView = document.getElementById("baner_index");
     var conItemView = document.getElementsByClassName("control")[0]
     var lis = conItemView.getElementsByTagName("li");
-    setInterval(function () {
-        // view.style.top = bll.next().distance+"px";
-        if (bll.flag) {
-            moveView();
+    function bannerAction(fn, wait) {
+        var timeOut;
+        wait = wait || 1500;
+        return {
+            start: function () {
+                timeOut = setInterval(function () {
+                    fn();
+                }, wait);
+            },
+            stop: function () {
+                clearTimeout(timeOut);
+            }
         }
-    }, 1500)
-
-    var moveView = function () {
+    }
+    var banneAct = bannerAction(moveView, 2000);
+    banneAct.start();
+    function moveView() {
         var viewState = bll.next();
         startMove(bgView, { top: viewState.bgDistance }, null, 16);
         startMove(conView, { top: viewState.conDistance }, null, 16);
@@ -560,20 +569,23 @@ var bannerControll = function () {
 
     bgView.addEventListener("mouseenter", function () {
         bll.flag = false;
+        banneAct.stop();
         console.log("bgView");
     }, false);
     bgView.addEventListener("mouseleave", function () {
         bll.flag = true;
+        banneAct.start();
     }, false);
 
     Array.prototype.forEach.call(lis, function (item) {
-        addEvent(item, "mouseover", function (e) {
+        addEvent(item, "mouseenter", function (e) {
             e = e || window.event;
             var target = e.target || e.srcElement;
-            console.count();
+            // console.count();
             if (target.nodeName == "LI") {
                 // console.count("mouseover");
                 bll.flag = false;
+                banneAct.stop();
                 bll.model.index = Array.prototype.indexOf.call(lis, target);
                 console.count("bll.model.index" + bll.model.index + " ");
                 moveView();
@@ -583,6 +595,7 @@ var bannerControll = function () {
     conItemView.parentNode.addEventListener("mouseleave", function () {
         setTimeout(function () {
             bll.flag = true;
+            banneAct.start();
         }, 500);
     }, false);
 }

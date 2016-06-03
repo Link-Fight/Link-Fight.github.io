@@ -19,7 +19,7 @@
  * [调用百度API的猜一猜](http://Link-Fight.github.io/javaScript/personal_practice/16-05-19.调用API-猜一猜.html)
  * [模仿一个个打字效果的控件](http://Link-Fight.github.io/javaScript/personal_practice/16-03-04.html)
  * [适应小屏幕的个人页面](http://Link-Fight.github.io/person/person.html)
- * [拉钩主页，其所有JS，但是自己手写](http://link-fight.github.io/task/task40530%20%E6%8B%89%E9%92%A9/index.html)
+ * [拉钩主页](http://link-fight.github.io/task/task40530%20%E6%8B%89%E9%92%A9/index.html)
 
 ## 学习路上的小文章
 
