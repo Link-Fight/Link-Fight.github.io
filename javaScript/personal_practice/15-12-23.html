@@ -66,6 +66,39 @@
             padding-left: 10px;
             padding-right: 10px;
         }
+        .demo{
+            background-color: #aaa;
+            
+        }
+        li{
+            margin-bottom: 20px;
+        }
+        ul{
+            margin-bottom: -15px;
+        }
+        .demo{
+            width: 100%;
+            margin: 20px auto;
+        }
+        .demo p{
+            
+            margin-top: -18px;
+            line-height: 40px;
+        }
+        
+         .demo p span{
+             line-height: 60px;
+             /*vertical-align: text-top;*/
+             background-color: red;
+             /*vertical-align: top;
+             vertical-align: 5px;*/
+             /*vertical-align: text-bottom;
+             vertical-align: 8.5px;*/
+             /*(out-line-height - inner-line-height )/2   top: +   bottom:-
+             vertical-align: 的百分数要相对于元素的line-
+            (out-font-size - inner-line-height)/2    text-top:*/        
+        
+         }
     </style>
     <script>    
      function MyMove(ele,attr,target,callBack){
@@ -198,6 +231,13 @@
             <li><a href="javascript:;" selectid="4">Javascript开发</a></li>
             <li><a href="javascript:;" selectid="5">Java特效</a></li>
         </ul>
+    </div>
+    <div class="demo">
+        <ul>
+            <li>123</li>
+            <li>324</li>
+        </ul>
+        <p>你们好 <span>我们好</span> 内容区 行内框 </p>
     </div>
 </body>
 

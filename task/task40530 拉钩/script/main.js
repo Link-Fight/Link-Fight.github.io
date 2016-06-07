@@ -424,10 +424,9 @@ window.onload = function () {
         this.setAttribute("data-tg-ph", temp);
     });
 
-
     bannerControll();
     tapControll();
-
+    setPosition();
 }
 
 
@@ -472,20 +471,6 @@ var DirctionModel = function (x, y, distance) {
     }
 }
 
-
-// var tapModel = {
-//     count: 3,
-//     index: 0
-// }
-
-// var tapBll = function (model) {
-//     this.model = JSON.parse(JSON.stringify(model));
-//     this.next = function () {
-//         this.model.index++;
-//         this.model.index = this.model.index % this.model.count;
-//         return this.model.index;
-//     }
-// }
 
 var tapControll = function () {
     var tapView = document.getElementById("js_tap_control");
@@ -560,14 +545,23 @@ var bannerControll = function () {
     var conView = document.getElementById("baner_index");
     var conItemView = document.getElementsByClassName("control")[0]
     var lis = conItemView.getElementsByTagName("li");
-    setInterval(function () {
-        // view.style.top = bll.next().distance+"px";
-        if (bll.flag) {
-            moveView();
+    function bannerAction(fn, wait) {
+        var timeOut;
+        wait = wait || 1500;
+        return {
+            start: debounce(function () {
+                timeOut = setInterval(function () {
+                    fn();
+                }, wait);
+            }, 500),
+            stop: function () {
+                clearTimeout(timeOut);
+            }
         }
-    }, 1500)
-
-    var moveView = function () {
+    }
+    var banneAct = bannerAction(moveView, 2000);
+    banneAct.start();
+    function moveView() {
         var viewState = bll.next();
         startMove(bgView, { top: viewState.bgDistance }, null, 16);
         startMove(conView, { top: viewState.conDistance }, null, 16);
@@ -575,20 +569,23 @@ var bannerControll = function () {
 
     bgView.addEventListener("mouseenter", function () {
         bll.flag = false;
+        banneAct.stop();
         console.log("bgView");
     }, false);
     bgView.addEventListener("mouseleave", function () {
         bll.flag = true;
+        banneAct.start();
     }, false);
 
     Array.prototype.forEach.call(lis, function (item) {
-        addEvent(item, "mouseover", function (e) {
+        addEvent(item, "mouseenter", function (e) {
             e = e || window.event;
             var target = e.target || e.srcElement;
-            console.count();
+            // console.count();
             if (target.nodeName == "LI") {
                 // console.count("mouseover");
                 bll.flag = false;
+                banneAct.stop();
                 bll.model.index = Array.prototype.indexOf.call(lis, target);
                 console.count("bll.model.index" + bll.model.index + " ");
                 moveView();
@@ -598,6 +595,22 @@ var bannerControll = function () {
     conItemView.parentNode.addEventListener("mouseleave", function () {
         setTimeout(function () {
             bll.flag = true;
+            banneAct.start();
         }, 500);
     }, false);
+}
+
+
+function setPosition() {
+    var menu_boxs = document.querySelectorAll(".menu_box");
+    Array.prototype.forEach.call(menu_boxs, function (item) {
+        item.addEventListener("mouseenter", function () {
+            console.count("menu_box");
+            var side_item = this.getElementsByClassName("side_item")[0];
+            var clientRect = side_item.getBoundingClientRect();
+            if (clientRect.bottom > window.innerHeight) {
+                side_item.style.top = -(clientRect.bottom - window.innerHeight + 10) + "px";
+            }
+        }, false);
+    });
 }

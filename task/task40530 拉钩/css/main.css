@@ -408,7 +408,7 @@ header {
     z-index: 0;
     border: 2px solid transparent;
     margin-right: 8px;
-    background-color: yellow;
+    background-color: greenyellow;
     position: relative;
     overflow: hidden; }
   .showCompany li:nth-last-child(1) {
