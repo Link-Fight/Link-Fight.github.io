@@ -1,26 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<meta charset="UTF-8">
 	<title>遮罩层-原生ajax</title>
-    <link rel="icon" href="./image/my.ico"  />
-    <link rel="Shortcut Icon" href="./image/my.ico">
+	<link rel="icon" href="./image/my.ico" />
+	<link rel="Shortcut Icon" href="./image/my.ico">
 	<style>
-		*{
+		* {
 			margin: 0;
 			padding: 0;
 		}
-		body{
+		
+		body {
 			background: #eee;
 		}
-		.container{
+		
+		.container {
 			width: 400px;
 			height: 600px;
 			margin: 10px auto;
-			border:5px solid #999;
+			border: 5px solid #999;
 			background: #aaa;
 		}
-		.main{
+		
+		.main {
 			padding: 20px;
 			width: 90%;
 			margin: 0 auto;
@@ -28,46 +32,106 @@
 			text-align: center;
 			position: relative;
 		}
-		.main>.main_shade{
+		
+		.main>.main_shade {
 			position: absolute;
 			top: 0px;
 			left: 0px;
 			background: rgba(0, 0, 0, 0.2);
 			/*text-align: center;*/
-			border:10px solid rgba(0, 0, 0, 0.1);
+			border: 10px solid rgba(0, 0, 0, 0.1);
 			display: none;
 		}
-		 .shade_content{ 
+		
+		.shade_content {
 			width: 300px;
 			height: 90%;
 			margin: 0 auto;
 			vertical-align: middle;
 			background: orangered;
 		}
-		.shade_content .header{
+		
+		.shade_content .header {
 			width: 100%;
 			height: 20px;
 			position: relative;
 			background: #999;
-			font-family:"楷体";
+			font-family: "楷体";
 			/*font-size: 14px;*/
 		}
-		.header>.close{
+		
+		.header>.close {
 			float: right;
 		}
-        .list{
-            list-style-type: none;
-        }
-        .list li:nth-child(2n){
-            background-color: green;
-        }
-        .list li:nth-child(2n-1){
-            background-color: red;
-        }
+		
+		.list {
+			list-style-type: none;
+		}
+		
+		.list li:nth-child(2n) {
+			background-color: green;
+		}
+		
+		.list li:nth-child(2n-1) {
+			background-color: red;
+		}
+		
+		div>p {
+			color: blue;
+		}
+		
+		h1+p {
+			color: red;
+		}
+		
+		p {
+			background: white;
+			font-size: 20px;
+			line-height: 150%;
+		}
+		/*#pp{
+			color: yellow;
+		}*/
+		
+		div {
+			line-height: 150%;
+		}
+		
+		[id="pp"] {
+			color: darkorange !important;
+			/*text-indent: -25px;*/
+			/*padding-left: 60px;*/
+			line-height: 40px;
+		}
+		
+		#pp span {
+			vertical-align: text-top;
+		}
+		.test1,.test2{
+			background-color: black;
+		}
+		.test2{
+			margin-top: -20px;
+			background-color: blue;
+		}
+		.test1{
+			margin-bottom: 40px;
+		}
 	</style>
 </head>
+
 <body>
 	<div class="container">
+
+		<h1>11</h1>
+		<p>p111</p>
+		<p>p222</p>
+		<h1>22</h1>
+		<p>p111</p>
+		<p>p222</p>
+
+		<p id="pp" class="test1" style="color:green;">pppp<span>kelin</span>ppppppppppppppppppp23434pppp3254呃的说法让对方p</p>
+		<p id="pp" class="test2" style="color:green;">pppp<span>kelin</span>ppppppppppppppppppp23434pppp3254呃的说法让对方p</p>
 		<div class="main">
 			<input type="text" placeholder="账号">
 			<br>
@@ -95,129 +159,132 @@
 					</div>
 					<input type="text" placeholder="邮箱">
 				</div>
-				</div>
+			</div>
 		</div>
 		<input type="button" value="读取文件" id='btn1'>
 		<a href="http://www.baidu.com" target="_blank">百度</a>
-        <ul class="list">
-            <li>11</li>
-            <li>22</li>
-            <li>33</li>
-            <li>44</li>
-            <li>55</li>
-        </ul>
-        <input type="button" value="切换" id="bt2">
-        <a href="http://www.bitbug.net/" target="_blank"><img src="http://www.bitbug.net/mypagerank.php?style=1" border="0" alt="My Google PageRank" /></a>
+		<ul class="list">
+			<li>11</li>
+			<li>22</li>
+			<li>33</li>
+			<li>44</li>
+			<li>55</li>
+		</ul>
+		<input type="button" value="切换" id="bt2">
+		<a href="http://www.bitbug.net/" target="_blank"><img src="http://www.bitbug.net/mypagerank.php?style=1" border="0" alt="My Google PageRank" /></a>
 	</div>
 	<script>
-        function btClick(){
-            var btn = document.getElementById("bt2");
-            btn.onclick = function(){
-                var ul = document.getElementsByClassName("list")[0];
-                do{
-                ul.appendChild(ul.firstChild);
-                }while(ul.firstChild.nodeType==1);
-            }
-        }
-        
-        function setTimeClick(){
-              var btn = document.getElementById("bt2");
-            setTimeout(function(){
-                  btn.click();
-                 setTimeClick();
-            },1000);
-        }
-        
-		window.onload=function(){
-            btClick();
-            setTimeClick();
+		function btClick() {
+			var btn = document.getElementById("bt2");
+			btn.onclick = function() {
+				var ul = document.getElementsByClassName("list")[0];
+				do {
+					ul.appendChild(ul.firstChild);
+				} while (ul.firstChild.nodeType == 1);
+			}
+		}
+
+		function setTimeClick() {
+			var btn = document.getElementById("bt2");
+			setTimeout(function() {
+				btn.click();
+				setTimeClick();
+			}, 1000);
+		}
+
+		window.onload = function() {
+			btClick();
+			setTimeClick();
 			var btn = document.getElementById('btn1');
-			btn.onclick= function(){
-				
-				myAjax("get","test.txt",successStateFun,failStatus,true);
-			 
-				
-				  return;
-				
-				var oAjax = new XMLHttpRequest();	
+			btn.onclick = function() {
+
+				myAjax("get", "test.txt", successStateFun, failStatus, true);
+
+
+				return;
+
+				var oAjax = new XMLHttpRequest();
 				alert(oAjax);
-				oAjax.open("get","test.txt",true);
+				oAjax.open("get", "test.txt", true);
 				oAjax.send();
 				// alert(oAjax.readyState);
-				oAjax.onreadystatechange=function(){
+				oAjax.onreadystatechange = function() {
 					alert(oAjax.readyState);
-					if(oAjax.readyState=="4"){
-						if(oAjax.status=="200"){
+					if (oAjax.readyState == "4") {
+						if (oAjax.status == "200") {
 							alert(oAjax.responseText);
 						}
 					}
 				}
 			};
 		}
-		
+
 		// var xmlHttp = null;
-		function myAjax(menth,url,successfun,failfun,async){			
-		 	var xmlHttp = new XMLHttpRequest();
-			if(window.XMLHttpRequest){
+		function myAjax(menth, url, successfun, failfun, async) {
+			var xmlHttp = new XMLHttpRequest();
+			if (window.XMLHttpRequest) {
 				xmlHttp = new XMLHttpRequest();
-			}else if(window.ActiveXObject){
-				xmlHttp=new ActiveXObject("Microsoft.XMLHTTP");
+			} else if (window.ActiveXObject) {
+				xmlHttp = new ActiveXObject("Microsoft.XMLHTTP");
 			}
-			if(xmlHttp!=null){
-				xmlHttp.open("get","test.txt",true);
+			if (xmlHttp != null) {
+				xmlHttp.open("get", "test.txt", true);
 				xmlHttp.send("user=123;pwd=233;");
-					xmlHttp.onreadystatechange=function(){
-					alert(xmlHttp.readyState+"@");
-					if(xmlHttp.readyState=="4"){
-						if(xmlHttp.status=="200"){
+				xmlHttp.onreadystatechange = function() {
+					alert(xmlHttp.readyState + "@");
+					if (xmlHttp.readyState == "4") {
+						if (xmlHttp.status == "200") {
 							// alert(xmlHttp.responseText);
 							successfun(xmlHttp.responseText);
-						}else
-						{
-							if(failfun)
+						} else {
+							if (failfun)
 								failfun();
 						}
 					}
 				}
-				
+
 				xmlHttp.onprogress = downLoadProgress;
 				xmlHttp.upload.onprogress = updateProgress;
 			}
 		}
 		var ss = true;
-		function downLoadProgress(event){
-			if(event.lengthComputable){
-				var percentComplete = event.loaded/event.total;
+
+		function downLoadProgress(event) {
+			if (event.lengthComputable) {
+				var percentComplete = event.loaded / event.total;
 				// alert(percentComplete);
 			}
 		}
-		
-		function updateProgress(event){
-			alert(event.lengthComputable+"@");
-			if(event.lengthComputable){
-				var percentComplete = event.loaded/event/total;
+
+		function updateProgress(event) {
+			alert(event.lengthComputable + "@");
+			if (event.lengthComputable) {
+				var percentComplete = event.loaded / event / total;
 				alert(percentComplete);
 			}
 		}
-		
-		function successStateFun(responseText){
+
+		function successStateFun(responseText) {
 			alert(responseText);
 		}
-		 
-		 function failStatus(){
-			 alert("fail");
-		 }
-		function onShade_0(e){
+
+		function failStatus() {
+			alert("fail");
+		}
+
+		function onShade_0(e) {
 			var parent_Div = e.parentElement;
 			var shade_Div = parent_Div.lastElementChild;
-			shade_Div.style.display='block';
-			shade_Div.style.height = parent_Div.offsetHeight -10*2+'px';
-			shade_Div.style.width = parent_Div.offsetWidth-10*2+'px';
+			shade_Div.style.display = 'block';
+			shade_Div.style.height = parent_Div.offsetHeight - 10 * 2 + 'px';
+			shade_Div.style.width = parent_Div.offsetWidth - 10 * 2 + 'px';
 		}
-		function onCloseShade(e){
-		   var shade = e.parentElement.parentElement.parentElement;
-		   shade.style.display='none';
+
+		function onCloseShade(e) {
+			var shade = e.parentElement.parentElement.parentElement;
+			shade.style.display = 'none';
 		}
 	</script>
 </body>
+
 </html>

@@ -1,8 +1,78 @@
 
 
 !(function (win) {
-   "use strict";
+    "use strict";
     // JavaScript Document
+
+    var a = [
+        { id: 0, pid: 0, name: 'text0' },
+
+        { id: 2, pid: 1, name: 'text2' },
+        { id: 1, pid: 0, name: 'text1' },
+        { id: 3, pid: 0, name: 'text3' },
+        { id: 4, pid: -2, name: 'text4' },
+    ];
+
+    function transfer() {
+        var result = [];
+        this.forEach(function (node) {
+            var flag = { flag: true }
+            insert(node, result, flag);
+
+            if (flag.flag) {
+                result.push(node);
+            }
+        });
+        // return result;
+        return JSON.parse(JSON.stringify(result).replace("{}", "").replace(",,", ","))
+    }
+
+    function insert(node, result, flag) {
+
+        if (Array.isArray(result)) {
+            result.forEach(function (val) { insert(node, val, flag); })
+        } else {
+            //查找到其父节点  加入 children中
+            if (node.pid === result.id) {
+                if (result.hasOwnProperty("children")) {
+                    result["children"].push(node);
+                } else {
+                    result["children"] = [node,];
+                }
+                flag.flag = false;
+                //查找到的是其子节点
+            } else if (node.id === result.pid) {
+                // if (flag.flag) {//没有找到过到其父节点
+                //     node["children"] = JSON.parse(JSON.stringify(result));
+                //     flag.flag = false;
+                // } else {//已经找到过到其父节点
+                node["children"] = JSON.parse(JSON.stringify(result));
+                flag.flag = false;
+                // }
+                deleteAll(result);
+            } else {
+                if (result.hasOwnProperty("children")) {
+                    insert(node, result["children"], flag);
+                }
+
+            }
+        }
+    }
+
+    function deleteAll(obj) {
+        for (var key in obj) {
+            delete obj[key];
+        }
+    }
+    function mix(t, s) {
+        for (item in s) {
+            t[item] = s[item]
+        }
+        return t;
+    }
+
+    a.transfer = transfer;
+    console.log(a.transfer());
 
     var startMove = function startMove(obj, json, endFn) {
 
@@ -468,4 +538,56 @@ function chart(principal, interest, monthly, payments) {
     addClass(graph.parentNode, "show");
 }
 
+(function () {
+    var a = [
+        { id: 0, pid: 0, name: 'text0' },
+        { id: 2, pid: 1, name: 'text2' },
+        { id: 1, pid: 0, name: 'text1' },
+        { id: 3, pid: 0, name: 'text3' },
+        { id: 4, pid: -2, name: 'text4' },
+    ];
 
+    function transfer() {
+        var result = [];
+        this.forEach(function (node) {
+            var flag = { flag: true }
+            insert(node, result, flag);
+            if (flag.flag) {
+                result.push(node);
+            }
+        });
+        return JSON.parse(JSON.stringify(result).replace("{}", "").replace(",,", ","))
+    }
+
+    function insert(node, result, flag) {
+        if (Array.isArray(result)) {
+            result.forEach(function (val) { insert(node, val, flag); })
+        } else {
+            if (node.pid === result.id) {
+                if (result.hasOwnProperty("children")) {
+                    result["children"].push(node);
+                } else {
+                    result["children"] = [node,];
+                }
+                flag.flag = false;
+            } else if (node.id === result.pid) {
+                node["children"] = JSON.parse(JSON.stringify(result));
+                flag.flag = false;
+                deleteAll(result);
+            } else {
+                if (result.hasOwnProperty("children")) {
+                    insert(node, result["children"], flag);
+                }
+            }
+        }
+    }
+
+    function deleteAll(obj) {
+        for (var key in obj) {
+            delete obj[key];
+        }
+    }
+    a.transfer = transfer;
+    console.log(a.transfer());
+
+})();

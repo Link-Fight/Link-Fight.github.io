@@ -61,7 +61,12 @@ input::-webkit-outer-spin-button {
     .left-input table .output {
       color: #226622; }
     .left-input table button {
-      width: 100px; }
+      width: 70px;
+      padding: 5px 15px;
+      border-width: 2px;
+      line-height: 160%;
+      background-color: #22aabb;
+      color: #fff; }
 
 .right-graph {
   float: left;
@@ -79,7 +84,7 @@ input::-webkit-outer-spin-button {
       right: 0;
       border-radius: 5px;
       background-color: #eee;
-      transition: left 1s ease-in-out; }
+      transition: left 1s ease-in-out 0.5s; }
     .right-graph .graph-warp:hover #downGraph {
       display: block; }
   .right-graph .graph-warp.show::after {
@@ -108,7 +113,7 @@ input::-webkit-outer-spin-button {
   to {
     top: 0px;
     opacity: 1; } }
-@media (max-width: 820px) {
+@media screen and (max-width: 820px) {
   .warp {
     width: 100%;
     padding: 0;

@@ -15,6 +15,7 @@
         
         html {
             font-family: 'Open Sans', sans-serif;
+            line-height: 1.8;
         }
         
         a {
@@ -34,7 +35,7 @@
             background-color: rgb(195, 92, 72);
         }
         
-        #patterns {
+        #tips {
             background-color: rgb(15, 92, 72);
         }
         
@@ -152,6 +153,7 @@
         }
         
         .txt code {
+            padding: 0 5px;
             color: #aa1133;
         }
     </style>
@@ -300,11 +302,11 @@
 </head>
 
 <body>
-    <section class="section" id='html'>
+    <!--<section class="section" id='html'>
         <div class="wrapper">
 
         </div>
-    </section>
+    </section>-->
     <section class="section" id="css">
         <div class="wrapper">
             <h1><a href="#css">css/层叠样式</a>  </h1>
@@ -347,7 +349,7 @@
                     </div>
                 </div>
             </div>
-            <p class="source">更多: <a target="_blank" href="http://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html">更多了解BFC</a>                / <a target="_blank" href="http://www.zhangxinxu.com/wordpress/2015/02/css-deep-understand-flow-bfc-column-two-auto-layout/">利用BFC来实现多栏自适应布局</a>                </p>
+            <p class="source">更多: <a target="_blank" href="http://www.cnblogs.com/lhb25/p/inside-block-formatting-ontext.html">更多了解BFC</a> / <a target="_blank" href="http://www.zhangxinxu.com/wordpress/2015/02/css-deep-understand-flow-bfc-column-two-auto-layout/">利用BFC来实现多栏自适应布局</a>                </p>
 
             <h3>圣杯布局/双飞翼布局</h3>
             <p class="target">目标是解决：三栏布局中，左右两栏固定宽度，中间部分自适应并且优先加载。</p>
@@ -400,11 +402,97 @@
 
             <h3>自适应的正方形</h3>
             <p>使用纯 CSS 制作出能够自适应大小的正方形</p>
-            <section class="txt"> 除了CSS3 中的视口相对单位，主要利用到 margin, padding 的百分比数值相对父元素宽度的宽度计算得出 来制作宽高相等、且相对视口宽度自适应的正方形。如果需求是制作相对视口高度自适应的正方形，估计就只能使用
-                vh 单位了</section>
+            <section class="txt"> 除了CSS3 中的视口相对单位，主要利用到 margin, padding 的百分比数值相对父元素宽度的宽度计算得出 来制作宽高相等、且相对视口宽度自适应的正方形。如果需求是制作相对视口高度自适应的正方形，估计就只能使用 vh 单位了</section>
             <p class="source"> 更多:<a href="http://www.cocoachina.com/webapp/20150807/12940.html">自适应的正方形</a> </p>
+
+            <h3>CSS继承性</h3>
+            <p class="target">虽然常听说：CSS少用继承，多用组合。但是，还是要了解清楚才行</p>
+            <section class="txt">
+                CSS中可以继承的属性有：
+                <br> azimuth, border-collapse, border-spacing, caption-side, color, cursor, direction, elevation, empty-cells,<code>  font-family, font-size, font-style, font-variant, font-weight, font, letter-spacing, line-height,</code> list-style-image,
+                list-style-position, list-style-type, list-style, orphans, pitch-range, pitch, quotes, richness, speak-header, speaknumeral, speak-punctuation, speak, speechrate, stress,<code> text-align, text-indent, texttransform, visibility</code>,
+                voice-family, volume, whitespace, widows,
+                <code> word-spacing</code>
+            </section>
         </div>
     </section>
+
+    <section class="section" id="tips">
+        <div class="wrapper">
+            <h1><a href="#tips">tips/注意</a>  </h1>
+            <h3>diaplay:inline/block和标签的嵌套规则</h3>
+            <section class="txt">
+                对于<code>display</code>属性来书，要记住的一点是，<b>这只是改变了元素的显示角色，而不是本质。换句话说设置一个行内元素<code>display:block</code>来生成块框并不会把这个行内元素变成一个真正的块级元素。</b>所以，链接可以放在一个段落中，但是链接不能包含段落，无论如果设计元素的样式，都不行。
+            </section>
+            <section class="txt">
+                这里顺便提一下标签的嵌套规则：
+                <ol>
+                    <li>块级元素可以包含内联元素或 <b> 某些</b>块级元素，但内联元素不能包含块级元素，它只能包含其它内联元素。 块级元素
+                    </li>
+                    <li> <b>块级元素不能放在p里面。</b></li>
+                    <li> <b>有几个特殊的块级元素只能包含内联元素，不能包含块级元素。</b>如h1,h2,h3,h4,h5,h6,p,dt</li>
+                    <li>li内可以包含div</li>
+                    <li>块级元素与块级元素并列、内联元素与内联元素并列。（错误的：&lt;div&gt;&lt;h2&gt;&lt;/h2&gt;&lt;span&gt;&lt;/span&gt;&lt;/div&gt;)</li>
+                </ol>
+            </section>
+            <!--<p><a href="www.baidu.com">baidu</a></p>
+        <p ><a href="www.baidu.com" style="display:block"><p>baidu</p></a></p>-->
+            <h3>display:inline-block/行内块元素</h3>
+            <section class="txt">
+                行内块元素作为替换元素放在行中。这说明，行内元素的底端默认地位于文本行的基线上，而且内部没有行分隔符。
+
+            </section>
+            <!--<div style="line-height:normal;">2333334343434333333333333333333
+                <p style="border:1px dotted;width:6em;text-align:center;display:inline-block;padding:0;"> Look,it's an inline-block paragraph</p> 33333333333333333333333333
+                <p style="border:1px dotted;width:6em;text-align:center;display:inline-block;padding:0;"> Look,it's an inline-block paragraph two</p>333333333333333333333333333333333333</div>
+                <a style="display:inline-block;width:20%" href="www.baidu.com" target="_blank">baidu.com</a>
+                <a style="display:inline-block;width:20%" href="www.baidu.com" target="_blank">baidu.com</a>
+                <a style="display:inline-block;width:20%" href="www.baidu.com" target="_blank">baidu.com</a>
+                <a style="display:inline-block;width:20%" href="www.baidu.com" target="_blank">baidu.com</a>
+                <a style="display:inline-block;width:20%" href="www.baidu.com" target="_blank">baidu.com</a>
+                <div style="margin-left:auto;width:auto;margin-right:100px;">
+                    3333
+                    <span style="padding:110px;margin:110px;">test</span>
+                </div>
+        </div>-->
+            <!--<div class="parent" style="width:100px;height:100px;padding:50px;margin:50px;background:#fff;position:relative">
+                <div class="child" style=" min-width:10px;min-heigth:20px;position:absolute;top:10%;bottom:20%;left:50%;right:10%;background:red;"></div>
+          </div>-->
+            <h3>clip/内容裁剪</h3>
+            <section class="txt">
+                <b>clip</b>可以改变剪裁区域的形状，在设置<b>overflow</b>为要剪裁该内容时候。它只是改变现实内容的区域形状。
+                <br> 值：
+                <code>rect(top,right,bottom,left)|auto|inherit</code>
+                <br> 应用于：绝对定位元素(在CSS2中，clip应用于块级元素和替换元素))
+                <br> 要注意的是: <code>rect(....)</code>的值不是边偏移，而是距元素左上角的距离。
+            </section>
+            <!--<div style="width:100px;height:100px;background:red;visibility:hidden;">
+                <div style="width:50px;height:50px;background:blue;visibility:visible;"></div>
+            </div>-->
+            <h3>visibility/元素可见性</h3>
+            <section class="txt">
+                这个属性，首先要掌握的是:它和<code>display:none</code>的区别，后者不单单元素不显示，还会从文档中删除，其实在浏览器的构成 <b>render Tree</b>的时候，该元素就不存在了。而前者，只是不可以看见，还是在文档中，影响着布局。
+                <br> 除此之外，要注意：
+                <br> 对于
+                <code>visibility:collapse</code>,根据CSS2，如果用于非表元素，其和<b>hidden</b>一样。
+                <br> 对于一个
+                <code>hidden</code>的元素，其后代元素还是可以可见的，但是要在其后代元素上显示声明<code>visible</code>。当然这也说明，<b><code>visibility</code>属性是可以继承的！</b>
+            </section>
+    </section>
+    <script>
+        function convertTxt(html) {
+            var dic = {
+                "<": "&lt;",
+                ">": "&gt;"
+            };
+            return [].map.call(html, function(str) {
+                if (dic[str] === undefined) {
+                    return str;
+                }
+                return dic[str];
+            }).join("");
+        }
+    </script>
 </body>
 
 
