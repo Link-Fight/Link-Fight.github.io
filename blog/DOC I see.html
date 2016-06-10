@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>JS I see</title>
+    <title>DOC I see</title>
     <style>
         * {
             margin: 0;
@@ -31,7 +31,7 @@
             background-color: rgb(195, 92, 72);
         }
         
-        #patterns {
+        #tips {
             background-color: rgb(15, 92, 72);
         }
         
@@ -127,6 +127,11 @@
         .old {
             background-color: rgba(0, 0, 0, .2);
         }
+        
+        .txt code {
+            padding: 0 5px;
+            color: #aa1133;
+        }
     </style>
 </head>
 
@@ -142,29 +147,20 @@
             <h3>types/JS的类型有</h3>
             <section class="txt">
                 <ul>
-                    <li><a title="The Number JavaScript object is a wrapper object allowing you to work with numerical values. A Number object is created using the Number() constructor."
-                            href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number"><code>Number</code></a></li>
+                    <li><a title="The Number JavaScript object is a wrapper object allowing you to work with numerical values. A Number object is created using the Number() constructor." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number"><code>Number</code></a></li>
                     <li><a title="The String global object is a constructor for strings, or a sequence of characters." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/String"><code>String</code></a></li>
                     <li><a title="The Boolean object is an object wrapper for a boolean value." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean"><code>Boolean</code></a></li>
-                    <li><a title="A symbol is a unique and immutable data type and may be used as an identifier for object properties. The symbol object is an implicit object wrapper for the symbol primitive data type."
-                            href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol"><code>Symbol</code></a> (new in
-                        Edition 6)</li>
+                    <li><a title="A symbol is a unique and immutable data type and may be used as an identifier for object properties. The symbol object is an implicit object wrapper for the symbol primitive data type." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol"><code>Symbol</code></a>                        (new in Edition 6)</li>
                     <li><a title="The Object constructor creates an object wrapper." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object"><code>Object</code></a>
                         <ul>
-                            <li><a title="The Function constructor creates a new Function object. In JavaScript every function is actually a Function object."
-                                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"><code>Function</code></a></li>
-                            <li><a title="The JavaScript Array&nbsp;object is a global object that&nbsp;is used in the&nbsp;construction&nbsp;of&nbsp;arrays; which are high-level, list-like objects."
-                                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"><code>Array</code></a></li>
-                            <li><a title="Creates a JavaScript Date instance that represents a single moment in time. Date objects are based on a time value that is the number of milliseconds since 1 January, 1970 UTC."
-                                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a></li>
-                            <li><a title="The RegExp constructor creates a regular expression object for matching text with a pattern."
-                                    href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"><code>RegExp</code></a></li>
+                            <li><a title="The Function constructor creates a new Function object. In JavaScript every function is actually a Function object." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function"><code>Function</code></a></li>
+                            <li><a title="The JavaScript Array&nbsp;object is a global object that&nbsp;is used in the&nbsp;construction&nbsp;of&nbsp;arrays; which are high-level, list-like objects." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array"><code>Array</code></a></li>
+                            <li><a title="Creates a JavaScript Date instance that represents a single moment in time. Date objects are based on a time value that is the number of milliseconds since 1 January, 1970 UTC." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date"><code>Date</code></a></li>
+                            <li><a title="The RegExp constructor creates a regular expression object for matching text with a pattern." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp"><code>RegExp</code></a></li>
                         </ul>
                     </li>
-                    <li><a title="The value null&nbsp;represents the intentional absence of any object value. It is one of JavaScript's primitive values."
-                            href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/null"><code>null</code></a></li>
-                    <li><a title="The global undefined property represents the primitive value undefined. It is one of JavaScript's primitive types."
-                            href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined"><code>undefined</code></a></li>
+                    <li><a title="The value null&nbsp;represents the intentional absence of any object value. It is one of JavaScript's primitive values." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/null"><code>null</code></a></li>
+                    <li><a title="The global undefined property represents the primitive value undefined. It is one of JavaScript's primitive types." href="/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined"><code>undefined</code></a></li>
                 </ul>
             </section>
             <h3>memory leak/内存泄漏</h3>
@@ -281,7 +277,20 @@
             </section>
         </div>
     </section>
-    
+    <section class="section" id="tips">
+        <div class="wrapper">
+            <h1><a href="#tips">tips/注意</a>  </h1>
+
+            <h3>[src/href]属性</h3>
+
+            <section class="txt">
+                如果直接访问<code>dom.[src/href]</code>将获取到绝对的URL路径，如果想只想获取相对的URL，请使用<code>dom.getAttribute(src/href,4)</code>
+            </section>
+
+            <h3>Quirks/Standards Model</h3>
+            <p class="source"> <a href="http://liuxiaofan.com/2014/03/11/2243.html">@_@</a></p>
+        </div>
+    </section>
 </body>
 
 

@@ -302,12 +302,49 @@
         li {
             line-height: 28px;
         }
+        
+        div,
+        section {
+            position: relative;
+        }
+        
+        div::before,
+        section::before {
+            content: attr(class);
+            font-size: 12px;
+            position: absolute;
+            left: 0;
+            top: 0;
+        }
+        
+        div.img {
+            background-image: url("http://link-fight.github.io/blog/index_0002N.jpg");
+            background-repeat: no-repeat;
+            background-position: center center;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .test_center::after {
+            content: "";
+            display: inline-block;
+            vertical-align: middle;
+            height: 100%;
+        }
+        
+        .txt ol {
+            margin-left: 4%;
+        }
+        .demo_area{
+            display: none;
+        }
     </style>
 </head>
 
 <body>
-   
-   <img src="index_0002.jpg" alt="hi" name="22" >//http://www.xaircraft.cn/tpl/Home/Index/images/
+    <!--<div class="img">222</div>-->
+    <img src="http://link-fight.github.io/blog/index_0002N.jpg" alt="hi" name="22" width="100%" height="100%">
+    <!--//http://www.xaircraft.cn/tpl/Home/Index/images/-->
     <section class="section" id="css">
         <div class="wrapper">
             <h1><a href="#css">css/层叠样式</a>  </h1>
@@ -315,17 +352,68 @@
             <h3>关于居中</h3>
 
             <section class="txt">
-                <h4> 水平居中在关于居中问题里面是属于比较简单的。</h4>
+                <h4> 水平居中</h4>
                 <ul>
-                    <li>对于行内元素：设置text-align: center;就能设置内容居中了。</li>
-                    <li>对于块状元素：在有固定width的情况下，使用margin:0 auto；可以水平集中。
-
+                    <li style="text-align:center;">对于行内元素：设置text-align: center;就能设置内容居中了。</li>
+                    <li style="width:70%;margin:0 auto;">对于块状元素：在有固定width的情况下，使用margin:0 auto；可以水平集中。
+                    </li>
+                    <li>(元素不在文档流)对于使用<code>float</code>的元素，要让其居中。(个人感觉没什么使用价值)
+                        <ul>
+                            <li>需要两个元素，两者为父子关系，并且两者都设置<code>float:left;position:relative;</code></li>
+                            <li>对于父元素设置<code>left:50%;</code>,子元素设置<code>right:50%;</code>。内容是在子元素上，那个父元素是为了定位而存在的额外辅助元素。</li>
+                        </ul>
                     </li>
                 </ul>
+                <h4>居中</h4>
+                <ul>
+                    <li>(元素在文档流)对于行内元素，在水平居中的基础上，设置其父元素的<code>line-height</code>的值等于 <code>height</code>的值。 </li>
+                    <li>(元素在文档流)对于块状元素,可以参照上一个，对目标元素设置<code>display:inline-height;</code>,其副作用就是该元素的高度会被拉伸到父元素一样的高度。</li>
+                    <li>(元素在文档流)对于定宽高的块状元素，在用<code>margin:0 auto;</code>水平居中后，设置<code>postion:relative;top:50%;</code>,再设置<code>margin-top:</code>为该元素高度的一半，把其又提上去。如果此时没有居中，那应该<code>margin</code>穿透出去了，需要给元素来点 <code>margin/padding/border</code> </li>
+                    <li>(元素不在文档流)对于绝对定位的定宽高的块状元素(<code>postion:absolute;</code>),设置<code>left:50%;top:50%;</code>，此时需要修正元素的位置，再设置<code>transform:translate(-50%;-50%;)</code>,或者是可以设置<code>margin-left,margin-top</code>来偏移，不过要写具体的值(<b>所以前面那种好</b>)。</li>
+                    <li>(元素在文档流)对于想要自适应的块级元素(就是该元素的宽高由其内容来撑开)
 
+                        <ol>
+                            <li>父元素设置<code>text-align:center</code>,为了居中。</li>
+                            <li>对父元素使用伪元素<code>::after/::before</code>,主要设置<code>height:100%;display:inline-block;vertical-align:middle;</code></li>
+                            <li>对于目标元素设置<code>display:inline-block;vertical-align:middle;</code></li>
+                        </ol>
+                    </li>
+                </ul>
             </section>
 
+            <div class="demo_area">
+                <div style="color:#fff;background:blue;overflow:hidden;height:50px;width:200px;margin:10px;">
+                    float
+                    <div class="HH" style="float:left;position:relative;left:50%;background:green;">
+                        <div style="float:left;position:relative;right:50%;background:red;color:yellow;">2@3@3</div>
+                    </div>
+                    float
+                </div>
+                <div style="background:yellow;height:100px;width:100px;margin:10px;line-height:100px;text-align:center;">
+                    <span>行内元素</span>
+                </div>
 
+                <div style="background:yellow;height:150px;width:150px;margin:10px;line-height:150px;text-align:center;">
+                    <div style="display:inline-block;background:blue;">块状元素</div>
+                </div>
+
+                <div style="width:200px;height:100px;background:yellow;position:relative;margin:10px;border:5px solid #fff;">
+                    <div style="width:50px;height:40px;background:red;margin:0 auto;font-size:10px;position:relative;top:50%;margin-top:-20px;">margin <br>ralative</div>
+                </div>
+                <div style="width:200px;height:100px;background:yellow;position:relative;margin:10px;">
+                    <div style="width:50px;height:40px;background:red;transform:translate(-50%,-50%);position:absolute;left:50%;top:50%;font-size:8px;">absolute <br>transform</div>
+                </div>
+                <div class="test_center" style="width:200px;height:100px;background:yellow;position:relative;margin:10px;text-align:center;font-size:13px;">
+                    <div style="background:red;display:inline-block;vertical-align:middle;">text-align<br>inline-block <br>::after <br>vertical-align</div>
+                    <!--<span style="background:red;display:inline-block">233</span>-->
+                </div>
+                <!--<div style="background:pink;float:left;position:relative">
+                <div style="position:relative;float:left;width:100px;height:100px;background:blue;"></div>
+            </div>-->
+                <div style="background:#000;height:100px;line-height:100px;text-align:center;color:#fff;vertical-align:middle;">
+                    <input type="text"><img src="http://www.xaircraft.cn/tpl/Home/Index/images/logo.png" alt="" style="vertical-align:middle;"> <span style="vertical-align:middle;">x喔喔</span>
+                </div>
+            </div>
             <h3>BFC(Block Formatting Content)/格式化上下文</h3>
             <p class="target">Describe BFC(Block Formatting Context) and how it works.</p>
             <section class="txt">简单来说BFC会形成一个独立的容器，该容器不受外界相邻元素的影响，同时也不影响外界元素(可以避免margin穿透，清除浮动)。
