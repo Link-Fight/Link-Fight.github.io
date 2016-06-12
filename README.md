@@ -1,12 +1,11 @@
 # Link-Fight.github.io
 
-里面主要是我的前端方面的个人练习。主要正在编写中......<br>
-[Link_Fight博客](http://link-fight.github.io/)
+
 
 [CodeCamp](https://www.freecodecamp.com/link-fight)
 
 
-## 练习页面
+## 页面
  * [新世界](http://link-fight.github.io/task/task07/task07.html)
  * [房贷计算](http://link-fight.github.io/book/JavaScript犀牛书6th/1.1/1.1.html)
  * [练习页面OA](http://Link-Fight.github.io/task/task09/task09.html)
@@ -21,8 +20,9 @@
  * [适应小屏幕的个人页面](http://Link-Fight.github.io/person/person.html)
  * [拉钩主页](http://link-fight.github.io/task/task40530%20%E6%8B%89%E9%92%A9/index.html)
 
-## 学习路上的小文章
+## 文章
 
   * [怎么写jq的插件](http://link-fight.github.io/blog/16-03-04%20jq_%E6%8F%92%E4%BB%B6.html)
   * [总结下:关于event里面的XY](http://link-fight.github.io/blog/16-03-07 关于event的xy.html)
   * [Js的收集](http://link-fight.github.io/blog/JS I see.html)
+  * [Css 的收集](http://link-fight.github.io/blog/CSS I see.html)
