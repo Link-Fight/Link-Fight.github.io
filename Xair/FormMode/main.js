@@ -212,7 +212,7 @@ Vue.component("date", {
         }
     },
     methods: {
-        clickFn: function (key, action, event) {
+        mHandleNum: function (key, action, event) {
             console.count(+this.date[key]);
             var num = +this.date[key];
             if (action == "UP") {
@@ -222,14 +222,21 @@ Vue.component("date", {
             }
             if (key == "HH") {
                 num = (num + 24) % 24;
+
             } else if (key == 'mm') {
                 num = (num + 60) % 60;
+                if (num == 0) {
+                    this.mHandleNum('HH','UP',event);
+                }
             }
 
-            if (num < 9) {
+            if (num <= 9) {
                 num = "0" + "" + num;
             }
             this.date[key] = num;
+        },
+        clickFn: function (key, action, event) {
+            this.mHandleNum.apply(this,arguments);
         },
         selectDate: function (str, num) {
             switch (str) {
@@ -340,7 +347,7 @@ Vue.component("date", {
                     num += 60;
                 }
             }
-            if (num < 9) {
+            if (num <= 9) {
                 num = "0" + "" + num;
             }
             return num;

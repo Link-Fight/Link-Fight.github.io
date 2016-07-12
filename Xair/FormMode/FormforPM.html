@@ -234,18 +234,22 @@
         .select_container .select_HH {
             height: 30px;
         }
-        .select_container li{
-            list-style:none;
+        
+        .select_container li {
+            list-style: none;
         }
+        
         .select_container .select_item_center {
             font-size: 17px;
             border-top: 2px solid green;
             border-bottom: 2px solid green;
         }
-        .select_container .select_HH{
+        
+        .select_container .select_HH {
             padding: 0 10px 0 40px;
         }
-         .select_container .select_mm{
+        
+        .select_container .select_mm {
             padding: 0 40px 0 10px;
         }
     </style>
@@ -308,6 +312,9 @@
                         </div>
                     </a>
                 </div>
+
+                <div class="weui_cells weui_cells_access">  {{date.HH}} 时  {{date.mm}}  分</div>
+
                 <div v-show="dateTab==0" style="font-size:0;">
                     <div class="select_container">
                         <ul class="select_HH">
@@ -325,13 +332,13 @@
                     <div class="select_container">
                         <ul class="select_mm">
                             <li @click="clickFn('mm','UP',$event)"  >
-                                {{+date.mm+1}}
+                                {{+date.mm+1 |filNum 'mm'}}
                             </li>
                             <li  class="select_item_center">
                                 {{date.mm}}
                             </li>
                             <li @click="clickFn('mm','DOWN',$event)" >
-                                {{date.mm-1}}
+                                {{date.mm-1 |filNum 'mm'}}
                             </li>
                         </ul>
                     </div>
