@@ -1,0 +1,25 @@
+.date-choose{position:fixed;top:0;right:0;width:100%;height:100%;overflow:hidden;z-index:100;}
+.date-cover{width:100%;height:100%;background:rgba(0,0,0,.5);position:absolute;top:0;left:0;}
+.date-main{position:fixed;right:0;top:0;width:250px;height:100%;background:#F2F2F2;text-align:center;}
+.date-header{position:fixed;top:0;right:0;width:250px;background:white;line-height:40px;height:40px;border-bottom:1px solid #ddd;box-shadow: 0 0 8px #ccc;z-index:1;}
+.date-header>div{margin:7px 10px !important;}
+.date-header>div:first-child{color:black;}
+.date-home{text-align:left;}
+.date-container{height:100%;background:white;overflow-x: hidden;overflow-y: auto;}
+.date-container a{color:black;}
+.date-clear{position:absolute;bottom:0;width:92%;margin:10px 0;border:1px solid #ccc;line-height:36px;background:white;-webkit-transform:translate(4%,0);}
+
+.date-container .select_container{
+    font-size: 14px;
+    display: inline-block;
+    height: 90px;
+    width: 50%;
+    overflow: hidden;
+    overflow-y: auto
+}
+
+
+
+.select_container .select_HH{
+    height: 30px;
+}

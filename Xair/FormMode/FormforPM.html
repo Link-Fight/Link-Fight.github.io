@@ -9,6 +9,14 @@
     <link rel="stylesheet" type="text/css" href="icon-font/iconfont.css">
     <script src="vue.js"></script>
     <style>
+        .fl {
+            float: left;
+        }
+        
+        .fr {
+            float: right;
+        }
+        
         body {
             background-color: #fbf9fe;
         }
@@ -137,11 +145,209 @@
             line-height: 45px;
         }
     </style>
+    <style>
+        .date-choose {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: 100;
+        }
+        
+        .date-cover {
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, .5);
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        
+        .date-main {
+            position: fixed;
+            right: 0;
+            top: 0;
+            width: 250px;
+            height: 100%;
+            background: #F2F2F2;
+            text-align: center;
+        }
+        
+        .date-header {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 250px;
+            background: white;
+            line-height: 40px;
+            height: 40px;
+            border-bottom: 1px solid #ddd;
+            box-shadow: 0 0 8px #ccc;
+            z-index: 1;
+        }
+        
+        .date-header>div {
+            margin: 7px 10px !important;
+        }
+        
+        .date-header>div:first-child {
+            color: black;
+        }
+        
+        .date-home {
+            text-align: left;
+        }
+        
+        .date-container {
+            height: 100%;
+            background: white;
+            overflow-x: hidden;
+            overflow-y: auto;
+        }
+        
+        .date-container a {
+            color: black;
+        }
+        
+        .date-clear {
+            position: absolute;
+            bottom: 0;
+            width: 92%;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            line-height: 36px;
+            background: white;
+            -webkit-transform: translate(4%, 0);
+        }
+        
+        .date-container .select_container {
+            font-size: 14px;
+            display: inline-block;
+            height: 90px;
+            width: 50%;
+            overflow: hidden;
+            overflow-y: auto
+        }
+        
+        .select_container .select_HH {
+            height: 30px;
+        }
+        .select_container li{
+            list-style:none;
+        }
+        .select_container .select_item_center {
+            font-size: 17px;
+            border-top: 2px solid green;
+            border-bottom: 2px solid green;
+        }
+        .select_container .select_HH{
+            padding: 0 10px 0 40px;
+        }
+         .select_container .select_mm{
+            padding: 0 40px 0 10px;
+        }
+    </style>
 </head>
+<template id="date">
+    <div class="date-choose">
+        <div class="date-cover"></div>
+        <div class="date-main">
+            <div class="date-header clearfix">
+                <div @click="cancelDate" class="fl weui_btn weui_btn_mini">取消</div>
+                <span>{{ chooseText }}</span>
+                <div @click="finishDate" class="fr weui_btn weui_btn_mini weui_btn_primary">完成</div>
+            </div>
+            <div class="date-container">
+                <div style="height:40px;"></div>
+                <div v-show="dateTab==0" class="date-home weui_cells weui_cells_access">
+                    <a @click="changeTab(1)" class="weui_cell" href="javascript:;">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>年</p>
+                        </div>
+                        <div class="weui_cell_ft">{{ date.year ? date.year+'年' : ''}}</div>
+                    </a>
+                    <a @click="changeTab(2)" class="weui_cell" href="javascript:;">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>月</p>
+                        </div>
+                        <div class="weui_cell_ft">{{ date.month?date.month+'月':''}}</div>
+                    </a>
+                    <a @click="changeTab(3)" class="weui_cell" href="javascript:;">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>日</p>
+                        </div>
+                        <div class="weui_cell_ft">{{ date.day?date.day+'日':'' }}</div>
+                    </a>
+                    <div class="weui_cell" v-if="!!date.weekText">
+                        <div class="weui_cell_bd weui_cell_primary" style="color:green;text-align:center;">
+                            {{date.weekText }}
+                        </div>
+                    </div>
+
+                </div>
+                <div v-show="dateTab==1" class="date-year weui_cells weui_cells_access">
+                    <a v-for="y in years" @click="selectDate('year',y)" class="weui_cell" href="javascript:;">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>{{ y }}年</p>
+                        </div>
+                    </a>
+                </div>
+                <div v-show="dateTab==2" class="date-month weui_cells weui_cells_access">
+                    <a v-for="m in months" @click="selectDate('month',m)" class="weui_cell" href="javascript:;">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>{{ m }}月</p>
+                        </div>
+                    </a>
+                </div>
+                <div v-show="dateTab==3" class="date-day weui_cells weui_cells_access">
+                    <a v-for="d in days" @click="selectDate('day',d)" class="weui_cell" href="javascript:;">
+                        <div class="weui_cell_bd weui_cell_primary">
+                            <p>{{ d }}日</p>
+                        </div>
+                    </a>
+                </div>
+                <div v-show="dateTab==0" style="font-size:0;">
+                    <div class="select_container">
+                        <ul class="select_HH">
+                            <li @click="clickFn('HH','UP',$event)" >
+                                {{+date.HH+1|filNum 'HH'}}
+                            </li>
+                            <li  class="select_item_center">
+                                {{date.HH}}
+                            </li>
+                            <li @click="clickFn('HH','DOWN',$event)">
+                                {{date.HH-1|filNum 'HH'}}
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="select_container">
+                        <ul class="select_mm">
+                            <li @click="clickFn('mm','UP',$event)"  >
+                                {{+date.mm+1}}
+                            </li>
+                            <li  class="select_item_center">
+                                {{date.mm}}
+                            </li>
+                            <li @click="clickFn('mm','DOWN',$event)" >
+                                {{date.mm-1}}
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div v-show="dateTab==0" @click="clearDate" class="date-clear">
+                清除选项
+            </div>
+        </div>
+    </div>
+</template>
 
 <body>
 
     <div id="app">
+        <date></date>
         <!--
         模板说明：
         1，标签上的‘:’+属性名/‘v-’+属性名，都属于vue的动态属性绑定，属性值为变量；
@@ -400,8 +606,7 @@
                         dataType:html.textarea.dataType,
                         val:variables.reportText,
                         validate:html.textarea.validate,validataMessage:html.textarea.validateMessage,required:html.textarea.required,maxLength:html.textarea.maxLength
-                        }" :disable="html.textarea.mode" v-model="variables.reportText" :placeholder="html.textarea.placeholder"
-                            rows="3"></textarea>
+                        }" :disable="html.textarea.mode" v-model="variables.reportText" :placeholder="html.textarea.placeholder" rows="3"></textarea>
                     </div>
                 </div>
             </div>
@@ -496,9 +701,8 @@
                     <div class="weui_cell_bd weui_cell_primary">
                         <textarea class="weui_textarea" :name="html.textarea_OP.name" v-validate="{type:html.textarea_OP.type,
                         key:html.textarea_OP.variable,label:html.textarea_OP.label,
-                        dataType:html.textarea_OP.dataType,val:variables.reportText,validate:html.textarea_OP.validate,validataMessage:html.textarea_OP.validateMessage,required:html.textarea_OP.required,maxLength:html.textarea_OP.maxLength}"
-                            :disable="html.textarea_OP.mode" v-model="variables.note_op" :placeholder="html.textarea_OP.placeholder"
-                            rows="3"></textarea>
+                        dataType:html.textarea_OP.dataType,val:variables.reportText,validate:html.textarea_OP.validate,validataMessage:html.textarea_OP.validateMessage,required:html.textarea_OP.required,maxLength:html.textarea_OP.maxLength}" :disable="html.textarea_OP.mode"
+                            v-model="variables.note_op" :placeholder="html.textarea_OP.placeholder" rows="3"></textarea>
                     </div>
                 </div>
             </div>
@@ -506,6 +710,7 @@
         </div>
         <!--model_view模板结束-->
     </div>
+
     <script src='main.js'></script>
 </body>
 

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Vue-router</title>
+    <script src="http://apps.bdimg.com/libs/vue/1.0.14/vue.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue-router/0.7.10/vue-router.min.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <h1>Hello Vue-router</h1>
+        <p>
+            <a v-link="{ path:'/foo' }"> Go To Foo</a>
+            <a v-link="{ path:'/bar' }"> Go To Bar</a>
+        </p>
+        <!--<router-view> 是一个顶级的外链。它会渲染一个和顶级路由匹配的组件：-->
+        <router-view></router-view>
+    </div>
+
+    <template id="tpl">
+        <div class="foo">
+            <h2>This is Foo!2</h2>
+            <p>
+                <a v-link="{ path:'/bar' }"> bar</a>
+                <a v-link="{ path:'/baz' }"> baz</a>
+            </p>
+            <router-view></router-view></div>
+    </template>
+    <script src="main.js"></script>
+</body>
+
+</html>
