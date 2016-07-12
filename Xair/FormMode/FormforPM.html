@@ -154,6 +154,8 @@
         <div id="infoContract">
 
             <div class="weui_cells_title">{{html.title.label}}</div>
+
+
             <!--dateTime 组件-->
             <!--BEGIN-dateTime-VIEW-->
             <div class="showValue">
@@ -163,8 +165,6 @@
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
                         <span class="weui_input">{{variables.Birthday}}</span>
-                    </div>
-                    <div class="weui_cell_ft" v-if="html.text.required">
                     </div>
                 </div>
             </div>
@@ -190,7 +190,7 @@
                         <input class="weui_input" :type="html.dateTime.viewMode" :min="html.dateTime.minDate" :max="html.dateTime.maxDate" v-model='variables.Birthday'>
                     </div>
                     <div class="weui_cell_ft">
-                        <template v-if="!!validateResult[html.dateTime.variable]">
+                        <template v-if="!!validateResult[html.dateTime.variable]&&html.dateTime.required">
                             <i class="iconfont icon-xingxing" :style="{'color':validateResult[html.dateTime.variable].status&&validateResult[html.dateTime.variable].val.length>0?'#09bb07':'red'}"></i>
                         </template>
                     </div>
@@ -206,8 +206,6 @@
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
                         <span class="weui_input">{{variables.email}}</span>
-                    </div>
-                    <div class="weui_cell_ft" v-if="html.text.required">
                     </div>
                 </div>
             </div>
@@ -232,7 +230,7 @@
                             minLength:html.text.minLength}" :disable="html.text.mode" v-model="variables.email" :placeholder="html.text.placeholder">
                     </div>
                     <div class="weui_cell_ft" v-if="html.text.required">
-                        <template v-if="!!validateResult[html.text.variable]">
+                        <template v-if="!!validateResult[html.text.variable]&&html.text.required">
                             <i class="iconfont icon-xingxing" :style="{'color':validateResult[html.text.variable].status&&validateResult[html.text.variable].val.length>0?'#09bb07':'red'}"></i>
                         </template>
                     </div>
@@ -264,7 +262,7 @@
             <p class="msg_error">{{ validateResult[html.checkbox.variable]?validateResult[html.checkbox.variable].msg :""}}</p>
             <div class="weui_cells_title">{{html.checkbox.label}}
                 <div class="weui_cell_ft" v-if="html.checkbox.required">
-                    <template v-if="!!validateResult[html.checkbox.variable]">
+                    <template v-if="!!validateResult[html.checkbox.variable]&&html.checkbox.required">
                         <i class="iconfont icon-xingxing" :style="{'color':validateResult[html.checkbox.variable].status && validateResult[html.checkbox.variable].val.length>0?'#09bb07':'red'}"></i>
                     </template>
                 </div>
@@ -306,7 +304,7 @@
             <p class="msg_error">{{ validateResult[html.dropdown.variable]?validateResult[html.dropdown.variable].msg :""}}</p>
             <div class="weui_cells_title">{{html.dropdown.label}}
                 <div class="weui_cell_ft" v-if="html.dropdown.required">
-                    <template v-if="!!validateResult[html.dropdown.variable]">
+                    <template v-if="!!validateResult[html.dropdown.variable]&&html.dropdown.required">
                         <i class="iconfont icon-xingxing" :style="{'color':validateResult[html.dropdown.variable].status&&validateResult[html.dropdown.variable].val.length>0?'#09bb07':'red'}"></i>
                     </template>
                 </div>
@@ -352,7 +350,7 @@
             <!--BEGIN-radio-EDIT-->
             <div class="weui_cells_title">{{html.radio.label}}
                 <div class="weui_cell_ft" v-if="html.radio.required">
-                    <template v-if="!!validateResult[html.radio.variable]">
+                    <template v-if="!!validateResult[html.radio.variable]&&html.radio.required">
                         <i class="iconfont icon-xingxing" :style="{'color':validateResult[html.radio.variable].status&&validateResult[html.radio.variable].val.length>0?'#09bb07':'red'}"></i>
                     </template>
                 </div>

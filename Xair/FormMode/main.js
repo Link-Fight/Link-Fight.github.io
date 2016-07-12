@@ -4,13 +4,11 @@ Vue.directive('validate', {
 
     },
     update: function (newVal, oldVal) {
-        console.log("newVal" + JSON.stringify(newVal));
-        // console.log("oldVal" + JSON.stringify(oldVal));
+        // console.log("newVal" + JSON.stringify(newVal));
         if (newVal.type == "datetime") {
-            alert(newVal.val);
+            console.log( JSON.stringify(newVal));
         }
         if (!oldVal && !!newVal && !!newVal.key) {
-            console.info("First" + newVal.key);
             this.vm.$set("validateResult." + newVal.key, {
                 required: newVal.required,
                 val: newVal.val,
@@ -122,7 +120,6 @@ Vue.directive('validate', {
         // 输入不为空 并且  有类型的校验方法
         if (!!oldVal && !!config.typeValidFn[newVal.type]) {
             config.typeValidFn[newVal.type](newVal);
-            console.log(newVal.type);
         }
 
         if (oldVal && oldVal.required && newVal.val != oldVal.val && newVal.val != '') {
@@ -431,6 +428,50 @@ var app = new Vue({
                 "label": "生日",
                 "placeholder": "请选择日期",
                 "hint": "",
+                "required": true,
+                "mode": "parent",
+                "format": "YYYY-MM-DD",
+                "dayViewHeaderFormat": "MMMM YYYY",
+                "extraFormats": false,
+                "stepping": 1,
+                "minDate": "2016-07-05",
+                "maxDate": "2016-07-16",
+                "useCurrent": "true",
+                "collapse": true,
+                "locale": "",
+                "defaultDate": "2016-07-13",
+                "disabledDates": false,
+                "enabledDates": false,
+                "daysOfWeekDisabled": false,
+                "calendarWeeks": false,
+                "viewMode": "datetime-local",
+                "toolbarPlacement": "default",
+                "showTodayButton": false,
+                "showClear": "false",
+                "widgetPositioning": {
+                    "horizontal": "auto",
+                    "vertical": "auto"
+                },
+                "widgetParent": null,
+                "keepOpen": false,
+                "var_name": "Birthday",
+                "colSpan": 12,
+                "data": {
+                    "value": "",
+                    "label": ""
+                }
+            },
+            dateTime1: {
+                "type": "datetime",
+                "variable": "BeginDay",
+                "var_uid": "756988525577db1d5d21563021960905",
+                "dataType": "date",
+                "protectedValue": false,
+                "id": "BeginDay",
+                "name": "BeginDay",
+                "label": "开始时间",
+                "placeholder": "请选择时间",
+                "hint": "",
                 "required": false,
                 "mode": "parent",
                 "format": "YYYY-MM-DD",
@@ -447,7 +488,7 @@ var app = new Vue({
                 "enabledDates": false,
                 "daysOfWeekDisabled": false,
                 "calendarWeeks": false,
-                "viewMode": "date",
+                "viewMode": "datetime-local",
                 "toolbarPlacement": "default",
                 "showTodayButton": false,
                 "showClear": "false",
@@ -457,7 +498,7 @@ var app = new Vue({
                 },
                 "widgetParent": null,
                 "keepOpen": false,
-                "var_name": "Birthday",
+                "var_name": "BeginDay",
                 "colSpan": 12,
                 "data": {
                     "value": "",
@@ -476,7 +517,8 @@ var app = new Vue({
                 value: "233",
                 title: "李世明",
             },
-            Birthday: ""
+            Birthday: "",
+            Beginday:""
         },
         validateResult: {
         },
