@@ -401,7 +401,7 @@ var app = new Vue({
                 "type": "datetime",
                 "variable": "Birthday",
                 "var_uid": "756988525577db1d5d21563021960905",
-                "dataType": "datetime",
+                "dataType": "date",
                 "protectedValue": false,
                 "id": "Birthday",
                 "name": "Birthday",
