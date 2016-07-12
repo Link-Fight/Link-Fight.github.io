@@ -314,8 +314,9 @@
                 </div>
 
                 <div class="weui_cells weui_cells_access">  {{date.HH}} 时  {{date.mm}}  分</div>
-
+                <p>  {{direction}}</p>
                 <div v-show="dateTab==0" style="font-size:0;">
+                  
                     <div class="select_container">
                         <ul class="select_HH">
                             <li @click="clickFn('HH','UP',$event)" >
@@ -330,7 +331,7 @@
                         </ul>
                     </div>
                     <div class="select_container">
-                        <ul class="select_mm">
+                        <ul class="select_mm" id="moveMM">
                             <li @click="clickFn('mm','UP',$event)"  >
                                 {{+date.mm+1 |filNum 'mm'}}
                             </li>

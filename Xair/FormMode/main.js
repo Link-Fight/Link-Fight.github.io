@@ -156,6 +156,7 @@ Vue.component("date", {
             months: ['不限', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             days: ['不限'],
             chooseText: '筛选',
+            direction: "",
             oldDate: {
                 year: '',
                 month: '',
@@ -189,7 +190,8 @@ Vue.component("date", {
                     string: '',
                     stringWeek: '',
                     HH: "09",
-                    mm: "21"
+                    mm: "21",
+
                 }
             },
             twoWay: true
@@ -226,7 +228,7 @@ Vue.component("date", {
             } else if (key == 'mm') {
                 num = (num + 60) % 60;
                 if (num == 0) {
-                    this.mHandleNum('HH','UP',event);
+                    this.mHandleNum('HH', 'UP', event);
                 }
             }
 
@@ -236,7 +238,7 @@ Vue.component("date", {
             this.date[key] = num;
         },
         clickFn: function (key, action, event) {
-            this.mHandleNum.apply(this,arguments);
+            this.mHandleNum.apply(this, arguments);
         },
         selectDate: function (str, num) {
             switch (str) {
@@ -354,11 +356,38 @@ Vue.component("date", {
         }
     },
     ready: function () {
+        var _this = this;
+        console.log("Ready");
         var currentYear = new Date().getFullYear();
         this.years = ['不限'];
         for (var i = 2015; i <= currentYear; i++) {
             this.years.push(i);
         }
+        var moveMM = document.getElementById("moveMM");
+        moveMM.addEventListener("touchstart", function (event) {
+            console.log("touchstart");
+            event.preventDefault();
+        }, false);
+        var old = "";
+        moveMM.addEventListener("touchmove", function (event) {
+            console.count("touchmove");
+            console.count(event.clientY)
+            if (!!old) {
+                if (event.touches[0].screenY < old) {
+                    _this.direction =event.target.nodeName+ "@UP" + event.currentTarget.nodeName;
+                } else {
+                    _this.direction =event.target.nodeName +"@DOWN" + event.currentTarget.nodeName;
+                }
+            }
+
+            old = event.touches[0].screenY;
+            console.log(event.touches[0].screenX - event.touches[0].clientX);
+            event.preventDefault();
+        }, false);
+        moveMM.addEventListener("touchend", function (event) {
+            console.log("touchend");
+            event.preventDefault();
+        }, false);
     }
 });
 
