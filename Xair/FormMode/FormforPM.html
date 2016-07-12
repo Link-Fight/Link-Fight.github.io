@@ -167,6 +167,76 @@
                             required:html.text.required,
                             maxLength:html.text.maxLength,
                             minLength:html.text.minLength}">
+                    <input class="weui_input" type="datetime-local" :placeholder="html.dateTime.placeholder" v-model='variables.Birthday'>
+                </div>
+            </div>
+
+
+            <div class="weui_cell">
+                <div class="weui_cell_hd"><label for="" class="weui_label">
+                    {{html.dateTime.label}}
+                    </label></div>
+                <div class="weui_cell_bd weui_cell_primary" v-validate="{
+                            type:html.dateTime.type,
+                            key:html.dateTime.variable,
+                            dataType:html.dateTime.dataType,
+                            val:variables.email,
+                            validate:html.text.validate,
+                            validataMessage:html.text.validateMessage,
+                            required:html.text.required,
+                            maxLength:html.text.maxLength,
+                            minLength:html.text.minLength}">
+                    <input class="weui_input" type="week" :placeholder="html.dateTime.placeholder" v-model='variables.Birthday'>
+                </div>
+            </div>
+            <div class="weui_cell">
+                <div class="weui_cell_hd"><label for="" class="weui_label">
+                    {{html.dateTime.label}}
+                    </label></div>
+                <div class="weui_cell_bd weui_cell_primary" v-validate="{
+                            type:html.dateTime.type,
+                            key:html.dateTime.variable,
+                            dataType:html.dateTime.dataType,
+                            val:variables.email,
+                            validate:html.text.validate,
+                            validataMessage:html.text.validateMessage,
+                            required:html.text.required,
+                            maxLength:html.text.maxLength,
+                            minLength:html.text.minLength}">
+                    <input class="weui_input" type="month" :placeholder="html.dateTime.placeholder" v-model='variables.Birthday'>
+                </div>
+            </div>
+            <div class="weui_cell">
+                <div class="weui_cell_hd"><label for="" class="weui_label">
+                    {{html.dateTime.label}}
+                    </label></div>
+                <div class="weui_cell_bd weui_cell_primary" v-validate="{
+                            type:html.dateTime.type,
+                            key:html.dateTime.variable,
+                            dataType:html.dateTime.dataType,
+                            val:variables.email,
+                            validate:html.text.validate,
+                            validataMessage:html.text.validateMessage,
+                            required:html.text.required,
+                            maxLength:html.text.maxLength,
+                            minLength:html.text.minLength}">
+                    <input class="weui_input" type="time" :placeholder="html.dateTime.placeholder" v-model='variables.Birthday'>
+                </div>
+            </div>
+            <div class="weui_cell">
+                <div class="weui_cell_hd"><label for="" class="weui_label">
+                    {{html.dateTime.label}}
+                    </label></div>
+                <div class="weui_cell_bd weui_cell_primary" v-validate="{
+                            type:html.dateTime.type,
+                            key:html.dateTime.variable,
+                            dataType:html.dateTime.dataType,
+                            val:variables.email,
+                            validate:html.text.validate,
+                            validataMessage:html.text.validateMessage,
+                            required:html.text.required,
+                            maxLength:html.text.maxLength,
+                            minLength:html.text.minLength}">
                     <input class="weui_input" type="datetime" :placeholder="html.dateTime.placeholder" v-model='variables.Birthday'>
                 </div>
             </div>
