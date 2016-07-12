@@ -6,7 +6,7 @@ Vue.directive('validate', {
     update: function (newVal, oldVal) {
         console.log("newVal" + JSON.stringify(newVal));
         // console.log("oldVal" + JSON.stringify(oldVal));
-        if(newVal.type=="datetime"){
+        if (newVal.type == "datetime") {
             alert(newVal.val);
         }
         if (!oldVal && !!newVal && !!newVal.key) {
@@ -81,8 +81,10 @@ Vue.directive('validate', {
                         config.toolFn.required(params.val);
                     }
                 },
-                "datetime":function(params){
-
+                "datetime": function (params) {
+                    if (params.required) {
+                        config.toolFn.required(params.val);
+                    }
                 }
             },
             toolFn: {
@@ -90,12 +92,12 @@ Vue.directive('validate', {
                     if (Array.isArray(params)) {
                         if (params.length == 0) {
                             config.result.status = false;
-                            config.result.msg += "最少选择一项 ";
+                            config.result.msg += " 最少选择一项 ";
                         }
                     } else {
                         if (!!!params) {
                             config.result.status = false;
-                            config.result.msg += "这是必填项 ";
+                            config.result.msg += " 这是必填项 ";
                         }
                     }
                 }
@@ -429,7 +431,7 @@ var app = new Vue({
                 "enabledDates": false,
                 "daysOfWeekDisabled": false,
                 "calendarWeeks": false,
-                "viewMode": "months",
+                "viewMode": "month",
                 "toolbarPlacement": "default",
                 "showTodayButton": false,
                 "showClear": "false",
@@ -458,7 +460,7 @@ var app = new Vue({
                 value: "233",
                 title: "李世明",
             },
-            Birthday:""
+            Birthday: ""
         },
         validateResult: {
         },

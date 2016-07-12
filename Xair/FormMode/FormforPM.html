@@ -158,17 +158,19 @@
                             key:html.dateTime.variable,
                             dataType:html.dateTime.dataType,
                             val:variables.Birthday,
-                            validate:html.dateTime.validate,
-                            validataMessage:html.dateTime.validateMessage,
                             required:html.dateTime.required,
                             minDate:html.dateTime.minDate,
                             maxDate:html.dateTime.maxDate}">
-                        <span class="placeholder" v-if="variables.Birthday.length>0">
+                        <span class="placeholder" v-if="variables.Birthday.length==0" style="top:-10px;">
                             {{html.dateTime.placeholder}}
                         </span>
-                        <input class="weui_input" :type="html.dateTime.dataType" :min="html.dateTime.minDate" :max="html.dateTime.maxDate" v-model='variables.Birthday'>
+                        <input class="weui_input" :type="html.dateTime.viewMode" :min="html.dateTime.minDate" :max="html.dateTime.maxDate" v-model='variables.Birthday'>
                     </div>
-                    <div class="weui_cell_ft"></div>
+                    <div class="weui_cell_ft">
+                        <template v-if="!!validateResult[html.dateTime.variable]">
+                            <i class="iconfont icon-xingxing" :style="{'color':validateResult[html.dateTime.variable].status&&validateResult[html.dateTime.variable].val.length>0?'#09bb07':'red'}"></i>
+                        </template>
+                    </div>
                 </div>
             </div>
 
