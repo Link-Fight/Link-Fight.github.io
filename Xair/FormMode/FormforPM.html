@@ -1,0 +1,474 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=no">
+    <meta charset="UTF-8">
+    <title>Form</title>
+    <link rel="stylesheet" type="text/css" href="weui.css" />
+    <link rel="stylesheet" type="text/css" href="icon-font/iconfont.css">
+    <script src="vue.js"></script>
+    <style>
+        body {
+            background-color: #fbf9fe;
+        }
+        
+        .weui_cells_form .weui_cell_hd {
+            padding-right: .5em;
+        }
+        
+        .weui_label {
+            width: auto;
+        }
+        
+        .weui_select {
+            padding-left: 0px;
+        }
+        
+        .weui_footer {
+            background-color: #fff;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            border-top: 1px solid #D9D9D9;
+        }
+        
+        .weui_footer_inner {
+            padding: 10px 15px;
+        }
+        
+        .weui_cells_title .weui_cell_ft {
+            float: right;
+        }
+        
+        .weui_label {
+            display: block;
+            width: 105px;
+            word-wrap: break-word;
+            word-break: break-all;
+        }
+        
+        .textarea {
+            padding-left: 15px;
+        }
+        
+        .textarea_title {
+            padding-top: 11px;
+            line-height: 24px;
+            padding-bottom: 9px;
+            font-size: 14px;
+            /*color: #515151;*/
+        }
+        
+        .textarea_content {
+            color: #7d7d7d;
+            border-top: 1px solid #e5e5e5;
+            padding: 10px 36px 10px 0px;
+            font-size: 14px;
+        }
+        
+        .textarea_title .iconfont {
+            float: right;
+            margin-right: 15px;
+            line-height: 25px;
+        }
+        
+        .textarea_content textarea {
+            font-size: 14px;
+        }
+        
+        .textarea_content>div {
+            min-height: 50px;
+            word-break: break-all;
+            font-size: 17px;
+            line-height: 25px;
+        }
+        
+        .showValue {
+            margin-top: 10px;
+            border-top: 1px solid #cbcbcb;
+            border-bottom: 1px solid #cbcbcb;
+            background-color: #fff;
+        }
+        
+        .showValue .weui_cell {
+            padding-left: 15px;
+        }
+        
+        .msg_error {
+            line-height: 22px;
+            color: red;
+            font-size: 12px;
+            padding: 10px 15px 0px;
+            margin-bottom: -10px;
+        }
+        
+        .readyOnly_wrap {
+            position: relative;
+        }
+        
+        .readyOnly {
+            position: absolute;
+            display: block;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 0;
+            z-index: 10;
+        }
+        
+        .placeholder-warp {
+            position: relative;
+        }
+        
+        .placeholder {
+            position: absolute;
+            color: #a9a9a9;
+            line-height: 44px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="app">
+        <!--
+        模板说明：
+        1，标签上的‘:’+属性名/‘v-’+属性名，都属于vue的动态属性绑定，属性值为变量；
+        2，内容区域的{{}}，属于vue动态内容绑定，双括号内是变量；
+        3，v-model:数据
+        4，v-validate 校验，传入一个对象{val：数据，variables：校验条件，validataMessage：校验提示，required：是否需要检验，type：结构类型，maxLength：最大长度}
+        5，:disable：绑定mode字段，表明标签是否可操作
+    -->
+        <!--模板开始-->
+        <div id="infoContract">
+
+            <div class="weui_cells_title">{{html.title.label}}</div>
+
+            <!--dateTime-->
+            <div class="weui_cell">
+                <div class="weui_cell_hd"><label for="" class="weui_label">日期</label></div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input class="weui_input" type="date" value="">
+                </div>
+            </div>
+
+            <div class="weui_cell">
+                <div class="weui_cell_hd"><label for="" class="weui_label">时间</label></div>
+                <div class="weui_cell_bd weui_cell_primary">
+                    <input class="weui_input" type="datetime-local" value="" placeholder="">
+                </div>
+            </div>
+            <!--input 组件-->
+            <!--BEGIN-input-VIEW-->
+            <div class="showValue">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">{{html.text.label}}</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <span class="weui_input">{{variables.email}}</span>
+                    </div>
+                    <div class="weui_cell_ft" v-if="html.text.required">
+                    </div>
+                </div>
+            </div>
+            <!--END-input-VIEW-->
+            <!--BEGIN-input-EDIT-->
+            <p class="msg_error">{{ validateResult[html.text.variable]?validateResult[html.text.variable].msg :""}}</p>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">{{html.text.label}}</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <input class="weui_input" :type="html.text.type" :name="html.text.name" v-validate="{
+                            type:html.text.type,
+                            key:html.text.variable,
+                            dataType:html.text.dataType,
+                            val:variables.email,
+                            validate:html.text.validate,
+                            validataMessage:html.text.validateMessage,
+                            required:html.text.required,
+                            maxLength:html.text.maxLength,
+                            minLength:html.text.minLength}" :disable="html.text.mode" v-model="variables.email" :placeholder="html.text.placeholder">
+                    </div>
+                    <div class="weui_cell_ft" v-if="html.text.required">
+                        <template v-if="!!validateResult[html.text.variable]">
+                            <i class="iconfont icon-xingxing" :style="{'color':validateResult[html.text.variable].status&&validateResult[html.text.variable].val.length>0?'#09bb07':'red'}"></i>
+                        </template>
+                    </div>
+                </div>
+            </div>
+            <!--END-input-EDIT-->
+
+            <!--checkbox组件-->
+            <!--BEGIN-checkbox-VIEW-->
+
+            <div class="weui_cells_title">{{html.checkbox.label}}
+            </div>
+            <div class="weui_cells weui_cells_checkbox readyOnly_wrap">
+                <div class="readyOnly">
+                </div>
+                <label v-for="item in html.checkbox.options" :for="'checkbox'+$index" class="weui_cell weui_check_label">
+                    <div class="weui_cell_hd ">
+                        <input type="checkbox" class="weui_check" :name="html.checkbox.var_name" :value="item.value" :id="'checkbox'+$index" v-model="variables.checkboxVar" readonly=readonly >
+                        <i class="weui_icon_checked"></i>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>{{item.label}}</p>
+                    </div>
+                </label>
+            </div>
+
+            <!--END-checkbox-VIEW-->
+            <!--BEGIN-checkbox-EDIT-->
+            <p class="msg_error">{{ validateResult[html.checkbox.variable]?validateResult[html.checkbox.variable].msg :""}}</p>
+            <div class="weui_cells_title">{{html.checkbox.label}}
+                <div class="weui_cell_ft" v-if="html.checkbox.required">
+                    <template v-if="!!validateResult[html.checkbox.variable]">
+                        <i class="iconfont icon-xingxing" :style="{'color':validateResult[html.checkbox.variable].status && validateResult[html.checkbox.variable].val.length>0?'#09bb07':'red'}"></i>
+                    </template>
+                </div>
+            </div>
+            <div class="weui_cells weui_cells_checkbox" v-validate="{
+            type:html.checkbox.type,
+            key:html.checkbox.variable,
+            val:variables.checkboxVar,
+            required:html.checkbox.required}">
+                <label v-for="item in html.checkbox.options" :for="'checkbox'+$index" class="weui_cell weui_check_label">
+                    <div class="weui_cell_hd">
+                        <input type="checkbox" class="weui_check" :name="html.checkbox.var_name" :value="item.value" :id="'checkbox'+$index" v-model="variables.checkboxVar">
+                        <i class="weui_icon_checked"></i>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>{{item.label}}</p>
+                    </div>
+                </label>
+            </div>
+            <!--END-checkbox-EDIT-->
+            <!--dropdown组件-->
+            <!--BEGIN-dropdown-VIEW-->
+            <div class="showValue">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">{{html.dropdown.label}}</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <span class="weui_input">
+                            <template v-for="item in html.dropdown.options" v-if="item.value===variables.dropdown">
+                                    {{item.label}}
+                            </template>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--END-dropdown-VIEW-->
+            <!--BEGIN-dropdown-EDIT-->
+            <p class="msg_error">{{ validateResult[html.dropdown.variable]?validateResult[html.dropdown.variable].msg :""}}</p>
+            <div class="weui_cells_title">{{html.dropdown.label}}
+                <div class="weui_cell_ft" v-if="html.dropdown.required">
+                    <template v-if="!!validateResult[html.dropdown.variable]">
+                        <i class="iconfont icon-xingxing" :style="{'color':validateResult[html.dropdown.variable].status&&validateResult[html.dropdown.variable].val.length>0?'#09bb07':'red'}"></i>
+                    </template>
+                </div>
+            </div>
+            <div class="weui_cells">
+                <div class="weui_cell weui_cell_select weui_select_after">
+                    <div class="weui_cell_hd">
+                        <label for="" class="weui_label">{{html.dropdown.label}}</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary placeholder-warp" v-validate="{
+                        type:html.dropdown.type,
+                        key:html.dropdown.variable,
+                        label:html.dropdown.label,
+                        val:variables.dropdown,
+                        required:html.dropdown.required, }">
+                        <div class="placeholder" v-if="variables.dropdown.length==0">
+                            {{html.dropdown.placeholder}}
+                        </div>
+                        <select class="weui_select" :name="html.dropdown.name" :disable="html.dropdown.mode" v-model="variables.dropdown">
+                        <option v-for="item in html.dropdown.options" :value="item.value">{{item.label}}</option>
+                </select>
+                    </div>
+                </div>
+            </div>
+            <!--END-dropdown-EDIT-->
+            <!--radio组件-->
+            <!--BEGIN-radio-VIEW-->
+            <div class="showValue">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">{{html.radio.label}}</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <span class="weui_input">
+                            <template v-for="item in html.radio.options" v-if="item.value===variables.radio">
+                                    {{item.label}}
+                            </template>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--END-radio-VIEW-->
+            <!--BEGIN-radio-EDIT-->
+            <div class="weui_cells_title">{{html.radio.label}}
+                <div class="weui_cell_ft" v-if="html.radio.required">
+                    <template v-if="!!validateResult[html.radio.variable]">
+                        <i class="iconfont icon-xingxing" :style="{'color':validateResult[html.radio.variable].status&&validateResult[html.radio.variable].val.length>0?'#09bb07':'red'}"></i>
+                    </template>
+                </div>
+
+            </div>
+            <div class="weui_cells weui_cells_checkbox" v-validate="{
+            type:html.radio.type,
+            key:html.radio.variable,
+            val:variables.radio,
+            required:html.radio.required}">
+                <label v-for="item in html.radio.options" :for="'radio'+$index" class="weui_cell weui_check_label">
+                    <div class="weui_cell_hd">
+                        <input type="radio" class="weui_check"  :value="item.value" :id="'radio'+$index" v-model="variables.radio">
+                        <i class="weui_icon_checked"></i>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>{{item.label}}</p>
+                    </div>
+                </label>
+            </div>
+            <p class="msg_error">{{ validateResult[html.radio.variable]?validateResult[html.radio.variable].msg :""}}</p>
+            <!--END-radio-EDIT-->
+            <!--textarea组件-->
+            <!--BEGIN-textarea-VIEW-->
+            <div class="showValue textarea">
+                <div class="textarea_title">
+                    {{html.textarea.label}}
+                </div>
+                <div class="textarea_content">
+                    <div> {{variables.reportText}}</div>
+                </div>
+            </div>
+            <!--END-textarea-VIEW-->
+            <!--BEGIN-textarea-EDIT-->
+            <p class="msg_error">{{ validateResult[html.textarea.variable]?validateResult[html.textarea.variable].msg :""}}</p>
+            <div class="weui_cells_title">{{html.textarea.label}}
+                <div class="weui_cell_ft">
+                    <i class="iconfont icon-xingxing" :style="{'color':!!variables.reportText?'#09bb07':'red'}" v-if="html.textarea.required"></i>
+                </div>
+            </div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <textarea class="weui_textarea" :name="html.textarea.name" v-validate="{
+                        type:html.textarea.type,
+                        key:html.textarea.variable,
+                        dataType:html.textarea.dataType,
+                        val:variables.reportText,
+                        validate:html.textarea.validate,validataMessage:html.textarea.validateMessage,required:html.textarea.required,maxLength:html.textarea.maxLength
+                        }" :disable="html.textarea.mode" v-model="variables.reportText" :placeholder="html.textarea.placeholder" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <!--END-textarea-EDIT-->
+
+            <div class="weui_footer">
+                <div class="weui_footer_inner">
+                    <a href="javascript:;" class="weui_btn weui_btn_primary">{{html.submit.label}}</a>
+                </div>
+            </div>
+
+            <!--模板结束-->
+
+
+        </div>
+        <!--model_view模板开始-->
+        <div id="model_view" style="border-top:20px solid #dada9c;background-color:#f3f3f3;">
+            <!---input 组件-->
+            <div class="showValue">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">{{html.text.label}}</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <span class="weui_input">{{variables.email}}</span>
+                    </div>
+                    <div class="weui_cell_ft" v-if="html.text.required">
+
+                    </div>
+                </div>
+            </div>
+            <!--textarea组件-->
+            <div class="showValue textarea">
+                <div class="textarea_title">{{html.textarea.label}}
+                </div>
+                <div class="textarea_content">
+                    <div> {{variables.reportText}}</div>
+                </div>
+            </div>
+            <!--radio组件-->
+            <div class="showValue">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">{{html.radio.label}}</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <span class="weui_input">
+                            <template v-for="item in html.radio.options" v-if="item.value===variables.radio">
+                                    {{item.label}}
+                            </template>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--dropdown组件-->
+            <div class="showValue">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">{{html.dropdown.label}}</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <span class="weui_input">
+                            <template v-for="item in html.dropdown.options" v-if="item.value===variables.dropdown">
+                                    {{item.label}}
+                            </template>
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--复杂的dropdown组件-->
+            <div class="showValue">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">{{html.dropdownList.label}}</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <span class="weui_input">
+                             {{variables.dropdownList.title}}
+                        </span>
+                    </div>
+                </div>
+            </div>
+            <!--  请输入处理意见的 textarea组件-->
+            <!--textarea组件-->
+            <div class="weui_cells_title">{{html.textarea_OP.label}}
+                <div class="weui_cell_ft">
+                    <i class="iconfont icon-xingxing" :style="{'color':!!variables.reportText?'#09bb07':'red'}" v-if="html.textarea_OP.required"></i>
+                </div>
+            </div>
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <textarea class="weui_textarea" :name="html.textarea_OP.name" v-validate="{type:html.textarea_OP.type,
+                        key:html.textarea_OP.variable,label:html.textarea_OP.label,
+                        dataType:html.textarea_OP.dataType,val:variables.reportText,validate:html.textarea_OP.validate,validataMessage:html.textarea_OP.validateMessage,required:html.textarea_OP.required,maxLength:html.textarea_OP.maxLength}" :disable="html.textarea_OP.mode"
+                            v-model="variables.note_op" :placeholder="html.textarea_OP.placeholder" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <p class="msg_error">{{ validateResult[html.textarea_OP.variable]?validateResult[html.textarea_OP.variable].msg :""}}</p>
+        </div>
+        <!--model_view模板结束-->
+    </div>
+    <script src='main.js'></script>
+</body>
+
+</html>
