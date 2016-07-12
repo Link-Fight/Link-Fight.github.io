@@ -95,6 +95,14 @@
             padding-left: 15px;
         }
         
+        .showValue span.weui_input {
+            font-size: 17px;
+        }
+        
+        .showValue .weui_cell_hd {
+            padding-right: .5em;
+        }
+        
         .msg_error {
             line-height: 22px;
             color: red;
@@ -146,8 +154,23 @@
         <div id="infoContract">
 
             <div class="weui_cells_title">{{html.title.label}}</div>
-            <!--dateTime-->
-
+            <!--dateTime 组件-->
+            <!--BEGIN-dateTime-VIEW-->
+            <div class="showValue">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">{{html.dateTime.label}}</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <span class="weui_input">{{variables.Birthday}}</span>
+                    </div>
+                    <div class="weui_cell_ft" v-if="html.text.required">
+                    </div>
+                </div>
+            </div>
+            <!--END-dateTime-VIEW-->
+            <!--BEGIN-dateTime-EDIT-->
+            <p class="msg_error">{{ validateResult[html.dateTime.variable]?validateResult[html.dateTime.variable].msg :""}}</p>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
                     <div class="weui_cell_hd">
@@ -173,9 +196,7 @@
                     </div>
                 </div>
             </div>
-
-
-
+            <!--END-dateTime-EDIT-->
             <!--input 组件-->
             <!--BEGIN-input-VIEW-->
             <div class="showValue">
