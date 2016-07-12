@@ -453,6 +453,7 @@ var app = new Vue({
                 value: "233",
                 title: "李世明",
             },
+            Birthday:""
         },
         validateResult: {
         },

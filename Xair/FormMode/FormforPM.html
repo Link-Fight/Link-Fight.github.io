@@ -154,9 +154,20 @@
             </div>
 
             <div class="weui_cell">
-                <div class="weui_cell_hd"><label for="" class="weui_label">时间</label></div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="datetime-local" value="" placeholder="">
+                <div class="weui_cell_hd"><label for="" class="weui_label">
+                    {{html.dateTime.label}}
+                    </label></div>
+                <div class="weui_cell_bd weui_cell_primary" v-validate="{
+                            type:html.dateTime.type,
+                            key:html.dateTime.variable,
+                            dataType:html.dateTime.dataType,
+                            val:variables.email,
+                            validate:html.text.validate,
+                            validataMessage:html.text.validateMessage,
+                            required:html.text.required,
+                            maxLength:html.text.maxLength,
+                            minLength:html.text.minLength}">
+                    <input class="weui_input" type="datetime" :placeholder="html.dateTime.placeholder" v-model='variables.Birthday'>
                 </div>
             </div>
             <!--input 组件-->
@@ -364,7 +375,8 @@
                         dataType:html.textarea.dataType,
                         val:variables.reportText,
                         validate:html.textarea.validate,validataMessage:html.textarea.validateMessage,required:html.textarea.required,maxLength:html.textarea.maxLength
-                        }" :disable="html.textarea.mode" v-model="variables.reportText" :placeholder="html.textarea.placeholder" rows="3"></textarea>
+                        }" :disable="html.textarea.mode" v-model="variables.reportText" :placeholder="html.textarea.placeholder"
+                            rows="3"></textarea>
                     </div>
                 </div>
             </div>
@@ -459,8 +471,9 @@
                     <div class="weui_cell_bd weui_cell_primary">
                         <textarea class="weui_textarea" :name="html.textarea_OP.name" v-validate="{type:html.textarea_OP.type,
                         key:html.textarea_OP.variable,label:html.textarea_OP.label,
-                        dataType:html.textarea_OP.dataType,val:variables.reportText,validate:html.textarea_OP.validate,validataMessage:html.textarea_OP.validateMessage,required:html.textarea_OP.required,maxLength:html.textarea_OP.maxLength}" :disable="html.textarea_OP.mode"
-                            v-model="variables.note_op" :placeholder="html.textarea_OP.placeholder" rows="3"></textarea>
+                        dataType:html.textarea_OP.dataType,val:variables.reportText,validate:html.textarea_OP.validate,validataMessage:html.textarea_OP.validateMessage,required:html.textarea_OP.required,maxLength:html.textarea_OP.maxLength}"
+                            :disable="html.textarea_OP.mode" v-model="variables.note_op" :placeholder="html.textarea_OP.placeholder"
+                            rows="3"></textarea>
                     </div>
                 </div>
             </div>
