@@ -123,8 +123,10 @@
         
         .placeholder {
             position: absolute;
+            top：0;
+            left: 0;
             color: #a9a9a9;
-            line-height: 44px;
+            line-height: 45px;
         }
     </style>
 </head>
@@ -145,18 +147,13 @@
 
             <div class="weui_cells_title">{{html.title.label}}</div>
             <!--dateTime-->
-            <div class="weui_cell">
-                <div class="weui_cell_hd"><label for="" class="weui_label">日期</label></div>
-                <div class="weui_cell_bd weui_cell_primary">
-                    <input class="weui_input" type="date" value="">
-                </div>
-            </div>
 
-            <div class="weui_cell">
-                <div class="weui_cell_hd"><label for="" class="weui_label">
-                    {{html.dateTime.label}}
-                    </label></div>
-                <div class="weui_cell_bd weui_cell_primary" v-validate="{
+            <div class="weui_cells weui_cells_form">
+                <div class="weui_cell">
+                    <div class="weui_cell_hd">
+                        <label for="" class="weui_label">{{html.dateTime.label}}</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary placeholder-warp" v-validate="{
                             type:html.dateTime.type,
                             key:html.dateTime.variable,
                             dataType:html.dateTime.dataType,
@@ -166,13 +163,17 @@
                             required:html.dateTime.required,
                             minDate:html.dateTime.minDate,
                             maxDate:html.dateTime.maxDate}">
-                    <input class="weui_input" :type="html.dateTime.dataType" :placeholder="html.dateTime.placeholder" :min="html.dateTime.minDate" :max="html.dateTime.maxDate"
-                        v-model='variables.Birthday'>
+                        <span class="placeholder" v-if="variables.Birthday.length>0">
+                            {{html.dateTime.placeholder}}
+                        </span>
+                        <input class="weui_input" :type="html.dateTime.dataType" :min="html.dateTime.minDate" :max="html.dateTime.maxDate" v-model='variables.Birthday'>
+                    </div>
+                    <div class="weui_cell_ft"></div>
                 </div>
             </div>
 
 
-    
+
             <!--input 组件-->
             <!--BEGIN-input-VIEW-->
             <div class="showValue">

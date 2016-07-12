@@ -6,7 +6,9 @@ Vue.directive('validate', {
     update: function (newVal, oldVal) {
         console.log("newVal" + JSON.stringify(newVal));
         // console.log("oldVal" + JSON.stringify(oldVal));
-
+        if(newVal.type=="datetime"){
+            alert(newVal.val);
+        }
         if (!oldVal && !!newVal && !!newVal.key) {
             console.info("First" + newVal.key);
             this.vm.$set("validateResult." + newVal.key, {
@@ -78,6 +80,9 @@ Vue.directive('validate', {
                     if (params.required) {
                         config.toolFn.required(params.val);
                     }
+                },
+                "datetime":function(params){
+
                 }
             },
             toolFn: {
