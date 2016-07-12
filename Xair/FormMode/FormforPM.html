@@ -144,7 +144,7 @@
         <div id="infoContract">
 
             <div class="weui_cells_title">{{html.title.label}}</div>
-            <input type="date" name="222" value="1992.01.09">
+            <input type="date" name="222" value="1992-01-09">
             <!--dateTime-->
             <div class="weui_cell">
                 <div class="weui_cell_hd"><label for="" class="weui_label">日期</label></div>
@@ -161,13 +161,14 @@
                             type:html.dateTime.type,
                             key:html.dateTime.variable,
                             dataType:html.dateTime.dataType,
-                            val:variables.email,
-                            validate:html.text.validate,
-                            validataMessage:html.text.validateMessage,
-                            required:html.text.required,
-                            maxLength:html.text.maxLength,
-                            minLength:html.text.minLength}">
-                    <input class="weui_input" type="datetime-local" :placeholder="html.dateTime.placeholder" v-model='variables.Birthday'>
+                            val:variables.Birthday,
+                            validate:html.dateTime.validate,
+                            validataMessage:html.dateTime.validateMessage,
+                            required:html.dateTime.required,
+                            minDate:html.dateTime.minDate,
+                            maxDate:html.dateTime.maxDate}">
+                    <input class="weui_input" type="datetime-local" :placeholder="html.dateTime.placeholder" :min="html.dateTime.minDate" :max="html.dateTime.maxDate"
+                        v-model='variables.Birthday'>
                 </div>
             </div>
 
@@ -176,16 +177,7 @@
                 <div class="weui_cell_hd"><label for="" class="weui_label">
                     {{html.dateTime.label}}
                     </label></div>
-                <div class="weui_cell_bd weui_cell_primary" v-validate="{
-                            type:html.dateTime.type,
-                            key:html.dateTime.variable,
-                            dataType:html.dateTime.dataType,
-                            val:variables.email,
-                            validate:html.text.validate,
-                            validataMessage:html.text.validateMessage,
-                            required:html.text.required,
-                            maxLength:html.text.maxLength,
-                            minLength:html.text.minLength}">
+                <div class="weui_cell_bd weui_cell_primary">
                     <input class="weui_input" type="week" :placeholder="html.dateTime.placeholder" v-model='variables.Birthday'>
                 </div>
             </div>
@@ -193,16 +185,7 @@
                 <div class="weui_cell_hd"><label for="" class="weui_label">
                     {{html.dateTime.label}}
                     </label></div>
-                <div class="weui_cell_bd weui_cell_primary" v-validate="{
-                            type:html.dateTime.type,
-                            key:html.dateTime.variable,
-                            dataType:html.dateTime.dataType,
-                            val:variables.email,
-                            validate:html.text.validate,
-                            validataMessage:html.text.validateMessage,
-                            required:html.text.required,
-                            maxLength:html.text.maxLength,
-                            minLength:html.text.minLength}">
+                <div class="weui_cell_bd weui_cell_primary">
                     <input class="weui_input" type="month" :placeholder="html.dateTime.placeholder" v-model='variables.Birthday'>
                 </div>
             </div>
@@ -210,16 +193,7 @@
                 <div class="weui_cell_hd"><label for="" class="weui_label">
                     {{html.dateTime.label}}
                     </label></div>
-                <div class="weui_cell_bd weui_cell_primary" v-validate="{
-                            type:html.dateTime.type,
-                            key:html.dateTime.variable,
-                            dataType:html.dateTime.dataType,
-                            val:variables.email,
-                            validate:html.text.validate,
-                            validataMessage:html.text.validateMessage,
-                            required:html.text.required,
-                            maxLength:html.text.maxLength,
-                            minLength:html.text.minLength}">
+                <div class="weui_cell_bd weui_cell_primary">
                     <input class="weui_input" type="time" :placeholder="html.dateTime.placeholder" v-model='variables.Birthday'>
                 </div>
             </div>
@@ -231,12 +205,12 @@
                             type:html.dateTime.type,
                             key:html.dateTime.variable,
                             dataType:html.dateTime.dataType,
-                            val:variables.email,
-                            validate:html.text.validate,
-                            validataMessage:html.text.validateMessage,
-                            required:html.text.required,
-                            maxLength:html.text.maxLength,
-                            minLength:html.text.minLength}">
+                            val:variables.Birthday,
+                            validate:html.dateTime.validate,
+                            validataMessage:html.dateTime.validateMessage,
+                            required:html.dateTime.required,
+                            minDate:html.dateTime.minDate,
+                            maxDate:html.dateTime.maxDate}">
                     <input class="weui_input" type="datetime" :placeholder="html.dateTime.placeholder" v-model='variables.Birthday'>
                 </div>
             </div>

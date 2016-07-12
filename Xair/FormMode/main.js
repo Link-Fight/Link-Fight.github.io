@@ -415,7 +415,7 @@ var app = new Vue({
                 "extraFormats": false,
                 "stepping": 1,
                 "minDate": "2016-07-05",
-                "maxDate": "2016-07-06",
+                "maxDate": "2016-07-16",
                 "useCurrent": "true",
                 "collapse": true,
                 "locale": "",
