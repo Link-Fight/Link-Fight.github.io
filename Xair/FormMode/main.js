@@ -156,7 +156,7 @@ Vue.component("date", {
             months: ['不限', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             days: ['不限'],
             chooseText: '筛选',
-            direction: "",
+            direction: "233",
             oldDate: {
                 year: '',
                 month: '',
