@@ -4,9 +4,8 @@ Vue.directive('validate', {
 
     },
     update: function (newVal, oldVal) {
-        // console.log("newVal" + JSON.stringify(newVal));
         if (newVal.type == "datetime") {
-            console.log(JSON.stringify(newVal));
+            // console.log(JSON.stringify(newVal));
         }
         if (!oldVal && !!newVal && !!newVal.key) {
             this.vm.$set("validateResult." + newVal.key, {
@@ -155,16 +154,14 @@ Vue.component("date", {
             years: ['不限'],
             months: ['不限', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             days: ['不限'],
-            chooseText: '筛选',
             touchConfight: {},
             oldDate: {
                 YYYY: '',
-                month: '',
+                MM: '',
+                DD: '',
                 day: '',
-                week: '',
                 HH: "08",
                 mm: "20",
-                format: "YYYY-MM-DD HH:mm:00",
             }
         }
     },
@@ -181,20 +178,46 @@ Vue.component("date", {
                 var _this = this;
                 return {
                     YYYY: mDate.getFullYear(),
-                    month: mDate.getMonth() + 1,
-                    day: mDate.getDate(),
-                    week: mDate.getDay(),
+                    MM: mDate.getMonth() + 1,
+                    DD: mDate.getDate(),
+                    day: mDate.getDay(),
                     HH: "09",
                     mm: "21",
-                    format: "YYYY-MM-DD HH:mm:00",
                 }
             },
             twoWay: true
+        },
+        format: {
+            type: String,
+            default: "YYYY-MM-DD HH:mm:00",
+        },
+        viewMode: {
+            type: String,
+            default: "datetime",
         }
     },
     computed: {
         weekText: function () {
-            return this.getWeekText(this.date.week)
+            var data = new Date(this.date.YYYY, this.date.MM - 1, this.date.DD);
+            if (data.toString().indexOf('Invalid') == -1) {
+                return this.getWeekText(data.getDay());
+            } else {
+                return "";
+            }
+        },
+        chooseText: function () {
+            if (this.dateTab == 0) {
+                return '选择';
+            }
+            if (this.dateTab == 1) {
+                return '选择年';
+            }
+            if (this.dateTab == 2) {
+                return !!this.date.YYYY ? this.date.YYYY + '年' : "选择月";
+            }
+            if (this.dateTab == 3) {
+                return !!this.date.DD ? this.date.MM + '月' : "选择日";
+            }
         }
     },
     watch: {
@@ -206,12 +229,18 @@ Vue.component("date", {
                 }
             }
         },
-        'dateTab': function (val) {
-            if (val == 0) this.chooseText = "筛选";
-            if (val == 1) this.chooseText = "选择年";
-            if (val == 2) this.chooseText = "选择月";
-            if (val == 3) this.chooseText = "选择日";
-        }
+        'viewMode': function (newVal, oldVal) {
+            if (this.viewMode == 'datetime') {
+                this.format = "YYYY-MM-DD HH:mm:00";
+            } else if (this.viewMode == 'days') {
+                this.format = "YYYY-MM-DD";
+            } else if (this.viewMode == 'months') {
+                this.format = "YYYY-MM";
+            } else if (this.viewMode == 'years') {
+                this.format = "YYYY";
+            }
+
+        },
     },
     methods: {
         touchFun: function (key, event) {
@@ -256,14 +285,20 @@ Vue.component("date", {
             }
             if (key == "HH") {
                 num = (num + 24) % 24;
-
             } else if (key == 'mm') {
                 num = (num + 60) % 60;
+            } else if (key == 'MM') {
+                num = (num + 12) % 12;
+                if (num == 0)
+                    num = 12;
+            } else if (key == "DD") {
+                var days = new Date(this.date.YYYY, this.date.MM, 0).getDate();
+                num = (num + days) % days;
                 if (num == 0) {
-                    this.mHandleNum('HH', action, event);
+                    num = days;
                 }
+                console.log(days + "@" + key + " " + action);
             }
-
             if (num <= 9) {
                 num = "0" + "" + num;
             }
@@ -272,89 +307,28 @@ Vue.component("date", {
         clickFn: function (key, action, event) {
             this.mHandleNum.apply(this, arguments);
         },
-        selectDate: function (str, num) {
-            switch (str) {
-                case 'YYYY':
-                    this.date.month = '';
-                    this.date.day = '';
-                    this.date.week = '';
-                    this.date.weekText = '';
-                    if (typeof num == 'string') {
-                        this.date.YYYY = '';
-                        this.goHome();
-                    } else {
-                        this.dateTab = 2;
-                        this.date.YYYY = num;
-                    }
-                    break;
-                case 'month':
-                    this.date.day = '';
-                    this.date.week = '';
-                    this.date.weekText = '';
-                    if (typeof num == 'string') {
-                        this.date.month = '';
-                        this.goHome();
-                    } else {
-                        this.dateTab = 3;
-                        this.date.month = num;
-                        this.setDaysByYearAndMonth();
-                    }
-                    break;
-                case 'day':
-                    if (typeof num == 'string') {
-                        this.date.day = '';
-                        this.date.week = '';
-                        this.date.weekText = '';
-                    } else {
-                        this.date.day = num;
-                        this.date.week = new Date(this.date.YYYY, this.date.month - 1, this.date.day).getDay();
-                        this.date.weekText = this.getWeekText(this.date.week);
-                    }
-                    this.goHome();
-                    break;
-            }
-        },
         changeTab: function (num) {
             if (num == 2 && !this.date.YYYY) return;
-            if (num == 3 && !this.date.month) return;
+            if (num == 3 && !this.date.MM) return;
             this.dateTab = num;
         },
         goHome: function () {
             this.dateTab = 0;
         },
         finishDate: function () {
-
-
             if (this.dateTab == 0) {
                 this.showDate = false;
                 console.info(this.toString());
             }
             this.goHome();
         },
-        clearDate: function () {
-            this.date.year = '';
-            this.date.month = '';
-            this.date.day = '';
-            this.date.week = '';
-            this.date.weekText = '';
-        },
         cancelDate: function () {
             this.showDate = false;
-            for (var i in this.oldDate) {
-                this.date[i] = this.oldDate[i];
-            }
-        },
-        setDaysByYearAndMonth: function () {
-            var number = new Date(this.date.YYYY, this.date.month, 0).getDate();
-            this.days = ['不限'];
-            for (var i = 1; i <= number; i++) {
-                this.days.push(i);
-            }
         },
         toString: function () {
-            var result = this.date.format;
+            var result = this.format;
             result = result.replace("YYYY", this.date.YYYY);
-            result = result.replace("MM", this.date.month);
+            result = result.replace("MM", this.date.MM);
             result = result.replace("DD", this.date.day);
             result = result.replace("HH", this.date.HH);
             result = result.replace("mm", this.date.mm);
@@ -367,11 +341,13 @@ Vue.component("date", {
             if (num == 4) return '星期四';
             if (num == 5) return '星期五';
             if (num == 6) return '星期六';
-            if (num == 7) return '星期天';
+            if (num == 0) return '星期天';
         }
     },
     filters: {
-        filNum: function (num, key) {
+        filNum: function (num, key, action) {
+            num = parseInt(num);
+            var addVar = "";
             if (num == -1) {
                 if (key == 'HH') {
                     num += 24;
@@ -379,10 +355,44 @@ Vue.component("date", {
                     num += 60;
                 }
             }
-            if (num <= 9) {
+            if (key == 'YYYY') {
+                addVar = '年';
+            }
+            if (key == 'HH' && num == 24) {
+                num = '00';
+            }
+            if (key == 'mm' && num == 60) {
+                num = '00';
+            }
+            if (key == 'MM') {
+                addVar = '月';
+                if (num != 12) {
+                    num = (num + 12) % 12;
+                }
+                if (num == 0) {
+                    num = 12;
+                }
+            }
+
+            if (key == 'DD') {
+                addVar = '日';
+                var days = new Date(this.date.YYYY, this.date.MM, 0).getDate();
+                if (num != days) {
+                    num = (num + days) % days;
+                    if (!!action) {
+                        console.log(days + "@" + num + " " + action);
+                    }
+
+                }
+                if (num == 0) {
+                    num = days;
+                }
+            }
+
+            if ((num + '').length < 2) {
                 num = "0" + "" + num;
             }
-            return num;
+            return num + addVar;
         }
     },
     ready: function () {
@@ -390,12 +400,6 @@ Vue.component("date", {
         this.$el.addEventListener('touchmove', function (e) {
             e.preventDefault();
         }, false);
-        console.log("Ready");
-        var currentYear = new Date().getFullYear();
-        this.years = ['不限'];
-        for (var i = 2015; i <= currentYear; i++) {
-            this.years.push(i);
-        }
     }
 });
 
