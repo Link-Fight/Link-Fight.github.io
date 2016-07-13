@@ -211,15 +211,21 @@
             color: black;
         }
         
-        .date-clear {
+        .date-save {
             position: absolute;
             bottom: 0;
             width: 92%;
             margin: 10px 0;
             border: 1px solid #ccc;
-            colo line-height: 36px;
-            background: white;
+            color: #fff;
+            line-height: 36px;
+            background: #04be02;
             -webkit-transform: translate(4%, 0);
+        }
+        
+        .data-canvel {
+            position: absolute;
+            left: 0;
         }
         
         .date-container .select_container {
@@ -268,7 +274,7 @@
         
         .select_containers .selects li {
             font-size: 14px;
-            padding: 2px 0;
+            padding: 8px 0;
         }
     </style>
 </head>
@@ -277,11 +283,13 @@
         <div class="date-cover"></div>
         <div class="date-main">
             <div class="date-header clearfix">
-                <div @click="cancelDate" class="fl weui_btn weui_btn_mini">取消</div>
+                <div @click="cancelDate" class="data-canvel weui_btn weui_btn_mini">取消</div>
                 <span>{{ chooseText }}</span>
-                <div @click="finishDate" class="fr weui_btn weui_btn_mini weui_btn_primary">完成</div>
+                <!--<div @click="finishDate" class="fr weui_btn weui_btn_mini weui_btn_primary">完成</div>-->
             </div>
             <div class="date-container">
+                <!--{{dateValue}}-->
+
                 <div style="height:40px;"></div>
                 <div v-show="dateTab==0" class="date-home weui_cells weui_cells_access">
                     <a @click="changeTab(1)" class="weui_cell" href="javascript:;">
@@ -298,7 +306,7 @@
                             <div class="weui_cell_ft">{{ date.MM?date.MM:''|filNum 'MM'}}</div>
                         </a>
                     </template>
-                    <template v-if="viewMode=='days'||viewMode=='datetime'">
+                    <template v-if="viewMode == 'datetime'||viewMode == 'datetime-local'||viewMode=='days'">
                         <a @click="changeTab(3)" class="weui_cell" href="javascript:;">
                             <div class="weui_cell_bd weui_cell_primary">
                                 <p>日</p>
@@ -311,7 +319,7 @@
                             </div>
                         </div>
                     </template>
-                    <template v-if="viewMode=='datetime'">
+                    <template v-if="viewMode=='datetime'||viewMode == 'datetime-local'">
                         <div class="weui_cell ">
                             <div class="weui_cell_bd weui_cell_primary" style="color:green;text-align:center;">
                                 {{date.HH}}
@@ -323,7 +331,7 @@
                             </span>
                             </div>
                         </div>
-                        <div style="font-size:0;">
+                        <div style="font-size:0;padding:10px 0">
                             <div class="select_container" @touchmove="touchFun('HH',$event)">
                                 <ul class="select_HH">
                                     <li @click="clickFn('HH','DOWN',$event)">
@@ -422,7 +430,7 @@
                         </ul>
                     </div>
                 </div>
-                <div v-show="dateTab==0" @click="finishDate" class="date-clear">
+                <div @click="finishDate" class="date-save">
                     确定
                 </div>
             </div>
@@ -435,7 +443,8 @@
 <body>
 
     <div id="app">
-        <date :show-Date.sync='showDate' v-if="showDate"></date>
+        {{variables.Birthday}}
+        <date  :show-Date.sync='showDate' v-if="showDate"  :date-value.sync="variables.Birthday" :view-Mode='html.dateTime.viewMode'></date>
         <!--
         模板说明：
         1，标签上的‘:’+属性名/‘v-’+属性名，都属于vue的动态属性绑定，属性值为变量；
