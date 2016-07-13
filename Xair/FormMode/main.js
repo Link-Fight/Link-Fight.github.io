@@ -222,8 +222,7 @@ Vue.component("date", {
                 var touchConfight = _this.$data.touchConfight[key];
                 if (!touchConfight) {
                     var clientRects = event.currentTarget.getBoundingClientRect()
-                    var top = clientRects.top - 10;
-                    var bottom = clientRects.bottom + 10;
+
                     var sleepTime = 80;
                     if (key == "HH") {
                         sleepTime = 120;
@@ -231,20 +230,16 @@ Vue.component("date", {
                     _this.$data.touchConfight[key] = touchConfight = {
                         lastTime: date,
                         oldY: touchY,
-                        top: top,
-                        bottom: bottom,
+
                         sleepTime: sleepTime,
                     }
                 }
                 if (date - touchConfight.lastTime > touchConfight.sleepTime) {
                     touchConfight.lastTime = date;
-                    if (touchY >= touchConfight.top && touchY <= touchConfight.bottom) {
-                        console.log(touchConfight.top + "#" + touchY + "$" + touchConfight.bottom);
-                        if (touchY < touchConfight.oldY) {
-                            _this.mHandleNum(key, 'UP', event);
-                        } else {
-                            _this.mHandleNum(key, 'DOWN', event);
-                        }
+                    if (touchY < touchConfight.oldY) {
+                        _this.mHandleNum(key, 'UP', event);
+                    } else {
+                        _this.mHandleNum(key, 'DOWN', event);
                     }
                     touchConfight.oldY = touchY;
                 }
@@ -798,8 +793,8 @@ var app = new Vue({
 
     }
     ,
-    methods:{
-        showDateFn:function(){
+    methods: {
+        showDateFn: function () {
             this.showDate = true;
         }
     }
