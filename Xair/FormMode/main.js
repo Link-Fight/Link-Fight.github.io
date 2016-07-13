@@ -162,10 +162,9 @@ Vue.component("date", {
                 month: '',
                 day: '',
                 week: '',
-                string: '',
-                stringWeek: '',
                 HH: "08",
-                mm: "20"
+                mm: "20",
+                format: "YYYY-MM-DD HH:mm:00",
             }
         }
     },
@@ -173,12 +172,10 @@ Vue.component("date", {
         showDate: {
             type: Boolean,
             required: true,
-            // default: false,
             twoWay: true
         },
         date: {
             type: Object,
-            // required: true,
             default: function () {
                 var mDate = new Date();
                 var _this = this;
@@ -187,11 +184,9 @@ Vue.component("date", {
                     month: mDate.getMonth() + 1,
                     day: mDate.getDate(),
                     week: mDate.getDay(),
-                    string: '',
-                    stringWeek: '',
                     HH: "09",
                     mm: "21",
-
+                    format: "YYYY-MM-DD HH:mm:00",
                 }
             },
             twoWay: true
@@ -234,7 +229,6 @@ Vue.component("date", {
                     _this.$data.touchConfight[key] = touchConfight = {
                         lastTime: date,
                         oldY: touchY,
-
                         sleepTime: sleepTime,
                     }
                 }
@@ -326,19 +320,12 @@ Vue.component("date", {
             this.dateTab = num;
         },
         goHome: function () {
-            this.toString();
             this.dateTab = 0;
         },
         finishDate: function () {
             this.goHome();
             this.showDate = false;
-            var result = "YYYY-MM-DD HH:mm:00";
-            result = result.replace("YYYY", this.date.year);
-            result = result.replace("MM", this.date.month);
-            result = result.replace("DD", this.date.day);
-            result = result.replace("HH", this.date.HH);
-            result = result.replace("mm", this.date.mm);
-            console.info(result);
+            console.info(this.toString());
         },
         clearDate: function () {
             this.date.year = '';
@@ -361,22 +348,13 @@ Vue.component("date", {
             }
         },
         toString: function () {
-            var str = '';
-            if (this.date.year) {
-                str += this.date.year;
-            }
-            if (this.date.month) {
-                str += '-' + this.date.month;
-            }
-            if (this.date.day) {
-                str += '-' + this.date.day;
-            }
-            this.date.string = str;
-            if (this.date.weekText) {
-                this.date.stringWeek = str + ' ' + this.date.weekText;
-            } else {
-                this.date.stringWeek = str;
-            }
+            var result = this.date.format;
+            result = result.replace("YYYY", this.date.year);
+            result = result.replace("MM", this.date.month);
+            result = result.replace("DD", this.date.day);
+            result = result.replace("HH", this.date.HH);
+            result = result.replace("mm", this.date.mm);
+            return result;
         },
         getWeekText: function (num) {
             if (num == 1) return '星期一';
@@ -405,9 +383,9 @@ Vue.component("date", {
     },
     ready: function () {
         var _this = this;
-        this.$el.addEventListener('touchmove', function (e) {
-            e.preventDefault();
-        }, false);
+        // this.$el.addEventListener('touchmove', function (e) {
+        //     e.preventDefault();
+        // }, false);
         console.log("Ready");
         var currentYear = new Date().getFullYear();
         this.years = ['不限'];
