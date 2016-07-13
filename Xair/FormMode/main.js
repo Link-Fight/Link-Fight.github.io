@@ -156,7 +156,7 @@ Vue.component("date", {
             months: ['不限', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             days: ['不限'],
             chooseText: '筛选',
-            // direction: "233@",
+            touchConfight: {},
             oldDate: {
                 year: '',
                 month: '',
@@ -219,22 +219,28 @@ Vue.component("date", {
             if (event.type == 'touchmove') {
                 var date = new Date();
                 var touchY = event.touches[0].screenY;
-                if (!event.currentTarget.configDate) {
+                var touchConfight = _this.$data.touchConfight[key];
+                if (!touchConfight) {
                     var clientRects = event.currentTarget.getBoundingClientRect()
                     var top = clientRects.top - 150;
                     var bottom = clientRects.bottom + 150;
-                    event.currentTarget.configDate = {
+                    var sleepTime = 50;
+                    if (key == "HH") {
+                        sleepTime = 80;
+                    }
+                    _this.$data.touchConfight[key] = touchConfight = {
                         lastTime: date,
                         oldY: touchY,
                         top: top,
                         bottom: bottom,
+                        sleepTime: sleepTime,
                     }
                 }
-                if (date - event.currentTarget.configDate.lastTime > 50) {
+                if (date - touchConfight.lastTime > touchConfight.sleepTime) {
                     console.count(key + "$" + touchY);
-                    event.currentTarget.configDate.lastTime = date;
-                    if (touchY >= event.currentTarget.configDate.top && touchY <= event.currentTarget.configDate.bottom) {
-                        if (touchY < event.currentTarget.configDate.oldY) {
+                    touchConfight.lastTime = date;
+                    if (touchY >= touchConfight.top && touchY <= touchConfight.bottom) {
+                        if (touchY < touchConfight.oldY) {
                             // _this.direction = event.target.nodeName + "@UP" + event.currentTarget.nodeName;
                             _this.mHandleNum(key, 'UP', event);
                         } else {
@@ -242,7 +248,7 @@ Vue.component("date", {
                             _this.mHandleNum(key, 'DOWN', event);
                         }
                     }
-                    event.currentTarget.configDate.oldY = touchY;
+                    touchConfight.oldY = touchY;
                 }
             }
             if (event.type.indexOf("touch") == -1) {
