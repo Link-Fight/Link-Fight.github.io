@@ -84,7 +84,7 @@ Vue.directive('validate', {
                         if (params.val.length >= params.minDate.length) {
                             if (params.val < params.minDate) {
                                 config.result.status = false;
-                                config.result.msg += " 选择日期需要在" + params.minDate + "之后 ";
+                                config.result.msg += " 最早选择日期是" + params.minDate + " ";
                             }
                         }
                     }
@@ -92,7 +92,7 @@ Vue.directive('validate', {
                         if (params.val.length >= params.maxDate.length) {
                             if (params.val > params.maxDate) {
                                 config.result.status = false;
-                                config.result.msg += " 选择日期需要在" + params.maxDate + "之前 ";
+                                config.result.msg += " 最晚选择日期是" + params.maxDate + " ";
                             }
                         }
                     }
