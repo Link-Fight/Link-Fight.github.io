@@ -313,16 +313,16 @@
                     </a>
                 </div>
 
-                <div class="weui_cells weui_cells_access">  {{date.HH}} 时  {{date.mm}}  分</div>
-                <p>  {{direction}}</p>
+                <div class="weui_cells weui_cells_access"> {{date.HH}} 时 {{date.mm}} 分</div>
+                <p> {{direction}}</p>
                 <div v-show="dateTab==0" style="font-size:0;">
-                  
-                    <div class="select_container">
+                    <!--@mousedown="touchFun('mousedown',$event)" @touchstart="touchFun('touchstart',$event)" @mousemove="touchFun('mousemove',$event)" @touchmove="touchFun('touchmove',$event)",$event)" @mouseleave="testFun('mouseleave',$event)" -->
+                    <div class="select_container" @touchmove="touchFun('HH',$event)">
                         <ul class="select_HH">
-                            <li @click="clickFn('HH','UP',$event)" >
+                            <li @click="clickFn('HH','UP',$event)">
                                 {{+date.HH+1|filNum 'HH'}}
                             </li>
-                            <li  class="select_item_center">
+                            <li class="select_item_center">
                                 {{date.HH}}
                             </li>
                             <li @click="clickFn('HH','DOWN',$event)">
@@ -331,14 +331,14 @@
                         </ul>
                     </div>
                     <div class="select_container">
-                        <ul class="select_mm" id="moveMM">
-                            <li @click="clickFn('mm','UP',$event)"  >
+                        <ul class="select_mm" @touchmove="touchFun('mm',$event)">
+                            <li @click="clickFn('mm','UP',$event)">
                                 {{+date.mm+1 |filNum 'mm'}}
                             </li>
-                            <li  class="select_item_center">
+                            <li class="select_item_center">
                                 {{date.mm}}
                             </li>
-                            <li @click="clickFn('mm','DOWN',$event)" >
+                            <li @click="clickFn('mm','DOWN',$event)">
                                 {{date.mm-1 |filNum 'mm'}}
                             </li>
                         </ul>
@@ -614,7 +614,8 @@
                         dataType:html.textarea.dataType,
                         val:variables.reportText,
                         validate:html.textarea.validate,validataMessage:html.textarea.validateMessage,required:html.textarea.required,maxLength:html.textarea.maxLength
-                        }" :disable="html.textarea.mode" v-model="variables.reportText" :placeholder="html.textarea.placeholder" rows="3"></textarea>
+                        }" :disable="html.textarea.mode" v-model="variables.reportText" :placeholder="html.textarea.placeholder"
+                            rows="3"></textarea>
                     </div>
                 </div>
             </div>
@@ -709,8 +710,9 @@
                     <div class="weui_cell_bd weui_cell_primary">
                         <textarea class="weui_textarea" :name="html.textarea_OP.name" v-validate="{type:html.textarea_OP.type,
                         key:html.textarea_OP.variable,label:html.textarea_OP.label,
-                        dataType:html.textarea_OP.dataType,val:variables.reportText,validate:html.textarea_OP.validate,validataMessage:html.textarea_OP.validateMessage,required:html.textarea_OP.required,maxLength:html.textarea_OP.maxLength}" :disable="html.textarea_OP.mode"
-                            v-model="variables.note_op" :placeholder="html.textarea_OP.placeholder" rows="3"></textarea>
+                        dataType:html.textarea_OP.dataType,val:variables.reportText,validate:html.textarea_OP.validate,validataMessage:html.textarea_OP.validateMessage,required:html.textarea_OP.required,maxLength:html.textarea_OP.maxLength}"
+                            :disable="html.textarea_OP.mode" v-model="variables.note_op" :placeholder="html.textarea_OP.placeholder"
+                            rows="3"></textarea>
                     </div>
                 </div>
             </div>

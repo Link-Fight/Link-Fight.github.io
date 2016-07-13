@@ -156,7 +156,7 @@ Vue.component("date", {
             months: ['不限', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
             days: ['不限'],
             chooseText: '筛选',
-            direction: "233@",
+            // direction: "233@",
             oldDate: {
                 year: '',
                 month: '',
@@ -214,6 +214,41 @@ Vue.component("date", {
         }
     },
     methods: {
+        touchFun: function (key, event) {
+            var _this = this;
+            if (event.type == 'touchmove') {
+                var date = new Date();
+                var touchY = event.touches[0].screenY;
+                if (!event.currentTarget.configDate) {
+                    var clientRects = event.currentTarget.getBoundingClientRect()
+                    var top = clientRects.top - 150;
+                    var bottom = clientRects.bottom + 150;
+                    event.currentTarget.configDate = {
+                        lastTime: date,
+                        oldY: touchY,
+                        top: top,
+                        bottom: bottom,
+                    }
+                }
+                if (date - event.currentTarget.configDate.lastTime > 50) {
+                    console.count(key + "$" + touchY);
+                    event.currentTarget.configDate.lastTime = date;
+                    if (touchY >= event.currentTarget.configDate.top && touchY <= event.currentTarget.configDate.bottom) {
+                        if (touchY < event.currentTarget.configDate.oldY) {
+                            // _this.direction = event.target.nodeName + "@UP" + event.currentTarget.nodeName;
+                            _this.mHandleNum(key, 'UP', event);
+                        } else {
+                            // _this.direction = event.target.nodeName + "@DOWN" + event.currentTarget.nodeName;
+                            _this.mHandleNum(key, 'DOWN', event);
+                        }
+                    }
+                    event.currentTarget.configDate.oldY = touchY;
+                }
+            }
+            if (event.type.indexOf("touch") == -1) {
+                console.warn(key + "@" + event.type);
+            }
+        },
         mHandleNum: function (key, action, event) {
             console.count(+this.date[key]);
             var num = +this.date[key];
@@ -357,37 +392,15 @@ Vue.component("date", {
     },
     ready: function () {
         var _this = this;
+        this.$el.addEventListener('touchmove', function (e) {
+            e.preventDefault();
+        }, false);
         console.log("Ready");
         var currentYear = new Date().getFullYear();
         this.years = ['不限'];
         for (var i = 2015; i <= currentYear; i++) {
             this.years.push(i);
         }
-        var moveMM = document.getElementById("moveMM");
-        moveMM.addEventListener("touchstart", function (event) {
-            console.log("touchstart");
-            event.preventDefault();
-        }, false);
-        var old = "";
-        moveMM.addEventListener("touchmove", function (event) {
-            console.count("touchmove");
-            console.count(event.clientY)
-            if (!!old) {
-                if (event.touches[0].screenY < old) {
-                    _this.direction =event.target.nodeName+ "@UP" + event.currentTarget.nodeName;
-                } else {
-                    _this.direction =event.target.nodeName +"@DOWN" + event.currentTarget.nodeName;
-                }
-            }
-
-            old = event.touches[0].screenY;
-            console.log(event.touches[0].screenX - event.touches[0].clientX);
-            event.preventDefault();
-        }, false);
-        moveMM.addEventListener("touchend", function (event) {
-            console.log("touchend");
-            event.preventDefault();
-        }, false);
     }
 });
 
