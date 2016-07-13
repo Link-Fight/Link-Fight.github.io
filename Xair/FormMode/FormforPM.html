@@ -240,6 +240,7 @@
             list-style: none;
             color: #666;
             text-align: center;
+            padding:5px 0;
         }
         
         .select_item_center {
@@ -364,20 +365,20 @@
                 <div v-show="dateTab==1" class="date-year weui_cells weui_cells_access">
                     <div class="select_containers" @touchmove="touchFun('YYYY',$event)">
                         <ul class="selects">
-                            <li @click="clickFn('YYYY','UP',$event)" @click="clickFn('YYYY','UP',$event)">
-                                {{+date.YYYY+2 |filNum 'YYYY'}}
+                            <li @click="clickFn('YYYY','DOWN',$event)" >
+                                {{+date.YYYY-2 |filNum 'YYYY'}}
                             </li>
-                            <li class="select_item_next" @click="clickFn('YYYY','UP',$event)">
-                                {{+date.YYYY+1 |filNum 'YYYY'}}
+                            <li class="select_item_next" @click="clickFn('YYYY','DOWN',$event)">
+                                {{+date.YYYY-1 |filNum 'YYYY'}}
                             </li>
                             <li class="select_item_center" @click='finishDate'>
                                 {{date.YYYY |filNum 'YYYY'}}
                             </li>
-                            <li class="select_item_next" @click="clickFn('YYYY','DOWN',$event)">
-                                {{date.YYYY-1 |filNum 'YYYY'}}
+                            <li class="select_item_next" @click="clickFn('YYYY','UP',$event)">
+                                {{date.YYYY+1 |filNum 'YYYY'}}
                             </li>
-                            <li @click="clickFn('YYYY','DOWN',$event)" @click="clickFn('YYYY','DOWN',$event)">
-                                {{+date.YYYY-2 |filNum 'YYYY'}}
+                            <li @click="clickFn('YYYY','UP',$event)"">
+                                {{+date.YYYY+2 |filNum 'YYYY'}}
                             </li>
                         </ul>
                     </div>

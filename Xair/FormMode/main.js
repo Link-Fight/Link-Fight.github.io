@@ -148,9 +148,8 @@ Vue.directive('validate', {
 Vue.component("date", {
     template: '#date',
     data: function () {
-        console.info(this);
         return {
-            dateTab: 0,
+            dateTab: -1,
             touchConfight: {},
             oldDate: {
                 YYYY: '',
@@ -176,22 +175,6 @@ Vue.component("date", {
             required: true,
             twoWay: true
         },
-        // date: {
-        //     type: Object,
-        //     default: function () {
-        //         var mDate = new Date();
-        //         var _this = this;
-        //         return {
-        //             YYYY: mDate.getFullYear(),
-        //             MM: mDate.getMonth() + 1,
-        //             DD: mDate.getDate(),
-        //             day: mDate.getDay(),
-        //             HH: "09",
-        //             mm: "21",
-        //         }
-        //     },
-        //     twoWay: true
-        // },
         format: {
             type: String,
             default: "YYYY-MM-DD HH:mm:00",
@@ -203,24 +186,9 @@ Vue.component("date", {
         dateValue: {
             type: String,
             default: function () {
-                console.count("123@");
                 return ""
             },
             coerce: function (val) {
-                console.log(this);
-                if (!!val) {
-                    try {
-                        var date = new Date(val);
-                        this.date.YYYY = mDate.getFullYear();
-                        this.date.MM = mDate.getMonth() + 1;
-                        this.date.DD = mDate.getDate();
-                        this.date.day = mDate.getDay();
-                        this.date.HH = "09";
-                        this.date.mm = "21";
-                    } catch (e) {
-
-                    }
-                }
                 return val;
             },
             twoWay: true,
@@ -236,6 +204,35 @@ Vue.component("date", {
             }
         },
         chooseText: function () {
+            if (this.dateTab == -1) {
+                try {
+                    if (this.viewMode == 'datetime-local') {
+                        this.viewMode == 'datetime'
+                    }
+                    if (this.viewMode == 'datetime') {
+                        this.format = "YYYY-MM-DD HH:mm:00";
+                    } else if (this.viewMode == 'days') {
+                        this.format = "YYYY-MM-DD";
+                    } else if (this.viewMode == 'months') {
+                        this.format = "YYYY-MM";
+                    } else if (this.viewMode == 'years') {
+                        this.format = "YYYY";
+                    }
+                    var date = new Date(this.dateValue);
+                    if (date.toString().indexOf("Invalid") == -1) {
+                        this.date.YYYY = date.getFullYear();
+                        this.date.MM = date.getMonth() + 1;
+                        this.date.DD = date.getDate();
+                        this.date.day = date.getDay();
+                        this.date.HH = date.getHours();
+                        this.date.mm = date.getMinutes();
+                    }
+
+                } catch (e) {
+
+                }
+                this.dateTab = 0;
+            }
             if (this.dateTab == 0) {
                 return '选择';
             }
@@ -246,52 +243,11 @@ Vue.component("date", {
                 return !!this.date.YYYY ? this.date.YYYY + '年' : "选择月";
             }
             if (this.dateTab == 3) {
-                return !!this.date.DD ? this.date.YYYY+"年"+this.date.MM + '月' : "选择日";
+                return !!this.date.DD ? this.date.YYYY + "年" + this.date.MM + '月' : "选择日";
             }
         }
     },
     watch: {
-        'showDate': function (val, oldVal) {
-            this.dateTab = 0;
-            if (val) {
-                for (var i in this.date) {
-                    this.oldDate[i] = this.date[i];
-                }
-            }
-        },
-        'viewMode': function (newVal, oldVal) {
-            if (this.viewMode == 'datetime-local') {
-                this.viewMode == 'datetime'
-            }
-
-            if (this.viewMode == 'datetime') {
-                this.format = "YYYY-MM-DD HH:mm:00";
-            } else if (this.viewMode == 'days') {
-                this.format = "YYYY-MM-DD";
-            } else if (this.viewMode == 'months') {
-                this.format = "YYYY-MM";
-            } else if (this.viewMode == 'years') {
-                this.format = "YYYY";
-            }
-        },
-        'dateValue': {
-            handler: function (newVal, oldVal) {
-                if (!!this.dateValue) {
-                    try {
-                        var date = new Date(this.dateValue);
-                        this.date.YYYY = mDate.getFullYear();
-                        this.date.MM = mDate.getMonth() + 1;
-                        this.date.DD = mDate.getDate();
-                        this.date.day = mDate.getDay();
-                        this.date.HH = "09";
-                        this.date.mm = "21";
-                    } catch (e) {
-
-                    }
-                }
-            },
-            deep: true,
-        }
     },
     methods: {
         touchFun: function (key, event) {
@@ -322,9 +278,6 @@ Vue.component("date", {
                     touchConfight.oldY = touchY;
                 }
             }
-            if (event.type.indexOf("touch") == -1) {
-                console.warn(key + "@" + event.type);
-            }
         },
         mHandleNum: function (key, action, event) {
             var num = +this.date[key];
@@ -347,11 +300,7 @@ Vue.component("date", {
                 if (num == 0) {
                     num = days;
                 }
-                console.log(days + "@" + key + " " + action);
             }
-
-            this.dateValue = num + "";
-
             if (num <= 9) {
                 num = "0" + "" + num;
             }
@@ -370,6 +319,7 @@ Vue.component("date", {
         },
         finishDate: function () {
             if (this.dateTab == 0) {
+                this.dateTab = -1;
                 this.showDate = false;
                 console.info(this.dateValue = this.toString());
             }
@@ -490,7 +440,7 @@ var app = new Vue({
         selectColor: true,
         invalid: true,
         msg: '',
-        showDate: true,
+        showDate: false,
         html: {
             title: {
                 "type": "title",
@@ -856,7 +806,7 @@ var app = new Vue({
                 value: "233",
                 title: "李世明",
             },
-            Birthday: "2016-01-09",
+            Birthday: "2016-01-09 10:20",
             Beginday: ""
         },
         validateResult: {
