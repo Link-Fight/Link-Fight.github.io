@@ -222,7 +222,6 @@ Vue.component("date", {
                 var touchConfight = _this.$data.touchConfight[key];
                 if (!touchConfight) {
                     var clientRects = event.currentTarget.getBoundingClientRect()
-
                     var sleepTime = 80;
                     if (key == "HH") {
                         sleepTime = 120;
@@ -283,7 +282,7 @@ Vue.component("date", {
                     this.date.weekText = '';
                     if (typeof num == 'string') {
                         this.date.year = '';
-                        this.finishDate();
+                        this.goHome();
                     } else {
                         this.dateTab = 2;
                         this.date.year = num;
@@ -295,7 +294,7 @@ Vue.component("date", {
                     this.date.weekText = '';
                     if (typeof num == 'string') {
                         this.date.month = '';
-                        this.finishDate();
+                        this.goHome();
                     } else {
                         this.dateTab = 3;
                         this.date.month = num;
@@ -312,7 +311,7 @@ Vue.component("date", {
                         this.date.week = new Date(this.date.year, this.date.month - 1, this.date.day).getDay();
                         this.date.weekText = this.getWeekText(this.date.week);
                     }
-                    this.finishDate();
+                    this.goHome();
                     break;
             }
         },
@@ -321,9 +320,12 @@ Vue.component("date", {
             if (num == 3 && !this.date.month) return;
             this.dateTab = num;
         },
-        finishDate: function () {
+        goHome: function () {
             this.toString();
             this.dateTab = 0;
+        },
+        finishDate: function () {
+            this.goHome();
             this.showDate = false;
         },
         clearDate: function () {
