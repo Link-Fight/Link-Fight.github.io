@@ -225,24 +225,19 @@
         .date-container .select_container {
             font-size: 14px;
             display: inline-block;
-            height: 90px;
             width: 50%;
             overflow: hidden;
             overflow-y: auto
         }
         
-        .select_container .select_HH {
-            /*height: 30px;*/
-        }
-        
-        .select_container li {
+        .date-container li {
             list-style: none;
             color: #666;
             text-align: center;
         }
         
-        .select_container .select_item_center {
-            font-size: 18px;
+        .select_item_center {
+            font-size: 17px;
             font-weight: bold;
             padding: 5px 0;
             color: #000;
@@ -250,12 +245,30 @@
             border-bottom: 3px solid #04be02;
         }
         
+        .select_containers {
+            padding: 0 10px;
+        }
+        
         .select_container .select_HH {
-            padding: 0 10px 0 40px;
+            margin: 0 10px 0 40px;
         }
         
         .select_container .select_mm {
-            padding: 0 40px 0 10px;
+            margin: 0 40px 0 10px;
+        }
+        
+        .select_containers .selects .select_item_center {
+            font-size: 20px;
+        }
+        
+        .select_containers .selects .select_item_next {
+            font-size: 16px;
+            padding:4px 0;
+        }
+        
+        .select_containers .selects li {
+            font-size: 14px;
+            padding:2px 0;
         }
     </style>
 </head>
@@ -275,7 +288,7 @@
                         <div class="weui_cell_bd weui_cell_primary">
                             <p>年</p>
                         </div>
-                        <div class="weui_cell_ft">{{ date.year ? date.year+'年' : ''}}</div>
+                        <div class="weui_cell_ft">{{ date.YYYY ? date.YYYY+'年' : ''}}</div>
                     </a>
                     <a @click="changeTab(2)" class="weui_cell" href="javascript:;">
                         <div class="weui_cell_bd weui_cell_primary">
@@ -335,11 +348,26 @@
                     </div>
                 </div>
                 <div v-show="dateTab==1" class="date-year weui_cells weui_cells_access">
-                    <a v-for="y in years" @click="selectDate('year',y)" class="weui_cell" href="javascript:;">
-                        <div class="weui_cell_bd weui_cell_primary">
-                            <p>{{ y }}年</p>
-                        </div>
-                    </a>
+                    <div class="select_containers" @touchmove="touchFun('YYYY',$event)">
+                        <ul class="selects">
+                            <li @click="clickFn('YYYY','UP',$event)">
+                                {{+date.YYYY+2}}
+                            </li>
+                            <li class="select_item_next" @click="clickFn('YYYY','UP',$event)">
+                                {{+date.YYYY+1}}
+                            </li>
+                            <li class="select_item_center">
+                                {{date.YYYY}}
+                            </li>
+                            <li class="select_item_next" @click="clickFn('YYYY','DOWN',$event)">
+                                {{date.YYYY-1}}
+                            </li>
+                            <li @click="clickFn('YYYY','DOWN',$event)">
+                                {{+date.YYYY-2}}
+                            </li>
+                        </ul>
+                    </div>
+
                 </div>
                 <div v-show="dateTab==2" class="date-month weui_cells weui_cells_access">
                     <a v-for="m in months" @click="selectDate('month',m)" class="weui_cell" href="javascript:;">
