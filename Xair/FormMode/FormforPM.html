@@ -241,7 +241,7 @@
         
         .select_container .select_item_center {
             font-size: 17px;
-            padding:5px 0;
+            padding: 5px 0;
             border-top: 2px solid green;
             border-bottom: 2px solid green;
         }
@@ -356,7 +356,7 @@
 <body>
 
     <div id="app">
-        <date></date>
+        <date :show-Date.sync='showDate' v-if="showDate"></date>
         <!--
         模板说明：
         1，标签上的‘:’+属性名/‘v-’+属性名，都属于vue的动态属性绑定，属性值为变量；
@@ -373,7 +373,7 @@
 
             <!--dateTime 组件-->
             <!--BEGIN-dateTime-VIEW-->
-            <div class="showValue">
+            <div class="showValue" @click='showDateFn'>
                 <div class="weui_cell">
                     <div class="weui_cell_hd">
                         <label class="weui_label">{{html.dateTime.label}}</label>

@@ -174,7 +174,7 @@ Vue.component("date", {
         showDate: {
             type: Boolean,
             // required: true,
-            default: true,
+            // default: true,
             twoWay: true
         },
         date: {
@@ -222,8 +222,8 @@ Vue.component("date", {
                 var touchConfight = _this.$data.touchConfight[key];
                 if (!touchConfight) {
                     var clientRects = event.currentTarget.getBoundingClientRect()
-                    var top = clientRects.top - 50;
-                    var bottom = clientRects.bottom + 50;
+                    var top = clientRects.top - 10;
+                    var bottom = clientRects.bottom + 10;
                     var sleepTime = 80;
                     if (key == "HH") {
                         sleepTime = 120;
@@ -239,7 +239,7 @@ Vue.component("date", {
                 if (date - touchConfight.lastTime > touchConfight.sleepTime) {
                     touchConfight.lastTime = date;
                     if (touchY >= touchConfight.top && touchY <= touchConfight.bottom) {
-                        console.log(touchConfight.top + "#" + touchY+"$"+touchConfight.bottom);
+                        console.log(touchConfight.top + "#" + touchY + "$" + touchConfight.bottom);
                         if (touchY < touchConfight.oldY) {
                             _this.mHandleNum(key, 'UP', event);
                         } else {
@@ -267,7 +267,7 @@ Vue.component("date", {
             } else if (key == 'mm') {
                 num = (num + 60) % 60;
                 if (num == 0) {
-                    this.mHandleNum('HH', 'UP', event);
+                    this.mHandleNum('HH', action, event);
                 }
             }
 
@@ -421,6 +421,7 @@ var app = new Vue({
         selectColor: true,
         invalid: true,
         msg: '',
+        showDate: true,
         html: {
             title: {
                 "type": "title",
@@ -795,5 +796,11 @@ var app = new Vue({
     },
     filters: {
 
+    }
+    ,
+    methods:{
+        showDateFn:function(){
+            this.showDate = true;
+        }
     }
 });
