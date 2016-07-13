@@ -238,12 +238,13 @@
         .select_container li {
             list-style: none;
             color: #666;
+            text-align: center;
         }
         
         .select_container .select_item_center {
             font-size: 17px;
             padding: 5px 0;
-            color:#000;
+            color: #000;
             border-top: 2px solid #04be02;
             border-bottom: 2px solid #04be02;
         }
@@ -287,12 +288,50 @@
                         </div>
                         <div class="weui_cell_ft">{{ date.day?date.day+'日':'' }}</div>
                     </a>
-                    <div class="weui_cell" v-if="!!date.weekText">
+                    <div class="weui_cell">
                         <div class="weui_cell_bd weui_cell_primary" style="color:green;text-align:center;">
-                            {{date.weekText }}
+                            {{weekText }}
                         </div>
                     </div>
-
+                    <div class="weui_cell ">
+                        <div class="weui_cell_bd weui_cell_primary" style="color:green;text-align:center;">
+                            {{date.HH}}
+                            <span style='color:#666;'>   
+                                时
+                                 </span> {{date.mm}}
+                            <span style='color:#666;'>
+                            分
+                            </span>
+                        </div>
+                    </div>
+                    <div style="font-size:0;">
+                        <div class="select_container" @touchmove="touchFun('HH',$event)">
+                            <ul class="select_HH">
+                                <li @click="clickFn('HH','UP',$event)">
+                                    {{+date.HH+1|filNum 'HH'}}
+                                </li>
+                                <li class="select_item_center">
+                                    {{date.HH}}
+                                </li>
+                                <li @click="clickFn('HH','DOWN',$event)">
+                                    {{date.HH-1|filNum 'HH'}}
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="select_container">
+                            <ul class="select_mm" @touchmove="touchFun('mm',$event)">
+                                <li @click="clickFn('mm','UP',$event)">
+                                    {{+date.mm+1 |filNum 'mm'}}
+                                </li>
+                                <li class="select_item_center">
+                                    {{date.mm}}
+                                </li>
+                                <li @click="clickFn('mm','DOWN',$event)">
+                                    {{date.mm-1 |filNum 'mm'}}
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
                 </div>
                 <div v-show="dateTab==1" class="date-year weui_cells weui_cells_access">
                     <a v-for="y in years" @click="selectDate('year',y)" class="weui_cell" href="javascript:;">
@@ -316,37 +355,7 @@
                     </a>
                 </div>
 
-                <div class="weui_cells weui_cells_access"> {{date.HH}} 时 {{date.mm}} 分</div>
-                <p> {{direction}}</p>
-                <div v-show="dateTab==0" style="font-size:0;">
-                    <!--@mousedown="touchFun('mousedown',$event)" @touchstart="touchFun('touchstart',$event)" @mousemove="touchFun('mousemove',$event)" @touchmove="touchFun('touchmove',$event)",$event)" @mouseleave="testFun('mouseleave',$event)" -->
-                    <div class="select_container" @touchmove="touchFun('HH',$event)">
-                        <ul class="select_HH">
-                            <li @click="clickFn('HH','UP',$event)">
-                                {{+date.HH+1|filNum 'HH'}}
-                            </li>
-                            <li class="select_item_center">
-                                {{date.HH}}
-                            </li>
-                            <li @click="clickFn('HH','DOWN',$event)">
-                                {{date.HH-1|filNum 'HH'}}
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="select_container">
-                        <ul class="select_mm" @touchmove="touchFun('mm',$event)">
-                            <li @click="clickFn('mm','UP',$event)">
-                                {{+date.mm+1 |filNum 'mm'}}
-                            </li>
-                            <li class="select_item_center">
-                                {{date.mm}}
-                            </li>
-                            <li @click="clickFn('mm','DOWN',$event)">
-                                {{date.mm-1 |filNum 'mm'}}
-                            </li>
-                        </ul>
-                    </div>
-                </div>
+
             </div>
             <div v-show="dateTab==0" @click="clearDate" class="date-clear">
                 清除选项

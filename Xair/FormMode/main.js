@@ -162,7 +162,6 @@ Vue.component("date", {
                 month: '',
                 day: '',
                 week: '',
-                weekText: '',
                 string: '',
                 stringWeek: '',
                 HH: "08",
@@ -173,20 +172,21 @@ Vue.component("date", {
     props: {
         showDate: {
             type: Boolean,
-            // required: true,
-            // default: true,
+            required: true,
+            // default: false,
             twoWay: true
         },
         date: {
             type: Object,
             // required: true,
             default: function () {
+                var mDate = new Date();
+                var _this = this;
                 return {
-                    year: '',
-                    month: '',
-                    day: '',
-                    week: '',
-                    weekText: '',
+                    year: mDate.getFullYear(),
+                    month: mDate.getMonth() + 1,
+                    day: mDate.getDate(),
+                    week: mDate.getDay(),
                     string: '',
                     stringWeek: '',
                     HH: "09",
@@ -195,6 +195,11 @@ Vue.component("date", {
                 }
             },
             twoWay: true
+        }
+    },
+    computed: {
+        weekText: function () {
+            return this.getWeekText(this.date.week)
         }
     },
     watch: {
@@ -222,7 +227,7 @@ Vue.component("date", {
                 var touchConfight = _this.$data.touchConfight[key];
                 if (!touchConfight) {
                     var clientRects = event.currentTarget.getBoundingClientRect()
-                    var sleepTime = 80;
+                    var sleepTime = 50;
                     if (key == "HH") {
                         sleepTime = 120;
                     }
@@ -327,6 +332,13 @@ Vue.component("date", {
         finishDate: function () {
             this.goHome();
             this.showDate = false;
+            var result = "YYYY-MM-DD HH:mm:00";
+            result = result.replace("YYYY", this.date.year);
+            result = result.replace("MM", this.date.month);
+            result = result.replace("DD", this.date.day);
+            result = result.replace("HH", this.date.HH);
+            result = result.replace("mm", this.date.mm);
+            console.info(result);
         },
         clearDate: function () {
             this.date.year = '';
@@ -797,6 +809,7 @@ var app = new Vue({
     ,
     methods: {
         showDateFn: function () {
+            console.log("showDateFn");
             this.showDate = true;
         }
     }
