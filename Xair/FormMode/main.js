@@ -218,15 +218,15 @@ Vue.component("date", {
             var _this = this;
             if (event.type == 'touchmove') {
                 var date = new Date();
-                var touchY = event.touches[0].screenY;
+                var touchY = event.touches[0].clientY;
                 var touchConfight = _this.$data.touchConfight[key];
                 if (!touchConfight) {
                     var clientRects = event.currentTarget.getBoundingClientRect()
-                    var top = clientRects.top - 150;
-                    var bottom = clientRects.bottom + 150;
-                    var sleepTime = 50;
+                    var top = clientRects.top - 50;
+                    var bottom = clientRects.bottom + 50;
+                    var sleepTime = 80;
                     if (key == "HH") {
-                        sleepTime = 80;
+                        sleepTime = 120;
                     }
                     _this.$data.touchConfight[key] = touchConfight = {
                         lastTime: date,
@@ -237,14 +237,12 @@ Vue.component("date", {
                     }
                 }
                 if (date - touchConfight.lastTime > touchConfight.sleepTime) {
-                    console.count(key + "$" + touchY);
                     touchConfight.lastTime = date;
                     if (touchY >= touchConfight.top && touchY <= touchConfight.bottom) {
+                        console.log(touchConfight.top + "#" + touchY+"$"+touchConfight.bottom);
                         if (touchY < touchConfight.oldY) {
-                            // _this.direction = event.target.nodeName + "@UP" + event.currentTarget.nodeName;
                             _this.mHandleNum(key, 'UP', event);
                         } else {
-                            // _this.direction = event.target.nodeName + "@DOWN" + event.currentTarget.nodeName;
                             _this.mHandleNum(key, 'DOWN', event);
                         }
                     }
