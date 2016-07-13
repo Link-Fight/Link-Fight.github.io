@@ -6,7 +6,7 @@ Vue.directive('validate', {
     update: function (newVal, oldVal) {
         // console.log("newVal" + JSON.stringify(newVal));
         if (newVal.type == "datetime") {
-            console.log( JSON.stringify(newVal));
+            console.log(JSON.stringify(newVal));
         }
         if (!oldVal && !!newVal && !!newVal.key) {
             this.vm.$set("validateResult." + newVal.key, {
@@ -146,6 +146,258 @@ Vue.directive('validate', {
 
     }
 });
+
+Vue.component("date", {
+    template: '#date',
+    data: function () {
+        return {
+            dateTab: 0,
+            years: ['不限'],
+            months: ['不限', 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12],
+            days: ['不限'],
+            chooseText: '筛选',
+            direction: "233@",
+            oldDate: {
+                year: '',
+                month: '',
+                day: '',
+                week: '',
+                weekText: '',
+                string: '',
+                stringWeek: '',
+                HH: "08",
+                mm: "20"
+            }
+        }
+    },
+    props: {
+        showDate: {
+            type: Boolean,
+            // required: true,
+            default: true,
+            twoWay: true
+        },
+        date: {
+            type: Object,
+            // required: true,
+            default: function () {
+                return {
+                    year: '',
+                    month: '',
+                    day: '',
+                    week: '',
+                    weekText: '',
+                    string: '',
+                    stringWeek: '',
+                    HH: "09",
+                    mm: "21",
+
+                }
+            },
+            twoWay: true
+        }
+    },
+    watch: {
+        'showDate': function (val, oldVal) {
+            this.dateTab = 0;
+            if (val) {
+                for (var i in this.date) {
+                    this.oldDate[i] = this.date[i];
+                }
+            }
+        },
+        'dateTab': function (val) {
+            if (val == 0) this.chooseText = "筛选";
+            if (val == 1) this.chooseText = "选择年";
+            if (val == 2) this.chooseText = "选择月";
+            if (val == 3) this.chooseText = "选择日";
+        }
+    },
+    methods: {
+        mHandleNum: function (key, action, event) {
+            console.count(+this.date[key]);
+            var num = +this.date[key];
+            if (action == "UP") {
+                num++;
+            } else if (action == "DOWN") {
+                num--;
+            }
+            if (key == "HH") {
+                num = (num + 24) % 24;
+
+            } else if (key == 'mm') {
+                num = (num + 60) % 60;
+                if (num == 0) {
+                    this.mHandleNum('HH', 'UP', event);
+                }
+            }
+
+            if (num <= 9) {
+                num = "0" + "" + num;
+            }
+            this.date[key] = num;
+        },
+        clickFn: function (key, action, event) {
+            this.mHandleNum.apply(this, arguments);
+        },
+        selectDate: function (str, num) {
+            switch (str) {
+                case 'year':
+                    this.date.month = '';
+                    this.date.day = '';
+                    this.date.week = '';
+                    this.date.weekText = '';
+                    if (typeof num == 'string') {
+                        this.date.year = '';
+                        this.finishDate();
+                    } else {
+                        this.dateTab = 2;
+                        this.date.year = num;
+                    }
+                    break;
+                case 'month':
+                    this.date.day = '';
+                    this.date.week = '';
+                    this.date.weekText = '';
+                    if (typeof num == 'string') {
+                        this.date.month = '';
+                        this.finishDate();
+                    } else {
+                        this.dateTab = 3;
+                        this.date.month = num;
+                        this.setDaysByYearAndMonth();
+                    }
+                    break;
+                case 'day':
+                    if (typeof num == 'string') {
+                        this.date.day = '';
+                        this.date.week = '';
+                        this.date.weekText = '';
+                    } else {
+                        this.date.day = num;
+                        this.date.week = new Date(this.date.year, this.date.month - 1, this.date.day).getDay();
+                        this.date.weekText = this.getWeekText(this.date.week);
+                    }
+                    this.finishDate();
+                    break;
+            }
+        },
+        changeTab: function (num) {
+            if (num == 2 && !this.date.year) return;
+            if (num == 3 && !this.date.month) return;
+            this.dateTab = num;
+        },
+        finishDate: function () {
+            this.toString();
+            this.dateTab = 0;
+            this.showDate = false;
+        },
+        clearDate: function () {
+            this.date.year = '';
+            this.date.month = '';
+            this.date.day = '';
+            this.date.week = '';
+            this.date.weekText = '';
+        },
+        cancelDate: function () {
+            this.showDate = false;
+            for (var i in this.oldDate) {
+                this.date[i] = this.oldDate[i];
+            }
+        },
+        setDaysByYearAndMonth: function () {
+            var number = new Date(this.date.year, this.date.month, 0).getDate();
+            this.days = ['不限'];
+            for (var i = 1; i <= number; i++) {
+                this.days.push(i);
+            }
+        },
+        toString: function () {
+            var str = '';
+            if (this.date.year) {
+                str += this.date.year;
+            }
+            if (this.date.month) {
+                str += '-' + this.date.month;
+            }
+            if (this.date.day) {
+                str += '-' + this.date.day;
+            }
+            this.date.string = str;
+            if (this.date.weekText) {
+                this.date.stringWeek = str + ' ' + this.date.weekText;
+            } else {
+                this.date.stringWeek = str;
+            }
+        },
+        getWeekText: function (num) {
+            if (num == 1) return '星期一';
+            if (num == 2) return '星期二';
+            if (num == 3) return '星期三';
+            if (num == 4) return '星期四';
+            if (num == 5) return '星期五';
+            if (num == 6) return '星期六';
+            if (num == 7) return '星期天';
+        }
+    },
+    filters: {
+        filNum: function (num, key) {
+            if (num == -1) {
+                if (key == 'HH') {
+                    num += 24;
+                } else if (key == 'mm') {
+                    num += 60;
+                }
+            }
+            if (num <= 9) {
+                num = "0" + "" + num;
+            }
+            return num;
+        }
+    },
+    ready: function () {
+        var _this = this;
+        console.log("Ready");
+        var currentYear = new Date().getFullYear();
+        this.years = ['不限'];
+        for (var i = 2015; i <= currentYear; i++) {
+            this.years.push(i);
+        }
+        var moveMM = document.getElementById("moveMM");
+        moveMM.addEventListener("touchstart", function (event) {
+            console.log("touchstart");
+            event.preventDefault();
+        }, false);
+        var old = "";
+        moveMM.addEventListener("touchmove", function (event) {
+            console.count("touchmove");
+            console.count(event.clientY)
+            if (!!old) {
+                if (event.touches[0].screenY < old) {
+                    _this.direction =event.target.nodeName+ "@UP" + event.currentTarget.nodeName;
+                } else {
+                    _this.direction =event.target.nodeName +"@DOWN" + event.currentTarget.nodeName;
+                }
+            }
+
+            old = event.touches[0].screenY;
+            console.log(event.touches[0].screenX - event.touches[0].clientX);
+            event.preventDefault();
+        }, false);
+        moveMM.addEventListener("touchend", function (event) {
+            console.log("touchend");
+            event.preventDefault();
+        }, false);
+    }
+});
+
+var MyComponent = Vue.extend({
+    template: '<div>A custom component!</div>'
+})
+
+// 注册
+Vue.component('my-component', MyComponent)
+
 var app = new Vue({
     el: '#app',
     data: {
@@ -518,7 +770,7 @@ var app = new Vue({
                 title: "李世明",
             },
             Birthday: "",
-            Beginday:""
+            Beginday: ""
         },
         validateResult: {
         },
