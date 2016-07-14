@@ -219,10 +219,11 @@
             color: #fff;
             line-height: 36px;
             background: #04be02;
+            border-radius:5px;
             -webkit-transform: translate(4%, 0);
         }
         
-        .data-canvel {
+        .data-cancel {
             position: absolute;
             left: 0;
         }
@@ -231,8 +232,6 @@
             font-size: 14px;
             display: inline-block;
             width: 50%;
-            overflow: hidden;
-            overflow-y: auto
         }
         
         .date-container li {
@@ -243,7 +242,7 @@
         }
         
         .select_item_center {
-            font-size: 17px;
+            font-size: 18px;
             font-weight: bold;
             padding: 5px 0;
             color: #000;
@@ -256,11 +255,11 @@
         }
         
         .select_container .select_HH {
-            margin: 0 10px 0 40px;
+            padding: 10px 10px 10px 40px;
         }
         
         .select_container .select_mm {
-            margin: 0 40px 0 10px;
+            padding: 10px 40px 10px 10px;
         }
         
         .select_containers .selects .select_item_center {
@@ -283,7 +282,7 @@
         <div class="date-cover" @click.self.stop="cancelDate"></div>
         <div class="date-main">
             <div class="date-header clearfix">
-                <div @click="cancelDate" class="data-canvel weui_btn weui_btn_mini">取消</div>
+                <div @click="cancelDate" class="data-cancel weui_btn weui_btn_mini">取消</div>
                 <span>{{ chooseText }}</span>
                 <!--<div @click="finishDate" class="fr weui_btn weui_btn_mini weui_btn_primary">完成</div>-->
             </div>
@@ -331,7 +330,7 @@
                             </span>
                             </div>
                         </div>
-                        <div style="font-size:0;padding:10px 0">
+                        <div style="font-size:0;">
                             <div class="select_container" @touchmove="touchFun('HH',$event)">
                                 <ul class="select_HH">
                                     <li @click="clickFn('HH','DOWN',$event)">
@@ -442,7 +441,7 @@
         </div>
 
     </div>
-    </div>
+   
 </template>
 
 <body>
@@ -478,10 +477,11 @@
                 </div>
             </div>
 
-            
+            <!--END-dateTime-VIEW-->
+            <!--BEGIN-dateTime-EDIT-->
 
              <p class="msg_error">{{ validateResult[html.date.variable]?validateResult[html.date.variable].msg :""}}</p>
-             <div class="showValue" @click="showDateFn('variables.day',variables.day,html.date.viewMode)">
+             <div class="weui_cells weui_cells_form" @click="showDateFn('variables.day',variables.day,html.date.viewMode)">
                 <div class="weui_cell" v-validate="{
                             type:html.date.type,
                             key:html.date.variable,
@@ -503,10 +503,9 @@
                     </div>
                 </div>
             </div>
-
-            <!--END-dateTime-VIEW-->
-            <!--BEGIN-dateTime-EDIT-->
-            <p class="msg_error">{{ validateResult[html.dateTime.variable]?validateResult[html.dateTime.variable].msg :""}}</p>
+           <!--END-dateTime-EDIT-->
+          
+            <!--<p class="msg_error">{{ validateResult[html.dateTime.variable]?validateResult[html.dateTime.variable].msg :""}}</p>
             <div class="weui_cells weui_cells_form">
                 <div class="weui_cell">
                     <div class="weui_cell_hd">
@@ -531,7 +530,7 @@
                         </template>
                     </div>
                 </div>
-            </div>
+            </div>-->
             <!--END-dateTime-EDIT-->
             <!--input 组件-->
             <!--BEGIN-input-VIEW-->
@@ -617,7 +616,35 @@
                         <p>{{item.label}}</p>
                     </div>
                 </label>
+            </div> 
+
+           <!--BEGIN-checkbox-EDIT-->
+            <p class="msg_error">{{ validateResult[html.checkbox.variable]?validateResult[html.checkbox.variable].msg :""}}</p>
+           <div class="weui_cells_title">{{html.checkbox.label}}
+               
             </div>
+            <div class="weui_cells weui_cells_checkbox" v-validate="{
+            type:html.checkbox.type,
+            key:html.checkbox.variable,
+            val:variables.checkboxVar,
+            required:html.checkbox.required}">
+                <label v-for="item in html.checkbox.options" :for="'checkbox'+$index" class="weui_cell weui_check_label">
+                    <div class="weui_cell_hd">
+                        <input type="checkbox" class="weui_check" :name="html.checkbox.var_name" :value="item.value" :id="'checkbox'+$index" v-model="variables.checkboxVar">
+                        <i class="weui_icon_checked"></i>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <p>{{item.label}}</p>
+                    </div>
+                </label>
+                 <div class="weui_cell_ft" v-if="html.checkbox.required">
+                    <template v-if="!!validateResult[html.checkbox.variable]&&html.checkbox.required">
+                        <i class="iconfont icon-xingxing" :style="{'color':validateResult[html.checkbox.variable].status && validateResult[html.checkbox.variable].val.length>0?'#09bb07':'red'}"></i>
+                    </template>
+                </div>
+                
+            </div>
+
             <!--END-checkbox-EDIT-->
             <!--dropdown组件-->
             <!--BEGIN-dropdown-VIEW-->

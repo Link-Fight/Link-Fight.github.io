@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <link href="http://cdn.bootcss.com/bootstrap/3.3.6/css/bootstrap.min.css" rel="stylesheet" />
+</head>
+<body>
+    <div class='container' id="demo">
+        <p>{{txt}}</p>
+        <button @click="show()" class="btn btn-default">show modal</button>
+    </div>
+
+    <template id="template">
+        <modal :show.sync="show">
+            <div slot="modal-header" class="modal-header">
+                <h4 class="modal-title">deep: {{deep}}</h4>
+            </div>
+            <div slot="modal-body" class="modal-body">
+                <input type="text" v-model="txt" />
+                <button @click="showNew">show new</button>
+            </div>
+            <div slot="modal-footer" class="modal-footer">
+                <button type="button" class="btn btn-default" @click='cancel()'>Exit</button>
+                <button type="button" class="btn btn-success" @click='submit()'>Save</button>
+            </div>
+        </modal>
+    </template>
+
+    <script src="http://cdn.bootcss.com/vue/1.0.17/vue.min.js"></script>
+    <script src="http://cdn.bootcss.com/vue-strap/1.0.9/vue-strap.min.js"></script>
+
+    <script type="text/javascript">
+        'use strict'
+
+        function creat_new_modal(txt, deep) {
+
+            var promise = new Promise(function (resolve, reject) {
+
+                var MyModal = Vue.extend({});
+
+                var modal = new MyModal({
+                    ready: function () {
+                        this.$watch('show', function (val) {
+                            if (val === false) {
+                                modal.$destroy(true)
+                            }
+                        })
+                    },
+                    data: {
+                        show: true,
+                        txt: txt,
+                        deep: deep || 0,
+                    },
+                    template: '#template',
+                    methods: {
+                        showNew: function () {
+                            var self = this
+
+                            creat_new_modal(this.txt, this.deep + 1).then(function (value) {
+                                self.txt = value
+                            }, function (error) {
+                                console.log(error)
+                            })
+                        },
+                        submit: function () {
+                            resolve(this.txt)
+                            this.show = false
+                        },
+                        cancel: function () {
+                            reject('cancel')
+                            this.show = false
+                        }
+                    },
+                    components: {
+                        modal: VueStrap.modal
+                    }
+                })
+
+                modal.$mount().$appendTo('body')
+            })
+            return promise
+        }
+
+        var vm = new Vue({
+            el: '#demo',
+            data: function () {
+                return {
+                    txt: null,
+                }
+            },
+            methods: {
+                show: function () {
+                    var self = this
+
+                    creat_new_modal(self.txt).then(function (value) {
+                        self.txt = value
+                    }, function (error) {
+                        console.log(error)
+                    })
+                }
+            }
+        })
+    </script>
+</body>
+</html>

@@ -144,7 +144,7 @@ Vue.directive('validate', {
 
     }
 });
-
+//   template: require("./index.html"),
 Vue.component("date", {
     template: '#date',
     data: function () {
