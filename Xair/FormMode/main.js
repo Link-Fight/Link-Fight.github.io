@@ -166,7 +166,6 @@ Vue.component("date", {
         showDate: {
             type: Boolean,
             required: true,
-
             twoWay: true
         },
         viewMode: {
@@ -321,7 +320,9 @@ Vue.component("date", {
             this.goHome();
         },
         cancelDate: function () {
+            console.log("cancelDate");
             this.showDate = false;
+            console.log("cancelDate"+ this.showDate);
         },
         toString: function () {
             var result = this.format;
@@ -794,7 +795,33 @@ var app = new Vue({
                     "value": "",
                     "label": ""
                 }
-            }
+            },
+            checkval: {
+                "type": "checkbox",
+                "variable": "checkboxValue",
+                "var_uid": "394465358577a2cbdce30e1068303843",
+                "dataType": "boolean",
+                "protectedValue": false,
+                "id": "checkboxValue",
+                "name": "checkboxValue",
+                "label": " 本人已认真阅读条款！",
+                "defaultValue": "",
+                "hint": "",
+                "required": true,
+                "mode": "parent",
+                "options": [
+                    {
+                        "value": "1",
+                        "label": "true"
+                    },
+                    {
+                        "value": "0",
+                        "label": "false"
+                    }
+                ],
+                "var_name": "checkboxValue",
+                "colSpan": 12
+            },
         },
         variables: {
             email: '',
@@ -808,7 +835,8 @@ var app = new Vue({
                 title: "李世明",
             },
             Birthday: "2016-11-09",
-            day: ""
+            day: "",
+            checkboxValue:"0",
         },
         validateResult: {
         },

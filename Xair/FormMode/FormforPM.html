@@ -35,7 +35,7 @@
         
         .weui_footer {
             background-color: #fff;
-            position: fixed;
+            position: absolute;
             bottom: 0;
             width: 100%;
             border-top: 1px solid #D9D9D9;
@@ -163,7 +163,7 @@
         }
         
         .date-main {
-            position: fixed;
+            position: absolute;
             right: 0;
             top: 0;
             width: 100%;
@@ -174,7 +174,7 @@
         }
         
         .date-header {
-            position: fixed;
+            position: absolute;
             top: 0;
             right: 0;
             width: 100%;
@@ -251,7 +251,9 @@
         }
         
         .select_containers {
+            position:relative;
             padding: 0 10px;
+            border-bottom:1px solid #D9D9D9;
         }
         
         .select_container .select_HH {
@@ -275,12 +277,56 @@
             font-size: 14px;
             padding: 8px 0;
         }
+        .checkbox_line_wrap{
+            position:relative;
+        }
+        .checkbox_line{
+            position:absolute;
+            display:inline-block;
+            width:100%;
+            height:100%;
+        }
+    </style>
+    <style>
+        .expand-transition{
+            transition:all 0.3s ease;
+            left:0;
+            
+        }
+        .expand-enter{
+            /*height:0%;*/
+            opacity:0;
+            left:100%;
+            /*height:100%;*/
+        }
+        .expand-leave{
+            opacity:0;
+            /*background-color:red;*/
+            left:-100%;
+            /*height:100%;*/
+        }
+
+        .expand-mask-transition {
+            transition: all 0.3s ease-in-out;
+            right:0;
+        }
+
+        .expand-mask-enter{
+            opacity: 0;
+            right:-100%;
+        }
+        .expand-mask-leave{
+            transition: all .3s ease-in-out;
+            background-color:blue;
+            opacity:0。5;
+            right:100%;
+        }
     </style>
 </head>
 <template id="date">
-    <div class="date-choose">
+    <div class="date-choose"  v-if="showDate"  transition="expand-mask">
         <div class="date-cover" @click.self.stop="cancelDate"></div>
-        <div class="date-main">
+        <div class="date-main" >
             <div class="date-header clearfix">
                 <div @click="cancelDate" class="data-cancel weui_btn weui_btn_mini">取消</div>
                 <span>{{ chooseText }}</span>
@@ -290,7 +336,7 @@
                 <!--{{dateValue}}-->
 
                 <div style="height:40px;"></div>
-                <div v-show="dateTab==0" class="date-home weui_cells weui_cells_access">
+                <div v-show="dateTab==0" transition="expand"  class="date-home weui_cells weui_cells_access">
                     <a @click="changeTab(1)" class="weui_cell" href="javascript:;">
                         <div class="weui_cell_bd weui_cell_primary">
                             <p>年</p>
@@ -360,7 +406,7 @@
                         </div>
                     </template>
                 </div>
-                <div v-show="dateTab==1" class="date-year weui_cells weui_cells_access">
+                <div v-show="dateTab==1"  transition="expand" class="date-year weui_cells weui_cells_access">
                     <div class="select_containers" @touchmove="touchFun('YYYY',$event)">
                         <ul class="selects">
                             <li @click="clickFn('YYYY','DOWN',$event)" >
@@ -381,7 +427,7 @@
                         </ul>
                     </div>
                 </div>
-                <div v-show="dateTab==2" class="date-month weui_cells weui_cells_access">
+                <div v-show="dateTab==2" transition="expand"  class="date-month weui_cells weui_cells_access">
                     <div class="select_containers" @touchmove="touchFun('MM',$event)">
                         <ul class="selects">
                             <li @click="clickFn('MM','DOWN',$event)">
@@ -402,7 +448,7 @@
                         </ul>
                     </div>
                 </div>
-                <div v-show="dateTab==3" class="date-day weui_cells weui_cells_access">
+                <div v-show="dateTab==3" transition="expand"  class="date-day weui_cells weui_cells_access">
                     <div class="select_containers" @touchmove="touchFun('DD',$event)">
                         <ul class="selects">
                             <li @click="clickFn('DD','DOWN',$event)" style='font-size:12px'>
@@ -448,7 +494,7 @@
 
     <div id="app">
         {{variables.Birthday}}
-        <date  :show-Date.sync='dateComponent.status' v-if="dateComponent.status"  :date-key='dateComponent.key' :date-value="dateComponent.val" :view-Mode='dateComponent.viewMode'></date>
+        <date   :show-Date.sync='dateComponent.status' v-if="dateComponent.status"  :date-key='dateComponent.key' :date-value="dateComponent.val" :view-Mode='dateComponent.viewMode'></date>
         <!--<date  :show-Date.sync='showDate1' v-if="showDate1"  :date-value.sync="variables.Birthday1" :view-Mode='html.dateTime.viewMode1'></date>-->
         <!--
         模板说明：
@@ -572,6 +618,31 @@
                 </div>
             </div>
             <!--END-input-EDIT-->
+
+            <p class="msg_error">{{ validateResult[html.checkval.variable]?validateResult[html.checkval.variable].msg :""}}</p>
+            <div class="weui_cells weui_cells_form">
+                    <div class="weui_cell weui_cell_switch checkbox_line_wrap"
+                    v-validate="{
+                            type:html.checkval.type,
+                            key:html.checkval.variable,
+                            val:variables.checkboxValue,
+                            required:html.checkval.required,}"
+                    >
+                        <label class="checkbox_line" :for="'html.checkval.variable'"></label>
+                         <div class="weui_cell_hd weui_label" style='font-size: 0;'>
+                            <input :id="'html.checkval.variable'"  class="weui_switch" type="checkbox" v-model="variables.checkboxValue">
+                        </div>
+                        <div class="weui_cell_hd weui_cell_primary">
+                           {{html.checkval.label}}   
+                        </div>
+                        <div class="weui_cell_ft" v-if="html.checkval.required">
+                        <template v-if="!!validateResult[html.checkval.variable]&&html.checkval.required">
+                            <i class="iconfont icon-xingxing" :style="{'color':validateResult[html.checkval.variable].status&&validateResult[html.checkval.variable].val?'#09bb07':'red'}"></i>
+                        </template>
+                    </div>
+                    </div>
+                </div>
+
 
             <!--checkbox组件-->
             <!--BEGIN-checkbox-VIEW-->
