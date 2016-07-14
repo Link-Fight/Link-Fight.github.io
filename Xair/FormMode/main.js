@@ -151,14 +151,7 @@ Vue.component("date", {
         return {
             dateTab: -1,
             touchConfight: {},
-            oldDate: {
-                YYYY: '',
-                MM: '',
-                DD: '',
-                day: '',
-                HH: "08",
-                mm: "20",
-            },
+            format: "",
             date: {
                 YYYY: "2010",
                 MM: "10",
@@ -173,25 +166,23 @@ Vue.component("date", {
         showDate: {
             type: Boolean,
             required: true,
+
             twoWay: true
-        },
-        format: {
-            type: String,
-            default: "YYYY-MM-DD HH:mm:00",
         },
         viewMode: {
             type: String,
             default: "datetime",
         },
+        dateKey: {
+            type: String,
+            required: true,
+        },
         dateValue: {
             type: String,
             default: function () {
-                return ""
+                return "datetime"
             },
-            coerce: function (val) {
-                return val;
-            },
-            twoWay: true,
+            // twoWay: true,
         }
     },
     computed: {
@@ -207,10 +198,10 @@ Vue.component("date", {
             if (this.dateTab == -1) {
                 try {
                     if (this.viewMode == 'datetime-local') {
-                        this.viewMode == 'datetime'
+                        this.viewMode = 'datetime'
                     }
                     if (this.viewMode == 'datetime') {
-                        this.format = "YYYY-MM-DD HH:mm:00";
+                        this.format = "YYYY-MM-DD HH:mm";
                     } else if (this.viewMode == 'days') {
                         this.format = "YYYY-MM-DD";
                     } else if (this.viewMode == 'months') {
@@ -321,7 +312,11 @@ Vue.component("date", {
             if (this.dateTab == 0) {
                 this.dateTab = -1;
                 this.showDate = false;
-                console.info(this.dateValue = this.toString());
+                console.info(this.toString());
+                this.$dispatch('dateComponent-msg', {
+                    key: this.dateKey,
+                    val: this.toString(),
+                });
             }
             this.goHome();
         },
@@ -440,7 +435,13 @@ var app = new Vue({
         selectColor: true,
         invalid: true,
         msg: '',
-        showDate: false,
+        dateComponent: {
+            status: false,
+            key: "",
+            val: "",
+            viewMode: "",
+        },
+
         html: {
             title: {
                 "type": "title",
@@ -733,7 +734,7 @@ var app = new Vue({
                 "enabledDates": false,
                 "daysOfWeekDisabled": false,
                 "calendarWeeks": false,
-                "viewMode": "datetime-local",
+                "viewMode": "days",
                 "toolbarPlacement": "default",
                 "showTodayButton": false,
                 "showClear": "false",
@@ -750,18 +751,18 @@ var app = new Vue({
                     "label": ""
                 }
             },
-            dateTime1: {
+            date: {
                 "type": "datetime",
-                "variable": "BeginDay",
+                "variable": "day",
                 "var_uid": "756988525577db1d5d21563021960905",
                 "dataType": "date",
                 "protectedValue": false,
-                "id": "BeginDay",
-                "name": "BeginDay",
+                "id": "day",
+                "name": "day",
                 "label": "开始时间",
                 "placeholder": "请选择时间",
                 "hint": "",
-                "required": false,
+                "required": true,
                 "mode": "parent",
                 "format": "YYYY-MM-DD",
                 "dayViewHeaderFormat": "MMMM YYYY",
@@ -787,7 +788,7 @@ var app = new Vue({
                 },
                 "widgetParent": null,
                 "keepOpen": false,
-                "var_name": "BeginDay",
+                "var_name": "day",
                 "colSpan": 12,
                 "data": {
                     "value": "",
@@ -806,8 +807,8 @@ var app = new Vue({
                 value: "233",
                 title: "李世明",
             },
-            Birthday: "2016-01-09 10:20",
-            Beginday: ""
+            Birthday: "2016-11-09",
+            day: ""
         },
         validateResult: {
         },
@@ -818,8 +819,16 @@ var app = new Vue({
     }
     ,
     methods: {
-        showDateFn: function () {
-            this.showDate = true;
+        showDateFn: function (key, val, viewMode) {
+            this.dateComponent.key = key;
+            this.dateComponent.val = val;
+            this.dateComponent.viewMode = viewMode;
+            this.dateComponent.status = true;
+        }
+    },
+    events: {
+        'dateComponent-msg': function (params) {
+            this.$set(params.key, params.val);
         }
     }
 });

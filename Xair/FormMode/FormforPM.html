@@ -21,9 +21,9 @@
             background-color: #fbf9fe;
         }
         
-        .weui_cells_form .weui_cell_hd {
+        /*.weui_cells_form .weui_cell_hd {
             padding-right: .5em;
-        }
+        }*/
         
         .weui_label {
             width: auto;
@@ -65,7 +65,6 @@
             line-height: 24px;
             padding-bottom: 9px;
             font-size: 14px;
-            /*color: #515151;*/
         }
         
         .textarea_content {
@@ -98,18 +97,16 @@
             border-bottom: 1px solid #cbcbcb;
             background-color: #fff;
         }
-        
-        .showValue .weui_cell {
-            padding-left: 15px;
-        }
-        
-        .showValue span.weui_input {
-            font-size: 17px;
-        }
-        
-        .showValue .weui_cell_hd {
-            padding-right: .5em;
-        }
+         .weui_cells.showValue{
+              border-top:none;
+              border-bottom:none;
+         }
+          .weui_cells.showValue .weui_cell_select .weui_cell_bd:after{
+              content:"";
+              display:none;
+          }
+
+  
         
         .msg_error {
             line-height: 22px;
@@ -169,7 +166,8 @@
             position: fixed;
             right: 0;
             top: 0;
-            width: 250px;
+            width: 100%;
+            max-width:280px;
             height: 100%;
             background: #F2F2F2;
             text-align: center;
@@ -179,7 +177,8 @@
             position: fixed;
             top: 0;
             right: 0;
-            width: 250px;
+            width: 100%;
+            max-width:280px;
             background: white;
             line-height: 40px;
             height: 40px;
@@ -281,7 +280,7 @@
 </head>
 <template id="date">
     <div class="date-choose">
-        <div class="date-cover"></div>
+        <div class="date-cover" @click.self.stop="cancelDate"></div>
         <div class="date-main">
             <div class="date-header clearfix">
                 <div @click="cancelDate" class="data-canvel weui_btn weui_btn_mini">取消</div>
@@ -430,6 +429,11 @@
                             </li>
                         </ul>
                     </div>
+                    <div class="weui_cell">
+                            <div class="weui_cell_bd weui_cell_primary" style="color:green;text-align:center;">
+                                {{weekText }}
+                            </div>
+                        </div>
                 </div>
                 <div @click="finishDate" class="date-save">
                     确定
@@ -445,7 +449,8 @@
 
     <div id="app">
         {{variables.Birthday}}
-        <date  :show-Date.sync='showDate' v-if="showDate"  :date-value.sync="variables.Birthday" :view-Mode='html.dateTime.viewMode'></date>
+        <date  :show-Date.sync='dateComponent.status' v-if="dateComponent.status"  :date-key='dateComponent.key' :date-value="dateComponent.val" :view-Mode='dateComponent.viewMode'></date>
+        <!--<date  :show-Date.sync='showDate1' v-if="showDate1"  :date-value.sync="variables.Birthday1" :view-Mode='html.dateTime.viewMode1'></date>-->
         <!--
         模板说明：
         1，标签上的‘:’+属性名/‘v-’+属性名，都属于vue的动态属性绑定，属性值为变量；
@@ -462,16 +467,43 @@
 
             <!--dateTime 组件-->
             <!--BEGIN-dateTime-VIEW-->
-            <div class="showValue" @click='showDateFn'>
+            <div class="showValue" >
                 <div class="weui_cell">
                     <div class="weui_cell_hd">
-                        <label class="weui_label">{{html.dateTime.label}}</label>
+                        <label class="weui_label">{{html.date.label}}</label>
                     </div>
                     <div class="weui_cell_bd weui_cell_primary">
-                        <span class="weui_input">{{variables.Birthday}}</span>
+                        <span class="weui_input">{{variables.day}}</span>
                     </div>
                 </div>
             </div>
+
+            
+
+             <p class="msg_error">{{ validateResult[html.date.variable]?validateResult[html.date.variable].msg :""}}</p>
+             <div class="showValue" @click="showDateFn('variables.day',variables.day,html.date.viewMode)">
+                <div class="weui_cell" v-validate="{
+                            type:html.date.type,
+                            key:html.date.variable,
+                            dataType:html.date.dataType,
+                            val:variables.day,
+                            required:html.date.required,
+                            minDate:html.date.minDate,
+                            maxDate:html.date.maxDate}">
+                    <div class="weui_cell_hd">
+                        <label class="weui_label">{{html.date.label}}</label>
+                    </div>
+                    <div class="weui_cell_bd weui_cell_primary">
+                        <span class="weui_input">{{variables.day}}</span>
+                    </div>
+                    <div class="weui_cell_ft">
+                        <template v-if="!!validateResult[html.date.variable]&&html.date.required">
+                            <i class="iconfont icon-xingxing" :style="{'color':validateResult[html.date.variable].status&&validateResult[html.date.variable].val.length>0?'#09bb07':'red'}"></i>
+                        </template>
+                    </div>
+                </div>
+            </div>
+
             <!--END-dateTime-VIEW-->
             <!--BEGIN-dateTime-EDIT-->
             <p class="msg_error">{{ validateResult[html.dateTime.variable]?validateResult[html.dateTime.variable].msg :""}}</p>
@@ -589,24 +621,26 @@
             <!--END-checkbox-EDIT-->
             <!--dropdown组件-->
             <!--BEGIN-dropdown-VIEW-->
-            <div class="showValue">
-                <div class="weui_cell">
+     
+
+             <div class="weui_cells showValue">
+                <div class="weui_cell weui_cell_select weui_select_after">
                     <div class="weui_cell_hd">
-                        <label class="weui_label">{{html.dropdown.label}}</label>
+                        <label for="" class="weui_label">{{html.dropdown.label}}</label>
                     </div>
-                    <div class="weui_cell_bd weui_cell_primary">
-                        <span class="weui_input">
-                            <template v-for="item in html.dropdown.options" v-if="item.value===variables.dropdown">
-                                    {{item.label}}
-                            </template>
-                        </span>
+                    <div class="weui_cell_bd weui_cell_primary readyOnly_wrap">
+                        <div class="readyOnly"></div>
+                        <select class="weui_select" :name="html.dropdown.name" :disable="html.dropdown.mode" v-model="variables.dropdown">
+                        <option v-for="item in html.dropdown.options" :value="item.value">{{item.label}}</option>
+                        </select>
                     </div>
                 </div>
             </div>
+
             <!--END-dropdown-VIEW-->
             <!--BEGIN-dropdown-EDIT-->
             <p class="msg_error">{{ validateResult[html.dropdown.variable]?validateResult[html.dropdown.variable].msg :""}}</p>
-            <div class="weui_cells_title">{{html.dropdown.label}}
+            <div class="weui_cells_title">选择:{{html.dropdown.label}}
                 <div class="weui_cell_ft" v-if="html.dropdown.required">
                     <template v-if="!!validateResult[html.dropdown.variable]&&html.dropdown.required">
                         <i class="iconfont icon-xingxing" :style="{'color':validateResult[html.dropdown.variable].status&&validateResult[html.dropdown.variable].val.length>0?'#09bb07':'red'}"></i>
