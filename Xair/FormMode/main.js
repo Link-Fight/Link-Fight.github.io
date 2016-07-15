@@ -145,7 +145,7 @@ Vue.directive('validate', {
     }
 });
 //   template: require("./index.html"),
-Vue.component("date", {
+Vue.component("expandDate", {
     template: '#date',
     data: function () {
         return {
