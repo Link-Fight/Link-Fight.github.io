@@ -377,7 +377,7 @@
                             </div>
                         </div>
                         <div style="font-size:0;">
-                            <div class="select_container" @touchmove="touchFun('HH',$event)">
+                            <div class="select_container" @touchmove.stop="touchFun('HH',$event)">
                                 <ul class="select_HH">
                                     <li @click="clickFn('HH','DOWN',$event)">
                                         {{+date.HH-1|filNum 'HH'}}
@@ -391,7 +391,7 @@
                                 </ul>
                             </div>
                             <div class="select_container">
-                                <ul class="select_mm" @touchmove="touchFun('mm',$event)">
+                                <ul class="select_mm" @touchmove.stop="touchFun('mm',$event)">
                                     <li @click="clickFn('mm','DOWN',$event)">
                                         {{+date.mm-1 |filNum 'mm'}}
                                     </li>
@@ -407,7 +407,7 @@
                     </template>
                 </div>
                 <div v-show="dateTab==1"  transition="expand" class="date-year weui_cells weui_cells_access">
-                    <div class="select_containers" @touchmove="touchFun('YYYY',$event)">
+                    <div class="select_containers" @touchmove.stop="touchFun('YYYY',$event)">
                         <ul class="selects">
                             <li @click="clickFn('YYYY','DOWN',$event)" >
                                 {{+date.YYYY-2 |filNum 'YYYY'}}
@@ -428,7 +428,7 @@
                     </div>
                 </div>
                 <div v-show="dateTab==2" transition="expand"  class="date-month weui_cells weui_cells_access">
-                    <div class="select_containers" @touchmove="touchFun('MM',$event)">
+                    <div class="select_containers" @touchmove.stop="touchFun('MM',$event)">
                         <ul class="selects">
                             <li @click="clickFn('MM','DOWN',$event)">
                                 {{+date.MM-2|filNum 'MM'}}
@@ -449,7 +449,7 @@
                     </div>
                 </div>
                 <div v-show="dateTab==3" transition="expand"  class="date-day weui_cells weui_cells_access">
-                    <div class="select_containers" @touchmove="touchFun('DD',$event)">
+                    <div class="select_containers" @touchmove.stop="touchFun('DD',$event)">
                         <ul class="selects">
                             <li @click="clickFn('DD','DOWN',$event)" style='font-size:12px'>
                                 {{+date.DD-3|filNum 'DD'}}
