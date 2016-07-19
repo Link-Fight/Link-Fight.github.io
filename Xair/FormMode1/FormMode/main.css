@@ -1,0 +1,425 @@
+    .fl {
+       float: left;
+   }
+   
+   .fr {
+       float: right;
+   }
+   
+   body {
+       background-color: #fbf9fe;
+   }
+   /*.weui_cells_form .weui_cell_hd {
+            padding-right: .5em;
+        }*/
+   
+   .weui_label {
+       width: auto;
+   }
+   
+   .weui_select {
+       padding-left: 0px;
+   }
+   
+   .weui_footer {
+       background-color: #fff;
+       /*position: absolute;*/
+       bottom: 0;
+       width: 100%;
+       border-top: 1px solid #D9D9D9;
+   }
+   
+   .weui_footer_inner {
+       padding: 10px 15px;
+   }
+   
+   .weui_cells_title .weui_cell_ft {
+       float: right;
+   }
+   
+   .weui_label {
+       display: block;
+       width: 105px;
+       word-wrap: break-word;
+       word-break: break-all;
+   }
+   
+   .textarea {
+       padding-left: 15px;
+   }
+   
+   .textarea_title {
+       padding-top: 11px;
+       line-height: 24px;
+       padding-bottom: 9px;
+       font-size: 14px;
+   }
+   
+   .textarea_content {
+       color: #7d7d7d;
+       border-top: 1px solid #e5e5e5;
+       padding: 10px 36px 10px 0px;
+       font-size: 14px;
+   }
+   
+   .textarea_title .iconfont {
+       float: right;
+       margin-right: 15px;
+       line-height: 25px;
+   }
+   
+   .textarea_content textarea {
+       font-size: 14px;
+   }
+   
+   .textarea_content>div {
+       min-height: 50px;
+       word-break: break-all;
+       font-size: 17px;
+       line-height: 25px;
+   }
+   
+   .showValue {
+       margin-top: 10px;
+       border-top: 1px solid #cbcbcb;
+       border-bottom: 1px solid #cbcbcb;
+       background-color: #fff;
+   }
+   
+   .weui_cells.showValue {
+       border-top: none;
+       border-bottom: none;
+   }
+   
+   .weui_cells.showValue .weui_cell_select .weui_cell_bd:after {
+       content: "";
+       display: none;
+   }
+   
+   .msg_error {
+       line-height: 22px;
+       color: red;
+       font-size: 12px;
+       padding: 10px 15px 0px;
+       margin-bottom: -10px;
+   }
+   
+   .readyOnly_wrap {
+       position: relative;
+   }
+   
+   .readyOnly {
+       position: absolute;
+       display: block;
+       left: 0;
+       right: 0;
+       top: 0;
+       bottom: 0;
+       z-index: 10;
+   }
+   
+   .placeholder-warp {
+       position: relative;
+   }
+   
+   .placeholder {
+       position: absolute;
+       top：0;
+       left: 0;
+       color: #a9a9a9;
+       line-height: 45px;
+   }
+   
+ .date-choose {
+       position: fixed;
+       top: 0;
+       right: 0;
+       width: 100%;
+       height: 100%;
+       overflow: hidden;
+       z-index: 100;
+   }
+   
+   .date-cover {
+       width: 100%;
+       height: 100%;
+       background: rgba(0, 0, 0, .5);
+       position: absolute;
+       top: 0;
+       left: 0;
+   }
+   
+   .date-main {
+       position: absolute;
+       right: 0;
+       top: 0;
+       width: 100%;
+       max-width: 280px;
+       height: 100%;
+       background: #F2F2F2;
+       text-align: center;
+   }
+   
+   .date-header {
+       position: absolute;
+       top: 0;
+       right: 0;
+       width: 100%;
+       max-width: 280px;
+       background: white;
+       line-height: 40px;
+       height: 40px;
+       border-bottom: 1px solid #ddd;
+       box-shadow: 0 0 8px #ccc;
+       z-index: 1;
+   }
+   
+   .date-header>div {
+       margin: 7px 10px !important;
+   }
+   
+   .date-header>div:first-child {
+       color: black;
+   }
+   
+   .date-home {
+       text-align: left;
+   }
+   
+   .date-container {
+       height: 100%;
+       background: white;
+       overflow-x: hidden;
+       overflow-y: auto;
+   }
+   
+   .date-container a {
+       color: black;
+   }
+   
+   .date-save {
+       position: absolute;
+       bottom: 0;
+       width: 92%;
+       margin: 10px 0;
+       border: 1px solid #ccc;
+       color: #fff;
+       line-height: 36px;
+       background: #04be02;
+       border-radius: 5px;
+       -webkit-transform: translate(4%, 0);
+   }
+   
+   .data-cancel {
+       position: absolute;
+       left: 0;
+   }
+   
+   .date-container .select_container {
+       font-size: 14px;
+       display: inline-block;
+       width: 50%;
+   }
+   
+   .date-container li {
+       list-style: none;
+       color: #666;
+       text-align: center;
+       padding: 5px 0;
+   }
+   
+   .select_item_center {
+       font-size: 18px;
+       font-weight: bold;
+       padding: 5px 0;
+       color: #000;
+       border-top: 3px solid #04be02;
+       border-bottom: 3px solid #04be02;
+   }
+   
+   .select_containers {
+       position: relative;
+       padding: 0 10px;
+       border-bottom: 1px solid #D9D9D9;
+   }
+   
+   .select_container .select_HH {
+       padding: 10px 10px 10px 40px;
+   }
+   
+   .select_container .select_mm {
+       padding: 10px 40px 10px 10px;
+   }
+   
+   .select_containers .selects .select_item_center {
+       font-size: 20px;
+   }
+   
+   .select_containers .selects .select_item_next {
+       font-size: 16px;
+       padding: 4px 0;
+   }
+   
+   .select_containers .selects li {
+       font-size: 14px;
+       padding: 8px 0;
+   }
+   
+   .checkbox_line_wrap {
+       position: relative;
+   }
+   
+   .checkbox_line {
+       position: absolute;
+       display: inline-block;
+       width: 100%;
+       height: 100%;
+   }
+   
+    .expand-transition {
+       transition: all 0.3s ease;
+       left: 0;
+   }
+   
+   .expand-enter {
+       /*height:0%;*/
+       opacity: 0;
+       left: 100%;
+       /*height:100%;*/
+   }
+   
+   .expand-leave {
+       opacity: 0;
+       /*background-color:red;*/
+       left: -100%;
+       /*height:100%;*/
+   }
+   
+   .expand-mask-transition {
+       transition: all 0.3s ease-in-out;
+       right: 0;
+   }
+   
+   .expand-mask-enter {
+       opacity: 0;
+       right: -100%;
+   }
+   
+   .expand-mask-leave {
+       transition: all .3s ease-in-out;
+       background-color: blue;
+       opacity: 0。5;
+       right: 100%;
+   }
+   
+   
+   /*地区选择*/
+   
+   #chooseArea {
+       width: 100%;
+       height: 100%;
+       position: fixed;
+       left: 0;
+       top: 0;
+       overflow: hidden;
+       z-index: 1;
+   }
+   
+   #chooseArea .area-mark {
+       width: 100%;
+       background: rgba(0, 0, 0, .5);
+       height: 100%;
+       position: absolute;
+       left: 0;
+       bottom: 0;
+       top: 0;
+   }
+   
+   #chooseArea .area-tab {
+       width: 80%;
+       position: absolute;
+       right: 0;
+       top: 0;
+       overflow: hidden;
+       height: 100%;
+   }
+   
+   #chooseArea .area-tab-menu {
+       width: 100%;
+       height: 40px;
+       line-height: 40px;
+       font-size: 14px;
+       text-align: center;
+       border-bottom: 1px solid #ddd;
+       background: #eee;
+       display: -webkit-box;
+   }
+   
+   #chooseArea .area-tab-menu li {
+       -webkit-box-flex: 1;
+       box-sizing: border-box;
+       display: inline-block;
+       padding: 0 0.3em;
+       cursor: pointer;
+   }
+   
+   #chooseArea .area-tab-menu li.active {
+       color: #0dc459;
+       border-bottom: 2px solid #0dc459;
+   }
+   
+   #chooseArea .area-tab-con {
+       width: 100%;
+       background: #fff;
+       overflow: hidden;
+       height: 100%;
+       position: relative;
+   }
+   
+   #chooseArea .area-tab-con ul {
+       width: 100%;
+       background: #fff;
+       overflow: auto;
+       height: 100%;
+   }
+   
+   #chooseArea .area-tab-con ul li {
+       height: 40px;
+       line-height: 40px;
+       text-indent: 20px;
+       border-bottom: 1px solid #e5e5e5;
+       cursor: pointer;
+   }
+   
+   #chooseArea .area-tab-con ul li.active {
+       color: #0dc459;
+   }
+   
+   #chooseArea .area-tab-con ul li:last-child {
+       border: 0 none;
+   }
+   
+   #chooseArea .loadtip {
+       position: absolute;
+       width: 100%;
+       height: 100%;
+       left: 0;
+       top: 0;
+       background: rgba(0, 0, 0, .1);
+       display: -webkit-box;
+       -webkit-box-align: center;
+       -webkit-box-pack: center;
+   }
+   
+   #chooseArea .loadtip:after {
+       content: '\e613';
+       font-size: 20px;
+       width: 20px;
+       height: 20px;
+       line-height: 20px;
+       font-family: 'wechat';
+       display: block;
+       color: #555;
+       -webkit-animation: loading 2s infinite linear;
+   }
+   
