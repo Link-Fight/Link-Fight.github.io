@@ -310,11 +310,11 @@ Vue.component("expandDate", {
 
             if (date - this.touchConfig.lastTime > this.touchConfig.sleepTime) {
                 if (this.touch.X < this.touchConfig.oldX) {
-                    this.horizontal -= 4;
+                    this.horizontal -= 6;
                     this.touch.direction = "L";
                     console.info("L");
                 } else {
-                    this.horizontal += 4;
+                    this.horizontal += 6;
                     this.touch.direction = "R";
                     console.log("R")
                 }
