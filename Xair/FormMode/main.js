@@ -297,7 +297,7 @@ Vue.component("expandDate", {
 
         },
         touchMoveHorizontal: function (event) {
-            if (Math.abs(this.horizontal) >= 102) {
+            if (Math.abs(this.horizontal) > 102) {
                 if (this.horizontal > 0) {
                     this.horizontal -= 2;
                 } else {
