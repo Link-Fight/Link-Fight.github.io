@@ -265,7 +265,7 @@ Vue.component("expandDate", {
                 clearInterval(_this.touch.time);
                 var target = 0;
                 _this.touch.time = setInterval(function () {
-                    var speed = (_this.horizontal) / 8;
+                    var speed = (_this.horizontal) / 4;
                     speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
                     console.info(speed);
                     _this.horizontal -= speed;
@@ -310,11 +310,11 @@ Vue.component("expandDate", {
 
             if (date - this.touchConfig.lastTime > this.touchConfig.sleepTime) {
                 if (this.touch.X < this.touchConfig.oldX) {
-                    this.horizontal -= 6;
+                    this.horizontal -= 8;
                     this.touch.direction = "L";
                     console.info("L");
                 } else {
-                    this.horizontal += 6;
+                    this.horizontal += 8;
                     this.touch.direction = "R";
                     console.log("R")
                 }
