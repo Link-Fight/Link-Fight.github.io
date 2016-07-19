@@ -265,7 +265,7 @@ Vue.component("expandDate", {
                 clearInterval(_this.touch.time);
                 var target = 0;
                 _this.touch.time = setInterval(function () {
-                    var speed = (_this.horizontal) / 8;
+                    var speed = (_this.horizontal) / 5;
                     speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
                     console.info(speed);
                     _this.horizontal -= speed;
@@ -273,7 +273,7 @@ Vue.component("expandDate", {
                         clearInterval(_this.touch.time);
                         _this.horizontal = 0;
                     }
-                }, 100);
+                }, 60);
             }
         }
     },
@@ -298,19 +298,23 @@ Vue.component("expandDate", {
         },
         touchMoveHorizontal: function (event) {
             if (Math.abs(this.horizontal) >= 102) {
-                this.horizontal = (this.horizontal/this.horizontal)* 102;
-                return;
+                // this.horizontal = (this.horizontal / this.horizontal) * 102;
+                if (this.horizontal > 0) {
+                    this.horizontal = 102;
+                }else{
+                    this.horizontal = -102;
+                }
             }
             this.touch.X = event.touches[0].clientX;
             var date = new Date();
 
             if (date - this.touchConfig.lastTime > this.touchConfig.sleepTime) {
                 if (this.touch.X < this.touchConfig.oldX) {
-                    this.horizontal -= 8;
+                    this.horizontal -= 2;
                     this.touch.direction = "L";
                     console.info("L");
                 } else {
-                    this.horizontal += 8;
+                    this.horizontal += 2;
                     this.touch.direction = "R";
                     console.log("R")
                 }
