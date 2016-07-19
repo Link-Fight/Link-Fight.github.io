@@ -273,7 +273,7 @@ Vue.component("expandDate", {
                         clearInterval(_this.touch.time);
                         _this.horizontal = 0;
                     }
-                }, 100);
+                }, 50);
             }
         }
     },
