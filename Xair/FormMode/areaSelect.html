@@ -1,0 +1,61 @@
+<style>
+    .expand-transition {
+        position: relative;
+        transition: all 0.3s ease;
+        left: 0;
+    }
+    
+    .expand-enter {
+        position: relative;
+        opacity: 0;
+        left: 100%;
+    }
+    
+    .expand-leave {
+        position: relative;
+        display: none;
+        opacity: 0;
+        left: -100%;
+    }
+    
+    .expand-mask-transition {
+        transition: all 0.3s ease-in-out;
+        right: 0;
+    }
+    
+    .expand-mask-enter {
+        opacity: 0;
+        right: -100%;
+    }
+    
+    .expand-mask-leave {
+        transition: all .3s ease-in-out;
+        opacity: 0。5;
+        right: 100%;
+    }
+    
+    #chooseArea .area-tab-menu li {
+        display: inline-block;
+        padding: 0 10px;
+    }
+</style>
+<div v-show="show" id="chooseArea" transition="expand-mask">
+    <div class="area-mark" @click="selectEnd"></div>
+    <div class="area-tab">
+        <ul class="area-tab-menu">
+            <li v-for="item in menuTabs"   @click.stop='menusClick(item)'>
+                {{item.name}}
+            </li>
+        </ul>
+        <div class="area-tab-con">
+            <p>#{{"ShowId:" +":Level:"+ currentLevel +":currentId:"+ currentId+"showId:"+currentShowId}}     </p>
+            <!--<p>@{{store|getJsonObj}}</p>-->
+            <ul>
+                <li v-for="item in store['id'+currentShowId]" :class="{'active':item.id == curlevelActiveId}" @click.stop="clickItem(item)">
+                    {{item.name}}
+                </li>
+            </ul>
+        </div>
+
+    </div>
+</div>
