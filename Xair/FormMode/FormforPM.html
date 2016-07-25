@@ -320,7 +320,7 @@
     </style>
 </head>
 <template id="date">
-    <div class="date-choose"  v-if="showDate"  transition="expand-mask" @touchmove.stop.prevent="touchMoveHorizontal($event)" @touchstart="touchstart($event)"  @touchend="touchend">
+    <div class="date-choose"  v-if="showDate"  transition="expand-mask">
         <div class="date-cover" @click.self.stop="cancelDate"></div>
         <div class="date-main" >
             <div class="date-header clearfix">
@@ -330,7 +330,7 @@
                  <div>{{touch.X}}</div>
                  <div>{{touch.status}}</div>
             </div>
-            <div class="date-container">
+            <div class="date-container"  @touchmove.stop.prevent="touchMoveHorizontal($event)" @touchstart="touchstart($event)"  @touchend="touchend|debounce 100" @touchcancel="touchcancel">
                 <div style="height:40px;"></div>
                 <div v-show="dateTab==0" transition="expand"  class="date-home weui_cells weui_cells_access" :style="{'background':'green','left':horizontal+'%'}" >
                     <a @click="changeTab(1)" class="weui_cell" href="javascript:;">
@@ -489,6 +489,9 @@
 <body>
 
     <div id="app">
+
+
+        
         {{variables.Birthday}}
         <p>{{variables[currentKey]}}</p>
         <ul>

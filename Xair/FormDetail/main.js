@@ -179,7 +179,7 @@ Vue.component("expandDate", {
             touchConfig: {
                 lastTime: null,
                 oldX: 0,
-                sleepTime: 50,
+                sleepTime: 100,
             }
         }
     },
@@ -267,15 +267,13 @@ Vue.component("expandDate", {
                 _this.touch.time = setInterval(function () {
                     var speed = (_this.horizontal) / 4;
                     speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
-                    console.info("speed"+speed);
+                    console.info(speed);
                     _this.horizontal -= speed;
                     if (Math.abs(_this.horizontal) <= 0) {
                         clearInterval(_this.touch.time);
                         _this.horizontal = 0;
                     }
                 }, 40);
-            } else if (val == "move") {
-                clearInterval(this.touch.time);
             }
         }
     },
@@ -287,9 +285,6 @@ Vue.component("expandDate", {
                 this.touch[this.touch.status].Y = event.touches[0].clientY;
             }
 
-        },
-        touchcancel:function(event){
-            console.warn("cancel");
         },
         touchstart: function (event) {
             clearInterval(this.touch.time);
@@ -312,21 +307,17 @@ Vue.component("expandDate", {
             }
             this.touch.X = event.touches[0].clientX;
             var date = new Date();
-            this.touch.status = "move";
-            if (date - this.touchConfig.lastTime > this.touchConfig.sleepTime) {
-                if (Math.abs(this.touch.X - this.touchConfig.oldX) > 4) {
-                    if (this.touch.X < this.touchConfig.oldX) {
-                        this.horizontal -= 2;
-                        this.touch.direction = "L";
-                        console.info("L");
-                    } else {
-                        this.horizontal += 2;
-                        this.touch.direction = "R";
-                        console.log("R")
-                    }
-                    this.touchConfig.oldX = this.touch.X;
-                }
 
+            if (date - this.touchConfig.lastTime > this.touchConfig.sleepTime) {
+                if (this.touch.X < this.touchConfig.oldX) {
+                    this.horizontal -= 2;
+                    this.touch.direction = "L";
+                    console.info("L");
+                } else {
+                    this.horizontal += 2;
+                    this.touch.direction = "R";
+                    console.log("R")
+                }
             }
         },
         touchFun: function (key, event) {
@@ -529,12 +520,12 @@ var app = new Vue({
                 type: "TABS",
                 tabs: [
                     {
-                        text: "任务详情",
-                        val: "1",
+                        key: "1",
+                        val: "任务详情",
                     },
                     {
-                        text: "作业工单",
-                        val: "2",
+                        key: "2",
+                        val: "作业工单",
                     }
                 ]
             },
@@ -544,27 +535,27 @@ var app = new Vue({
                 tabs: 1,
                 dataSet: [
                     {
-                        text: "地区",
+                        key: "地区",
                         value: "新疆/巴州",
                         envent: "PHOTO"
                     },
                     {
-                        text: "地区A",
+                        key: "地区A",
                         value: "新疆/巴州A",
                         envent: "PHOTO"
                     },
                     {
-                        text: "地区B",
+                        key: "地区B",
                         value: "新疆/巴州B",
                         envent: "PHOTO"
                     },
                     {
-                        text: "地区C",
+                        key: "地区C",
                         value: "新疆/巴州C",
                         envent: "PHOTO"
                     },
                     {
-                        text: "地区D",
+                        key: "地区D",
                         value: "新疆/巴州D",
                         envent: "PHOTO"
                     },
@@ -577,23 +568,23 @@ var app = new Vue({
                 tabs: 2,
                 dataSet: [
                     {
-                        text: "2地区",
+                        key: "2地区",
                         value: "新疆/巴州",
                     },
                     {
-                        text: "2地区A",
+                        key: "2地区A",
                         value: "新疆/巴州A",
                     },
                     {
-                        text: "2地区B",
+                        key: "2地区B",
                         value: "新疆/巴州B",
                     },
                     {
-                        text: "2地区C",
+                        key: "2地区C",
                         value: "新疆/巴州C",
                     },
                     {
-                        text: "2地区D",
+                        key: "2地区D",
                         value: "新疆/巴州D",
                     },
 
