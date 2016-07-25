@@ -329,6 +329,9 @@
                 <div>{{horizontal}}</div>
                  <div>{{touch.X}}</div>
                  <div>{{touch.status}}</div>
+                 <div>
+                     {{touch.radiusX}}
+                 </div>
             </div>
             <div class="date-container"  @touchmove.stop.prevent="touchMoveHorizontal($event)" @touchstart="touchstart($event)"  @touchend="touchend|debounce 100" @touchcancel="touchcancel">
                 <div style="height:40px;"></div>

@@ -167,6 +167,7 @@ Vue.component("expandDate", {
                 Y: 0,
                 status: "",
                 direction: "",
+                radiusX:"",
                 start: {
                     X: 0,
                     Y: 0,
@@ -310,6 +311,7 @@ Vue.component("expandDate", {
                     this.horizontal = -102;
                 }
             }
+            this.touch.radiusX = event.touches[0].radiusX;
             this.touch.X = event.touches[0].clientX;
             var date = new Date();
             this.touch.status = "move";
