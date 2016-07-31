@@ -12,316 +12,6 @@
     <link rel="stylesheet" type="text/css" href="icon-font/iconfont.css">
     <script src="vue.js"></script>
     <link rel="stylesheet" href="main.css">
-    <style>
-        .fl {
-            float: left;
-        }
-        
-        .fr {
-            float: right;
-        }
-        
-        body {
-            background-color: #fbf9fe;
-        }
-        
-        /*.weui_cells_form .weui_cell_hd {
-            padding-right: .5em;
-        }*/
-        
-        .weui_label {
-            width: auto;
-        }
-        
-        .weui_select {
-            padding-left: 0px;
-        }
-        
-        .weui_footer {
-            background-color: #fff;
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            border-top: 1px solid #D9D9D9;
-        }
-        
-        .weui_footer_inner {
-            padding: 10px 15px;
-        }
-        
-        .weui_cells_title .weui_cell_ft {
-            float: right;
-        }
-        
-        .weui_label {
-            display: block;
-            width: 105px;
-            word-wrap: break-word;
-            word-break: break-all;
-        }
-        
-        .textarea {
-            padding-left: 15px;
-        }
-        
-        .textarea_title {
-            padding-top: 11px;
-            line-height: 24px;
-            padding-bottom: 9px;
-            font-size: 14px;
-        }
-        
-        .textarea_content {
-            color: #7d7d7d;
-            border-top: 1px solid #e5e5e5;
-            padding: 10px 36px 10px 0px;
-            font-size: 14px;
-        }
-        
-        .textarea_title .iconfont {
-            float: right;
-            margin-right: 15px;
-            line-height: 25px;
-        }
-        
-        .textarea_content textarea {
-            font-size: 14px;
-        }
-        
-        .textarea_content>div {
-            min-height: 50px;
-            word-break: break-all;
-            font-size: 17px;
-            line-height: 25px;
-        }
-        
-        .showValue {
-            margin-top: 10px;
-            border-top: 1px solid #cbcbcb;
-            border-bottom: 1px solid #cbcbcb;
-            background-color: #fff;
-        }
-         .weui_cells.showValue{
-              border-top:none;
-              border-bottom:none;
-         }
-          .weui_cells.showValue .weui_cell_select .weui_cell_bd:after{
-              content:"";
-              display:none;
-          }
-
-  
-        
-        .msg_error {
-            line-height: 22px;
-            color: red;
-            font-size: 12px;
-            padding: 10px 15px 0px;
-            margin-bottom: -10px;
-        }
-        
-        .readyOnly_wrap {
-            position: relative;
-        }
-        
-        .readyOnly {
-            position: absolute;
-            display: block;
-            left: 0;
-            right: 0;
-            top: 0;
-            bottom: 0;
-            z-index: 1;
-        }
-        
-        .placeholder-warp {
-            position: relative;
-        }
-        
-        .placeholder {
-            position: absolute;
-            top：0;
-            left: 0;
-            color: #a9a9a9;
-            line-height: 45px;
-        }
-    </style>
-    <style>
-        .date-choose {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 100%;
-            height: 100%;
-            overflow: hidden;
-            z-index: 100;
-        }
-        
-        .date-cover {
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, .5);
-            position: absolute;
-            top: 0;
-            left: 0;
-        }
-        
-        .date-main {
-            position: absolute;
-            right: 0;
-            top: 0;
-            width: 100%;
-            max-width:280px;
-            height: 100%;
-            background: #F2F2F2;
-            text-align: center;
-        }
-        
-        .date-header {
-            position: absolute;
-            top: 0;
-            right: 0;
-            width: 100%;
-            max-width:280px;
-            background: white;
-            line-height: 40px;
-            height: 40px;
-            border-bottom: 1px solid #ddd;
-            box-shadow: 0 0 8px #ccc;
-            z-index: 1;
-        }
-        
-        .date-header>div {
-            margin: 7px 10px !important;
-        }
-        
-        .date-header>div:first-child {
-            color: black;
-        }
-        
-        .date-home {
-            text-align: left;
-        }
-        
-        .date-container {
-            height: 100%;
-            background: white;
-            overflow-x: hidden;
-            overflow-y: auto;
-        }
-        
-        .date-container a {
-            color: black;
-        }
-        
-        .date-save {
-            position: absolute;
-            bottom: 0;
-            width: 92%;
-            margin: 10px 0;
-            border: 1px solid #ccc;
-            color: #fff;
-            line-height: 36px;
-            background: #04be02;
-            border-radius:5px;
-            -webkit-transform: translate(4%, 0);
-        }
-        
-        .data-cancel {
-            position: absolute;
-            left: 0;
-        }
-        
-        .date-container .select_container {
-            font-size: 14px;
-            display: inline-block;
-            width: 50%;
-        }
-        
-        .date-container li {
-            list-style: none;
-            color: #666;
-            text-align: center;
-            padding:5px 0;
-        }
-        
-        .select_item_center {
-            font-size: 18px;
-            font-weight: bold;
-            padding: 5px 0;
-            color: #000;
-            border-top: 3px solid #04be02;
-            border-bottom: 3px solid #04be02;
-        }
-        
-        .select_containers {
-            position:relative;
-            padding: 0 10px;
-            border-bottom:1px solid #D9D9D9;
-        }
-        
-        .select_container .select_HH {
-            padding: 10px 10px 10px 40px;
-        }
-        
-        .select_container .select_mm {
-            padding: 10px 40px 10px 10px;
-        }
-        
-        .select_containers .selects .select_item_center {
-            font-size: 20px;
-        }
-        
-        .select_containers .selects .select_item_next {
-            font-size: 16px;
-            padding: 4px 0;
-        }
-        
-        .select_containers .selects li {
-            font-size: 14px;
-            padding: 8px 0;
-        }
-        .checkbox_line_wrap{
-            position:relative;
-        }
-        .checkbox_line{
-            position:absolute;
-            display:inline-block;
-            width:100%;
-            height:100%;
-        }
-    </style>
-    <style>
-        .expand-transition{
-            transition:all 0.3s ease;
-            left:0;
-            
-        }
-        .expand-enter{
-            opacity:0;
-            left:100%;
-        }
-        .expand-leave{
-            opacity:0;
-            left:-100%;
-        }
-
-        .expand-mask-transition {
-            transition: all 0.3s ease-in-out;
-            right:0;
-        }
-
-        .expand-mask-enter{
-            opacity: 0;
-            right:-100%;
-        }
-        .expand-mask-leave{
-            transition: all .3s ease-in-out;
-            background-color:blue;
-            opacity:0。5;
-            right:100%;
-        }
-    </style>
 </head>
 <template id="date">
     <div class="date-choose"  v-if="showDate"  transition="expand-mask">
@@ -330,16 +20,13 @@
             <div class="date-header clearfix">
                 <div @click="cancelDate" class="data-cancel weui_btn weui_btn_mini">取消</div>
                 <span>{{ chooseText }}</span>
-                <div>{{horizontal}}</div>
-                 <div>{{touch.X}}</div>
-                 <div>{{touch.status}}</div>
-                 <div>
-                     {{touch.radiusX}}
-                 </div>
+                <!--<div @click="finishDate" class="fr weui_btn weui_btn_mini weui_btn_primary">完成</div>-->
             </div>
-            <div class="date-container"  @touchmove.stop.prevent="touchMoveHorizontal($event)" @touchstart="touchstart($event)"  @touchend="touchend|debounce 100" @touchcancel="touchcancel">
+            <div class="date-container">
+                <!--{{dateValue}}-->
+
                 <div style="height:40px;"></div>
-                <div v-show="dateTab==0" transition="expand"  class="date-home weui_cells weui_cells_access" :style="{'background':'green','left':horizontal+'%'}" >
+                <div v-show="dateTab==0" transition="expand"  class="date-home weui_cells weui_cells_access">
                     <a @click="changeTab(1)" class="weui_cell" href="javascript:;">
                         <div class="weui_cell_bd weui_cell_primary">
                             <p>年</p>
@@ -380,7 +67,7 @@
                             </div>
                         </div>
                         <div style="font-size:0;">
-                            <div class="select_container" @touchmove.stop.prevent ="touchFun('HH',$event)">
+                            <div class="select_container" @touchmove="touchFun('HH',$event)">
                                 <ul class="select_HH">
                                     <li @click="clickFn('HH','DOWN',$event)">
                                         {{+date.HH-1|filNum 'HH'}}
@@ -394,7 +81,7 @@
                                 </ul>
                             </div>
                             <div class="select_container">
-                                <ul class="select_mm" @touchmove.stop.prevent ="touchFun('mm',$event)">
+                                <ul class="select_mm" @touchmove="touchFun('mm',$event)">
                                     <li @click="clickFn('mm','DOWN',$event)">
                                         {{+date.mm-1 |filNum 'mm'}}
                                     </li>
@@ -408,7 +95,6 @@
                             </div>
                         </div>
                     </template>
-
 </div>
 <div v-show="dateTab==1" transition="expand" class="date-year weui_cells weui_cells_access">
     <div class="select_containers" @touchmove="touchFun('YYYY',$event)">
@@ -426,41 +112,15 @@
                 {{date.YYYY+1 |filNum 'YYYY'}}
             </li>
             <li @click="clickFn('YYYY','UP',$event)" ">
-
-                </div>
-                <div v-show="dateTab==1"  transition="expand" class="date-year weui_cells weui_cells_access">
-                    <div class="select_containers" @touchmove.stop.prevent ="touchFun('YYYY',$event)">
-                        <ul class="selects">
-                            <li @click="clickFn('YYYY','DOWN',$event)" >
-                                {{+date.YYYY-2 |filNum 'YYYY'}}
-                            </li>
-                            <li class="select_item_next" @click="clickFn('YYYY','DOWN',$event)">
-                                {{+date.YYYY-1 |filNum 'YYYY'}}
-                            </li>
-                            <li class="select_item_center" @click='finishDate'>
-                                {{date.YYYY |filNum 'YYYY'}}
-                            </li>
-                            <li class="select_item_next" @click="clickFn('YYYY','UP',$event)">
-                                {{date.YYYY+1 |filNum 'YYYY'}}
-                            </li>
-                            <li @click="clickFn('YYYY','UP',$event)"">
-
                                 {{+date.YYYY+2 |filNum 'YYYY'}}
                             </li>
                         </ul>
                     </div>
                 </div>
-
                 <div v-show="dateTab==2 " transition="expand "  class="date-month weui_cells weui_cells_access ">
                     <div class="select_containers " @touchmove="touchFun( 'MM',$event) ">
                         <ul class="selects ">
                             <li @click="clickFn( 'MM', 'DOWN',$event) ">
-
-                <div v-show="dateTab==2" transition="expand"  class="date-month weui_cells weui_cells_access">
-                    <div class="select_containers" @touchmove.stop.prevent ="touchFun('MM',$event)">
-                        <ul class="selects">
-                            <li @click="clickFn('MM','DOWN',$event)">
-
                                 {{+date.MM-2|filNum 'MM'}}
                             </li>
                             <li class="select_item_next " @click="clickFn( 'MM', 'DOWN',$event) ">
@@ -482,11 +142,6 @@
                     <div class="select_containers " @touchmove="touchFun( 'DD',$event) ">
                         <ul class="selects ">
                             <li @click="clickFn( 'DD', 'DOWN',$event) " style='font-size:12px'>
-                <div v-show="dateTab==3" transition="expand"  class="date-day weui_cells weui_cells_access">
-                    <div class="select_containers" @touchmove.stop.prevent ="touchFun('DD',$event)">
-                        <ul class="selects">
-                            <li @click="clickFn('DD','DOWN',$event)" style='font-size:12px'>
-
                                 {{+date.DD-3|filNum 'DD'}}
                             </li>
                             <li @click="clickFn( 'DD', 'DOWN',$event) ">
@@ -559,20 +214,6 @@
             <area :show.sync="areaComponent.show" :date-key='areaComponent.key' :selected="areaComponent.current"></area>
             <!--<date  :show-Date.sync='showDate1' v-if="showDate1"  :date-value.sync="variables.Birthday1" :view-Mode='html.dateTime.viewMode1'></date>-->
             <!--
-    <div id="app">
-
-
-        
-        {{variables.Birthday}}
-        <p>{{variables[currentKey]}}</p>
-        <ul>
-            <li v-for="item in arr[currentKey]">
-                {{item}}
-            </li>
-        </ul>
-        <expand-Date   :show-Date.sync='dateComponent.status' v-if="dateComponent.status"  :date-key='dateComponent.key' :date-value="dateComponent.val" :view-Mode='dateComponent.viewMode'></expand-Date>
-        <!--<date  :show-Date.sync='showDate1' v-if="showDate1"  :date-value.sync="variables.Birthday1" :view-Mode='html.dateTime.viewMode1'></date>-->
-        <!--
         模板说明：
         1，标签上的‘:’+属性名/‘v-’+属性名，都属于vue的动态属性绑定，属性值为变量；
         2，内容区域的{{}}，属于vue动态内容绑定，双括号内是变量；
@@ -705,37 +346,6 @@
                         <label class="checkbox_line" :for="'html.checkval.variable'"></label>
                         <div class="weui_cell_hd weui_label" style='font-size: 0;'>
                             <input :id="'html.checkval.variable'" class="weui_switch" type="checkbox" v-model="variables.checkboxValue">
-            </div>
-            <!--END-input-EDIT-->
-   <!--新checkbox组件-->
-   <!--BEGIN-新checkbox-VIEW-->
-
-                <div class="weui_cells weui_cells_form">
-                    <div class="weui_cell weui_cell_switch checkbox_line_wrap">
-                        
-                         <div class="weui_cell_hd weui_label" style='font-size: 0;'>
-                            <input :id="'html.checkval.variable'"  class="weui_switch" type="checkbox" v-model="variables.checkboxValue" disabled>
-                        </div>
-                        <div class="weui_cell_hd weui_cell_primary">
-                           {{html.checkval.label}}   
-                        </div>
-                    </div>
-                </div>
-
-    <!--END-新checkbox-VIEW-->
-    <!--BEGIN-新checkbox-VIEW-->
-            <p class="msg_error">{{ validateResult[html.checkval.variable]?validateResult[html.checkval.variable].msg :""}}</p>
-            <div class="weui_cells weui_cells_form">
-                    <div class="weui_cell weui_cell_switch checkbox_line_wrap"
-                    v-validate="{
-                            type:html.checkval.type,
-                            key:html.checkval.variable,
-                            val:variables.checkboxValue,
-                            required:html.checkval.required,}"
-                    >
-                        <label class="checkbox_line" :for="html.checkval.variable"></label>
-                         <div class="weui_cell_hd weui_label" style='font-size: 0;'>
-                            <input :id="html.checkval.variable"  class="weui_switch" type="checkbox" v-model="variables.checkboxValue">
                         </div>
                         <div class="weui_cell_hd weui_cell_primary">
                             {{html.checkval.label}}
@@ -747,7 +357,7 @@
                         </div>
                     </div>
                 </div>
-  <!--END-新checkbox-VIEW-->
+
 
                 <!--checkbox组件-->
                 <!--BEGIN-checkbox-VIEW-->

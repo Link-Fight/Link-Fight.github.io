@@ -145,7 +145,7 @@ Vue.directive('validate', {
     }
 });
 //   template: require("./index.html"),
-Vue.component("expandDate", {
+Vue.component("date", {
     template: '#date',
     data: function () {
         return {
@@ -159,28 +159,6 @@ Vue.component("expandDate", {
                 day: '1',
                 HH: "09",
                 mm: "21",
-            },
-            horizontal: 0,
-            touch: {
-                time: 0,
-                X: 0,
-                Y: 0,
-                status: "",
-                direction: "",
-                radiusX:"",
-                start: {
-                    X: 0,
-                    Y: 0,
-                },
-                end: {
-                    X: 0,
-                    Y: 0,
-                }
-            },
-            touchConfig: {
-                lastTime: null,
-                oldX: 0,
-                sleepTime: 50,
             }
         }
     },
@@ -260,77 +238,8 @@ Vue.component("expandDate", {
         }
     },
     watch: {
-        "touch.status": function (val, oldVal) {
-            if (val == "end") {
-                var _this = this;
-                clearInterval(_this.touch.time);
-                var target = 0;
-                _this.touch.time = setInterval(function () {
-                    var speed = (_this.horizontal) / 4;
-                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
-                    console.info("speed"+speed);
-                    _this.horizontal -= speed;
-                    if (Math.abs(_this.horizontal) <= 0) {
-                        clearInterval(_this.touch.time);
-                        _this.horizontal = 0;
-                    }
-                }, 40);
-            } else if (val == "move") {
-                clearInterval(this.touch.time);
-            }
-        }
     },
     methods: {
-        touchend: function (event) {
-            this.touch.status = "end";
-            if (event.touches[0]) {
-                this.touch[this.touch.status].X = event.touches[0].clientX;
-                this.touch[this.touch.status].Y = event.touches[0].clientY;
-            }
-
-        },
-        touchcancel:function(event){
-            console.warn("cancel");
-        },
-        touchstart: function (event) {
-            clearInterval(this.touch.time);
-            this.touch.status = "start";
-            this.touch[this.touch.status].X = event.touches[0].clientX;
-            this.touch[this.touch.status].Y = event.touches[0].clientY;
-            var date = new Date();
-            this.touchConfig.lastTime = date;
-            this.touchConfig.oldX = event.touches[0].clientX;
-
-        },
-        touchMoveHorizontal: function (event) {
-            if (Math.abs(this.horizontal) >= 102) {
-                // this.horizontal = (this.horizontal / this.horizontal) * 102;
-                if (this.horizontal > 0) {
-                    this.horizontal = 102;
-                } else {
-                    this.horizontal = -102;
-                }
-            }
-            this.touch.radiusX = event.touches[0].radiusX;
-            this.touch.X = event.touches[0].clientX;
-            var date = new Date();
-            this.touch.status = "move";
-            if (date - this.touchConfig.lastTime > this.touchConfig.sleepTime) {
-                if (Math.abs(this.touch.X - this.touchConfig.oldX) > 4) {
-                    if (this.touch.X < this.touchConfig.oldX) {
-                        this.horizontal -= 2;
-                        this.touch.direction = "L";
-                        console.info("L");
-                    } else {
-                        this.horizontal += 2;
-                        this.touch.direction = "R";
-                        console.log("R")
-                    }
-                    this.touchConfig.oldX = this.touch.X;
-                }
-
-            }
-        },
         touchFun: function (key, event) {
             var _this = this;
             if (event.type == 'touchmove') {
@@ -744,96 +653,6 @@ Vue.component("area", {
 var app = new Vue({
     el: '#app',
     data: {
-        detailDate: [
-
-            {
-                titile: "我是tab",
-                type: "TABS",
-                tabs: [
-                    {
-                        text: "任务详情",
-                        val: "1",
-                    },
-                    {
-                        text: "作业工单",
-                        val: "2",
-                    }
-                ]
-            },
-            {
-                title: "",
-                type: "PARAMS",
-                tabs: 1,
-                dataSet: [
-                    {
-                        text: "地区",
-                        value: "新疆/巴州",
-                        envent: "PHOTO"
-                    },
-                    {
-                        text: "地区A",
-                        value: "新疆/巴州A",
-                        envent: "PHOTO"
-                    },
-                    {
-                        text: "地区B",
-                        value: "新疆/巴州B",
-                        envent: "PHOTO"
-                    },
-                    {
-                        text: "地区C",
-                        value: "新疆/巴州C",
-                        envent: "PHOTO"
-                    },
-                    {
-                        text: "地区D",
-                        value: "新疆/巴州D",
-                        envent: "PHOTO"
-                    },
-
-                ]
-            },
-            {
-                title: "",
-                type: "PARAMS",
-                tabs: 2,
-                dataSet: [
-                    {
-                        text: "2地区",
-                        value: "新疆/巴州",
-                    },
-                    {
-                        text: "2地区A",
-                        value: "新疆/巴州A",
-                    },
-                    {
-                        text: "2地区B",
-                        value: "新疆/巴州B",
-                    },
-                    {
-                        text: "2地区C",
-                        value: "新疆/巴州C",
-                    },
-                    {
-                        text: "2地区D",
-                        value: "新疆/巴州D",
-                    },
-
-                ]
-            },
-            {
-                title: "文本",
-                type: "TEXT_AREA",
-                text_title: "备注",
-                text_content: "备注说明，备注说明，备注说明，备注说明，备注说明，备注说明，备注说明，备注说明，备注说明，备注说明，备注说明，备注说明，"
-            },
-        ],
-        currentKey: "",
-        arr: {
-            "city": [
-                "A", "B", "C"
-            ]
-        },
         selectColor: true,
         invalid: true,
         msg: '',

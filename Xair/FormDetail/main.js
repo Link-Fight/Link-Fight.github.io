@@ -167,7 +167,6 @@ Vue.component("expandDate", {
                 Y: 0,
                 status: "",
                 direction: "",
-                radiusX:"",
                 start: {
                     X: 0,
                     Y: 0,
@@ -180,7 +179,7 @@ Vue.component("expandDate", {
             touchConfig: {
                 lastTime: null,
                 oldX: 0,
-                sleepTime: 50,
+                sleepTime: 100,
             }
         }
     },
@@ -268,15 +267,13 @@ Vue.component("expandDate", {
                 _this.touch.time = setInterval(function () {
                     var speed = (_this.horizontal) / 4;
                     speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
-                    console.info("speed"+speed);
+                    console.info(speed);
                     _this.horizontal -= speed;
                     if (Math.abs(_this.horizontal) <= 0) {
                         clearInterval(_this.touch.time);
                         _this.horizontal = 0;
                     }
                 }, 40);
-            } else if (val == "move") {
-                clearInterval(this.touch.time);
             }
         }
     },
@@ -288,9 +285,6 @@ Vue.component("expandDate", {
                 this.touch[this.touch.status].Y = event.touches[0].clientY;
             }
 
-        },
-        touchcancel:function(event){
-            console.warn("cancel");
         },
         touchstart: function (event) {
             clearInterval(this.touch.time);
@@ -311,24 +305,19 @@ Vue.component("expandDate", {
                     this.horizontal = -102;
                 }
             }
-            this.touch.radiusX = event.touches[0].radiusX;
             this.touch.X = event.touches[0].clientX;
             var date = new Date();
-            this.touch.status = "move";
-            if (date - this.touchConfig.lastTime > this.touchConfig.sleepTime) {
-                if (Math.abs(this.touch.X - this.touchConfig.oldX) > 4) {
-                    if (this.touch.X < this.touchConfig.oldX) {
-                        this.horizontal -= 2;
-                        this.touch.direction = "L";
-                        console.info("L");
-                    } else {
-                        this.horizontal += 2;
-                        this.touch.direction = "R";
-                        console.log("R")
-                    }
-                    this.touchConfig.oldX = this.touch.X;
-                }
 
+            if (date - this.touchConfig.lastTime > this.touchConfig.sleepTime) {
+                if (this.touch.X < this.touchConfig.oldX) {
+                    this.horizontal -= 2;
+                    this.touch.direction = "L";
+                    console.info("L");
+                } else {
+                    this.horizontal += 2;
+                    this.touch.direction = "R";
+                    console.log("R")
+                }
             }
         },
         touchFun: function (key, event) {
@@ -514,232 +503,12 @@ Vue.component("expandDate", {
     }
 });
 
-Vue.component("area", {
-    template: '#area',
-    props: {
-        show: {
-            type: Boolean,
-            default: false,
-            twoWay: true
-        },
-        selected: {
-            type: Object,
-            default: function () {
-                return { name: '', id: '' }
-            },
-            // twoWay: true
-        },
-        dateKey: {
-            type: String,
-            required: true,
-        },
-        isShowCountry: {
-            type: Boolean,
-            default: false
-        }
-    },
-    data: function () {
-        return {
-            menus: [
-                {
-                    pid: 0,
-                    id: "",
-                    name: "请选择",
-                    level: 0,
-                }
-            ],
-            pathMenus: [],
-            currentLevel: 0,
-            currentId: 0,
-            store: {},//暂存数据
-        }
-    },
-    computed: {
-        curlevelActiveId: function () {
-            return this.pathMenus[this.currentLevel - 1].id;
-        }
-    },
-    created: function () {
-    },
-    watch: {
-        'show': function (val, oldVal) {
-            if (val) {
-                this.init();
-            }
+var MyComponent = Vue.extend({
+    template: '<div>A custom component!</div>'
+})
 
-        },
-        "pathMenus": function (val, oldVal) {
-            console.log("pathMenus");
-            var menus = [];
-
-            for (var level = 0; level < this.pathMenus.length; level++) {
-                menus.push({
-                    pid: level > 0 ? this.pathMenus[level - 1].id : 0,
-                    id: this.pathMenus[level].id,
-                    name: this.pathMenus[level].name,
-                    level: level,
-                });
-            }
-            menus.push({
-                pid: this.pathMenus.length == 0 ? "0" : this.pathMenus[this.pathMenus.length - 1].id,
-                id: "",
-                name: "请选择",
-                level: this.pathMenus.length == 0 ? 0 : level,
-            })
-            this.menus = menus;
-        }
-    },
-    methods: {
-        init: function () {
-            var _this = this;
-            if (!!_this.selected) {
-                _this.selected = {
-                    name: '', id: '',
-                }
-            }
-            console.log(_this.selected.id + "#");
-            if (_this.selected.id) {
-                Xa.get('/common/area/up_areas', { id: !!_this.selected.id }, function (result) {
-                    if (result.status == 200) {
-                        if (result.data.length != 0) {
-                            var dataList = [];
-                            for (var i = 0; i < result.data.length; i++) {
-                                if (result.data[i].level == 1) {
-                                    _this.$set("store.id" + "0", result.data[i].data);
-                                } else if (result.data[i].data.length > 0) {
-                                    _this.$set("store.id" + result.data[i].id, result.data[i].data);
-                                }
-                                dataList[result.data[i].level - 1] = {
-                                    id: result.data[i].id,
-                                    name: result.data[i].name,
-                                };
-                            }
-                            if (dataList.length > 0) {
-                                do {
-                                    _this.pathMenus.push(dataList.shift());
-                                } while (dataList.length == 0);
-                            }
-                            _this.currentLevel = _this.pathMenus.length - 1;
-                        }
-
-                    } else {
-                        alert(result.message);
-                    }
-                });
-            } else {
-                if (_this.store["id0"]) {
-                    return;
-                } else if (true) {
-                    var data = {};
-                    _this.currentLevel = 0;
-                    _this.currentShowId = 0;
-                    _this.$set("store.id" + _this.currentShowId, data);
-                } else {
-                    Xa.get('/common/area/areas', { upid: "0" }, function (result) {
-                        if (result.status == 200) {
-                            _this.currentLevel = 0;
-                            _this.currentShowId = 0;
-                            _this.$set("store.id" + _this.currentShowId, result.date);
-                        } else {
-                            alert(result.message);
-                        }
-                    });
-                }
-
-
-            }
-
-        },
-        selectEnd: function () {
-            this.show = false;
-            this.$dispatch('selectEnd', this.current);
-            this.$dispatch('areaComponent-msg', {
-                key: this.dateKey,
-                val: {
-                    id: this.currentId,
-                    name: this.toString(),
-                }
-            });
-        },
-        clickItem: function (item) {
-            if (!this.store["id" + item.id]) {
-                this.getNextLevelDate(item.id, item.name);
-            }
-            this.nextLevelTabs(item);
-        },
-        getNextLevelDate: function (id, name) {
-            var _this = this;
-
-            if (true) {
-                var data = [];
-                if (data.length == 0) {
-                    _this.pathMenus.push({
-                        id: id,
-                        name: name,
-                    });
-                    this.currentId = id;
-                    this.selectEnd();
-                    return;
-                }
-                _this.$set("store.id" + id, data);
-            } else {
-                Xa.get("/common/area/areas", { upid: item.id }, function (result) {
-                    if (result.status == 200) {
-                        if (result.data.length > 0) {
-                            _this.$set("store.id" + id, result.data);
-                        } else {
-                            _this.pathMenus.push({
-                                id: id,
-                                name: name,
-                            });
-                            this.currentId = id;
-                            this.selectEnd();
-                            return;
-                        }
-                    } else {
-                        alert(result.message);
-                        return;
-                    }
-
-                });
-            }
-
-        },
-        menusClick: function (item) {
-            this.currentLevel = item.level;
-            if (!this.store["id" + item.pid]) {
-                this.getNextLevelDate(item.pid);
-            }
-        },
-        nextLevelTabs: function (item) {
-            if (this.currentLevel < this.pathMenus.length) {
-                do {
-                    this.pathMenus.pop();
-                } while (this.currentLevel == this.pathMenus.length);
-            }
-            this.currentId = item.id;
-            this.currentLevel++;
-            this.currentShowId = item.id;
-            this.pathMenus.push({
-                id: item.id,
-                name: item.name,
-            });
-        },
-        toString: function () {
-            var str = "";
-            this.pathMenus.forEach(function (element) {
-                str += element.name;
-            });
-            return str;
-        }
-    },
-    filters: {
-        getJsonObj: function (param) {
-            return JSON.stringify(param);
-        }
-    },
-    ready: function () { }
-});
+// 注册
+Vue.component('my-component', MyComponent)
 
 var app = new Vue({
     el: '#app',
@@ -751,12 +520,12 @@ var app = new Vue({
                 type: "TABS",
                 tabs: [
                     {
-                        text: "任务详情",
-                        val: "1",
+                        key: "1",
+                        val: "任务详情",
                     },
                     {
-                        text: "作业工单",
-                        val: "2",
+                        key: "2",
+                        val: "作业工单",
                     }
                 ]
             },
@@ -766,27 +535,27 @@ var app = new Vue({
                 tabs: 1,
                 dataSet: [
                     {
-                        text: "地区",
+                        key: "地区",
                         value: "新疆/巴州",
                         envent: "PHOTO"
                     },
                     {
-                        text: "地区A",
+                        key: "地区A",
                         value: "新疆/巴州A",
                         envent: "PHOTO"
                     },
                     {
-                        text: "地区B",
+                        key: "地区B",
                         value: "新疆/巴州B",
                         envent: "PHOTO"
                     },
                     {
-                        text: "地区C",
+                        key: "地区C",
                         value: "新疆/巴州C",
                         envent: "PHOTO"
                     },
                     {
-                        text: "地区D",
+                        key: "地区D",
                         value: "新疆/巴州D",
                         envent: "PHOTO"
                     },
@@ -799,23 +568,23 @@ var app = new Vue({
                 tabs: 2,
                 dataSet: [
                     {
-                        text: "2地区",
+                        key: "2地区",
                         value: "新疆/巴州",
                     },
                     {
-                        text: "2地区A",
+                        key: "2地区A",
                         value: "新疆/巴州A",
                     },
                     {
-                        text: "2地区B",
+                        key: "2地区B",
                         value: "新疆/巴州B",
                     },
                     {
-                        text: "2地区C",
+                        key: "2地区C",
                         value: "新疆/巴州C",
                     },
                     {
-                        text: "2地区D",
+                        key: "2地区D",
                         value: "新疆/巴州D",
                     },
 
@@ -843,18 +612,7 @@ var app = new Vue({
             val: "",
             viewMode: "",
         },
-        areaComponent: {
-            show: false,
-            key: "",
-            current: {
-                name: "",
-                id: ""
-            }
-        },
-        area: {
-            id: "",
-            name: "233"
-        },
+
         html: {
             title: {
                 "type": "title",
@@ -1256,31 +1014,19 @@ var app = new Vue({
     },
     filters: {
 
-    },
+    }
+    ,
     methods: {
         showDateFn: function (key, val, viewMode) {
             this.dateComponent.key = key;
             this.dateComponent.val = val;
             this.dateComponent.viewMode = viewMode;
             this.dateComponent.status = true;
-        },
-        showAreaFu: function (key, val) {
-            console.log("showAreaFu@" + key + " " + val + " ");
-            if (!!val) {
-                this.areaComponent.current.name = val.name;
-                this.areaComponent.current.id = val.id;
-            }
-            this.areaComponent.key = key;
-            this.areaComponent.show = true;
-        },
+        }
     },
     events: {
         'dateComponent-msg': function (params) {
             this.$set(params.key, params.val);
-        },
-         'areaComponent-msg': function (params) {
-                console.log('areaComponent-msg',JSON.stringify(params));
-                this.$set(params.key, params.val);
-            },
+        }
     }
 });
