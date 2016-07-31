@@ -145,7 +145,7 @@ Vue.directive('validate', {
     }
 });
 //   template: require("./index.html"),
-Vue.component("expandDate", {
+Vue.component("date", {
     template: '#date',
     data: function () {
         return {
@@ -159,27 +159,6 @@ Vue.component("expandDate", {
                 day: '1',
                 HH: "09",
                 mm: "21",
-            },
-            horizontal: 0,
-            touch: {
-                time: 0,
-                X: 0,
-                Y: 0,
-                status: "",
-                direction: "",
-                start: {
-                    X: 0,
-                    Y: 0,
-                },
-                end: {
-                    X: 0,
-                    Y: 0,
-                }
-            },
-            touchConfig: {
-                lastTime: null,
-                oldX: 0,
-                sleepTime: 100,
             }
         }
     },
@@ -259,67 +238,8 @@ Vue.component("expandDate", {
         }
     },
     watch: {
-        "touch.status": function (val, oldVal) {
-            if (val == "end") {
-                var _this = this;
-                clearInterval(_this.touch.time);
-                var target = 0;
-                _this.touch.time = setInterval(function () {
-                    var speed = (_this.horizontal) / 4;
-                    speed = speed > 0 ? Math.ceil(speed) : Math.floor(speed);
-                    console.info(speed);
-                    _this.horizontal -= speed;
-                    if (Math.abs(_this.horizontal) <= 0) {
-                        clearInterval(_this.touch.time);
-                        _this.horizontal = 0;
-                    }
-                }, 40);
-            }
-        }
     },
     methods: {
-        touchend: function (event) {
-            this.touch.status = "end";
-            if (event.touches[0]) {
-                this.touch[this.touch.status].X = event.touches[0].clientX;
-                this.touch[this.touch.status].Y = event.touches[0].clientY;
-            }
-
-        },
-        touchstart: function (event) {
-            clearInterval(this.touch.time);
-            this.touch.status = "start";
-            this.touch[this.touch.status].X = event.touches[0].clientX;
-            this.touch[this.touch.status].Y = event.touches[0].clientY;
-            var date = new Date();
-            this.touchConfig.lastTime = date;
-            this.touchConfig.oldX = event.touches[0].clientX;
-
-        },
-        touchMoveHorizontal: function (event) {
-            if (Math.abs(this.horizontal) >= 102) {
-                // this.horizontal = (this.horizontal / this.horizontal) * 102;
-                if (this.horizontal > 0) {
-                    this.horizontal = 102;
-                }else{
-                    this.horizontal = -102;
-                }
-            }
-            this.touch.X = event.touches[0].clientX;
-            var date = new Date();
-
-            if (date - this.touchConfig.lastTime > this.touchConfig.sleepTime) {
-                if (this.touch.X < this.touchConfig.oldX) {
-                    this.horizontal -= 2;
-                    this.touch.direction = "L";
-                    console.info("L");
-                } else {
-                    this.horizontal += 2;
-                    this.touch.direction = "R";
-                    console.log("R")
-                }
-            }
-        },
         touchFun: function (key, event) {
             var _this = this;
             if (event.type == 'touchmove') {
@@ -627,7 +547,6 @@ Vue.component("area", {
                     Xa.get('/common/area/areas', { upid: "0" }, function (result) {
                         if (result.status == 200) {
                             _this.currentLevel = 0;
-                            _this.currentShowId = 0;
                             _this.$set("store.id" + _this.currentShowId, result.date);
                         } else {
                             alert(result.message);
@@ -733,17 +652,12 @@ Vue.component("area", {
 var app = new Vue({
     el: '#app',
     data: {
-        currentKey: "",
-        arr: {
-            "city": [
-                "A", "B", "C"
-            ]
-        },
+        showAn:false,
         selectColor: true,
         invalid: true,
         msg: '',
         dateComponent: {
-            status: true,
+            status: false,
             key: "",
             val: "",
             viewMode: "",
