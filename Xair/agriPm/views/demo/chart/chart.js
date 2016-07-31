@@ -45,17 +45,17 @@
 /***/ 0:
 /***/ function(module, exports, __webpack_require__) {
 
-	module.exports = __webpack_require__(468);
+	module.exports = __webpack_require__(469);
 
 
 /***/ },
 
-/***/ 468:
+/***/ 469:
 /***/ function(module, exports, __webpack_require__) {
 
 	Xa.defineModule('/demo/chart/chart', function () {
 	    return {
-	        template: __webpack_require__(469),
+	        template: __webpack_require__(470),
 	        data: function () {
 	            return {
 
@@ -70,6 +70,7 @@
 	                            x: 'left',
 	                            data: ['直接访问', '邮件营销', '联盟广告', '视频广告', '搜索引擎']
 	                        },
+	                        roseType: 'radius',
 	                        series: [
 	                            {
 	                                name: '访问来源',
@@ -234,7 +235,7 @@
 	                            }
 	                        ]
 	                    },
-	                    option = {
+	                    {
 	                        title: {
 	                            text: '未来一周气温变化',
 	                            subtext: '纯属虚构',
@@ -339,7 +340,133 @@
 	                                }
 	                            }
 	                        ]
-	                    }
+	                    },
+	                    {
+	                        tooltip: {
+	                            trigger: 'axis'
+	                        },
+	                        legend:
+	                        {
+	                            x: 0,
+	                            data: ['一二三四五六Step Start', 'Step Middle', 'Step End', "no Step default", "no Step smooth"],
+	                            formatter: function (name) {
+	                                console.log(arguments);
+	                                return echarts.format.truncateText(name, 65, '14px Microsoft Yahei', '…');
+	                            },
+	                        },
+	                        grid: {
+	                            left: '3%',
+	                            right: '8%',
+	                            bottom: '3%',
+	                            containLabel: true
+	                        },
+	                        toolbox: {
+	                            feature: {
+	                                restore: {},
+	                                magicType: { show: true, type: ['line', 'bar',] },
+	                                dataView: {
+	                                    readOnly: true,
+	                                    optionToContent: function (opt) {
+	                                        var table = "";
+	                                        for (var index = 0, len = opt.xAxis.length; index < len; index++) {
+	                                            var axisData = opt.xAxis[index].data;
+	                                            var series = opt.series;
+	                                            table += '<table class="chart-DataView-Table" style="width:100%;text-align:center"><tbody><tr style="background:green;color:#fff">'
+	                                                + '<td>' + opt.xAxis[index].name + '</td>';
+	                                            for (var si = 0, l = series.length; si < l; si++) {
+	                                                table += '<td>' + series[si].name + '</td>';
+	                                            }
+	                                            table + '</tr>';
+	                                            for (var i = 0, l = axisData.length; i < l; i++) {
+	                                                table += '<tr>' + '<td>' + axisData[i] + '</td>';
+	                                                for (var ssi = 0, ll = series.length; ssi < ll; ssi++) {
+	                                                    var value = series[ssi].data[i];
+	                                                    if (value instanceof Object) {
+	                                                        value = value.value;
+	                                                    }
+	                                                    table += '<td>' + value + '</td>';
+	                                                }
+	                                                table += '</tr>';
+	                                            }
+	                                            table += '</tbody></table>';
+	                                        }
+	                                        return table;
+	                                    },
+	                                }
+	                            }
+	                        },
+	                        xAxis: [{
+	                            type: 'category',
+	                            name: "时间",
+	                            data: ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'],
+	                            nameRotate: -45,
+	                        }],
+	                        yAxis: {
+	                            type: 'value'
+	                        },
+	                        series: [
+	                            {
+	                                name: '一二三四五六Step Start',
+	                                type: 'line',
+	                                step: 'start',
+	                                data: [120, 132, 101, 134, 90, 230, 210]
+	                            },
+	                            {
+	                                name: 'Step Middle',
+	                                type: 'line',
+	                                step: 'middle',
+	                                data: [220, 282, 201, 234, 290, 430, 410]
+	                            },
+	                            {
+	                                name: 'Step End',
+	                                type: 'line',
+	                                step: 'end',
+	                                data: [450, 432, 401, 454, 590, 530, 510]
+	                            },
+	                            {
+	                                name: 'no Step default',
+	                                type: 'line',
+	                                data: [550, 532, 445, 554, 690, 630, 530]
+	                            },
+	                            {
+	                                name: 'no Step smooth',
+	                                type: 'line',
+	                                smooth: true,
+	                                data: [650, 632, 645, 654, 710, 730, 630]
+	                            },
+	                        ]
+	                    },
+	                    {
+	                        //X 轴显示
+	                        chartType: "line",
+	                        "xAxis.data": ['周一', "周二", "周三", "周四", "周五", "周六", "周日"],
+	                        "series": [{
+	                            name: '一二三四五六Step Start',
+	                            type: 'line',
+	                            data: [120, 132, 101, 134, 90, 230, 210]
+	                        },
+	                            {
+	                                name: 'Step Middle',
+	                                
+	                                data: [220, 282, 201, 234, 290, 430, 410]
+	                            },
+	                            {
+	                                name: 'Step End',
+	                                type: 'bar',
+	                                data: [450, 432, 401, 454, 590, 530, 510]
+	                            },
+	                            {
+	                                name: 'no Step default',
+	                                type: 'line',
+	                                data: [550, 532, 445, 554, 690, 630, 530]
+	                            },
+	                            {
+	                                name: 'no Step smooth',
+	                                type: 'line',
+	                                data: [650, 632, 645, 654, 710, 730, 630]
+	                            },
+	                        ]
+	                    },
 
 	                ]
 	            }
@@ -349,7 +476,7 @@
 
 /***/ },
 
-/***/ 469:
+/***/ 470:
 /***/ function(module, exports) {
 
 	module.exports = "<style>\r\n    .chart {\r\n        width: 100%;\r\n        height: 300px;\r\n        padding: 0 4px;\r\n        box-sizing:border-box;\r\n    }\r\n</style>\r\n\r\n2333\r\n<template v-for='chart in chartDates'>\r\n    <div class=\"chart\" v-echarts=\"chart\" ></div>\r\n</template>";
