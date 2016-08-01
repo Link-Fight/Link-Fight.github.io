@@ -320,6 +320,26 @@
             opacity: 0。5;
             right: 100%;
         }
+        
+        .warp {
+            overflow-x: auto;
+            width: 100%;
+            position: relative;
+        }
+        
+        .warp::-webkit-scrollbar {
+            width: 0px;
+            height: 0px;
+        }
+        
+        .item {
+            position: relative;
+            left: -50%;
+            width: 200%;
+            /*left:-50%;*/
+            padding-left: 50%;
+            box-sizing: border-box;
+        }
     </style>
 </head>
 
@@ -328,25 +348,34 @@
 
     <div id="app">
 
-        <template v-for='item in detailDate'>
+        <!--<template v-for='item in detailDate'>-->
 
-            <template v-if='item.type=="TABS"'>
+        <!--<template v-if='item.type=="TABS"'>
                 <ul style='background-color:red;'>
                     <li v-for='mItem in item.tabs' style='color:green;float:left;width:50%;'>
                         {{mItem.val}}
                     </li>
                 </ul>
-            </template>
-            <template  v-if='item.type=="PARAMS"' >
-                <div style=' color:#444;'>
-                    <p v-for='mItem in item.dataSet'>
-                        {{mItem.key}}  {{mItem.value}}  
-                         </p>
+            </template>-->
+        <!--<template v-if='item.type=="PARAMS"'>
+                <div class="wrap" style=' color:#444;'>
+                    <p class="item" v-for='mItem in item.dataSet'>
+                        {{mItem.key}} {{mItem.value}}
+                    </p>
                 </div>
             </template>
-        </template>
-
-
+        </template>-->
+        <select class="weui_select" v-model="variables.checkboxVar" style='color:#fff;background: green;'>
+                                           
+                     <option  v-for='item in html.checkbox.options'  :value="item.value">{{item.label}} </option>                                          
+                                        </select>
+        <select class="weui_select" v-model="variables.checkboxVar2" style='color:#fff;background: blue;'>
+                                           
+                     <option  v-for='item in html.checkbox2.options'  :value="item.value">{{item.label}} </option>                                          
+                                        </select>
+        <div v-if='{}|eventShow'>
+            成功
+        </div>
 
     </div>
 
