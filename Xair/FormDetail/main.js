@@ -691,12 +691,46 @@ var app = new Vue({
                 "options": [
                     {
                         "value": "1",
-                        "label": "true"
+                        "label": "需求合同"
                     },
                     {
-                        "value": "0",
-                        "label": "false"
-                    }
+                        "value": "2",
+                        "label": "订单合同"
+                    },
+                    {
+                        "value": "3",
+                        "label": "演示合同"
+                    },
+                ],
+                "var_name": "checkboxVar1",
+                "colSpan": 12
+            },
+            checkbox2: {
+                "type": "checkbox",
+                "variable": "checkboxVar2",
+                "var_uid": "394465358577a2cbdce30e1068303843",
+                "dataType": "boolean",
+                "protectedValue": false,
+                "id": "checkboxVar",
+                "name": "checkboxVar",
+                "label": "checkbox_1",
+                "defaultValue": "",
+                "hint": "",
+                "required": true,
+                "mode": "parent",
+                "options": [
+                    {
+                        "value": "1",
+                        "label": "需求"
+                    },
+                    {
+                        "value": "2",
+                        "label": "订单"
+                    },
+                    {
+                        "value": "3",
+                        "label": "演示"
+                    },
                 ],
                 "var_name": "checkboxVar1",
                 "colSpan": 12
@@ -996,7 +1030,8 @@ var app = new Vue({
         variables: {
             email: '',
             reportText: '',
-            checkboxVar: ['1'],
+            checkboxVar: "",
+            checkboxVar2: "",
             dropdown: "",
             radio: "",
             note_op: "",
@@ -1011,12 +1046,110 @@ var app = new Vue({
         validateResult: {
         },
         mode: "view",
+        eventV2: {
+            "show": {
+                fn: "checkboxVar2||checkboxVar",
+                items:
+                [
+                    {
+                        "control_id": "checkboxVar2",
+                        "value": ['1', '2']
+                    },
+                    {
+                        "control_id": "checkboxVar",
+                        "value": "1"
+                    },
+                ]
+            }
+        },
+
+        eventV1: {
+            "show": {
+
+                "control_id": "checkboxVar",
+
+                "value": ['1', '2']
+
+            }
+        },
+
+        showEvent: false,
     },
     filters: {
+        eventShow: function (config) {
+            console.info("eventShow", JSON.stringify(config));
+            console.info("eventShow", JSON.stringify(this.variables));
+            var _this = this;
+            var strConfig = JSON.stringify(config);
+            console.log(strConfig);
+            if (strConfig.length <= 4) {
+                return true;
+            }
+            var result = true;
 
+            if (Array.isArray(config.show.items)) {
+                var strFn = config.show.fn;
+                var resultObj = {};
+                config.show.items.forEach(function (item) {
+                    var value = _this.variables[item.control_id];
+                    resultObj.key = item.control_id;
+                    if (Array.isArray(item.value)) {
+                        resultObj.result = item.value.indexOf(value) > -1;
+                    } else {
+                        resultObj.result = item.value == value;
+                    }
+                    if (!!strFn) {
+                        strFn = strFn.replace(resultObj.key, resultObj.result);
+                    }
+                });
+                if (config.show.items.length == 0) {
+                    result = resultObj.result;
+                } else {
+
+                    result = _this.evilFn(strFn);
+                }
+            } else {
+                var value = this.variables[config.show.control_id];
+                if (Array.isArray(config.show.value)) {
+                    result = config.show.value.indexOf(value) > -1;
+                }
+                if (value == config.show.value) {
+                    result = true;
+                } else {
+                    result = false;
+                }
+            }
+
+            if(!result){
+
+            }
+            return result;
+        },
+        eventShow2: function (config) {
+            var strConfig = JSON.stringify(config);
+            console.log(strConfig);
+            if (strConfig.length <= 4) {
+                return true;
+            }
+            var value = this.variables[config.show.control_id];
+            if (Array.isArray(config.show.value)) {
+                return config.show.value.indexOf(value) > -1;
+            }
+
+            if (value == config.show.value) {
+                return true;
+            } else {
+                return false;
+            }
+
+        }
     }
     ,
     methods: {
+        evilFn: function (fn) {
+            var Fn = Function;  //一个变量指向Function，防止有些前端编译工具报错
+            return new Fn('return ' + fn)();
+        },
         showDateFn: function (key, val, viewMode) {
             this.dateComponent.key = key;
             this.dateComponent.val = val;

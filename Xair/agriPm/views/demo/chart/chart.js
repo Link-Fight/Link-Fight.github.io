@@ -349,10 +349,10 @@
 	                        {
 	                            x: 0,
 	                            data: ['一二三四五六Step Start', 'Step Middle', 'Step End', "no Step default", "no Step smooth"],
-	                            formatter: function (name) {
-	                                console.log(arguments);
-	                                return echarts.format.truncateText(name, 65, '14px Microsoft Yahei', '…');
-	                            },
+	                            // formatter: function (name) {
+	                            //     console.log(arguments);
+	                            //     return echarts.format.truncateText(name, 65, '14px Microsoft Yahei', '…');
+	                            // },
 	                        },
 	                        grid: {
 	                            left: '3%',
