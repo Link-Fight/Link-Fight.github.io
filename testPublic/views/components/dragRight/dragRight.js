@@ -175,6 +175,7 @@
 	        },
 
 	        onDrag: function onDrag(e) {
+	            this.dragMove.count++;
 	            var event = e;
 	            e = e.changedTouches ? e.changedTouches[0] : e;
 	            var dx = e.pageX - this.dragMove.start_x;
@@ -185,6 +186,7 @@
 	            this.dragMove.start_y = e.pageY;
 	            console.count(dx + " " + dy);
 	            console.count(this.dragMove.count);
+	            if (this.dragMove.count < 3) return;
 	            if (dx == 0) {
 	                return;
 	            } else {
@@ -213,7 +215,6 @@
 	            var dampen = dx > 0 ? 3 : 4;
 
 	            this.dragMove.x = this.dragMove.x - dx / dampen;
-	            this.dragMove.count++;
 	            event.preventDefault();
 	        },
 	        stopDrag: function stopDrag(e) {
@@ -237,7 +238,7 @@
 /***/ 328:
 /***/ function(module, exports) {
 
-	module.exports = "<style>\r\n    .center_parent::after {\r\n        content: \" \";\r\n        height: 100%;\r\n        display: inline-block;\r\n        vertical-align: middle;\r\n    }\r\n</style>\r\n<div class='dragRight_Component' @mousedown=\"startDrag\" @touchstart=\"startDrag\" @mousemove.stop=\"onDrag\" @touchmove.stop=\"onDrag\"\r\n    @mouseup=\"stopDrag\" @touchend=\"stopDrag\" @mouseleave=\"stopDrag\" style='position:relative;'>\r\n    <slot name=\"content\"></slot>\r\n    <div style='position:absolute;top:0;right:0;height:100%;'>\r\n        <slot name=\"rightTip\"></slot>\r\n    </div>\r\n    <div class=\"right center_parent\" :style='{\"right\":dragMove.x+\"px\"}' style='position:absolute;top:0;height:100%;box-sizing:border-box;text-align: center;font-size: 0;'\r\n        @click.stop=\"clickRight\">\r\n        <slot name=\"rightContent\"></slot>\r\n    </div>\r\n</div>";
+	module.exports = "<style>\r\n    .center_parent::after {\r\n        content: \" \";\r\n        height: 100%;\r\n        display: inline-block;\r\n        vertical-align: middle;\r\n    }\r\n    \r\n    .dragRight_Component {\r\n        overflow: hidden;\r\n    }\r\n</style>\r\n<div class='dragRight_Component' @mousedown=\"startDrag\" @touchstart=\"startDrag\" @mousemove.stop=\"onDrag\" @touchmove.stop=\"onDrag\" @mouseup=\"stopDrag\" @touchend=\"stopDrag\" @mouseleave=\"stopDrag\" style='position:relative;'>\r\n    <slot name=\"content\"></slot>\r\n    <div style='position:absolute;top:0;right:0;height:100%;'>\r\n        <slot name=\"rightTip\"></slot>\r\n    </div>\r\n    <div class=\"right center_parent\" :style='{\"right\":dragMove.x+\"px\"}' style='position:absolute;top:0;height:100%;box-sizing:border-box;text-align: center;font-size: 0;' @click.stop=\"clickRight\">\r\n        <slot name=\"rightContent\"></slot>\r\n    </div>\r\n</div>";
 
 /***/ }
 

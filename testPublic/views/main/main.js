@@ -175,6 +175,7 @@
 	        },
 
 	        onDrag: function onDrag(e) {
+	            this.dragMove.count++;
 	            var event = e;
 	            e = e.changedTouches ? e.changedTouches[0] : e;
 	            var dx = e.pageX - this.dragMove.start_x;
@@ -185,6 +186,7 @@
 	            this.dragMove.start_y = e.pageY;
 	            console.count(dx + " " + dy);
 	            console.count(this.dragMove.count);
+	            if (this.dragMove.count < 3) return;
 	            if (dx == 0) {
 	                return;
 	            } else {
@@ -213,7 +215,6 @@
 	            var dampen = dx > 0 ? 3 : 4;
 
 	            this.dragMove.x = this.dragMove.x - dx / dampen;
-	            this.dragMove.count++;
 	            event.preventDefault();
 	        },
 	        stopDrag: function stopDrag(e) {
@@ -237,7 +238,7 @@
 /***/ 328:
 /***/ function(module, exports) {
 
-	module.exports = "<style>\r\n    .center_parent::after {\r\n        content: \" \";\r\n        height: 100%;\r\n        display: inline-block;\r\n        vertical-align: middle;\r\n    }\r\n</style>\r\n<div class='dragRight_Component' @mousedown=\"startDrag\" @touchstart=\"startDrag\" @mousemove.stop=\"onDrag\" @touchmove.stop=\"onDrag\"\r\n    @mouseup=\"stopDrag\" @touchend=\"stopDrag\" @mouseleave=\"stopDrag\" style='position:relative;'>\r\n    <slot name=\"content\"></slot>\r\n    <div style='position:absolute;top:0;right:0;height:100%;'>\r\n        <slot name=\"rightTip\"></slot>\r\n    </div>\r\n    <div class=\"right center_parent\" :style='{\"right\":dragMove.x+\"px\"}' style='position:absolute;top:0;height:100%;box-sizing:border-box;text-align: center;font-size: 0;'\r\n        @click.stop=\"clickRight\">\r\n        <slot name=\"rightContent\"></slot>\r\n    </div>\r\n</div>";
+	module.exports = "<style>\r\n    .center_parent::after {\r\n        content: \" \";\r\n        height: 100%;\r\n        display: inline-block;\r\n        vertical-align: middle;\r\n    }\r\n    \r\n    .dragRight_Component {\r\n        overflow: hidden;\r\n    }\r\n</style>\r\n<div class='dragRight_Component' @mousedown=\"startDrag\" @touchstart=\"startDrag\" @mousemove.stop=\"onDrag\" @touchmove.stop=\"onDrag\" @mouseup=\"stopDrag\" @touchend=\"stopDrag\" @mouseleave=\"stopDrag\" style='position:relative;'>\r\n    <slot name=\"content\"></slot>\r\n    <div style='position:absolute;top:0;right:0;height:100%;'>\r\n        <slot name=\"rightTip\"></slot>\r\n    </div>\r\n    <div class=\"right center_parent\" :style='{\"right\":dragMove.x+\"px\"}' style='position:absolute;top:0;height:100%;box-sizing:border-box;text-align: center;font-size: 0;' @click.stop=\"clickRight\">\r\n        <slot name=\"rightContent\"></slot>\r\n    </div>\r\n</div>";
 
 /***/ },
 
@@ -370,7 +371,7 @@
 /***/ 349:
 /***/ function(module, exports) {
 
-	module.exports = "<div>\r\n    1222\r\n    <p>Test DragRight</p>\r\n    {{{curHtml}}}\r\n    \r\n    <div  style='height:200px;overflow:hidden;overflow-y:auto;border-bottom:1px solid red;'>\r\n\r\n        <template v-for='data in mList'>\r\n\t\t\t\t\t\t<dragright-Component>\r\n\t\t\t\t\t\t\t<template slot=\"content\">\r\n\t\t\t\t\t\t\t\t<div class=\"weui_cells weui_cells_access flywrap\"    >\r\n\t\t\t\t\t\t\t\t\t<a v-for='field in data.fields' style='display: inline-block;vertical-align: top;width: 50%'>\r\n\t\t\t\t\t\t\t\t\t\t{{field.key}}：{{field.value}}\r\n\t\t\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t\t\t<span style='position:absolute;top:10px;right:10px;'>{{data.id}}</span>\r\n\t\t\t\t\t\t\t\t\t<i v-if='data.confirm_status == -1' class=\"confirm_faili iconfont icon-chacha1\"></i>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</template>\r\n        <template slot=\"rightContent\">\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status != -1' @click.stop='clickFn(data,\"dialog\",$event)' class=\"center_parent\" style='height: 100%;background: red;display: inline-block;'>\r\n\t\t\t\t\t\t\t\t\t<span style=\"color:#fff;padding:0 20px;width:10px;font-size:12px;display:inline-block;vertical-align:middle\">不通过</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status == -1' @click.stop='clickFn(data,\"cancel_alert_status\",$event)' class=\"center_parent\" style='height: 100%;background: green;display: inline-block;'>\r\n\t\t\t\t\t\t\t\t\t<span style=\"color:#fff;padding:0 20px;width:10px;font-size:12px;display:inline-block;vertical-align:middle\">取消</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</template>\r\n        <template slot='rightTip'>\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status != -1' style='height:100%;width:3px;background:red;'>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status == -1' style='height:100%;width:3px;background:green;'>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</template>\r\n        </dragright-Component>\r\n\r\n    </div>\r\n</div>";
+	module.exports = "<style>\r\n    .flywrap {\r\n        margin-top: 0;\r\n        padding:10px;\r\n    }\r\n    \r\n    .center_parent::after {\r\n        content: \" \";\r\n        height: 100%;\r\n        display: inline-block;\r\n        vertical-align: middle;\r\n    }\r\n    .dragRight_Component{\r\n        margin-top:5px;\r\n    }\r\n    .dragRight_Component:last-child{\r\n        margin-bottom:56px;\r\n    }\r\n</style>\r\n<div>\r\n    1222\r\n    <p>Test DragRight</p>\r\n    {{{curHtml}}}\r\n\r\n    <div style='height:200px;overflow:hidden;overflow-y:auto;border-bottom:20px solid #CD7F32;border-top:20px solid #CD7F32;'>\r\n\r\n        <template v-for='data in mList'>\r\n\t\t\t\t\t\t<dragright-Component>\r\n\t\t\t\t\t\t\t<template slot=\"content\">\r\n\t\t\t\t\t\t\t\t<div class=\"weui_cells weui_cells_access flywrap\"    >\r\n\t\t\t\t\t\t\t\t\t<a v-for='field in data.fields' style='display: inline-block;vertical-align: top;width: 50%'>\r\n\t\t\t\t\t\t\t\t\t\t{{field.key}}：{{field.value}}\r\n\t\t\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t\t\t<span style='position:absolute;top:10px;right:10px;'>{{data.id}}</span>\r\n\t\t\t\t\t\t\t\t\t<i v-if='data.confirm_status == -1' class=\"confirm_faili iconfont icon-chacha1\"></i>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</template>\r\n        <template slot=\"rightContent\">\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status != -1' @click.stop='clickFn(data,\"dialog\",$event)' class=\"center_parent\" style='height: 100%;background: red;display: inline-block;'>\r\n\t\t\t\t\t\t\t\t\t<span style=\"color:#fff;padding:0 20px;width:10px;font-size:12px;display:inline-block;vertical-align:middle\">不通过</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status == -1' @click.stop='clickFn(data,\"cancel_alert_status\",$event)' class=\"center_parent\" style='height: 100%;background: green;display: inline-block;'>\r\n\t\t\t\t\t\t\t\t\t<span style=\"color:#fff;padding:0 20px;width:10px;font-size:12px;display:inline-block;vertical-align:middle\">取消</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</template>\r\n        <template slot='rightTip'>\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status != -1' style='height:100%;width:3px;background:red;'>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status == -1' style='height:100%;width:3px;background:green;'>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</template>\r\n        </dragright-Component>\r\n\r\n    </div>\r\n</div>";
 
 /***/ }
 
