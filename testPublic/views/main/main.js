@@ -391,14 +391,83 @@
 	    });
 	}
 
+	var threeDobej = {
+	    rotateY: 45,
+	    transform: "transform: perspective(500px) rotateY(45deg)"
+	};
+
+	var dragObj = {
+	    dragMove: {
+	        dragging: false,
+	        direction: "", //L/R
+	        x: -200,
+	        count: 0,
+	        start_x: 0,
+	        start_y: 0
+	    }
+	};
+	window.XY = [];
 	var option = {
 	    template: __webpack_require__(349),
 	    data: function data() {
-	        return optionData;
+	        return Object.assign({}, optionData, dragObj, threeDobej);
 	    },
 	    methods: {
 	        clickFn: function clickFn(item, action, e) {
 	            this.curHtml = "输出:" + JSON.stringify(action);
+	        },
+
+	        startDrag: function startDrag(e) {
+	            // debugger;
+	            // !this.init.flag && this.initViewData(e.target);
+	            e = e.changedTouches ? e.changedTouches[0] : e;
+	            this.dragMove.dragging = true;
+	            this.dragMove.start_x = e.pageX;
+	            this.dragMove.start_y = e.pageY;
+	            this.dragMove.count = 0;
+	            window.XY.push(" !! ");
+	        },
+	        onDrag: function onDrag(e) {
+	            this.dragMove.count++;
+	            var event = e;
+	            e = e.changedTouches ? e.changedTouches[0] : e;
+	            var dx = e.pageX - this.dragMove.start_x;
+	            var dy = e.pageY - this.dragMove.start_y;
+	            //左滑  dx<0   右滑  dx>0 
+	            var direction = "";
+	            this.dragMove.start_x = e.pageX;
+	            this.dragMove.start_y = e.pageY;
+	            console.info("xy:" + dx + " " + dy);
+	            window.XY.push("xy:" + dx + " " + dy);
+	            if (Math.abs(dy / dx) > 6) {
+	                return;
+	            }
+	            if (dx < 0) {
+	                direction = "L";
+	                console.info(direction);
+	            } else {
+	                direction = "R";
+	                console.info(direction);
+	            }
+	            console.info(direction);
+	            if (direction == "R") {
+	                this.rotateY += 2;
+	                this.rotateY = this.rotateY % 360;
+	                this.transform = "transform: perspective(500px) rotateY(" + this.rotateY + "deg);";
+	            } else {
+	                this.rotateY -= 2;
+	                this.rotateY = this.rotateY % 360;
+	                this.transform = "transform: perspective(500px) rotateY(" + this.rotateY + "deg);";
+	            }
+	            // this.dragMove.direction = direction;
+	            // const dampen = dx > 0 ? 3 : 4;
+	            // this.dragMove.x = this.dragMove.x - dx / dampen;
+	            // event.preventDefault();
+	        },
+	        stopDrag: function stopDrag(e) {
+	            if (this.dragMove.dragging) {
+	                this.dragMove.dragging = false;
+	            }
 	        }
 	    },
 	    components: {
@@ -439,7 +508,7 @@
 /***/ 349:
 /***/ function(module, exports) {
 
-	module.exports = "<style>\r\n    .flywrap {\r\n        margin-top: 0;\r\n        padding: 10px;\r\n    }\r\n    \r\n    .center_parent::after {\r\n        content: \" \";\r\n        height: 100%;\r\n        display: inline-block;\r\n        vertical-align: middle;\r\n    }\r\n    \r\n    .dragRight_Component {\r\n        margin-top: 5px;\r\n    }\r\n    \r\n    .dragRight_Component:last-child {\r\n        margin-bottom: 56px;\r\n    }\r\n    \r\n    div.confirm_faili {\r\n        background: #F2F2F2;\r\n    }\r\n    \r\n    i.confirm_faili {\r\n        position: absolute;\r\n        left: 50%;\r\n        top: 50%;\r\n        transform: translate(-50%, -50%);\r\n        font-size: 30px;\r\n        line-height: 30px;\r\n        opacity: 0.5;\r\n        color: red;\r\n    }\r\n</style>\r\n<div>\r\n    <p>Test DragRight</p>\r\n    {{{curHtml}}}\r\n\r\n    <div style='height:200px;overflow:hidden;overflow-y:auto;border-bottom:20px solid #CD7F32;border-top:20px solid #CD7F32;'>\r\n        <div style='overflow:hidden;width:100%'>\r\n            <template v-for='data in mList'>\r\n\t\t\t\t\t\t<dragright-Component>\r\n\t\t\t\t\t\t\t<template slot=\"content\">\r\n\t\t\t\t\t\t\t\t<div class=\"weui_cells weui_cells_access flywrap\"    >\r\n\t\t\t\t\t\t\t\t\t<a v-for='field in data.fields' style='display: inline-block;vertical-align: top;width: 50%'>\r\n\t\t\t\t\t\t\t\t\t\t{{field.key}}：{{field.value}}\r\n\t\t\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t\t\t<span style='position:absolute;top:10px;right:10px;'>{{data.id}}</span>\r\n\t\t\t\t\t\t\t\t\t<i v-if='data.confirm_status == -1' class=\"confirm_faili iconfont icon-chacha1\"></i>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</template>\r\n            <template slot=\"rightContent\">\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status != -1' @click.stop='clickFn(data,\"dialog\",$event)' class=\"center_parent\" style='height: 100%;background: red;display: inline-block;'>\r\n\t\t\t\t\t\t\t\t\t<span style=\"color:#fff;padding:0 20px;width:10px;font-size:12px;display:inline-block;vertical-align:middle\">不通过</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status == -1' @click.stop='clickFn(data,\"cancel_alert_status\",$event)' class=\"center_parent\" style='height: 100%;background: green;display: inline-block;'>\r\n\t\t\t\t\t\t\t\t\t<span style=\"color:#fff;padding:0 20px;width:10px;font-size:12px;display:inline-block;vertical-align:middle\">取消</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</template>\r\n            <template slot='rightTip'>\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status != -1' style='height:100%;width:3px;background:red;'>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status == -1' style='height:100%;width:3px;background:green;'>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</template>\r\n            </dragright-Component>\r\n        </div>\r\n    </div>\r\n</div>";
+	module.exports = "<style>\r\n    .flywrap {\r\n        margin-top: 0;\r\n        padding: 10px;\r\n    }\r\n    \r\n    .center_parent::after {\r\n        content: \" \";\r\n        height: 100%;\r\n        display: inline-block;\r\n        vertical-align: middle;\r\n    }\r\n    \r\n    .dragRight_Component {\r\n        margin-top: 5px;\r\n    }\r\n    \r\n    .dragRight_Component:last-child {\r\n        margin-bottom: 56px;\r\n    }\r\n    \r\n    div.confirm_faili {\r\n        background: #F2F2F2;\r\n    }\r\n    \r\n    i.confirm_faili {\r\n        position: absolute;\r\n        left: 50%;\r\n        top: 50%;\r\n        transform: translate(-50%, -50%);\r\n        font-size: 30px;\r\n        line-height: 30px;\r\n        opacity: 0.5;\r\n        color: red;\r\n    }\r\n    \r\n    .stage_area {\r\n        width: 100%;\r\n        /*height: 100px;*/\r\n        margin-left: auto;\r\n        margin-right: auto;\r\n        padding: 20px 0px;\r\n        background-color: #f0f0f0;\r\n        box-shadow: inset 0 0 3px rgba(0, 0, 0, .35);\r\n        -webkit-transition: top .5s;\r\n        position: relative;\r\n        z-index: 2;\r\n        top: 0;\r\n    }\r\n    \r\n    .piece {\r\n        display:inline-block;\r\n        width: 100px;\r\n        height: 100px;\r\n        background-color: #cad5eb;\r\n        padding: 10px;\r\n        -moz-box-sizing: border-box;\r\n        -webkit-box-sizing: border-box;\r\n        box-sizing: border-box;\r\n        margin:10px 0;\r\n        position: relative;\r\n    }\r\n</style>\r\n<div>\r\n    <p>Test DragRight</p>\r\n    {{{curHtml}}}\r\n    <div id=\"stageSecond\" class=\"stage_area\" @mousedown=\"startDrag\" @touchstart=\"startDrag\" @mousemove.stop=\"onDrag\" @touchmove.stop=\"onDrag\" @mouseup=\"stopDrag\" @touchend=\"stopDrag\" @mouseleave=\"stopDrag\">\r\n        <div class=\"piece\"  :style=\"transform\"  style=\"z-index: 24; background-color: rgba(204, 153, 51, 0.74902);\"></div>\r\n        <div class=\"piece\"  style=\"z-index: 31; transform: perspective(500px) rotateY(45deg); background-color: rgba(51, 204, 87, 0.74902);\" :style=\"transform\"></div>\r\n        <div class=\"piece\"  style=\"z-index: 45; transform: perspective(500px) rotateY(45deg); background-color: rgba(51, 204, 161, 0.74902);\"></div>\r\n        <div class=\"piece\"  style=\"z-index: 83; transform: perspective(500px) rotateY(45deg); background-color: rgba(171, 51, 204, 0.74902);\"></div>\r\n        <div class=\"piece\"  style=\"z-index: 500; transform: perspective(500px) rotateY(45deg); background-color: rgba(204, 51, 110, 0.74902);\"></div>\r\n        <div class=\"piece\"  style=\"z-index: 125; transform: perspective(500px) rotateY(45deg); background-color: rgba(125, 204, 51, 0.74902);\"></div>\r\n        <div class=\"piece\"  style=\"z-index: 56; transform: perspective(500px) rotateY(45deg); background-color: rgba(204, 71, 51, 0.74902);\"></div>\r\n        <div class=\"piece\"  style=\"z-index: 36; transform: perspective(500px) rotateY(45deg); background-color: rgba(204, 122, 51, 0.74902);\"></div>\r\n        <div class=\"piece\"  style=\"z-index: 26; transform: perspective(500px) rotateY(45deg); background-color: rgba(204, 120, 51, 0.74902);\"></div>\r\n    </div>\r\n\r\n    <div style='clear:both;height:200px;overflow:hidden;overflow-y:auto;border-bottom:20px solid #CD7F32;border-top:20px solid #CD7F32;'>\r\n        <div style='overflow:hidden;width:100%'>\r\n            <template v-for='data in mList'>\r\n\t\t\t\t\t\t<dragright-Component>\r\n\t\t\t\t\t\t\t<template slot=\"content\">\r\n\t\t\t\t\t\t\t\t<div class=\"weui_cells weui_cells_access flywrap\"    >\r\n\t\t\t\t\t\t\t\t\t<a v-for='field in data.fields' style='display: inline-block;vertical-align: top;width: 50%'>\r\n\t\t\t\t\t\t\t\t\t\t{{field.key}}：{{field.value}}\r\n\t\t\t\t\t\t\t\t\t</a>\r\n\t\t\t\t\t\t\t\t\t<span style='position:absolute;top:10px;right:10px;'>{{data.id}}</span>\r\n\t\t\t\t\t\t\t\t\t<i v-if='data.confirm_status == -1' class=\"confirm_faili iconfont icon-chacha1\"></i>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</template>\r\n            <template slot=\"rightContent\">\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status != -1' @click.stop='clickFn(data,\"dialog\",$event)' class=\"center_parent\" style='height: 100%;background: red;display: inline-block;'>\r\n\t\t\t\t\t\t\t\t\t<span style=\"color:#fff;padding:0 20px;width:10px;font-size:12px;display:inline-block;vertical-align:middle\">不通过</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status == -1' @click.stop='clickFn(data,\"cancel_alert_status\",$event)' class=\"center_parent\" style='height: 100%;background: green;display: inline-block;'>\r\n\t\t\t\t\t\t\t\t\t<span style=\"color:#fff;padding:0 20px;width:10px;font-size:12px;display:inline-block;vertical-align:middle\">取消</span>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</template>\r\n            <template slot='rightTip'>\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status != -1' style='height:100%;width:3px;background:red;'>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t\t<div v-show='data.confirm_status == -1' style='height:100%;width:3px;background:green;'>\r\n\t\t\t\t\t\t\t\t</div>\r\n\t\t\t\t\t\t\t</template>\r\n            </dragright-Component>\r\n        </div>\r\n    </div>\r\n</div>";
 
 /***/ }
 
