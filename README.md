@@ -1,14 +1,21 @@
-# Link-Fight.github.io
+简介
 
-
+人总是需要个舞台来展示自己，而这里就是我的舞台。
 
 [CodeCamp](https://www.freecodecamp.com/link-fight)
 
+## 笔记
 
-## 2018/09/28
+  * CSS
+       * [normalize.css的学习](https://github.com/Link-Fight/Link-Fight.github.io/issues/1) 
 
-虽然在阿里云上准备了个人的站点，但是个人缺乏设计能力，还是先在github上记录下
+## 项目总结
 
+## 写过的轮子
+
+## 知乎上文章
+
+* [工作日常 - Egg与MySql的一点琐事](https://zhuanlan.zhihu.com/p/45039962)
 
 ## 页面
  * [新世界](http://link-fight.github.io/task/task07/task07.html)
