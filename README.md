@@ -8,6 +8,9 @@
 
   * CSS
        * [normalize.css的学习](https://github.com/Link-Fight/Link-Fight.github.io/issues/1) 
+## 面试准备
+  * vue
+      * [vue是如何实现双向绑定和模板渲染的（第一反应版）](https://github.com/Link-Fight/Link-Fight.github.io/issues/2)
 
 ## 项目总结
 
