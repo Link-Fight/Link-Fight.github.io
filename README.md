@@ -5,6 +5,11 @@
 [CodeCamp](https://www.freecodecamp.com/link-fight)
 
 
+## 2018/09/28
+
+虽然在阿里云上准备了个人的站点，但是个人缺乏设计能力，还是先在github上记录下
+
+
 ## 页面
  * [新世界](http://link-fight.github.io/task/task07/task07.html)
  * [房贷计算](http://link-fight.github.io/book/JavaScript犀牛书6th/1.1/1.1.html)
