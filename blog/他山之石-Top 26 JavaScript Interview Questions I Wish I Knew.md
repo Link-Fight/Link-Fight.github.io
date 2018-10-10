@@ -177,4 +177,4 @@ function test(p){
 
 一般用闭包。还可以用`Symbol`关键字。
 
-## Q19: Explain the Prototype Design Pattern
+### Q19 ~ Q26 答案都比较抽象，看原文比较合适
